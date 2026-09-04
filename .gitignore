@@ -16,3 +16,7 @@ docs/paper/build.log
 docs/paper/*.aux
 docs/paper/*.bbl
 docs/paper/*.xdv
+
+# Private session notes, never committed
+HANDOVER-PRIVATE.txt
+JUDGEMENT*.txt
