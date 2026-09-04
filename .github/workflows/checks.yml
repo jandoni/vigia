@@ -1,0 +1,25 @@
+# The three build-failing guards plus the test suite — the same `make check`
+# a contributor runs locally. The guards are the point of this project: the
+# licence perimeter, the privacy boundary and the results freeze are enforced
+# here, not promised in prose.
+name: checks
+on: [push, pull_request]
+jobs:
+  guards-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: runtime dependencies (the whole perimeter — four packages)
+        run: pip install onnxruntime numpy opencv-python-headless PyYAML
+      - name: licence guard — no AGPL import anywhere under vigia/
+        run: python tools/check_licence.py
+      - name: privacy guard — no biometric identification code path
+        run: python tools/check_privacy.py
+      - name: results freeze — every published figure matches its source
+        run: python tools/freeze_results.py
+      - name: tests
+        run: |
+          for t in tests/*.py; do python "$t"; done

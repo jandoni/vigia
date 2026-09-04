@@ -1,0 +1,95 @@
+% ===========================================================================
+%  VIGÍA — Multi-Hazard Early Detection for Existing Camera Infrastructure
+%
+%  BUILD:  python docs/build_paper.py        (or: make paper)
+%
+%  Do not compile this file directly and do not edit generated/numbers.tex.
+%  The build regenerates the figures from eval/results/, writes the numbers
+%  macros from the same files, and only then runs the typesetter — so a
+%  chart, a table and a sentence cannot disagree about a measurement.
+% ===========================================================================
+\documentclass[11pt,a4paper]{article}
+
+\input{preamble}
+\input{generated/numbers}
+
+\hypersetup{
+  pdftitle  = {VIGÍA — Multi-Hazard Early Detection for Existing Camera Infrastructure},
+  pdfauthor = {Jon Andoni Baranda},
+  pdfsubject= {Technical documentation},
+}
+
+\begin{document}
+
+% --------------------------------------------------------------- title page
+\begin{titlepage}
+\centering
+\vspace*{4.2cm}
+
+{\Huge\scshape VIGÍA\par}
+\vspace{0.9cm}
+{\LARGE Multi-Hazard Early Detection\\[2pt] for Existing Camera Infrastructure\par}
+\vspace{0.7cm}
+{\large\itshape Technical documentation\par}
+
+\vspace{2.4cm}
+{\large Jon Andoni Baranda\par}
+\vspace{0.15cm}
+{Independent researcher \textperiodcentered\ Bilbao\,/\,Chicago\par}
+{\small \href{mailto:jonandoni.baranda@gmail.com}{jonandoni.baranda@gmail.com}\par}
+\vspace{0.35cm}
+{Version \DocVersion\ \textperiodcentered\ \today\par}
+
+\vfill
+\begin{minipage}{0.82\textwidth}
+\small
+\noindent{\scshape How to read this document}\par\vspace{3pt}
+\noindent Every quantitative figure is labelled either \measured{} — produced
+by our own evaluation harness, with the dataset and script named — or
+\reported{}, published by the people who built the component. The two are
+never mixed, and a figure we have not measured is marked as such rather than
+omitted. Proportions carry the interval their sample size supports
+(\cref{sec:metrics}); several of this project's headline numbers rest on
+small samples, and a point estimate alone would overstate them.\par
+\vspace{6pt}
+\noindent Numbers in this document are not typed. They are generated from
+\texttt{eval/results/*.json} by \texttt{docs/build\_paper.py}, so a
+re-measurement changes the document by rebuilding it.
+\end{minipage}
+
+\vspace{1.2cm}
+{\small Project licence: Apache-2.0 \textperiodcentered\ Research prototype,
+not a certified emergency system\par}
+\end{titlepage}
+
+% ------------------------------------------------------------------ front
+\pagenumbering{roman}
+\input{sections/00-abstract}
+\cleardoublepage
+{\hypersetup{allcolors=black}\tableofcontents}
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% -------------------------------------------------------------------- body
+\input{sections/01-introduction}
+\input{sections/01b-related}
+\input{sections/02-architecture}
+\input{sections/03-metrics}
+\input{sections/04-detectors}
+\input{sections/05-validator}
+\input{sections/06-flood-trend}
+\input{sections/07-routing}
+\input{sections/08-methodology}
+\input{sections/09-results}
+\input{sections/10-attribution}
+\input{sections/12-conclusion}
+
+% ---------------------------------------------------------------- appendix
+\appendix
+\input{sections/A-reproducibility}
+\input{sections/11-changelog}
+
+\bibliography{refs}
+
+\end{document}

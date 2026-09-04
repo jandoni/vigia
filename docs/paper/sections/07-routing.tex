@@ -1,0 +1,91 @@
+\section{Scene routing on the upload path}
+\label{sec:routing}
+
+Tier 0 decides which detectors run on a \emph{registered} camera, from a
+declared context. Uploaded footage has no registration and no declaration, so
+something has to choose. This section describes that something, and is
+separated from \cref{sec:gate} deliberately: the two answer superficially
+similar questions under completely different evidence, and conflating them
+would undermine the argument of \cref{sec:gate}.
+
+\subsection{Two approaches that did not work}
+
+\paragraph{Asking the detectors.} The first version ran every detector over a
+few sampled frames and took whichever claimed the footage most strongly. It
+routed 2 of 4 test clips wrongly, and not for want of tuning: the scores are
+not comparable quantities. Each detector has its own confidence calibration
+and its own propensity to fire, so ``flood scored 1.9 and building access
+scored 0.7'' says almost nothing about which is right. On rubble the aerial
+flood model genuinely reports water — the known consequence of training on
+\AerialFlooded{} flooded images (\cref{sec:pooling}).
+
+\paragraph{Asking the user.} The second version presented the detectors'
+reactions as ranked evidence and let the operator choose. Always correct, and
+one piece of homework for someone who came to watch a system work.
+
+\subsection{A classifier trained for this question}
+
+The third version is a MobileNetV3 classifier over \RouterClasses{} scene
+classes, trained on \RouterTrainImages{} images and held out on
+\RouterHeldOut{}. For a video it samples $K = 6$ frames and averages
+\emph{probabilities}, not logits:
+\begin{equation}
+  \bar{p} = \frac{1}{K} \sum_{k=1}^{K} \operatorname{softmax}\bigl(z(f_k)\bigr),
+  \qquad
+  \hat{c} = \argmax_{c} \ \bar{p}_c .
+  \label{eq:router}
+\end{equation}
+Averaging after the softmax bounds each frame's influence at $1/K$. Averaging
+logits instead lets a single frame with an extreme activation — a close-up of
+water in an otherwise aerial rubble clip — dominate the whole decision, which
+is precisely the failure mode the detector-voting approach already exhibited.
+
+Held-out accuracy is \RouterAccuracy{} (95\,\% interval \RouterAccuracyCI),
+and per class \RouterPerClass{} on \RouterPerClassImages{} images each
+(\RouterPerClassCI). On the four demonstration clips it routes 4 of 4
+correctly, at $\bar{p}_{\hat{c}}$ of $1.00$, $0.98$, $1.00$ and $0.85$.
+
+\subsection{How that figure should be read}
+
+An accuracy of \RouterAccuracy{} deserves suspicion rather than celebration,
+and three qualifications belong beside it.
+
+\begin{itemize}
+  \item \textbf{The task is easy.} Landscape with a smoke plume, water seen
+        across, open sea from above, and rubble from above are four visually
+        distinct scene types. This is not fine-grained discrimination, and the
+        number should not be read as though it were.
+  \item \textbf{The model has memorised its training set}, reaching a training
+        loss of $10^{-4}$. Held-out accuracy is what matters, and the splits
+        are source-aware — fire trains on \texttt{pyro-sdis} stills and tests
+        on HPWREN sequences from other cameras; flood trains on FloodNet UAV
+        imagery plus ATLANTIS ground photography and tests on USGS and LSU
+        cameras it has never seen — but building access is split by capture
+        index within one archive, which is the weakest of the four splits and
+        should be read as such.
+  \item \textbf{Road incidents are absent.} Only four usable training images
+        exist for that class, so the router was never taught it and never
+        offers it. Excluding a class the evidence cannot support is preferable
+        to a fifth output trained on four pictures.
+\end{itemize}
+
+\begin{recorded}{The split that was wrong, and how it showed}
+The first trained router scored \RouterAccuracy{} on three classes and $0.60$
+on flood. The cause was a viewpoint mismatch of exactly the kind
+\cref{sec:viewpoint} exists to prevent: the flood class trained on FloodNet,
+which is entirely aerial, and was tested against ground-level cameras. Water
+seen from above and water seen across are different pictures. Adding ATLANTIS
+ground-level photography to that one class moved it to
+\RouterPerClass{}. The number without this story looks like luck.
+\end{recorded}
+
+\subsection{This does not overturn Tier 0}
+
+The router is confined to the upload path. A registered camera's hazards are
+still \emph{declared}, never inferred, so the argument of \cref{sec:gate} —
+that a misrouting classifier on the critical path fails silently — is
+untouched. The router operates where nothing has been declared and where a
+human is present to disagree: its answer is applied automatically, stated in
+the interface, and every alternative remains one click away. That is a
+different risk profile from a live camera watching unattended, and the
+architecture keeps the two apart.

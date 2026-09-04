@@ -1,0 +1,704 @@
+{
+  "model": "atlantis_water_deeplabv3.onnx",
+  "segmentation": {
+    "images": 1296,
+    "water_iou": 0.7633,
+    "precision": 0.8799,
+    "recall": 0.852,
+    "f1": 0.8657,
+    "pixel_accuracy": 0.9319,
+    "median_latency_ms": 21.8
+  },
+  "trend": {
+    "LSU-20200423-original": {
+      "frames": 29,
+      "duration_minutes": 420.0,
+      "coverage_start": 0.1327,
+      "coverage_end": 0.2354,
+      "coverage_change": 0.1027,
+      "trend_counts": {
+        "unknown": 2,
+        "stable": 25,
+        "rising": 2
+      },
+      "least_squares_first_call_seconds": 5400.0,
+      "page_hinkley_alarm_seconds": 4500.0,
+      "series": [
+        {
+          "seconds": 0.0,
+          "coverage": 0.13272,
+          "trend": "unknown",
+          "rate_per_min": 0.0,
+          "r_squared": 0.0,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 900.0,
+          "coverage": 0.13421,
+          "trend": "unknown",
+          "rate_per_min": 0.0,
+          "r_squared": 0.0,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 1800.0,
+          "coverage": 0.13347,
+          "trend": "stable",
+          "rate_per_min": 2.5e-05,
+          "r_squared": 0.251,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 2700.0,
+          "coverage": 0.12868,
+          "trend": "stable",
+          "rate_per_min": -8.6e-05,
+          "r_squared": 0.452,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 3600.0,
+          "coverage": 0.02653,
+          "trend": "stable",
+          "rate_per_min": -0.001453,
+          "r_squared": 0.53,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 4500.0,
+          "coverage": 0.41668,
+          "trend": "stable",
+          "rate_per_min": 0.003053,
+          "r_squared": 0.245,
+          "ph_statistic": 0.25264
+        },
+        {
+          "seconds": 5400.0,
+          "coverage": 0.41444,
+          "trend": "rising",
+          "rate_per_min": 0.005666,
+          "r_squared": 0.557,
+          "ph_statistic": 0.46697
+        },
+        {
+          "seconds": 6300.0,
+          "coverage": 0.38883,
+          "trend": "rising",
+          "rate_per_min": 0.006055,
+          "r_squared": 0.608,
+          "ph_statistic": 0.63186
+        },
+        {
+          "seconds": 7200.0,
+          "coverage": 0.36687,
+          "trend": "stable",
+          "rate_per_min": 0.004352,
+          "r_squared": 0.383,
+          "ph_statistic": 0.75868
+        },
+        {
+          "seconds": 8100.0,
+          "coverage": 0.33706,
+          "trend": "stable",
+          "rate_per_min": -0.001379,
+          "r_squared": 0.948,
+          "ph_statistic": 0.84579
+        },
+        {
+          "seconds": 9000.0,
+          "coverage": 0.31579,
+          "trend": "stable",
+          "rate_per_min": -0.00166,
+          "r_squared": 0.998,
+          "ph_statistic": 0.90547
+        },
+        {
+          "seconds": 9900.0,
+          "coverage": 0.30772,
+          "trend": "stable",
+          "rate_per_min": -0.001422,
+          "r_squared": 0.97,
+          "ph_statistic": 0.9526
+        },
+        {
+          "seconds": 10800.0,
+          "coverage": 0.30305,
+          "trend": "stable",
+          "rate_per_min": -0.001047,
+          "r_squared": 0.894,
+          "ph_statistic": 0.99165
+        },
+        {
+          "seconds": 11700.0,
+          "coverage": 0.29907,
+          "trend": "stable",
+          "rate_per_min": -0.000592,
+          "r_squared": 0.868,
+          "ph_statistic": 1.02406
+        },
+        {
+          "seconds": 12600.0,
+          "coverage": 0.29537,
+          "trend": "stable",
+          "rate_per_min": -0.00033,
+          "r_squared": 0.971,
+          "ph_statistic": 1.05073
+        },
+        {
+          "seconds": 13500.0,
+          "coverage": 0.28749,
+          "trend": "stable",
+          "rate_per_min": -0.000321,
+          "r_squared": 0.978,
+          "ph_statistic": 1.06823
+        },
+        {
+          "seconds": 14400.0,
+          "coverage": 0.27954,
+          "trend": "stable",
+          "rate_per_min": -0.000391,
+          "r_squared": 0.967,
+          "ph_statistic": 1.07709
+        },
+        {
+          "seconds": 15300.0,
+          "coverage": 0.30456,
+          "trend": "stable",
+          "rate_per_min": -3.2e-05,
+          "r_squared": 0.006,
+          "ph_statistic": 1.10898
+        },
+        {
+          "seconds": 16200.0,
+          "coverage": 0.27786,
+          "trend": "stable",
+          "rate_per_min": -0.00012,
+          "r_squared": 0.065,
+          "ph_statistic": 1.11379
+        },
+        {
+          "seconds": 17100.0,
+          "coverage": 0.28806,
+          "trend": "stable",
+          "rate_per_min": -4e-06,
+          "r_squared": 0.0,
+          "ph_statistic": 1.12795
+        },
+        {
+          "seconds": 18000.0,
+          "coverage": 0.27739,
+          "trend": "stable",
+          "rate_per_min": -0.000139,
+          "r_squared": 0.082,
+          "ph_statistic": 1.13118
+        },
+        {
+          "seconds": 18900.0,
+          "coverage": 0.26774,
+          "trend": "stable",
+          "rate_per_min": -0.000494,
+          "r_squared": 0.703,
+          "ph_statistic": 1.12496
+        },
+        {
+          "seconds": 19800.0,
+          "coverage": 0.26352,
+          "trend": "stable",
+          "rate_per_min": -0.000327,
+          "r_squared": 0.651,
+          "ph_statistic": 1.11488
+        },
+        {
+          "seconds": 20700.0,
+          "coverage": 0.26208,
+          "trend": "stable",
+          "rate_per_min": -0.000439,
+          "r_squared": 0.912,
+          "ph_statistic": 1.10377
+        },
+        {
+          "seconds": 21600.0,
+          "coverage": 0.25362,
+          "trend": "stable",
+          "rate_per_min": -0.000355,
+          "r_squared": 0.94,
+          "ph_statistic": 1.08489
+        },
+        {
+          "seconds": 22500.0,
+          "coverage": 0.24865,
+          "trend": "stable",
+          "rate_per_min": -0.000321,
+          "r_squared": 0.954,
+          "ph_statistic": 1.06189
+        },
+        {
+          "seconds": 23400.0,
+          "coverage": 0.24196,
+          "trend": "stable",
+          "rate_per_min": -0.000377,
+          "r_squared": 0.97,
+          "ph_statistic": 1.03323
+        },
+        {
+          "seconds": 24300.0,
+          "coverage": 0.23686,
+          "trend": "stable",
+          "rate_per_min": -0.000414,
+          "r_squared": 0.992,
+          "ph_statistic": 1.00059
+        },
+        {
+          "seconds": 25200.0,
+          "coverage": 0.23539,
+          "trend": "stable",
+          "rate_per_min": -0.000322,
+          "r_squared": 0.966,
+          "ph_statistic": 0.96759
+        }
+      ]
+    },
+    "LSU-20200526": {
+      "frames": 12,
+      "duration_minutes": 11.0,
+      "coverage_start": 0.4037,
+      "coverage_end": 0.5111,
+      "coverage_change": 0.1074,
+      "trend_counts": {
+        "unknown": 1,
+        "stable": 4,
+        "rising": 7
+      },
+      "least_squares_first_call_seconds": 76.0,
+      "page_hinkley_alarm_seconds": 184.0,
+      "series": [
+        {
+          "seconds": 0.0,
+          "coverage": 0.40366,
+          "trend": "unknown",
+          "rate_per_min": 0.0,
+          "r_squared": 0.0,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 76.0,
+          "coverage": 0.42679,
+          "trend": "rising",
+          "rate_per_min": 0.018264,
+          "r_squared": 1.0,
+          "ph_statistic": 0.00957
+        },
+        {
+          "seconds": 148.0,
+          "coverage": 0.44807,
+          "trend": "rising",
+          "rate_per_min": 0.018007,
+          "r_squared": 1.0,
+          "ph_statistic": 0.02946
+        },
+        {
+          "seconds": 184.0,
+          "coverage": 0.46151,
+          "trend": "rising",
+          "rate_per_min": 0.018629,
+          "r_squared": 0.999,
+          "ph_statistic": 0.05396
+        },
+        {
+          "seconds": 255.0,
+          "coverage": 0.48658,
+          "trend": "rising",
+          "rate_per_min": 0.019402,
+          "r_squared": 0.998,
+          "ph_statistic": 0.09322
+        },
+        {
+          "seconds": 326.0,
+          "coverage": 0.49389,
+          "trend": "rising",
+          "rate_per_min": 0.016902,
+          "r_squared": 0.97,
+          "ph_statistic": 0.13169
+        },
+        {
+          "seconds": 363.0,
+          "coverage": 0.49179,
+          "trend": "rising",
+          "rate_per_min": 0.014407,
+          "r_squared": 0.93,
+          "ph_statistic": 0.16259
+        },
+        {
+          "seconds": 437.0,
+          "coverage": 0.50302,
+          "trend": "rising",
+          "rate_per_min": 0.010897,
+          "r_squared": 0.885,
+          "ph_statistic": 0.19919
+        },
+        {
+          "seconds": 510.0,
+          "coverage": 0.4854,
+          "trend": "stable",
+          "rate_per_min": 0.00054,
+          "r_squared": 0.016,
+          "ph_statistic": 0.21585
+        },
+        {
+          "seconds": 548.0,
+          "coverage": 0.51147,
+          "trend": "stable",
+          "rate_per_min": 0.00294,
+          "r_squared": 0.297,
+          "ph_statistic": 0.2541
+        },
+        {
+          "seconds": 624.0,
+          "coverage": 0.51123,
+          "trend": "stable",
+          "rate_per_min": 0.003426,
+          "r_squared": 0.362,
+          "ph_statistic": 0.28847
+        },
+        {
+          "seconds": 661.0,
+          "coverage": 0.51108,
+          "trend": "stable",
+          "rate_per_min": 0.00398,
+          "r_squared": 0.435,
+          "ph_statistic": 0.31967
+        }
+      ]
+    },
+    "LSU-20200624": {
+      "frames": 39,
+      "duration_minutes": 41.8,
+      "coverage_start": 0.3962,
+      "coverage_end": 0.6193,
+      "coverage_change": 0.2231,
+      "trend_counts": {
+        "unknown": 1,
+        "stable": 13,
+        "falling": 7,
+        "rising": 18
+      },
+      "least_squares_first_call_seconds": 789.0,
+      "page_hinkley_alarm_seconds": 971.0,
+      "series": [
+        {
+          "seconds": 0.0,
+          "coverage": 0.39618,
+          "trend": "unknown",
+          "rate_per_min": 0.0,
+          "r_squared": 0.0,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 39.0,
+          "coverage": 0.39743,
+          "trend": "stable",
+          "rate_per_min": 0.001923,
+          "r_squared": 1.0,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 117.0,
+          "coverage": 0.38752,
+          "trend": "stable",
+          "rate_per_min": -0.004895,
+          "r_squared": 0.811,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 157.0,
+          "coverage": 0.39512,
+          "trend": "stable",
+          "rate_per_min": -0.001827,
+          "r_squared": 0.238,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 237.0,
+          "coverage": 0.39322,
+          "trend": "stable",
+          "rate_per_min": -0.00097,
+          "r_squared": 0.154,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 277.0,
+          "coverage": 0.39084,
+          "trend": "stable",
+          "rate_per_min": -0.00102,
+          "r_squared": 0.25,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 357.0,
+          "coverage": 0.39028,
+          "trend": "stable",
+          "rate_per_min": 1.8e-05,
+          "r_squared": 0.0,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 398.0,
+          "coverage": 0.40402,
+          "trend": "stable",
+          "rate_per_min": 0.00178,
+          "r_squared": 0.319,
+          "ph_statistic": 0.00769
+        },
+        {
+          "seconds": 479.0,
+          "coverage": 0.39592,
+          "trend": "stable",
+          "rate_per_min": 0.001654,
+          "r_squared": 0.226,
+          "ph_statistic": 0.00711
+        },
+        {
+          "seconds": 522.0,
+          "coverage": 0.39399,
+          "trend": "stable",
+          "rate_per_min": 0.000871,
+          "r_squared": 0.104,
+          "ph_statistic": 0.00464
+        },
+        {
+          "seconds": 789.0,
+          "coverage": 0.21534,
+          "trend": "falling",
+          "rate_per_min": -0.036787,
+          "r_squared": 0.986,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 824.0,
+          "coverage": 0.22324,
+          "trend": "rising",
+          "rate_per_min": 0.013546,
+          "r_squared": 1.0,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 898.0,
+          "coverage": 0.28164,
+          "trend": "rising",
+          "rate_per_min": 0.038183,
+          "r_squared": 0.956,
+          "ph_statistic": 0.0
+        },
+        {
+          "seconds": 971.0,
+          "coverage": 0.42044,
+          "trend": "rising",
+          "rate_per_min": 0.067345,
+          "r_squared": 0.917,
+          "ph_statistic": 0.05521
+        },
+        {
+          "seconds": 1009.0,
+          "coverage": 0.4405,
+          "trend": "rising",
+          "rate_per_min": 0.067321,
+          "r_squared": 0.951,
+          "ph_statistic": 0.12533
+        },
+        {
+          "seconds": 1084.0,
+          "coverage": 0.40956,
+          "trend": "rising",
+          "rate_per_min": 0.050549,
+          "r_squared": 0.845,
+          "ph_statistic": 0.16193
+        },
+        {
+          "seconds": 1119.0,
+          "coverage": 0.49318,
+          "trend": "rising",
+          "rate_per_min": 0.05105,
+          "r_squared": 0.844,
+          "ph_statistic": 0.27497
+        },
+        {
+          "seconds": 1192.0,
+          "coverage": 0.52686,
+          "trend": "rising",
+          "rate_per_min": 0.042389,
+          "r_squared": 0.79,
+          "ph_statistic": 0.41343
+        },
+        {
+          "seconds": 1265.0,
+          "coverage": 0.54336,
+          "trend": "rising",
+          "rate_per_min": 0.027291,
+          "r_squared": 0.783,
+          "ph_statistic": 0.56012
+        },
+        {
+          "seconds": 1302.0,
+          "coverage": 0.54575,
+          "trend": "rising",
+          "rate_per_min": 0.027018,
+          "r_squared": 0.782,
+          "ph_statistic": 0.70165
+        },
+        {
+          "seconds": 1375.0,
+          "coverage": 0.57577,
+          "trend": "rising",
+          "rate_per_min": 0.028372,
+          "r_squared": 0.81,
+          "ph_statistic": 0.86494
+        },
+        {
+          "seconds": 1450.0,
+          "coverage": 0.59345,
+          "trend": "rising",
+          "rate_per_min": 0.01603,
+          "r_squared": 0.974,
+          "ph_statistic": 1.03759
+        },
+        {
+          "seconds": 1487.0,
+          "coverage": 0.62441,
+          "trend": "rising",
+          "rate_per_min": 0.018954,
+          "r_squared": 0.952,
+          "ph_statistic": 1.23226
+        },
+        {
+          "seconds": 1562.0,
+          "coverage": 0.58261,
+          "trend": "rising",
+          "rate_per_min": 0.01253,
+          "r_squared": 0.604,
+          "ph_statistic": 1.37867
+        },
+        {
+          "seconds": 1599.0,
+          "coverage": 0.57997,
+          "trend": "rising",
+          "rate_per_min": 0.006739,
+          "r_squared": 0.242,
+          "ph_statistic": 1.51662
+        },
+        {
+          "seconds": 1672.0,
+          "coverage": 0.58782,
+          "trend": "stable",
+          "rate_per_min": -0.000791,
+          "r_squared": 0.006,
+          "ph_statistic": 1.65673
+        },
+        {
+          "seconds": 1744.0,
+          "coverage": 0.60614,
+          "trend": "stable",
+          "rate_per_min": -0.001422,
+          "r_squared": 0.024,
+          "ph_statistic": 1.80922
+        },
+        {
+          "seconds": 1781.0,
+          "coverage": 0.53941,
+          "trend": "falling",
+          "rate_per_min": -0.009336,
+          "r_squared": 0.371,
+          "ph_statistic": 1.89184
+        },
+        {
+          "seconds": 1854.0,
+          "coverage": 0.59129,
+          "trend": "stable",
+          "rate_per_min": -0.000954,
+          "r_squared": 0.006,
+          "ph_statistic": 2.02164
+        },
+        {
+          "seconds": 1928.0,
+          "coverage": 0.65921,
+          "trend": "rising",
+          "rate_per_min": 0.014438,
+          "r_squared": 0.306,
+          "ph_statistic": 2.2127
+        },
+        {
+          "seconds": 1968.0,
+          "coverage": 0.60708,
+          "trend": "rising",
+          "rate_per_min": 0.010237,
+          "r_squared": 0.248,
+          "ph_statistic": 2.34708
+        },
+        {
+          "seconds": 2080.0,
+          "coverage": 0.61942,
+          "trend": "rising",
+          "rate_per_min": 0.014973,
+          "r_squared": 0.422,
+          "ph_statistic": 2.48916
+        },
+        {
+          "seconds": 2156.0,
+          "coverage": 0.61212,
+          "trend": "falling",
+          "rate_per_min": -0.007867,
+          "r_squared": 0.332,
+          "ph_statistic": 2.61979
+        },
+        {
+          "seconds": 2195.0,
+          "coverage": 0.61474,
+          "trend": "falling",
+          "rate_per_min": -0.006194,
+          "r_squared": 0.324,
+          "ph_statistic": 2.74907
+        },
+        {
+          "seconds": 2273.0,
+          "coverage": 0.59385,
+          "trend": "falling",
+          "rate_per_min": -0.007499,
+          "r_squared": 0.804,
+          "ph_statistic": 2.85431
+        },
+        {
+          "seconds": 2349.0,
+          "coverage": 0.59676,
+          "trend": "falling",
+          "rate_per_min": -0.0059,
+          "r_squared": 0.81,
+          "ph_statistic": 2.95938
+        },
+        {
+          "seconds": 2388.0,
+          "coverage": 0.58916,
+          "trend": "falling",
+          "rate_per_min": -0.006276,
+          "r_squared": 0.814,
+          "ph_statistic": 3.05418
+        },
+        {
+          "seconds": 2468.0,
+          "coverage": 0.62437,
+          "trend": "stable",
+          "rate_per_min": 0.001286,
+          "r_squared": 0.022,
+          "ph_statistic": 3.18071
+        },
+        {
+          "seconds": 2507.0,
+          "coverage": 0.61929,
+          "trend": "rising",
+          "rate_per_min": 0.008367,
+          "r_squared": 0.664,
+          "ph_statistic": 3.29899
+        }
+      ]
+    }
+  },
+  "trend_comparison_note": "Least-squares fit vs Page-Hinkley on identical inputs. Neither is claimed as novel; Choi et al. (2026) published Page-Hinkley for this problem. Finding: the two methods win on different sampling regimes. The windowed fit is faster on densely sampled cameras (76 s vs 184 s, 789 s vs 971 s), while Page-Hinkley is faster on sparsely sampled ones (4500 s vs 5400 s) because it is sample-based rather than time-based. An earlier fixed 300 s window caused the fit to fail completely on a camera sampled every 15 minutes; the window is now adaptive."
+}

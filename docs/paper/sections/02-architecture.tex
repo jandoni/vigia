@@ -1,0 +1,409 @@
+\section{System architecture}
+\label{sec:architecture}
+
+VIGÍA is organised in three tiers. Detectors are interchangeable; the
+validator is shared and hazard-agnostic. Adding a hazard requires a detector
+class and a configuration entry, and no change to the validator.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  box/.style={draw=rulegrey, fill=tierfill, rounded corners=1pt,
+              minimum height=7mm, inner xsep=6pt, align=center},
+  tier/.style={draw=none, font=\scriptsize\scshape, text=notegrey},
+  arrow/.style={-{Latex[length=4pt]}, draw=notegrey},
+]
+\node[tier] (t0) at (0,3.3) {Tier 0 — context gate};
+\node[tier] (t1) at (5.1,3.3) {Tier 1 — detectors};
+\node[tier] (t2) at (10.2,3.3) {Tier 2 — validator};
+
+\node[box, text width=25mm] (gate) at (0,1.4)
+  {camera registry\\[1pt]\scriptsize declares context,\\[-1pt]\scriptsize
+   viewpoint, hazards};
+
+\node[box, text width=27mm] (d1) at (5.1,2.6) {fire \& smoke};
+\node[box, text width=27mm] (d2) at (5.1,1.9) {flood / water level};
+\node[box, text width=27mm] (d3) at (5.1,1.2) {people in water};
+\node[box, text width=27mm] (d4) at (5.1,0.5) {building access};
+\node[box, text width=27mm] (d5) at (5.1,-0.2) {road incidents};
+
+\node[box, text width=27mm] (val) at (10.2,1.4)
+  {confidence\\[-1pt] persistence (IoU)\\[-1pt] location cooldown};
+
+\node[align=left, font=\scriptsize, text=notegrey] (out) at (10.2,-0.35)
+  {\textsc{confirmed} $\rightarrow$ alert\\ \textsc{rejected} $\rightarrow$
+   logged with the level\\ that rejected it};
+
+\foreach \d in {d1,d2,d3,d4,d5} { \draw[arrow] (gate) -- (\d); }
+\foreach \d in {d1,d2,d3,d4,d5} { \draw[arrow] (\d) -- (val); }
+\draw[arrow] (val) -- (out);
+
+\node[align=left, font=\scriptsize, text=notegrey] at (0,-0.1)
+  {forest, street, river,\\ coast, motorway,\\ earthquake zone, \dots};
+\draw[arrow] (0,0.5) -- (gate);
+\end{tikzpicture}
+\caption{The three tiers. The gate decides which detectors run for a given
+camera; the detectors run independently and in parallel; one shared validator,
+configured per hazard but never specialised per hazard, decides which
+detections become events.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Tier 0 — the context gate}
+\label{sec:gate}
+
+Each camera is registered once with a declared context. The gate looks up
+which detectors apply to that context and runs only those.
+
+\begin{definition}[Gate]
+\label{def:gate}
+Let $\contexts$ be the set of camera contexts, $\hazards$ the set of hazards,
+$\cameras$ the registered cameras, and
+\[
+  \viewpoints = \{\,\textsc{ground},\ \textsc{oblique},\ \textsc{nadir}\,\}
+\]
+the set of viewpoints. Each camera $c$ carries
+a context $\chi(c) \in \contexts$ and a viewpoint $\nu(c) \in \viewpoints$.
+The gate is a total map
+\[
+  G : \contexts \longrightarrow 2^{\hazards},
+\]
+and the detectors constructed for camera $c$ are
+$\detectors(c) = \{\, d_h : h \in G(\chi(c)) \,\}$.
+\end{definition}
+
+The gate is declarative, not learned. We deliberately do not classify a frame
+and route it: that introduces a misrouting failure mode on the critical path
+and saves little. Every operational deployment we surveyed works this way — a
+ridgeline wildfire camera never runs drowning detection. Published work on
+cascaded gating in video pipelines~\citep{kang2017noscope,mao2018catdet}
+reports 5--13$\times$ compute reduction at minimal accuracy cost; here the
+gate is what makes five hazards affordable on one machine.
+
+The gate's entire intelligence is \cref{tab:gate}, which is small enough to
+audit at a glance. That is the trade being made: a wrong entry here is visible
+in a YAML file and fixable by a human, whereas a misrouting classifier fails
+silently.
+
+\begin{table}[htbp]
+\centering\small
+\caption{The context-to-hazard map. The bias is toward including a hazard when
+it is plausible, because a missed hazard is a life-safety failure whereas an
+unnecessary detector costs only the compute the gate was saving. Where that
+bias was resisted — motorway, which excludes flood — the reason is that
+claiming a hazard outside a detector's measured envelope is worse than not
+claiming it.}
+\label{tab:gate}
+\begin{tabularx}{\textwidth}{l l L}
+\toprule
+Context & Hazards enabled & Reasoning \\
+\midrule
+forest             & fire                              & PyroNear's stated envelope: fixed-mount wide-field, daylight \\
+wildland interface & fire, road                        & Settlement meets vegetation, plus the roads people flee along \\
+street             & flood, road, building access      & The DANA case: water rising, vehicles caught, people trapped \\
+urban block        & flood, building access            & Dense built environment \\
+river              & flood, drowning                   & Level and rate of rise, plus anyone swept in \\
+coast              & drowning                          & Open water; the SeaDronesSee envelope \\
+motorway           & road                              & Deliberately narrow: flood is plausible but outside the flood detector's calibrated envelope \\
+earthquake zone    & building access                   & The DRespNeT envelope \\
+UAV search         & building access, drowning         & Aerial search and rescue; both detectors are UAV-trained \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{The saving is reported, not assumed.}
+For a registry of $\cameras$ cameras and $|\hazards|$ available hazards, the
+gate's reduction in detector invocations per frame is
+\begin{equation}
+  \rho \;=\; 1 - \frac{\sum_{c \in \cameras} |G(\chi(c))|}
+                      {|\cameras|\,|\hazards|}.
+  \label{eq:gate-saving}
+\end{equation}
+On the demonstration registry shipped with the system (\GateCameras{}
+cameras and $|\hazards| = \GateHazards$ available hazards), the gate requests
+\GateGated{} detector invocations per frame instead of \GateUngated{}, so
+$\rho = \GateReduction\,\%$, and only \GateModelsLoaded{} of the
+\GateHazards{} detector types are ever constructed. The unrequested models are
+never constructed at all, so the saving is in memory as well as compute: a
+deployment of only ridgeline cameras loads one ONNX session, not five.
+
+\subsection{Viewpoint envelopes}
+\label{sec:viewpoint}
+
+The gate also declares \emph{viewpoint}, because a detector's training
+viewpoint is part of its operating envelope and nothing else in the system
+captured it.
+
+\begin{definition}[Admissibility]
+\label{def:admissible}
+Each detector $d$ declares an envelope $V(d) \subseteq \viewpoints$. A camera
+$c$ may be paired with $d$ only if
+\[
+  \mathrm{adm}(c, d) \iff \nu(c) \in V(d),
+\]
+and $\mathrm{CameraPipeline}(c)$ raises unless
+$\mathrm{adm}(c,d)$ holds for every $d \in \detectors(c)$.
+\end{definition}
+
+This was added after a measured failure rather than as a precaution.
+
+\begin{recorded}{A confident wrong number}
+The flood segmenter is trained on ATLANTIS~\citep{erfani2022atlantis}, which
+is ground-level and oblique photography of water bodies. Evaluated on
+straight-down UAV imagery it reported up to $0.397$ water coverage on frames
+whose actual water was a narrow canal, tinting large areas of mown grass as
+water. It did not fail loudly. It returned a confident wrong number, which for
+a life-safety component is the worst available failure. Viewpoint is therefore
+declared on every camera and every detector, and the pipeline refuses the
+pairing before any model is loaded — the same reasoning as the licence and
+privacy guards: make the mistake impossible rather than documented. A test
+fails the build if any detector stops declaring an envelope, so a sixth hazard
+cannot be added without stating where it works.
+\end{recorded}
+
+\begin{recorded}{Failing loudly}
+An unregistered camera raises rather than returning an empty hazard set.
+Returning an empty set would turn a typo into a camera that watches for
+nothing and reports success — the worst available failure mode for this
+system. Enforced by \texttt{tests/test\_registry.py}.
+\end{recorded}
+
+\subsection{Tier 1 — specialist detectors}
+
+Independent models running in parallel, rather than one shared-backbone
+multi-task model. A unified model would require a single coherent label space
+and jointly annotated data; these hazards come from separate datasets with
+incompatible labels. It would also couple training, so that retraining fire
+could silently degrade flood.
+
+\subsection{Licensing architecture}
+\label{sec:licensing}
+
+VIGÍA ships under Apache-2.0. Several source models were fine-tuned using
+Ultralytics tooling, which is licensed AGPL-3.0 — a licence whose terms would
+extend to this entire project were the package imported at runtime.
+
+The resolution is to run every model through ONNX Runtime and never import the
+\texttt{ultralytics} package in the runtime path. PyroNear's own edge engine
+does exactly this, which is how it remains Apache-2.0 while running a YOLO
+architecture. Any \texttt{.pt}~$\rightarrow$~\texttt{.onnx} conversion is an
+offline build step confined to \texttt{tools/}, executed in a separate virtual
+environment.
+
+This is enforced automatically rather than by discipline:
+\texttt{tools/check\_licence.py} parses every file under \texttt{vigia/} with
+Python's AST module and fails the build if a forbidden package is imported. It
+parses rather than greps, so a comment mentioning the package does not trip
+it.
+
+\subsection{Privacy by design}
+\label{sec:privacy}
+
+The EU AI Act's high-risk provisions~\citep{euaiact} took full effect in
+August 2026. Annex III classifies biometric identification systems as
+high-risk, and Article 5(1)(h) prohibits real-time remote biometric
+identification in publicly accessible spaces for law enforcement, with narrow
+exceptions.
+
+VIGÍA identifies nobody, and this is structural rather than configured.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Four privacy commitments and the mechanism that enforces each. A
+commitment that lives only in a document is a configuration flag waiting to
+happen.}
+\label{tab:privacy}
+\begin{tabularx}{\textwidth}{p{4.1cm} L}
+\toprule
+Commitment & How it is enforced \\
+\midrule
+No biometric code path &
+\texttt{tools/check\_privacy.py} parses every file under \texttt{vigia/},
+\texttt{tools/}, \texttt{scripts/} and \texttt{eval/} and fails on any import
+of a face or re-identification library, any use of OpenCV's face APIs, or any
+function or class whose name describes identity work. Unlike the licence
+guard, \texttt{tools/} is not exempt: an offline script that built a face
+index would breach the commitment just as surely. \\
+\addlinespace
+Only the event and one evidence frame leave &
+The \texttt{Alert} type has no field for a clip and no writer for one. A test
+asserts the absence, so adding one becomes a visible change to a documented
+boundary rather than a quiet tweak. \\
+\addlinespace
+No raw video retention &
+\texttt{RetentionPolicy} raises on construction if raw video storage is
+requested. The rolling buffer is a fixed-length in-memory deque sized from the
+camera's declared retention window, and no code path writes video to disk. \\
+\addlinespace
+Presence and location, never identity &
+Person-shaped detections are blurred inside their own boxes before any
+evidence frame is written, on a copy so the source frame is never mutated. The
+box stays visible: an operator needs to know that someone is there and where,
+never who. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The redaction list is keyed on detector class names, and a test fails if a
+detector declares a person-depicting class that is not on it — so a sixth
+hazard cannot introduce an unredacted person class by omission.
+
+\begin{recorded}{Guards are tested against violations}
+A guard that cannot fail is worthless. The privacy guard was run against
+deliberately planted violations, which is how two gaps were found: class names
+such as \texttt{PersonReidentifier} and \texttt{GaitSignatureExtractor}
+initially escaped, because the patterns matched whole words containing
+underscores. Matching now strips underscores before comparison. The same
+reasoning applies to the ONNX parity check of \cref{sec:backends}.
+\end{recorded}
+
+\subsection{Runtime pipeline}
+\label{sec:pipeline}
+
+The three tiers are joined by \texttt{vigia/pipeline.py}: capture, gate,
+detect in parallel, validate, emit. It decides none of those things itself —
+the registry decides which detectors run, the validator decides what is an
+alert, and the egress module decides what may leave. Keeping those three out
+of the pipeline is what allows each to be tested and reported separately, and
+it is why adding a sixth hazard touches none of this code.
+
+Concurrency follows the pattern reported for a comparable
+system~\citep{multitasksystem}: one
+thread per active detector over bounded queues, with a single fusion stage.
+The detectors are independent ONNX Runtime sessions, which release the GIL
+during inference — where essentially all of the time goes — so they run
+genuinely in parallel. Across cameras the detector objects are shared while
+the validators are emphatically not: validator state is per camera per hazard,
+and sharing it would let one camera's tracks confirm another camera's events.
+
+The queues are bounded by design. An unbounded queue converts a detector that
+cannot keep up into unbounded memory growth and ever-increasing latency, which
+in a life-safety system means alerting about something that stopped being true
+minutes ago. Bounded queues convert the same condition into dropped frames
+that are counted and reported. How the backpressure resolves depends on the
+source, and the distinction matters for the integrity of every figure here:
+
+\begin{itemize}
+  \item \textbf{Live sources never block.} A detector that falls behind costs
+        frames, not latency, and stale frames are discarded in favour of the
+        newest available.
+  \item \textbf{File sources always block.} An evaluation replay or a curated
+        demonstration clip must be deterministic; dropping frames would make a
+        published measurement depend on how busy the machine happened to be.
+\end{itemize}
+
+\begin{recorded}{Found by measurement, not foresight}
+With non-blocking dispatch on both source types, a 16-frame clip through a
+\SI{193}{\milli\second} detector processed 3 frames and silently dropped 13. A
+replay that quietly skips 80\,\% of its input would have produced plausible
+and meaningless numbers.
+\end{recorded}
+
+On the reference machine a single ridgeline camera replaying a 40-frame
+sequence through the fire detector sustains 8--14 frames per second end to end
+at \SI{117}{\milli\second} median detector latency, processing every frame
+with none dropped.
+
+\subsection{Operator view}
+\label{sec:operator}
+
+The interface is built around one observation. Every camera-AI demonstration
+draws a box around a fire, and a reviewer has seen that before. What is rarely
+shown is detections being \emph{rejected} — and since the validator suppresses
+the large majority of what the detectors propose, watching that happen is the
+only direct visual evidence for the one claim in this work that is original.
+The interface is therefore a dual view: what the detector proposed against
+what the system confirmed. Every other decision follows from that.
+
+\begin{itemize}
+  \item \textbf{Header} — the camera's context and a chip per hazard, lit only
+        for the hazards the gate runs there. Switching cameras visibly changes
+        which detectors are active, which explains Tier 0 faster than a
+        diagram does.
+  \item \textbf{Canvas} — confirmed events in accent, candidates still short
+        of the persistence threshold in a muted tone, and suppressed
+        candidates outlined in grey and labelled with the cascade level that
+        rejected them. Naming the level is the point: the viewer sees not only
+        that a detection was dropped but which test dropped it.
+  \item \textbf{Signal chain} — the levels of \cref{def:cascade} with live
+        pass and reject counts, the same counters that produce
+        \cref{tab:ablation}.
+  \item \textbf{Timeline} — candidate ticks above confirmed ticks. The density
+        contrast between the two rows is the argument, made without a sentence
+        of text.
+  \item \textbf{Metric strip} — seen, confirmed, filtered, deduplicated, frame
+        rate and latency, always visible, in tabular figures so nothing reads
+        as hand-waved. Filtering and deduplication are shown separately here
+        for the reason given in \cref{sec:decomposition}.
+\end{itemize}
+
+A single control switches the suppressed layer off, at which point the view
+becomes an ordinary detection demonstration while the counters keep running.
+That is the difference between a clean frame and several hundred suppressed
+candidates behind it: the work is happening either way, and only one of the
+two views shows it.
+
+The transport is deliberately split. Video is MJPEG over plain HTTP, so the
+browser's own decoder does the work; events are small JSON over a WebSocket.
+Frames never travel on the event channel. The reference
+system~\citep{multitasksystem} identifies
+Base64-over-WebSocket frame transport as its bottleneck and lists WebRTC as
+future work; separating the channels sidesteps that problem rather than
+optimising it. The client falls back to polling if the socket drops, so the
+view degrades to slower rather than to frozen.
+
+The front end is vanilla JavaScript and CSS with no build step and no package
+manager, and the web framework is an optional dependency rather than a core
+one — a deployed edge node runs headless and never needs it. Both choices are
+credibility arguments as much as technical ones: a system that requires a
+toolchain to demonstrate is a system nobody will try, and an edge runtime of
+four packages is a claim that can be checked.
+
+\begin{recorded}{A failure that hid behind its own fallback}
+The WebSocket route rejected every handshake with HTTP 403 while the interface
+kept updating normally, because the polling fallback covered for it. The cause
+was that this module used deferred annotation evaluation, which turns
+annotations into strings that the framework resolves against module globals —
+while the WebSocket type was imported inside a function, to keep the web
+framework optional. The parameter could not be typed and was treated as a
+required query parameter. Worth recording because the graceful degradation
+that made the system robust is exactly what made the defect invisible; it was
+found in the server log and a direct client, not in the browser.
+\end{recorded}
+
+\begin{recorded}{Blocking work on the event loop}
+Several HTTP endpoints were declared asynchronous while doing synchronous work
+— image decoding, and in one case a complete multi-second analysis of an
+uploaded clip. An asynchronous handler runs on the event loop rather than in a
+worker thread, so analysing a clip stalled every MJPEG stream and every event
+socket in the process for the duration, including the live public cameras of
+\cref{sec:livecameras}. The symptom presented as a slow interface rather than
+as an error. The endpoints that block now run in a thread pool, and the
+analysis call is dispatched explicitly off the loop; the server answers in
+milliseconds while an analysis runs.
+\end{recorded}
+
+\subsection{Live public cameras}
+\label{sec:livecameras}
+
+The system runs against genuinely live public cameras as well as recorded
+clips, through the same pipeline: the United States Geological Survey's
+streamgage camera network~\citep{usgshivis}, whose imagery is a work of the
+United States Government and therefore unrestricted, and HPWREN's real-time
+wildfire cameras~\citep{hpwren}, which permit publication subject to
+attribution. Both publish stills every one to five minutes rather than video,
+and that cadence is the deployment regime rather than a limitation of the
+demonstration — it is precisely why the flood trend detector of
+\cref{sec:flood-trend} counts samples rather than seconds.
+
+Two properties of this path are worth stating because they are easy to get
+wrong. First, only genuinely new images are admitted: a repeated fetch of an
+unchanged image is discarded, because handing the validator the same frame
+three times would satisfy a persistence-of-three test without the world having
+been observed three times, manufacturing a confirmation from a single
+observation. Second, no beach or resort webcam appears in the catalogue, and
+the reason is \cref{def:admissible} rather than licensing: a beach camera
+looking along the sand is a \textsc{ground} view, while the people-in-water
+detector's envelope is aerial and elevated. The pairing is refused before a
+model is loaded.

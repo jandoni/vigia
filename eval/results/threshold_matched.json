@@ -1,0 +1,1958 @@
+{
+  "question": "can raising the raw detector's confidence floor reach the cascade's operating point without the cascade?",
+  "method": "identical cached detections as eval/run_ablation.py; raw = all temporal levels disabled, floor swept",
+  "cascade": {
+    "floor": 0.2,
+    "persistence": 3,
+    "negatives": {
+      "frames": 300,
+      "pre_frames": 300,
+      "post_frames": 0,
+      "false_alarm_rate": 0.01,
+      "detection_rate": null,
+      "sequences_detected": 0,
+      "total_sequences": 30,
+      "alerts": 3,
+      "median_minutes_to_detect": null
+    },
+    "fires": {
+      "frames": 240,
+      "pre_frames": 120,
+      "post_frames": 120,
+      "false_alarm_rate": 0.0,
+      "detection_rate": 0.7917,
+      "sequences_detected": 6,
+      "total_sequences": 6,
+      "alerts": 95,
+      "median_minutes_to_detect": 3.0
+    }
+  },
+  "matched_floor": 0.26,
+  "matched": {
+    "floor": 0.26,
+    "negatives": {
+      "frames": 300,
+      "pre_frames": 300,
+      "post_frames": 0,
+      "false_alarm_rate": 0.01,
+      "detection_rate": null,
+      "sequences_detected": 0,
+      "total_sequences": 30,
+      "alerts": 3,
+      "median_minutes_to_detect": null
+    },
+    "fires": {
+      "frames": 240,
+      "pre_frames": 120,
+      "post_frames": 120,
+      "false_alarm_rate": 0.0083,
+      "detection_rate": 0.9,
+      "sequences_detected": 6,
+      "total_sequences": 6,
+      "alerts": 109,
+      "median_minutes_to_detect": 1.0
+    }
+  },
+  "sweep": [
+    {
+      "floor": 0.2,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.04,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 12,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.925,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 112,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.21,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0233,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 7,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.925,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 112,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.22,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0233,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 7,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.925,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 112,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.23,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.02,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 6,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.925,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 112,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.24,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0167,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 5,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.9167,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 111,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.25,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0167,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 5,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.9,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 109,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.26,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 3,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.9,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 109,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.27,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 3,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.875,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 106,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.28,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 3,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.8667,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 105,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.29,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0067,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 2,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.8583,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 103,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.3,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.8417,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 101,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.31,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.825,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 99,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.32,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.8083,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 97,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.33,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.8083,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 97,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.34,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.8,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 96,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.35,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 95,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.36,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 95,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    {
+      "floor": 0.37,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.775,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 93,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.38,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7667,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 92,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.39,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.75,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 90,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.4,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7417,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 89,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.41,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7333,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 88,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.42,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7167,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 86,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.43,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7083,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 85,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.44,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 83,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.45,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.675,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 81,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.46,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.675,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 81,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.47,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.675,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 81,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.48,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6667,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 80,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.49,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.65,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 78,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.5,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6333,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 76,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.51,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.625,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 75,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.52,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6167,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 74,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.53,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6167,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 74,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.54,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6167,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 74,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.55,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6167,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 74,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.56,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 72,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.57,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.5833,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 70,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.58,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.5667,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 68,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.59,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.5333,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 64,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.6,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.525,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 63,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.61,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.5,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 60,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.62,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.5,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 60,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.63,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.4667,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 56,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.64,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.4583,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 55,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.65,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.4083,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 49,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.66,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.375,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 45,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.67,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.3583,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 43,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.68,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.3167,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 38,
+        "median_minutes_to_detect": 13.0
+      }
+    },
+    {
+      "floor": 0.69,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.3167,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "alerts": 38,
+        "median_minutes_to_detect": 13.0
+      }
+    },
+    {
+      "floor": 0.7,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.3,
+        "sequences_detected": 4,
+        "total_sequences": 6,
+        "alerts": 36,
+        "median_minutes_to_detect": 13.0
+      }
+    },
+    {
+      "floor": 0.71,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.2583,
+        "sequences_detected": 4,
+        "total_sequences": 6,
+        "alerts": 31,
+        "median_minutes_to_detect": 13.0
+      }
+    },
+    {
+      "floor": 0.72,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.2417,
+        "sequences_detected": 4,
+        "total_sequences": 6,
+        "alerts": 29,
+        "median_minutes_to_detect": 13.0
+      }
+    },
+    {
+      "floor": 0.73,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.2333,
+        "sequences_detected": 4,
+        "total_sequences": 6,
+        "alerts": 28,
+        "median_minutes_to_detect": 13.0
+      }
+    },
+    {
+      "floor": 0.74,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.2,
+        "sequences_detected": 3,
+        "total_sequences": 6,
+        "alerts": 24,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.75,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.2,
+        "sequences_detected": 3,
+        "total_sequences": 6,
+        "alerts": 24,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.76,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.1833,
+        "sequences_detected": 3,
+        "total_sequences": 6,
+        "alerts": 22,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.77,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.1667,
+        "sequences_detected": 2,
+        "total_sequences": 6,
+        "alerts": 20,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    {
+      "floor": 0.78,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.1417,
+        "sequences_detected": 2,
+        "total_sequences": 6,
+        "alerts": 17,
+        "median_minutes_to_detect": 9.0
+      }
+    },
+    {
+      "floor": 0.79,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.125,
+        "sequences_detected": 2,
+        "total_sequences": 6,
+        "alerts": 15,
+        "median_minutes_to_detect": 9.0
+      }
+    },
+    {
+      "floor": 0.8,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.1083,
+        "sequences_detected": 2,
+        "total_sequences": 6,
+        "alerts": 13,
+        "median_minutes_to_detect": 9.0
+      }
+    },
+    {
+      "floor": 0.81,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0917,
+        "sequences_detected": 2,
+        "total_sequences": 6,
+        "alerts": 11,
+        "median_minutes_to_detect": 9.0
+      }
+    },
+    {
+      "floor": 0.82,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0833,
+        "sequences_detected": 2,
+        "total_sequences": 6,
+        "alerts": 10,
+        "median_minutes_to_detect": 9.0
+      }
+    },
+    {
+      "floor": 0.83,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0667,
+        "sequences_detected": 2,
+        "total_sequences": 6,
+        "alerts": 8,
+        "median_minutes_to_detect": 9.0
+      }
+    },
+    {
+      "floor": 0.84,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.05,
+        "sequences_detected": 2,
+        "total_sequences": 6,
+        "alerts": 6,
+        "median_minutes_to_detect": 9.0
+      }
+    },
+    {
+      "floor": 0.85,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.025,
+        "sequences_detected": 1,
+        "total_sequences": 6,
+        "alerts": 3,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.86,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0167,
+        "sequences_detected": 1,
+        "total_sequences": 6,
+        "alerts": 2,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    {
+      "floor": 0.87,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0083,
+        "sequences_detected": 1,
+        "total_sequences": 6,
+        "alerts": 1,
+        "median_minutes_to_detect": 6.0
+      }
+    },
+    {
+      "floor": 0.88,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0,
+        "sequences_detected": 0,
+        "total_sequences": 6,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      }
+    },
+    {
+      "floor": 0.89,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0,
+        "sequences_detected": 0,
+        "total_sequences": 6,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      }
+    },
+    {
+      "floor": 0.9,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0,
+        "sequences_detected": 0,
+        "total_sequences": 6,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      }
+    },
+    {
+      "floor": 0.91,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0,
+        "sequences_detected": 0,
+        "total_sequences": 6,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      }
+    },
+    {
+      "floor": 0.92,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0,
+        "sequences_detected": 0,
+        "total_sequences": 6,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      }
+    },
+    {
+      "floor": 0.93,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0,
+        "sequences_detected": 0,
+        "total_sequences": 6,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      }
+    },
+    {
+      "floor": 0.94,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0,
+        "sequences_detected": 0,
+        "total_sequences": 6,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      }
+    },
+    {
+      "floor": 0.95,
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.0,
+        "sequences_detected": 0,
+        "total_sequences": 6,
+        "alerts": 0,
+        "median_minutes_to_detect": null
+      }
+    }
+  ]
+}

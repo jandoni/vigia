@@ -1,0 +1,154 @@
+{
+  "dataset": "/Users/MacBook/Projects/concurso/data/seadronessee/val",
+  "model": "seadronessee_rfdetr_small.onnx",
+  "iou_match_threshold": 0.3,
+  "images": 300,
+  "images_with_swimmers": 255,
+  "reported_by_author_all_classes": {
+    "mAP_50": 0.7931,
+    "per_class_AP_swimmer": 0.282,
+    "note": "Author's headline mAP is across five classes and is carried by boats. Our figures below are swimmer-only."
+  },
+  "results": {
+    "conf_0.1": {
+      "images": 300,
+      "ground_truth_swimmers": 1218,
+      "predicted_swimmers": 1555,
+      "box_level": {
+        "true_positives": 1129,
+        "false_positives": 426,
+        "false_negatives": 89,
+        "true_negatives": 0,
+        "precision": 0.726,
+        "recall": 0.9269,
+        "f1": 0.8143,
+        "f2": 0.8783,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 254,
+        "false_positives": 3,
+        "false_negatives": 1,
+        "true_negatives": 42,
+        "precision": 0.9883,
+        "recall": 0.9961,
+        "f1": 0.9922,
+        "f2": 0.9945,
+        "false_alarm_rate": 0.0667
+      },
+      "median_latency_ms": 50.7
+    },
+    "conf_0.2": {
+      "images": 300,
+      "ground_truth_swimmers": 1218,
+      "predicted_swimmers": 1277,
+      "box_level": {
+        "true_positives": 1123,
+        "false_positives": 154,
+        "false_negatives": 95,
+        "true_negatives": 0,
+        "precision": 0.8794,
+        "recall": 0.922,
+        "f1": 0.9002,
+        "f2": 0.9132,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 254,
+        "false_positives": 1,
+        "false_negatives": 1,
+        "true_negatives": 44,
+        "precision": 0.9961,
+        "recall": 0.9961,
+        "f1": 0.9961,
+        "f2": 0.9961,
+        "false_alarm_rate": 0.0222
+      },
+      "median_latency_ms": 50.4
+    },
+    "conf_0.3": {
+      "images": 300,
+      "ground_truth_swimmers": 1218,
+      "predicted_swimmers": 1211,
+      "box_level": {
+        "true_positives": 1114,
+        "false_positives": 97,
+        "false_negatives": 104,
+        "true_negatives": 0,
+        "precision": 0.9199,
+        "recall": 0.9146,
+        "f1": 0.9172,
+        "f2": 0.9157,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 253,
+        "false_positives": 1,
+        "false_negatives": 2,
+        "true_negatives": 44,
+        "precision": 0.9961,
+        "recall": 0.9922,
+        "f1": 0.9941,
+        "f2": 0.9929,
+        "false_alarm_rate": 0.0222
+      },
+      "median_latency_ms": 50.2
+    },
+    "conf_0.5": {
+      "images": 300,
+      "ground_truth_swimmers": 1218,
+      "predicted_swimmers": 1107,
+      "box_level": {
+        "true_positives": 1057,
+        "false_positives": 50,
+        "false_negatives": 161,
+        "true_negatives": 0,
+        "precision": 0.9548,
+        "recall": 0.8678,
+        "f1": 0.9092,
+        "f2": 0.8839,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 245,
+        "false_positives": 0,
+        "false_negatives": 10,
+        "true_negatives": 45,
+        "precision": 1.0,
+        "recall": 0.9608,
+        "f1": 0.98,
+        "f2": 0.9684,
+        "false_alarm_rate": 0.0
+      },
+      "median_latency_ms": 50.2
+    },
+    "conf_0.7": {
+      "images": 300,
+      "ground_truth_swimmers": 1218,
+      "predicted_swimmers": 730,
+      "box_level": {
+        "true_positives": 719,
+        "false_positives": 11,
+        "false_negatives": 499,
+        "true_negatives": 0,
+        "precision": 0.9849,
+        "recall": 0.5903,
+        "f1": 0.7382,
+        "f2": 0.6417,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 199,
+        "false_positives": 0,
+        "false_negatives": 56,
+        "true_negatives": 45,
+        "precision": 1.0,
+        "recall": 0.7804,
+        "f1": 0.8767,
+        "f2": 0.8162,
+        "false_alarm_rate": 0.0
+      },
+      "median_latency_ms": 50.4
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "conf_threshold": 0.2,
+  "negative_sequences": 30,
+  "fire_sequences": 6,
+  "results": {
+    "raw detector (no validator)": {
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.04,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 12,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.925,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 112,
+        "median_minutes_to_detect": 1.0
+      }
+    },
+    "full cascade, persistence=2": {
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.02,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 6,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.8583,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 103,
+        "median_minutes_to_detect": 2.0
+      }
+    },
+    "full cascade, persistence=3": {
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 3,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 95,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    "full cascade, persistence=4": {
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0067,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 2,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7333,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 88,
+        "median_minutes_to_detect": 4.0
+      }
+    },
+    "full cascade, persistence=5": {
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.0033,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 1,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.675,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 81,
+        "median_minutes_to_detect": 5.1
+      }
+    },
+    "minus confidence": {
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.1367,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 51,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.1167,
+        "detection_rate": 0.8583,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 117,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    "minus persistence": {
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.04,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 12,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0083,
+        "detection_rate": 0.925,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 112,
+        "median_minutes_to_detect": 1.0
+      }
+    }
+  }
+}

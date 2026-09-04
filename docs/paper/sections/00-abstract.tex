@@ -1,0 +1,44 @@
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+VIGÍA integrates publicly available hazard detectors under a single gated
+pipeline and adds a shared temporal validation layer that makes them usable on
+ordinary municipal cameras. The system is explicitly an integration project:
+every detector it runs was trained by someone else and is credited by name,
+licence and source. The contribution is the validation layer and the
+evaluation methodology that measures what that layer buys and what it costs.
+
+The problem is not detection accuracy. Published hazard detectors are good and
+freely available; what prevents their deployment is that they alarm far too
+often. Measured on its authors' own validation split, the PyroNear wildfire
+detector raises an alarm on \FireImageFAR{} of frames containing no smoke
+(95\,\% interval \FireImageFARCI, \FireNegatives{} negatives). That is not a
+defect but the operating point its authors chose, on the assumption that
+something downstream filters the output. VIGÍA is that something.
+
+Across \AblationNegativeSequences{} negative sequences the validator reduces
+the false-alarm rate from \RawFAR{} to \ValidatedFAR{}, a \FARReduction\,\%
+reduction, while still detecting every one of the \FiresTotal{} ignition
+sequences, at a cost of \AddedMinutesToDetect{} minutes of additional latency
+that this document derives in closed form rather than only observing. We then
+run the control most system papers omit — matching that false-alarm rate by
+simply raising the detector's confidence floor — and report that on this
+negative set an oracle-tuned floor achieves the same rate at higher recall
+and lower latency. The validator's defensible value is therefore narrower
+than raw suppression: it reaches that operating point without access to the
+negative distribution, and it provides alert deduplication that no threshold
+can express (\cref{sec:threshold-matched}). The same validator, changed
+only by configuration, transfers across hazards whose detectors were built by
+different people, on different data, for phenomena with different physics; a
+build-failing test enforces that no hazard-specific branch exists in it.
+
+Two commitments are enforced in code rather than stated in prose. The runtime
+imports no AGPL-licensed package, and no biometric identification code path
+exists; both are checked by guards that parse the source tree and fail the
+build. A third guard checks every published figure against the results file it
+cites.
+
+Where the evidence is thin, this document says so and quantifies it. Building
+access rests on \BuildingTestImages{} held-out images: its image-level recall
+is \BuildingImageRecall, but the interval that sample supports is
+\BuildingImageRecallCI, and the paper reports the second.

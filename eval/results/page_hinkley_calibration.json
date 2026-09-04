@@ -1,0 +1,60 @@
+{
+  "purpose": "Calibrate Page-Hinkley for water-area signals. The naive defaults produced a 92% false-alarm rate on stable water.",
+  "method": "200 trials x 40 samples of stable water (mean 0.35) with Gaussian noise; latency measured on a steady rise with sigma=0.01 noise.",
+  "prior_art": "Choi, Kim, Win Aung, Park (2026), Developments in the Built Environment 25:100866 \u2014 Page-Hinkley for anticipatory urban flood warning from CCTV.",
+  "chosen_default": "delta=0.005, threshold=0.10",
+  "false_alarm_rate_on_stable_water": {
+    "delta=0.002_threshold=0.02": {
+      "sigma_0.005": 0.15,
+      "sigma_0.01": 0.92,
+      "sigma_0.02": 1.0
+    },
+    "delta=0.002_threshold=0.05": {
+      "sigma_0.005": 0.0,
+      "sigma_0.01": 0.23,
+      "sigma_0.02": 0.905
+    },
+    "delta=0.005_threshold=0.05": {
+      "sigma_0.005": 0.0,
+      "sigma_0.01": 0.02,
+      "sigma_0.02": 0.745
+    },
+    "delta=0.005_threshold=0.1": {
+      "sigma_0.005": 0.0,
+      "sigma_0.01": 0.0,
+      "sigma_0.02": 0.16
+    },
+    "delta=0.01_threshold=0.1": {
+      "sigma_0.005": 0.0,
+      "sigma_0.01": 0.0,
+      "sigma_0.02": 0.02
+    }
+  },
+  "detection_latency_samples": {
+    "delta=0.002_threshold=0.02": {
+      "rise_0.005_per_frame": 5,
+      "rise_0.01_per_frame": 3,
+      "rise_0.03_per_frame": 3
+    },
+    "delta=0.002_threshold=0.05": {
+      "rise_0.005_per_frame": 6,
+      "rise_0.01_per_frame": 5,
+      "rise_0.03_per_frame": 3
+    },
+    "delta=0.005_threshold=0.05": {
+      "rise_0.005_per_frame": 7,
+      "rise_0.01_per_frame": 5,
+      "rise_0.03_per_frame": 3
+    },
+    "delta=0.005_threshold=0.1": {
+      "rise_0.005_per_frame": 11,
+      "rise_0.01_per_frame": 7,
+      "rise_0.03_per_frame": 4
+    },
+    "delta=0.01_threshold=0.1": {
+      "rise_0.005_per_frame": 15,
+      "rise_0.01_per_frame": 8,
+      "rise_0.03_per_frame": 4
+    }
+  }
+}

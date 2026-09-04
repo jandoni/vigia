@@ -1,0 +1,158 @@
+{
+  "question": "does a colour prior earn a place in the cascade, measured rather than assumed?",
+  "verdict": "REMOVED. Fog and smoke are both grey: on hard stills the prior trades ~5 points of recall per 10 points of FAR; in the cascade it improves nothing and a strict cutoff loses an ignition sequence.",
+  "prior": "achromatic (smoke): fraction >= 0.10 of box pixels with S <= cutoff, V >= 50",
+  "confidence_floor": 0.2,
+  "stills": {
+    "images": 1085,
+    "positives": 500,
+    "results": {
+      "colour off": {
+        "true_positives": 489,
+        "false_negatives": 11,
+        "false_positives": 413,
+        "true_negatives": 172,
+        "recall": 0.978,
+        "false_alarm_rate": 0.706
+      },
+      "S<=40": {
+        "true_positives": 368,
+        "false_negatives": 132,
+        "false_positives": 267,
+        "true_negatives": 318,
+        "recall": 0.736,
+        "false_alarm_rate": 0.4564
+      },
+      "S<=60": {
+        "true_positives": 424,
+        "false_negatives": 76,
+        "false_positives": 306,
+        "true_negatives": 279,
+        "recall": 0.848,
+        "false_alarm_rate": 0.5231
+      },
+      "S<=80": {
+        "true_positives": 452,
+        "false_negatives": 48,
+        "false_positives": 332,
+        "true_negatives": 253,
+        "recall": 0.904,
+        "false_alarm_rate": 0.5675
+      },
+      "S<=100": {
+        "true_positives": 465,
+        "false_negatives": 35,
+        "false_positives": 359,
+        "true_negatives": 226,
+        "recall": 0.93,
+        "false_alarm_rate": 0.6137
+      },
+      "S<=120": {
+        "true_positives": 467,
+        "false_negatives": 33,
+        "false_positives": 365,
+        "true_negatives": 220,
+        "recall": 0.934,
+        "false_alarm_rate": 0.6239
+      }
+    }
+  },
+  "temporal": {
+    "colour off": {
+      "negatives": {
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    "S<=40": {
+      "negatives": {
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6417,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    "S<=60": {
+      "negatives": {
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.6417,
+        "sequences_detected": 5,
+        "total_sequences": 6,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    "S<=80": {
+      "negatives": {
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    "S<=100": {
+      "negatives": {
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "median_minutes_to_detect": 3.0
+      }
+    },
+    "S<=120": {
+      "negatives": {
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "median_minutes_to_detect": 3.0
+      }
+    }
+  }
+}

@@ -1,0 +1,197 @@
+\section{Definitions and evaluation metrics}
+\label{sec:metrics}
+
+This section fixes the quantities the rest of the document reports. It exists
+because several of the mistakes recorded here were mistakes of \emph{metric}
+rather than of model: a figure that was correct as computed and wrong as
+interpreted. Stating the definitions precisely is what made those visible.
+
+\subsection{Matching predictions to ground truth}
+
+For two axis-aligned boxes $a, b$ the intersection over union is
+\begin{equation}
+  \iou(a,b) \;=\; \frac{|a \cap b|}{|a \cup b|} \;\in\; [0,1].
+  \label{eq:iou}
+\end{equation}
+
+Given predictions $\hat{B} = \{\hat{b}_1, \dots, \hat{b}_m\}$ sorted by
+descending confidence and ground truth $B = \{b_1, \dots, b_n\}$, each
+prediction is matched greedily to the highest-$\iou$ unmatched ground-truth
+box exceeding a threshold $\tau$. Writing $\mathrm{TP}$, $\mathrm{FP}$ and
+$\mathrm{FN}$ for the resulting counts,
+\begin{equation}
+  \precision = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}, \qquad
+  \recall = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}}.
+  \label{eq:pr}
+\end{equation}
+
+Throughout this document $\tau = 0.3$. That is looser than the $0.5$
+convention, and the choice is deliberate: the operational question is whether
+a person or a plume was \emph{found}, not whether its box was drawn tightly.
+A stricter threshold answers a localisation question this system does not ask.
+
+\subsection{Two levels of evaluation, and why both}
+\label{sec:twolevels}
+
+\emph{Box-level} metrics use \cref{eq:pr} over instances. \emph{Image-level}
+metrics reduce each image to a binary decision — did the detector fire at all
+— and compute the same quantities over images. The image-level false-alarm
+rate over a negative set $N$ (images containing no instance of the hazard) is
+\begin{equation}
+  \mathrm{FAR} \;=\; \frac{|\{\, i \in N : \hat{y}_i = 1 \,\}|}{|N|}.
+  \label{eq:far}
+\end{equation}
+
+Both are reported everywhere, because either alone conceals a failure the
+other exposes.
+
+\begin{recorded}{The failure that image-level metrics hid}
+The people-in-water detector's exported head has six logit slots for five
+classes. A leading no-object slot was assumed, and every label shifted by one:
+boats were reported as swimmers at $0.84$ confidence while real swimmers were
+discarded. It nearly survived review because image-level precision still read
+$0.83$ — boats and swimmers co-occur in the same frames, so an image with a
+boat called ``swimmer'' is still an image containing a swimmer. Only
+box-level $\iou$ matching exposed it, at a recall of $0.002$.
+\end{recorded}
+
+\subsection{Recall-weighted \texorpdfstring{$F$}{F} scores}
+
+The harmonic family
+\begin{equation}
+  F_\beta \;=\; \frac{(1 + \beta^{2})\, \precision \recall}
+                     {\beta^{2} \precision + \recall}
+  \label{eq:fbeta}
+\end{equation}
+is reported at $\beta = 2$ as the headline, a convention borrowed from the
+RipVIS benchmark~\citep{ripvis2025}. The justification is not stylistic. At
+the symmetric point $\precision = \recall = p$,
+\begin{equation}
+  \frac{\partial F_\beta / \partial \recall}
+       {\partial F_\beta / \partial \precision}
+  \;=\; \beta^{2},
+  \label{eq:fbeta-ratio}
+\end{equation}
+so $\beta = 2$ states explicitly that a point of recall is worth four points
+of precision here. That is the correct trade for this system for an asymmetric
+reason: the validator downstream can discard a false alarm, but nothing
+downstream can recover a person who was never detected.
+
+\subsection{Segmentation, and the trap of pooling}
+\label{sec:pooling}
+
+For binary masks the water $\iou$ on a single image is \cref{eq:iou} over
+pixel sets. Over a corpus of $n$ images there are two ways to aggregate, and
+they answer different questions:
+\begin{align}
+  \iou_{\text{pooled}} &= \frac{\sum_{i=1}^{n} |P_i \cap G_i|}
+                               {\sum_{i=1}^{n} |P_i \cup G_i|},
+  \label{eq:iou-pooled} \\[2pt]
+  \iou_{\text{strat}}  &= \frac{\sum_{i \in S} |P_i \cap G_i|}
+                               {\sum_{i \in S} |P_i \cup G_i|},
+  \qquad S \subset \{1,\dots,n\}.
+  \label{eq:iou-strat}
+\end{align}
+
+\Cref{eq:iou-pooled} weights every image by the size of its union, so a corpus
+dominated by easy cases is dominated by easy cases in the score. When the
+subset $S$ that the model exists to handle is a small minority, the pooled
+figure flatters it, and the more severe the case the smaller its influence.
+
+This is not hypothetical. FloodNet's~\citep{rahnemoonfar2021floodnet} labelled
+release contains \AerialLabelled{} pairs of which only \AerialFlooded{} are
+flooded — \AerialFloodedShare\,\% of the corpus. The aerial flood segmenter
+scores $\iou_{\text{pooled}} = \AerialOverallIoU$ but
+$\iou_{\text{strat}} = \AerialFloodedIoU$ on the flooded subset. Model
+selection in this project uses the stratified figure, and \cref{sec:flood}
+publishes it as the headline with the pooled one beside it, clearly labelled.
+Selecting on the pooled figure would have chosen a model that is better at
+recognising dry ground.
+
+\subsection{Interval estimation}
+\label{sec:intervals}
+
+Half of this project's figures rest on small samples: \BuildingTestImages{}
+held-out images for building access, \FireNarrowNegatives{} negatives in the
+first fire baseline. A bare point estimate from such a sample invites a reader
+to believe it to three decimal places, so every proportion in this document
+whose denominator is known is reported with a 95\,\% \emph{Wilson score}
+interval~\citep{wilson1927probable}. For $k$ successes in $n$ trials with
+$\hat{p} = k/n$ and $z = 1.96$,
+\begin{equation}
+  \mathrm{CI}_{95} \;=\;
+  \frac{\hat{p} + \dfrac{z^{2}}{2n}}{1 + \dfrac{z^{2}}{n}}
+  \;\pm\;
+  \frac{z\sqrt{\dfrac{\hat{p}(1-\hat{p})}{n} + \dfrac{z^{2}}{4n^{2}}}}
+       {1 + \dfrac{z^{2}}{n}}.
+  \label{eq:wilson}
+\end{equation}
+
+Wilson rather than the textbook normal approximation
+$\hat{p} \pm z\sqrt{\hat{p}(1-\hat{p})/n}$, for a reason this project's data
+makes concrete rather than academic~\citep{brown2001interval}. At
+$\hat{p} = 1$ the normal interval collapses to a point: building access
+detects a person in $12$ of $12$ positive held-out images, and the normal
+interval reports $[1.000, 1.000]$ — perfect certainty inferred from twelve
+observations. \Cref{eq:wilson}, derived by inverting the score test rather
+than by assuming normality of the estimate, gives
+\BuildingImageRecallCI. That interval is the honest statement, and it is what
+\cref{sec:building} reports.
+
+\Cref{tab:intervals} collects the cases where the interval changes how a
+figure should be read.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Point estimates with the 95\,\% Wilson interval their sample size
+supports. The last column is the reading the interval permits, which in three
+of these rows is materially weaker than the point estimate alone suggests.
+Computed by \texttt{docs/build\_paper.py}, not typed.}
+\label{tab:intervals}
+\begin{tabularx}{\textwidth}{l S[table-format=1.4] c L}
+\toprule
+Quantity & {Estimate} & 95\,\% interval & What it supports \\
+\midrule
+Fire image-level FAR, \FireNegatives{} negatives
+  & \FireImageFAR & \FireImageFARCI
+  & Precise enough to quote. The motivating claim is safe. \\
+Fire image-level FAR, \FireNarrowNegatives{} negatives
+  & \FireNarrowFAR & \FireNarrowFARCI
+  & Consistent with anything from two-thirds to nearly all. Withdrawn. \\
+Swimmer box recall, \SwimmerInstances{} instances
+  & \SwimmerBoxRecall & \SwimmerBoxRecallCI
+  & Tight. The strongest evidence in the project. \\
+Civilian box recall, \BuildingCivilians{} instances
+  & \BuildingCivilianRecall & \BuildingCivilianRecallCI
+  & Solid at instance level, from \BuildingTestImages{} images. \\
+Building image-level recall, 12 images
+  & \BuildingImageRecall & \BuildingImageRecallCI
+  & Cannot exclude one image in four being missed. \\
+Building image-level FAR, 12 negatives
+  & \BuildingImageFAR & \BuildingImageFARCI
+  & Almost uninformative. Reported for completeness only. \\
+Scene router accuracy, \RouterHeldOut{} images
+  & \RouterAccuracy & \RouterAccuracyCI
+  & Tight, but see \cref{sec:routing} on task difficulty. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Class merging}
+
+Two detectors emit more classes than VIGÍA consumes. Merging is a partial
+surjection
+\begin{equation}
+  \mu : \mathcal{K}_{\text{model}} \longrightarrow
+        \mathcal{K}_{\text{system}} \cup \{\bot\},
+  \label{eq:merge}
+\end{equation}
+where $\bot$ discards a class. For building access $|\mathcal{K}_{\text{model}}| = 28$
+and $|\mathcal{K}_{\text{system}}| = 5$; for people in water, five model classes
+reduce to one consumed class. Crucially, $\mu$ is applied at the detector
+boundary and only a designated subset
+$\mathcal{A} \subseteq \mathcal{K}_{\text{system}}$ — the \emph{alarm} classes
+— reaches the validator. Everything else is operator context. A rescue team on
+site is the expected state at an incident already being handled, and a boat is
+not an emergency; routing either to the validator would alarm on every rescue
+worker and every vessel in frame.

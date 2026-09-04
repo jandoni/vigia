@@ -1,0 +1,9 @@
+  [  1/6] 20160604_FIRE_rm-n-mobo-c                   40 frames
+  [  2/6] 20170722_FIRE_hp-e-mobo-c                   40 frames
+  [  3/6] 20180603_FIRE_sm-w-mobo-c                   40 frames
+  [  4/6] 20180813_FIRE_bh-s-mobo-c                   40 frames
+  [  5/6] 20190924_FIRE_bl-s-mobo-c                   40 frames
+  [  6/6] 20191006_FIRE_om-n-mobo-c                   40 frames
+
+240 frames, 145 detections (conf >= 0.05) in 39s (146 ms/frame)
+wrote eval/cache/figlib_fires.jsonl

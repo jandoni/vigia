@@ -1,0 +1,377 @@
+\section{Detectors}
+\label{sec:detectors}
+
+One subsection per hazard. Each names the people whose work it uses, states
+what we changed, and reports only figures we measured ourselves; figures
+published by the original authors are listed separately and attributed.
+
+Five hazards are integrated. Four are disaster hazards and carry the system's
+purpose; the fifth, road incidents, is retained explicitly as a generality
+experiment for the validator rather than as a headline capability — a car
+accident is an emergency, not a disaster. Its value is that it has completely
+different physics and timescales from wildfire, so a validator that works on
+both is demonstrably not tuned to one phenomenon.
+
+\subsection{Fire and smoke}
+\label{sec:fire}
+
+\begin{description}[leftmargin=7.4em,labelwidth=7.0em,style=sameline,font=\normalfont\itshape]
+  \item[Model] \texttt{yolo11s\_sensitive-detector}, Apache-2.0.
+  \item[Authors] The PyroNear association, a French open-source non-profit, in
+    collaboration with the French Fire and Rescue Services
+    (SDIS)~\citep{pyronear2025}.
+  \item[Deployment] 15 lookout towers, 51 cameras across France, Spain and
+    Chile, running on Raspberry Pi hardware.
+  \item[Envelope] Fixed-mount wide-field outdoor cameras viewing a landscape
+    horizon, in daylight. Not validated for indoor fire, close-range flame or
+    night operation.
+\end{description}
+
+It is a deliberately \emph{sensitive} detector: the authors recommend a low
+confidence floor ($0.20$) and a very low NMS $\iou$ ($0.01$), trading
+precision for recall on the assumption that a downstream filter exists. That
+design choice is precisely why it is the right baseline for this project — the
+filter it assumes is what we built.
+
+We run the published ONNX export unmodified. The model is downloaded from its
+original distributor at setup time and is never redistributed here. We
+relabelled its single class from \texttt{item} to \texttt{smoke}, and wrote
+our own letterbox preprocessing and YOLO decoding with NumPy non-maximum
+suppression, so the runtime has no dependency on the AGPL-licensed package
+(\cref{sec:licensing}).
+
+\begin{table}[htbp]
+\centering\small
+\caption{Fire detector, single-frame and with no temporal validation — this is
+the baseline the validator must improve on, not a headline result.
+\texttt{pyro-sdis}~\citep{pyrosdis} validation split, \FireImages{} rows
+(\FirePositives{} positive, \FireNegatives{} negative, 21 cameras), confidence
+$0.20$, $\tau = 0.3$. \measured{} — \texttt{eval/run\_image\_eval.py}.}
+\label{tab:fire}
+\begin{tabular}{l S[table-format=1.3] l}
+\toprule
+Metric & {Value} & Note \\
+\midrule
+Box precision              & \FireBoxPrecision & \\
+Box recall                 & \FireBoxRecall    & \\
+Box $F_2$                  & \FireBoxFTwo      & recall-weighted, \cref{eq:fbeta} \\
+Image-level recall         & \FireImageRecall  & \\
+Image-level FAR            & \FireImageFAR     & 95\,\% CI \FireImageFARCI \\
+Median latency, ms & \FireLatency & M4 Pro, CPU provider \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The authors publish no precision, recall or mAP for this checkpoint, so
+\cref{tab:fire} has no \reported{} column: there is nothing to compare
+against, and inventing one would be worse than the gap.
+
+\begin{recorded}{A caveat that earned its keep}
+The most quoted figure in this project — that the published fire detector
+alarms on frames containing no smoke — was first measured on
+\FireNarrowNegatives{} negative frames and carried the standing note
+``indicative, not precise; widen before publishing''. Widening it to
+\FireNegatives{} negatives from 21 cameras, a twenty-five-fold increase, moved
+the false-alarm rate from \FireNarrowFAR{} to \FireImageFAR{} and box
+precision from \FireNarrowBoxPrecision{} to \FireBoxPrecision. Recall barely
+moved (\FireNarrowBoxRecall{} to \FireBoxRecall), which is the reassuring
+half: the detector finds what it finds, and it was the small sample that had
+flattered it on false alarms. The motivating claim is untouched — a detector
+alarming on 71\,\% of clear frames is unusable without a filter — but the
+specific number was overstated by sixteen percentage points and every
+quotation of it was corrected. \Cref{tab:intervals} shows why the original was
+never quotable: its interval was \FireNarrowFARCI.
+\end{recorded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{fire_negative_widening.pdf}
+\caption{The same detector at the same threshold, measured against
+\FireNarrowNegatives{} negatives and then against \FireNegatives{}. Recall
+barely moved; precision and the false-alarm rate both fell. This is what a
+small sample flattering a detector looks like.}
+\label{fig:widening}
+\end{figure}
+
+\subsection{Flood and water level}
+\label{sec:flood}
+
+The keystone hazard, and the one directly connected to the DANA. Two
+capabilities: segmenting the water region, and estimating water level against
+a fixed per-camera reference line (\cref{sec:flood-trend}).
+
+\begin{description}[leftmargin=7.4em,labelwidth=7.0em,style=sameline,font=\normalfont\itshape]
+  \item[Architecture] DeepLabV3~\citep{chen2017rethinking} with a
+    MobileNetV3-Large backbone~\citep{howard2019searching}, from torchvision
+    (BSD-3-Clause).
+  \item[Training data] ATLANTIS~\citep{erfani2022atlantis} — 5{,}195
+    pixel-annotated waterbody images, 56 classes.
+  \item[Trained by] Us. This is the only ground-level detector in VIGÍA that
+    we trained ourselves.
+  \item[Envelope] Water region segmentation in outdoor scenes, ground and
+    oblique viewpoints. The per-camera reference line is optional: without
+    calibration the uncalibrated area signal still yields a trend, so a camera
+    is useful the moment it is connected.
+\end{description}
+
+The architecture was chosen for licensing as much as performance: torchvision
+is BSD-3-Clause, making this the only detector in the system entirely free of
+AGPL. ATLANTIS's 56 classes were collapsed to binary water by
+\cref{eq:merge} — VIGÍA does not need to know whether it is looking at a canal
+or a river, only where the water is and whether it is rising. Seventeen
+liquid-water labels count as water; water-associated \emph{structures} (dam,
+levee, pier, culvert, breakwater) are excluded because they are not water, as
+are glaciers and snow, which are not liquid, and mangrove, which is vegetation
+standing in water whose extent does not track a level. The class mapping was
+derived empirically by cross-referencing the dominant mask value in each label
+folder against the published label list, not assumed.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Flood segmenter on the ATLANTIS test split, \FloodTestImages{}
+images, held out and never seen during training or validation. No third-party
+baseline is quoted because the dataset authors' own network reports over all
+56 classes rather than binary water, so its figures are not comparable.
+\measured{} — \texttt{eval/run\_flood\_eval.py}.}
+\label{tab:flood}
+\begin{tabular}{l S[table-format=1.4] l}
+\toprule
+Metric & {Value} & Note \\
+\midrule
+Water $\iou$    & \FloodWaterIoU      & pooled, \cref{eq:iou-pooled} \\
+Precision       & \FloodPrecision     & \\
+Recall          & \FloodRecall        & \\
+$F_1$           & \FloodFOne          & \\
+Pixel accuracy  & \FloodPixelAccuracy & \\
+Median latency, ms & \FloodLatency & M4 Pro, CPU provider \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{recorded}{A deployment hazard in the export}
+PyTorch's ONNX exporter splits weights into a separate \texttt{.onnx.data}
+sidecar. Copying only the \texttt{.onnx} yields a graph that loads
+successfully and then produces garbage. Our export folds any sidecar back into
+the single file and verifies argmax parity against the source PyTorch model,
+failing below 99.9\,\% agreement.
+\end{recorded}
+
+\subsubsection{The aerial variant}
+
+A UAV camera declaring a \textsc{nadir} viewpoint was previously refused by
+\cref{def:admissible}, because the ATLANTIS model's envelope excludes it. A
+second segmenter was therefore trained on FloodNet Track
+1~\citep{rahnemoonfar2021floodnet} (CDLA-Permissive-1.0) and the pipeline
+routes by viewpoint.
+
+Its evidence class is weaker than everything else in this document and is
+labelled as such: FloodNet withheld its validation and test masks for the
+competition, so no independent labelled split exists in the release. The
+figures below come from a stratified split carved out of the
+\AerialLabelled{} labelled training pairs and \emph{seen by model selection} —
+training-time validation, not held-out evaluation.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Aerial flood segmenter. Two $\iou$ figures are reported because
+\cref{sec:pooling} requires it: only \AerialFlooded{} of \AerialLabelled{}
+labelled images are flooded, so the pooled figure is carried by dry scenes.
+Model selection used the stratified figure. \textsc{validation-measured}, not
+held out — \texttt{scripts/train\_flood\_aerial.py}.}
+\label{tab:flood-aerial}
+\begin{tabular}{l S[table-format=1.4] l}
+\toprule
+Metric & {Value} & Note \\
+\midrule
+Water $\iou$, flooded subset & \AerialFloodedIoU   & \cref{eq:iou-strat}; the honest figure \\
+Water $\iou$, pooled         & \AerialOverallIoU   & \cref{eq:iou-pooled}; flattered by dry scenes \\
+Pixel accuracy               & \AerialPixelAccuracy & \\
+Best epoch                   & \AerialBestEpoch    & selected on the flooded subset \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{aerial_flood_training.pdf}
+\caption{Training the aerial flood segmenter. The two curves are reported
+separately because only \AerialFlooded{} of \AerialLabelled{} labelled images
+are flooded; a single pooled $\iou$ would be carried by dry scenes and would
+flatter the model on the one case it exists to handle.}
+\label{fig:aerial}
+\end{figure}
+
+\subsection{People in water}
+\label{sec:piw}
+
+\begin{description}[leftmargin=7.4em,labelwidth=7.0em,style=sameline,font=\normalfont\itshape]
+  \item[Model] RF-DETR Small fine-tuned on SeaDronesSee~\citep{rfdetrseadronessee},
+    Apache-2.0.
+  \item[Dataset] SeaDronesSee~\citep{varga2022seadronessee}, CC0 1.0 — the
+    least restrictive licence in the project, so the credit here is given by
+    choice rather than obligation.
+  \item[Why RF-DETR] The same author published YOLO11n and YOLO11x checkpoints
+    for this dataset under AGPL-3.0. RF-DETR was chosen specifically because
+    it is Apache-2.0 and keeps this detector outside the AGPL perimeter.
+  \item[Envelope] Elevated and aerial views of open water,
+    \SIrange{5}{260}{\metre} altitude. Not validated for pool settings, surf
+    zones or extreme crowd density.
+\end{description}
+
+Only the \texttt{swimmer} class reaches the validator. A boat is context, not
+an emergency. RF-DETR emits a fixed set of object queries with no duplicate
+boxes, so unlike the YOLO detectors it requires no non-maximum suppression.
+
+\begin{table}[htbp]
+\centering\small
+\caption{People-in-water detector, SeaDronesSee validation split,
+\SwimmerImages{} images (\SwimmerPositiveImages{} with swimmers),
+\SwimmerInstances{} ground-truth swimmer instances, confidence $0.30$.
+\measured{} — \texttt{eval/run\_person\_in\_water\_eval.py}.}
+\label{tab:piw}
+\begin{tabular}{l S[table-format=1.4] l}
+\toprule
+Metric & {Value} & Note \\
+\midrule
+Swimmer box precision & \SwimmerPrecision & \\
+Swimmer box recall    & \SwimmerRecall    & 95\,\% CI \SwimmerBoxRecallCI \\
+Swimmer box $F_1$     & \SwimmerFOne      & \\
+Image-level FAR       & \SwimmerImageFAR  & 95\,\% CI \SwimmerImageFARCI \\
+Median latency, ms & \SwimmerLatency & M4 Pro, CPU provider \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We do not quote the author's headline mAP@50 of \SwimmerAuthorMAP{}
+(\reported{}): it is across five classes and carried by boats, and the swimmer
+class — the only one VIGÍA cares about — is their second weakest at
+\SwimmerAuthorAP{} (\reported{}). Our \SwimmerFOne{} and their
+\SwimmerAuthorAP{} are not in conflict. Average precision over strict $\iou$
+thresholds punishes imprecise boxes on tiny objects, while our
+$\tau = 0.3$ operating point asks the operationally relevant question, which
+is whether the person was found at all.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{confidence_sweep.pdf}
+\caption{Swimmer precision and recall against the confidence threshold. The
+operating point is chosen where recall is still high, because the validator
+can discard a false alarm but nothing downstream can recover a person never
+detected — the same asymmetry that motivates $\beta = 2$ in
+\cref{eq:fbeta-ratio}.}
+\label{fig:sweep}
+\end{figure}
+
+\subsection{Trapped people and building access}
+\label{sec:building}
+
+\begin{description}[leftmargin=7.4em,labelwidth=7.0em,style=sameline,font=\normalfont\itshape]
+  \item[Model] YOLOv8-DRN, trained and published by the DRespNeT
+    authors~\citep{sirma2025drespnet}, CC BY 4.0 — attribution is legally
+    required here, unlike SeaDronesSee where it is given by choice.
+  \item[Dataset] DRespNeT: UAV imagery of the 2023 Türkiye earthquakes,
+    650 train / 50 valid / 25 test.
+  \item[Envelope] Downward and oblique UAV views of earthquake-damaged urban
+    blocks. Not validated for street-level views, interior imagery or night.
+    Trained on 650 images, so generalisation to other disaster types and other
+    cities is unproven rather than assumed.
+\end{description}
+
+The model predicts 28 classes; \cref{eq:merge} reduces them to five at the
+detector boundary, and only \texttt{civilian} reaches the validator. The model
+is an instance segmenter, so its output carries 32 mask coefficients after the
+class scores; these are trimmed at postprocess, because without that the
+decoder reads 60 classes and takes an argmax over mask prototypes.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Building-access detector on the held-out test split,
+\BuildingTestImages{} images, \BuildingCivilians{} ground-truth civilian
+instances, confidence $0.30$. The image-level rows are computed over twelve
+positive and twelve negative images; their intervals are given because the
+point estimates alone would badly overstate what \BuildingTestImages{} images
+can establish. \measured{} — \texttt{eval/run\_building\_access\_eval.py}.}
+\label{tab:building}
+\begin{tabular}{l S[table-format=1.3] l}
+\toprule
+Metric & {Value} & Note \\
+\midrule
+Civilian box precision & \BuildingBoxPrecision & \\
+Civilian box recall    & \BuildingBoxRecall    & 95\,\% CI \BuildingCivilianRecallCI \\
+Civilian box $F_1$     & \BuildingBoxFOne      & \\
+Image-level recall     & \BuildingImageRecall  & 95\,\% CI \BuildingImageRecallCI \\
+Image-level FAR        & \BuildingImageFAR     & 95\,\% CI \BuildingImageFARCI \\
+Rescue team $F_1$      & \BuildingRescueFOne   & operator context, not an alarm \\
+Accessible entry $F_1$ & \BuildingEntryOpenFOne & operator context \\
+Blocked entry $F_1$    & \BuildingEntryBlockedFOne & operator context \\
+Collapsed building $F_1$ & \BuildingCollapsedFOne & operator context \\
+Median latency, ms & \BuildingLatency & M4 Pro, CPU provider \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The authors report 92.7\,\% mAP@50 at 27\,FPS across all 28 classes
+(\reported{}). That is not comparable to \cref{tab:building}: they report over
+28 classes, we merge to five and measure one.
+
+\begin{recorded}{An architectural preference abandoned on evidence}
+VIGÍA first trained its own torchvision Faster R-CNN on the same 650 images,
+specifically because torchvision is BSD-3-Clause and would have kept this
+detector clear of the AGPL perimeter altogether. On the identical held-out
+split with the identical metric it reached civilian box recall of $0.141$ — it
+missed roughly six of every seven people it should have boxed, and was by a
+wide margin the weakest component in the system. The authors' own weights
+reach \BuildingBoxRecall. The test/valid gap also inverted: our model scored
+$0.462$ on valid against $0.141$ on test, a collapse showing it had not
+generalised, where the published weights score $0.815$ against
+\BuildingBoxFOne. Keeping a six-times-worse detector to preserve an
+architectural preference would have been a choice against the people this
+detector exists to find. The AGPL exposure is contained the same way as fire:
+ONNX conversion in an isolated build environment, no weights redistributed,
+enforced by \texttt{tools/check\_licence.py}.
+\end{recorded}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{building_access_models.pdf}
+\caption{The two models on the identical held-out split with the identical
+metric. Image-level recall is \BuildingImageRecall{} for both, which is
+exactly why image-level metrics alone are not enough (\cref{sec:twolevels}):
+they hide a six-fold difference in whether the person was actually located.}
+\label{fig:building-models}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{building_access_per_class.pdf}
+\caption{Per-class $F_1$ on the held-out split at confidence $0.30$. Only
+\texttt{civilian} reaches the validator; the rest are operator context.}
+\label{fig:building-classes}
+\end{figure}
+
+\subsection{Road incidents}
+\label{sec:traffic}
+
+Included to test whether the validator transfers to a hazard with entirely
+different physics. The model~\citep{enostraffic} is MIT-licensed and detects
+accidents and vehicles in roadside and dashcam imagery; only the
+\texttt{accident} class reaches the validator, since passing \texttt{vehicle}
+through would make every car on the road an alert.
+
+Its status is \emph{not measured}. It is integrated and running behind the
+validator, and it supplied the second hazard in \cref{tab:transfer}, but that
+experiment measures the \emph{validator}, not this detector: no precision or
+recall for the accident class against held-out labels has been run. The
+available footage is a dashcam compilation that is predominantly accident
+footage and therefore cannot support a false-positive rate. The authors report
+mAP@50 of $0.826$ and accident-class recall of $0.855$ (\reported{}); we do
+not adopt those as ours.
+
+\begin{recorded}{A checkpoint choice recorded rather than silently made}
+The author's own inference script uses the \texttt{epoch14} checkpoint. On
+their four published test images, \texttt{epoch61} returns exactly one
+accident per image at confidence $0.58$--$0.70$, whereas \texttt{epoch14}
+returns three detections on one image. We use \texttt{epoch61} and record the
+reason here rather than leaving a future reader to wonder why the two
+disagree.
+\end{recorded}

@@ -1,0 +1,92 @@
+\section{Consolidated results}
+\label{sec:results}
+
+Every figure VIGÍA has measured to date, in one place. Figures published by
+third parties are listed separately in \cref{tab:reported} and are never
+combined with ours.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Measured by us. Every value is generated from the results file named
+in the last column; none is typed into this document.}
+\label{tab:measured}
+\begin{tabularx}{\textwidth}{l L S[table-format=1.4] l}
+\toprule
+Hazard & Metric & {Value} & Harness \\
+\midrule
+Fire   & Box precision                          & \FireBoxPrecision  & \texttt{run\_image\_eval} \\
+Fire   & Box recall                             & \FireBoxRecall     & \texttt{run\_image\_eval} \\
+Fire   & Image-level FAR, \FireNegatives{} negatives & \FireImageFAR & \texttt{run\_image\_eval} \\
+Fire   & FAR, no validator                      & \RawFAR            & \texttt{run\_ablation} \\
+Fire   & FAR, validator at $N=3$                & \ValidatedFAR      & \texttt{run\_ablation} \\
+\addlinespace
+Flood  & Water $\iou$, ATLANTIS test            & \FloodWaterIoU     & \texttt{run\_flood\_eval} \\
+Flood  & $F_1$, ATLANTIS test                   & \FloodFOne         & \texttt{run\_flood\_eval} \\
+Flood  & Water $\iou$, aerial, flooded subset   & \AerialFloodedIoU  & \texttt{train\_flood\_aerial} \\
+\addlinespace
+People in water & Box $F_1$                     & \SwimmerFOne       & \texttt{run\_person\_in\_water\_eval} \\
+People in water & Image-level FAR               & \SwimmerImageFAR   & \texttt{run\_person\_in\_water\_eval} \\
+\addlinespace
+Building access & Civilian box recall           & \BuildingBoxRecall & \texttt{run\_building\_access\_eval} \\
+Building access & Civilian box $F_1$            & \BuildingBoxFOne   & \texttt{run\_building\_access\_eval} \\
+\addlinespace
+Scene routing   & Held-out accuracy             & \RouterAccuracy    & \texttt{train\_scene\_router} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Quantities that are not detector accuracy: what the validator does,
+what the gate saves, and what the system costs to run. \measured{} on the
+reference machine (MacBook Pro M4 Pro, \SI{48}{\gigabyte}), \textsc{reference}
+backend.}
+\label{tab:system}
+\begin{tabularx}{\textwidth}{L l l}
+\toprule
+Quantity & Value & Source \\
+\midrule
+False-alarm reduction, validator at $N = 3$   & \FARReduction\,\%   & \cref{tab:ablation} \\
+Ignition sequences still detected             & \FiresFound{}/\FiresTotal{} & \cref{tab:ablation} \\
+Median time to first alert, raw               & \RawMinutesToDetect\,min & \cref{tab:ablation} \\
+Median time to first alert, validated         & \MedianMinutesToDetect\,min & \cref{tab:ablation} \\
+Added latency, predicted and observed         & \AddedMinutesToDetect\,min & \cref{eq:latency} \\
+Frame-level recall, raw then validated        & \RawFireRecall\ / \ValidatedFireRecall & \cref{tab:ablation} \\
+Threshold-matched control: oracle floor       & \MatchedFloor{} reaches FAR \CascadeFAR & \cref{sec:threshold-matched} \\
+\quad its recall / latency vs the cascade's   & \MatchedRecall{}\,/\,\MatchedMinutes\,min vs \CascadeRecall{}\,/\,\MedianMinutesToDetect\,min & \cref{fig:frontier} \\
+Colour prior: measured and removed            & recall \ColourBaselineRecall{} $\to$ \ColourStrictRecall{} for FAR \ColourBaselineFAR{} $\to$ \ColourStrictFAR & \cref{sec:removed-levels} \\
+Suppression, total across four clips          & \SuppressionTotal\,\%      & \cref{eq:decomposition} \\
+\quad of which filtering                      & \SuppressionFiltered\,\%   & \cref{tab:decomposition} \\
+\quad of which deduplication                  & \SuppressionDeduplicated\,\% & \cref{tab:decomposition} \\
+Gate reduction, demonstration registry        & \GateReduction\,\%  & \cref{eq:gate-saving} \\
+\quad detector invocations per frame          & \GateGated{} of \GateUngated{} & \cref{eq:gate-saving} \\
+Inference latency, \textsc{reference}         & \textasciitilde\SI{60}{\milli\second} & \cref{sec:backends} \\
+Inference latency, \textsc{fast}              & \textasciitilde\SI{34}{\milli\second} & \cref{sec:backends} \\
+Validator behavioural tests                   & 9/9 passing         & \texttt{tests/test\_validator.py} \\
+Registry tests                                & 22/22 passing       & \texttt{tests/test\_registry.py} \\
+Flood level tests                             & 13/13 passing       & \texttt{tests/test\_flood\_level.py} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering\small
+\caption{\reported{}. Published by the people who built each component, listed
+here for completeness and never combined with our figures. Where a
+model card publishes nothing, that is stated rather than filled in.}
+\label{tab:reported}
+\begin{tabularx}{\textwidth}{l L l}
+\toprule
+Component & Metric & Value \\
+\midrule
+PyroNear fire detector    & precision / recall / mAP     & not published \\
+PyroNear2025 benchmark    & cross-dataset $F_1$          & \textasciitilde70\,\% \\
+RF-DETR SeaDronesSee      & mAP@50, five classes         & \SwimmerAuthorMAP \\
+RF-DETR SeaDronesSee      & per-class AP, swimmer        & \SwimmerAuthorAP \\
+YOLOv8-DRN (DRespNeT)     & mAP@50, 28 classes, 27\,FPS  & 92.7\,\% \\
+Road-incident YOLO11x     & mAP@50                       & 0.826 \\
+Road-incident YOLO11x     & accident-class recall        & 0.855 \\
+Reference multi-task system & fire FAR 52\,\% $\to$ 4\,\% at 96\,\% sensitivity & \citep{multitasksystem} \\
+\bottomrule
+\end{tabularx}
+\end{table}

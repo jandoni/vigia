@@ -1,0 +1,334 @@
+\section{The temporal validator}
+\label{sec:validator}
+
+This is the original contribution. Everything else in VIGÍA is integration.
+
+\subsection{Rationale}
+
+Detection is a commodity: datasets are public, models are published, and
+fine-tuning one is a weekend's work. The unsolved, expensive and
+operationally decisive problem is the false alarm, which is why commercial
+operators surround good models with expensive human staffing.
+
+The validator sits between the detectors and the alert channel. It receives
+every raw detection and decides which become events. Detections it rejects are
+not discarded silently: each is annotated with the name of the level that
+rejected it, so suppression is auditable in evaluation and visible in the
+operator interface.
+
+\subsection{The cascade}
+
+\begin{definition}[Cascade]
+\label{def:cascade}
+Let $x$ be a detection with box $b(x)$, confidence $s(x)$ and frame timestamp
+$t$. The validator applies three predicates in order, cheapest first:
+\begin{align}
+  L_1(x) &\iff s(x) \ge \theta
+    &&\text{confidence} \label{eq:l1}\\
+  L_2(x) &\iff h(\kappa(x)) \ge N
+    &&\text{persistence} \label{eq:l2}\\
+  L_3(x) &\iff \neg\,\exists\,(b', t') \in R_t :
+                \iou(b(x), b') \ge \tau_c
+    &&\text{cooldown} \label{eq:l3}
+\end{align}
+where $\kappa(x)$ is the track $x$ was associated with, $h(\cdot)$ is that
+track's hit count, and $R_t = \{(b', t') : t - t' \le \Delta\}$ is the set of
+recently confirmed boxes. A detection becomes an event iff
+$\bigwedge_{i=1}^{3} L_i(x)$.
+\end{definition}
+
+Association is by greedy $\iou$ overlap: a detection joins the existing track
+maximising $\iou$ above a threshold $\tau_t$, or starts a new one, and a track
+is dropped after $M$ consecutive misses. Every level is independently
+switchable. That is not a convenience — it is what allows the ablation of
+\cref{sec:ablation} to be produced by the same code that runs in production,
+rather than by a separate analysis script that might diverge from it.
+
+\subsection{The cascade earned its shape: two levels built, measured, removed}
+\label{sec:removed-levels}
+
+The cascade did not start with three levels. Two more were implemented,
+measured under the same harnesses, and removed on the evidence; both removals
+are guarded by regression tests, and both are reported here because a cascade
+that only ever grows is a cascade nobody is checking.
+
+\begin{recorded}{Size plausibility: harmful on the worst cases}
+A size-plausibility level rejected detections whose area fraction or aspect
+ratio was implausible. Measured, it rejected 0\,\% of detections on wildfire
+and 0\,\% on road incidents. When flood was added it proved actively harmful:
+real ATLANTIS flood masks cover a median 32\,\% of the frame and severe cases
+exceed 60\,\%, so a plausible maximum-area default silently discarded the
+worst floods — the more severe the disaster, the more likely the alert
+disappeared. A level that earns nothing on two hazards and inverts the safety
+property on a third does not belong in a life-safety cascade. Removing it
+changed no measured result, which is itself the evidence it was doing nothing.
+\end{recorded}
+
+\begin{recorded}{Colour prior: fog is exactly as grey as smoke}
+A colour level checked the fraction of a box's pixels inside a per-hazard HSV
+region. Every shipped configuration disabled it, which meant an earlier
+draft of this paper defined a level that had never run in a reported
+experiment — the same situation that triggered the size measurement. The only
+physically sensible prior for wildfire smoke is achromaticity, and as first
+parameterised the level could not even express that (it could demand
+\emph{minimum} saturation, never a maximum); the bound was added so the
+measurement could run at all. Swept over five cutoffs on \ColourStillsImages{}
+pyro-sdis stills, the prior bought false alarms only by discarding real
+smoke — recall \ColourBaselineRecall{} $\to$ \ColourStrictRecall{} to move
+FAR \ColourBaselineFAR{} $\to$ \ColourStrictFAR{} at the strictest cutoff,
+about five points of recall per ten of FAR at every point — because fog, the
+curated hard negative, shares the one property being tested. Inside the
+temporal cascade it improved nothing at any cutoff, and strict cutoffs lost
+an ignition sequence outright (\ColourStrictFires{} of \FiresTotal). Removed
+(\texttt{eval/run\_colour\_eval.py}; the harness reimplements the prior
+locally so the experiment outlives the level it deleted).
+\end{recorded}
+
+\subsection{Filtering and deduplication are different claims}
+\label{sec:decomposition}
+
+The validator rejects the large majority of what the detectors propose, and it
+is tempting to report that as a single suppression figure. That figure would
+be misleading, because it combines two operations supporting entirely
+different claims.
+
+\begin{definition}[Suppression decomposition]
+\label{def:decomposition}
+Let $P$ be the number of proposals and $E$ the number of confirmed events.
+Write $\Phi$ for the proposals rejected by $L_1$--$L_2$ and $D$ for those
+rejected by $L_3$, and define
+\begin{equation}
+  S_{\text{total}} = 1 - \frac{E}{P},
+  \qquad
+  S_{\text{filter}} = \frac{\Phi}{P},
+  \qquad
+  S_{\text{dedup}} = \frac{D}{P}.
+  \label{eq:decomposition-terms}
+\end{equation}
+Since every proposal is either confirmed or rejected by exactly one level,
+\begin{equation}
+  S_{\text{total}} \;=\; S_{\text{filter}} \;+\; S_{\text{dedup}}.
+  \label{eq:decomposition}
+\end{equation}
+\end{definition}
+
+Only the first term is false-alarm reduction, and only the first term supports
+the claim this project makes. The second is the system declining to
+re-announce an event it has already reported: nothing is filtered out there,
+an alert is simply not sent twice.
+
+Measured across the four demonstration clips, \SuppressionProposed{} proposals
+produced \SuppressionConfirmed{} confirmed events. As one number that is
+\SuppressionTotal\,\% suppression. Split by \cref{eq:decomposition} it is
+\SuppressionFiltered\,\% filtering and \SuppressionDeduplicated\,\%
+deduplication — and the split varies enormously by hazard.
+
+\begin{table}[htbp]
+\centering\small
+\caption{The decomposition of \cref{eq:decomposition} per hazard. The
+proportions invert between fire and building access, which a single
+suppression figure would conceal entirely. \measured{} —
+\texttt{docs/figures/suppression.json}.}
+\label{tab:decomposition}
+\begin{tabular}{l S[table-format=3.0] S[table-format=3.0]
+                  S[table-format=2.1] S[table-format=2.1]}
+\toprule
+Hazard & {Proposed} & {Confirmed} & {Filtering \%} & {Dedup. \%} \\
+\midrule
+Fire             & \SplitFireProposed           & \SplitFireConfirmed           & \SplitFireFiltered           & \SplitFireDeduplicated \\
+Flood            & \SplitFloodProposed          & \SplitFloodConfirmed          & \SplitFloodFiltered          & \SplitFloodDeduplicated \\
+People in water  & \SplitDrowningProposed       & \SplitDrowningConfirmed       & \SplitDrowningFiltered       & \SplitDrowningDeduplicated \\
+Building access  & \SplitBuildingAccessProposed & \SplitBuildingAccessConfirmed & \SplitBuildingAccessFiltered & \SplitBuildingAccessDeduplicated \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{suppression_split.pdf}
+\caption{What the validator does with each hazard's proposals. Fire's headline
+suppression is almost entirely the system declining to re-announce one fire it
+had already found; building access's is almost entirely filtering. Quoting a
+single figure would overstate the false-alarm contribution by a factor of
+eight on the fire clip.}
+\label{fig:suppression}
+\end{figure}
+
+\begin{recorded}{This project has been caught by exactly this before}
+During the first ablation, recall appeared to collapse from $0.925$ to $0.125$
+and read as the validator destroying the detector. It was cooldown correctly
+suppressing repeat alerts about a fire already found — the validator was
+locating \emph{more} fires, not fewer. Cooldown was removed from the
+evaluation harness for that reason. The runtime pipeline later reintroduced
+the same conflation in its live statistics, and now reports the two quantities
+separately everywhere they appear, including on the recorded demonstrations
+and in the operator interface.
+\end{recorded}
+
+\subsection{Does it reduce false alarms?}
+\label{sec:ablation}
+
+\begin{table}[htbp]
+\centering\small
+\caption{The validator against the raw detector on
+\AblationNegativeSequences{} negative sequences and \AblationFireSequences{}
+ignition sequences from HPWREN FIgLib. \measured{} —
+\texttt{eval/run\_ablation.py}.}
+\label{tab:ablation}
+\begin{tabular}{l S[table-format=1.3] S[table-format=2.0] c
+                  S[table-format=1.3] S[table-format=1.1]}
+\toprule
+Configuration & {FAR} & {Reduction \%} & Fires found & {Frame recall}
+  & {Min.\ to detect} \\
+\midrule
+Raw detector, no validator      & \RawFAR       & {—}            & \RawFiresFound/\FiresTotal & \RawFireRecall       & \RawMinutesToDetect \\
+Full cascade, persistence $= 3$ & \ValidatedFAR & \FARReduction  & \FiresFound/\FiresTotal    & \ValidatedFireRecall & \MedianMinutesToDetect \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At persistence 3 the false-alarm rate falls by \FARReduction\,\% and every
+fire is still found: \FiresFound{} of \FiresTotal{}, the same as the raw
+detector. Sequence-level detection is what matters operationally, and it is
+unchanged.
+
+Two costs are paid for that, and both are in \cref{tab:ablation} rather than
+in a footnote. The median time to first alert rises from
+\RawMinutesToDetect{} to \MedianMinutesToDetect{} minutes, and frame-level
+recall falls from \RawFireRecall{} to \ValidatedFireRecall{} — the frames
+spent accumulating persistence are frames on which the system stays silent
+about a fire it can already see. Reporting only the false-alarm reduction
+would hide both. A filter that drove false alarms to zero by refusing to alert
+at all would score perfectly on the one metric and be useless.
+
+\subsection{The obvious baseline, run against ourselves}
+\label{sec:threshold-matched}
+
+\Cref{tab:ablation} compares the cascade against the raw detector \emph{at
+the same confidence floor}. That leaves open the objection any careful
+reader raises next: forget temporal validation — raise the floor until the
+false-alarm rate matches, and see what it costs. Most system papers leave
+this control to the reviewer. We ran it, and it partially deflates our own
+headline, so it is reported in full.
+
+Sweeping the raw detector's floor over the same cached detections, a floor
+of \MatchedFloor{} —
+selected \emph{on these very negatives}, so an oracle baseline — reaches the
+cascade's false-alarm rate of \CascadeFAR{} while keeping frame recall
+\MatchedRecall{} against the cascade's \CascadeRecall{}, all
+\MatchedFires{}/\FiresTotal{} fires, and a median time-to-alert of
+\MatchedMinutes{} minute against the cascade's \MedianMinutesToDetect. A
+floor of \ZeroFARFloor{} drives the false-alarm rate to zero on this set
+outright, at frame recall \ZeroFARRecall. \Cref{fig:frontier} shows the
+frontier; the cascade's operating point sits below it.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{threshold_frontier.pdf}
+\caption{The control experiment
+(\texttt{eval/run\_threshold\_matched.py}). Each blue point is the raw
+detector at one confidence floor, on identical cached detections; the orange
+point is the cascade at persistence 3. On this negative set an oracle-tuned floor
+dominates the cascade — the finding this paper reports against itself, and
+the reason the claim in \cref{sec:scoped-claim} is scoped the way it is.}
+\label{fig:frontier}
+\end{figure}
+
+\subsubsection{What the control does and does not establish}
+\label{sec:scoped-claim}
+
+The control establishes that \textbf{per-frame false-alarm reduction on this
+negative set is not the cascade's contribution}: a tuned threshold does it
+more cheaply. Three things bound how far that conclusion travels, each a
+fact rather than a defence:
+
+\begin{itemize}
+  \item \textbf{The matched floor is tuned on the evaluation negatives.} The
+        sweep selects $\theta = \MatchedFloor$ using the same 30 sequences it
+        is scored on; the cascade runs the detector authors' published
+        default ($0.20$) untouched. A deployed threshold must be chosen
+        per camera network without access to its future negatives, and how
+        well that transfers is exactly what a single negative set cannot
+        measure.
+  \item \textbf{No floor survives the hard negatives.} On the curated
+        \texttt{pyro-sdis} negatives (\cref{sec:fire}), raising the floor to
+        $0.30$ still leaves a false-alarm rate of $0.648$ while recall is
+        already falling — fog and dust are detected \emph{with high
+        confidence}. Whether persistence helps there is untested, because no
+        temporal hard-negative set exists in any release we know of; building
+        one is listed in \cref{sec:outstanding}.
+  \item \textbf{Deduplication is not achievable by any threshold.}
+        \Cref{tab:decomposition} shows most of what the validator does on
+        several hazards is withholding repeats of an event already reported —
+        an operational function a per-frame threshold cannot express at all.
+\end{itemize}
+
+The honest statement of the validator's value is therefore narrower than an
+earlier draft of this work believed, and is the one this paper stands
+behind: \emph{a single untuned mechanism that reaches an oracle-tuned
+threshold's false-alarm rate without access to the negative distribution,
+provides deduplication no threshold can, and transfers across hazards by
+configuration} — at a measured cost in recall and latency
+(\cref{sec:latency}) that thresholding, where it suffices, does not pay.
+Where a deployment can tune a floor on representative negatives and does not
+need deduplication, thresholding alone is the better choice, and this paper
+says so.
+
+\subsection{The latency cost, in closed form}
+\label{sec:latency}
+
+The latency is not an empirical surprise. Persistence requires $N$ associated
+sightings before confirming, so for a camera sampling at rate $f$ the
+additional delay relative to a single-frame detector is
+\begin{equation}
+  \mathbb{E}[\Delta t] \;=\; \frac{N - 1}{f},
+  \label{eq:latency}
+\end{equation}
+assuming the track is not missed. HPWREN's FIgLib cameras sample once per
+minute, so at $N = 3$ \cref{eq:latency} predicts exactly
+$(3-1)/1 = \SI{2}{\minute}$ of extra delay. The measured medians are
+\RawMinutesToDetect{} minutes raw and \MedianMinutesToDetect{} validated, a
+difference of \AddedMinutesToDetect{} minutes — the predicted value. The
+identity matters more than the agreement: it says the latency cost is a
+property of the \emph{camera's sampling rate}, not of the method, so the same
+cascade on a camera sampling at \SI{1}{\hertz} costs two seconds. A deployment
+choosing $N$ is choosing a point on \cref{eq:latency}, and can be told what it
+will cost before any data is collected.
+
+\subsection{Hazard-agnosticism, tested and enforced}
+
+PyroNear's published training manifest shows that they already perform
+sequential confirmation for wildfire, with a grid search over a minimum frame
+count. Temporal confirmation for fire is therefore not novel, and we say so.
+The claim VIGÍA makes is narrower and still defensible: \emph{one} validator,
+configured rather than specialised, working across hazards whose detectors
+were built by different people, on different data, for phenomena with
+different physics.
+
+\begin{table}[htbp]
+\centering\small
+\caption{The same validator on two hazards with different physics: a wildfire
+plume develops over tens of minutes and is nearly static between frames; a
+collision resolves in under a second with objects moving fast across the
+frame. The only difference between the two runs is a configuration object.
+\measured{} — \texttt{eval/run\_multihazard.py}.}
+\label{tab:transfer}
+\begin{tabular}{l l S[table-format=3.0] S[table-format=3.0]
+                  S[table-format=2.0] S[table-format=2.1]}
+\toprule
+Hazard & Source & {Frames} & {Raw det.} & {Confirmed} & {Suppression \%} \\
+\midrule
+Wildfire smoke  & FIgLib, 1 frame/min & \FireFrames    & \FireRawDetections    & \FireConfirmedEvents    & \FireSuppression \\
+Road incidents  & Dashcam, 2 fps      & \TrafficFrames & \TrafficRawDetections & \TrafficConfirmedEvents & \TrafficSuppression \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{recorded}{Enforced, not merely asserted}
+\texttt{tests/test\_validator.py} contains
+\texttt{test\_validator\_contains\_no\_hazard\_specific\_code}, which parses
+the validator's source with Python's AST module and fails the build if any
+comparison against a specific hazard appears. A future contributor fixing a
+wildfire bug with a hazard-specific branch cannot silently invalidate the
+central claim of this document. The suite passes 9 of 9.
+\end{recorded}

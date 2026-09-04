@@ -1,0 +1,183 @@
+/* VIGÍA operator view — control room, not consumer app.
+ *
+ * Rules held to throughout:
+ *   - Colour encodes STATE and nothing else. Three states have a hue;
+ *     everything else is greyscale. No decorative colour anywhere.
+ *   - Tabular numerals wherever a figure appears, so columns of numbers do not
+ *     jitter as they update. A number that dances reads as unreliable.
+ *   - No gradients, no rounded-card soup, no animation that is not conveying a
+ *     state change. Restraint is what separates a system from a student project.
+ */
+
+:root {
+  --ground:      #0d0d0f;
+  --panel:       #141417;
+  --panel-2:     #1a1a1e;
+  --line:        #26262b;
+  --text:        #e6e6e8;
+  --muted:       #85858f;
+  --faint:       #5a5a63;
+
+  /* Semantic only. */
+  --confirmed:   #ffdc56;
+  --tracking:    #78bea6;
+  --suppressed:  #6e6e6e;
+  --bad:         #e0655c;
+
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; height: 100%;
+  background: var(--ground); color: var(--text);
+  font-family: var(--sans); font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  height: 100vh; overflow: hidden;
+}
+
+.k { color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.v { color: var(--text); font-variant-numeric: tabular-nums; }
+.n { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 15px; }
+
+/* ---------------------------------------------------------------- header */
+
+.bar {
+  display: flex; align-items: center; gap: 24px;
+  padding: 0 16px; height: 48px;
+  background: var(--panel); border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 600; letter-spacing: .18em; font-size: 14px; }
+.camera { display: flex; align-items: center; gap: 8px; }
+
+select {
+  background: var(--panel-2); color: var(--text);
+  border: 1px solid var(--line); border-radius: 2px;
+  padding: 4px 8px; font-family: var(--sans); font-size: 12px;
+}
+
+.chips { display: flex; gap: 6px; margin-left: auto; }
+.chip {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 9px; border: 1px solid var(--line); border-radius: 2px;
+  color: var(--faint); font-size: 11px; letter-spacing: .04em;
+}
+/* An active chip is a detector the gate actually runs on this camera. */
+.chip.on { color: var(--text); border-color: #3a3a42; }
+.chip i { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
+.chip.on i { background: var(--tracking); }
+
+.gate {
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  padding-left: 16px; border-left: 1px solid var(--line);
+}
+
+/* ----------------------------------------------------------------- main */
+
+main { display: grid; grid-template-columns: 1fr 300px; min-height: 0; }
+
+.stage { display: flex; min-height: 0; padding: 12px; }
+.canvas {
+  position: relative; flex: 1; min-height: 0;
+  background: #000; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+}
+#video { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+
+.legend {
+  position: absolute; left: 10px; bottom: 10px;
+  display: flex; gap: 14px;
+  background: rgba(13,13,15,.82); padding: 5px 10px;
+  border: 1px solid var(--line); font-size: 11px; color: var(--muted);
+}
+.legend span { display: flex; align-items: center; gap: 6px; }
+.sw { width: 10px; height: 2px; display: inline-block; }
+.sw.confirmed  { background: var(--confirmed); height: 3px; }
+.sw.tracking   { background: var(--tracking); }
+.sw.suppressed { background: var(--suppressed); }
+
+/* ----------------------------------------------------------------- rail */
+
+.rail {
+  background: var(--panel); border-left: 1px solid var(--line);
+  padding: 14px; overflow-y: auto;
+}
+.rail h2 {
+  margin: 0 0 10px; font-size: 11px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+.rail h2:not(:first-child) { margin-top: 22px; }
+
+/* Each level is a bar: the filled part passed, the rest was rejected. */
+.level { margin-bottom: 11px; }
+.level-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 4px;
+}
+.level-name { font-size: 12px; }
+.level-name.off { color: var(--faint); text-decoration: line-through; }
+.level-counts { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.level-counts b { color: var(--text); font-weight: 500; }
+.bar-track { height: 3px; background: var(--suppressed); position: relative; }
+.bar-fill  { height: 100%; background: var(--tracking); transition: width .25s linear; }
+
+.confirmed-box {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-top: 16px; padding: 10px 12px;
+  background: var(--panel-2); border-left: 2px solid var(--confirmed);
+}
+.big {
+  font-family: var(--mono); font-size: 26px; color: var(--confirmed);
+  font-variant-numeric: tabular-nums; line-height: 1;
+}
+
+.toggle { display: flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 12px; }
+.toggle input { accent-color: var(--tracking); }
+.hint { margin: 6px 0 0; font-size: 11px; color: var(--faint); line-height: 1.45; }
+
+.events { display: flex; flex-direction: column; gap: 6px; }
+.event {
+  padding: 7px 9px; background: var(--panel-2);
+  border-left: 2px solid var(--confirmed); font-size: 11px;
+}
+.event .top { display: flex; justify-content: space-between; }
+.event .haz { color: var(--confirmed); letter-spacing: .04em; }
+.event .meta { color: var(--muted); font-family: var(--mono); }
+.empty { color: var(--faint); font-size: 11px; margin: 0; }
+
+/* ------------------------------------------------------------- timeline */
+
+.timeline {
+  background: var(--panel); border-top: 1px solid var(--line);
+  padding: 8px 16px; display: flex; flex-direction: column; gap: 4px;
+}
+.timeline .row { display: flex; align-items: center; gap: 12px; }
+.timeline .k { width: 78px; flex: none; }
+.track { flex: 1; height: 16px; display: flex; align-items: center; gap: 1px; }
+.tick { width: 2px; flex: none; background: var(--suppressed); }
+.tick.hit { background: var(--confirmed); }
+
+/* -------------------------------------------------------------- metrics */
+
+.metrics {
+  display: flex; gap: 30px; align-items: center;
+  padding: 9px 16px; background: var(--panel-2);
+  border-top: 1px solid var(--line);
+}
+.metrics > div { display: flex; flex-direction: column; gap: 2px; }
+.metrics .status { flex-direction: row; align-items: center; gap: 7px; margin-left: auto; color: var(--muted); font-size: 11px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); }
+.dot.live { background: var(--tracking); }
+.dot.down { background: var(--bad); }
+
+@media (max-width: 900px) {
+  main { grid-template-columns: 1fr; }
+  .rail { border-left: none; border-top: 1px solid var(--line); }
+}

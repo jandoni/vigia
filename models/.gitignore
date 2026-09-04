@@ -1,0 +1,5 @@
+# Weights are never committed. Fetch them with tools/fetch_models.py
+*.onnx
+*.pt
+*.pth
+*.tar.gz

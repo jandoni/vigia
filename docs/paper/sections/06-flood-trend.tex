@@ -1,0 +1,182 @@
+\section{The anticipatory flood signal}
+\label{sec:flood-trend}
+
+Flood is the only hazard whose temporal logic does not rest solely on the
+validator. A water level has a trend, and the trend is the alert: knowing that
+a street is flooded is useful, but knowing that it is filling, and how fast,
+is what buys evacuation time.
+
+\paragraph{Not a novel contribution, and read this before describing it as
+one.} \Citet{choi2026pagehinkley} target the same gap on the same
+infrastructure — anticipatory urban flood warning from existing CCTV, using
+Page--Hinkley change detection with short-term trend analysis producing an
+estimated time-to-threshold. That is the same capability, published
+independently. VIGÍA therefore implements \emph{both} mechanisms and measures
+them against each other on identical inputs, rather than claiming either. What
+is ours is the multi-hazard pipeline they sit inside.
+
+\subsection{Two signals}
+
+Segmenting water yields a mask $W_t \subseteq \Omega$ over the frame domain
+$\Omega$. Two scalars are derived, deliberately:
+\begin{align}
+  a_t &= \frac{|W_t|}{|\Omega|}
+     &&\text{area fraction — needs no calibration}
+     \label{eq:area}\\
+  \ell_t &= \frac{1}{K}\max\{\, k : \textstyle\sum_{j=k-4}^{k}
+              \mathbb{1}[\, p_j \in W_t \,] > 0 \,\}
+     &&\text{level along a reference line}
+     \label{eq:level}
+\end{align}
+where $p_1, \dots, p_K$ are $K = 200$ points sampled from the bottom of a
+per-camera reference line upward. \Cref{eq:level} walks up from the bottom and
+stops at the first sustained dry stretch rather than taking the highest water
+pixel anywhere on the line; a reflection or a puddle further up would
+otherwise read as a far higher level than reality. The five-sample tolerance
+is 2.5\,\% of the line, which absorbs segmentation speckle without jumping
+gaps.
+
+The area signal works on any camera the moment it is connected; the level
+signal needs a one-off human calibration but is physically meaningful and
+comparable between cameras. Choosing the reference line is deliberately not
+automated: a wrong automatic choice would silently corrupt every reading from
+that camera.
+
+\subsection{Windowed least squares}
+
+Rate of rise is fitted rather than differenced. Frame-to-frame differencing of
+a noisy segmentation mask produces a rate estimate dominated by segmentation
+jitter; an ordinary least-squares slope over a window is stable enough to
+threshold on. Over the readings in a trailing window $\mathcal{W}$,
+\begin{equation}
+  \hat{\beta} = \frac{\sum_{i \in \mathcal{W}} (t_i - \bar{t})(y_i - \bar{y})}
+                     {\sum_{i \in \mathcal{W}} (t_i - \bar{t})^{2}},
+  \qquad
+  R^{2} = 1 - \frac{\sum_i (y_i - \hat{y}_i)^{2}}
+                   {\sum_i (y_i - \bar{y})^{2}}.
+  \label{eq:ols}
+\end{equation}
+A trend is declared only when $|\mathcal{W}| \ge 4$ and $R^{2} \ge 0.5$: a
+poor fit usually means the segmentation is unstable rather than that the water
+is doing something complicated, so the system declines to call it. Where a
+calibrated level exists it is preferred over area for the trend decision,
+because area fraction moves with camera perspective and level does not. The
+operational output is the extrapolation
+\begin{equation}
+  t_{\text{threshold}} = \frac{\ell^{*} - \ell_t}{\hat{\beta}},
+  \qquad \hat{\beta} > 0,
+  \label{eq:tttp}
+\end{equation}
+which is the number an operator actually wants: not ``the street is flooding''
+but ``this underpass is impassable in eleven minutes''.
+
+\begin{recorded}{A bug only real data could find}
+With a fixed \SI{300}{\second} window, \cref{eq:ols} never fired at all on a
+creek camera sampled every fifteen minutes — it reported \textsc{unknown} for
+seven hours while the water rose by 10\,\% of the frame — because the window
+could never contain two frames. Every synthetic test passed throughout. A time
+window is the wrong abstraction when the sampling rate is a property of the
+deployment, so the window is now adaptive: it admits at least four sampling
+intervals, measured from the observed median gap. Page--Hinkley, being
+sample-based rather than time-based, was unaffected.
+\end{recorded}
+
+\subsection{Page--Hinkley change detection}
+\label{sec:ph}
+
+The Page--Hinkley test~\citep{page1954continuous,hinkley1971inference} is a
+classical sequential change-point detector. For observations $x_1, x_2, \dots$
+with running mean $\bar{x}_i$, tolerated drift $\delta$ and threshold
+$\lambda$:
+\begin{align}
+  m_t &= \sum_{i=1}^{t} \bigl( x_i - \bar{x}_i - \delta \bigr),
+  \label{eq:ph-cum}\\
+  M_t &= \min_{1 \le i \le t} m_i,
+  \label{eq:ph-min}\\
+  \mathrm{PH}_t &= m_t - M_t,
+  \label{eq:ph-stat}
+\end{align}
+with an alarm at the first $t \ge t_{\min}$ for which
+$\mathrm{PH}_t > \lambda$. Its character differs from \cref{eq:ols}: it
+responds quickly to the \emph{onset} of a change, whereas the fit estimates
+the \emph{rate} of an ongoing one more stably. They are complementary rather
+than competing, which is why both are available.
+
+\subsection{Calibration matters more than the algorithm}
+\label{sec:ph-calibration}
+
+On a signal that is not changing, \cref{eq:ph-cum} is a random walk with step
+standard deviation $\sigma$ and drift $-\delta$ per sample, and
+\cref{eq:ph-stat} is that walk's drawdown below its own running minimum. A
+threshold small relative to the noise will therefore be crossed eventually by
+noise alone. For Brownian motion with negative drift the all-time maximum
+drawdown is exponentially distributed, giving
+\begin{equation}
+  \Pr[\text{false alarm}] \;\approx\;
+  \exp\!\left( -\,\frac{2\,\delta\,\lambda}{\sigma^{2}} \right),
+  \label{eq:ph-far}
+\end{equation}
+and, inverting, a design rule for a camera nobody has calibrated:
+\begin{equation}
+  \lambda \;\gtrsim\; \frac{\sigma^{2}}{2\delta}\,\ln\frac{1}{\alpha}
+  \label{eq:ph-design}
+\end{equation}
+for a target false-alarm probability $\alpha$.
+
+Our first defaults, $\delta = 0.002$ and $\lambda = 0.02$, looked reasonable
+and produced a 92\,\% false-alarm rate on \emph{stable} water with realistic
+segmentation noise. \Cref{tab:ph} places the measured grid beside
+\cref{eq:ph-far}.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Page--Hinkley false-alarm rate on stable water, measured over 200
+trials of 40 samples, against the drawdown model of \cref{eq:ph-far}. All
+values are percentages. The model consistently \emph{under}-predicts — by
+roughly a factor of two in the interesting region — because it assumes the
+infinite-time limit and treats the running-mean subtraction as exact. It
+nevertheless reproduces the ordering across every row and column and locates
+the usable/unusable boundary correctly, so \cref{eq:ph-design} is a sound
+floor for a new camera and not a substitute for measuring it. Generated by
+\texttt{docs/build\_paper.py} from
+\texttt{eval/results/page\_hinkley\_calibration.json}.}
+\label{tab:ph}
+\input{generated/page_hinkley}
+\end{table}
+
+The chosen default, $\delta = 0.005$ and $\lambda = 0.10$, trades a little
+latency for zero false alarms at typical segmentation noise: detection latency
+for a genuine rise is 11, 7 and 4 samples at 0.5\,\%, 1\,\% and 3\,\% per
+frame respectively. A camera with noisier segmentation needs a higher
+threshold, and \cref{eq:ph-design} says roughly how much higher — but it
+should be measured per camera rather than assumed.
+
+\subsection{Compared on real cameras}
+
+Both mechanisms were run on identical inputs from LSU creek camera sequences
+in the V-FloodNet dataset~\citep{liang2022vfloodnet}: real fixed cameras, real
+water, real segmentation noise. The two win on different sampling regimes —
+the windowed fit is faster on densely sampled cameras, Page--Hinkley on
+sparsely sampled ones, because it counts samples rather than seconds. Neither
+is claimed as ours, and the comparison is reported rather than a winner
+declared.
+
+\subsection{Ground truth the other footage does not have}
+\label{sec:gage}
+
+USGS cameras~\citep{usgshivis} sit on instrumented gauges, so every frame
+arrives with a measured water level beside it — which no other footage in this
+project provides. Over the 50 frames of a real flood event (Walnut Creek at
+Raleigh, 8 August 2024, gauge rising to \SI{9.00}{\foot} and receding to
+\SI{4.25}{\foot}), segmented water coverage correlates with measured gauge
+height at $r = +0.50$.
+
+That is a real but moderate relationship, and it is reported because it
+\emph{qualifies} the trend claim rather than supporting it unconditionally.
+Coverage tracks the water level between a flood day and a receded day, but
+within a day at near-constant level the coverage still varies by more than the
+level does. Restricting to midday frames does not improve it ($r = +0.46$ to
+$+0.50$ across daylight windows), so the residual is not simply low sun.
+Camera-derived coverage is evidence of a trend, not a substitute for a gauge.
+This is one event on one camera, and \cref{sec:outstanding} lists repeating it
+as outstanding work.

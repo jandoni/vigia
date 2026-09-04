@@ -1,0 +1,66 @@
+\section{Attribution and credits}
+\label{sec:attribution}
+
+VIGÍA is built on work done by other people. This section names them. Model
+weights are not redistributed in our repository; they are downloaded from
+their original distributors at setup time, and provenance for each is recorded
+in \texttt{models/REGISTRY.yaml} alongside its licence.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Models and datasets, with the licence each is used under.}
+\label{tab:credits}
+\begin{tabularx}{\textwidth}{W{1.35} W{0.75} W{0.90}}
+\toprule
+Component & Licence & Used for \\
+\midrule
+\texttt{yolo11s\_sensitive-detector} — PyroNear association with the French Fire and Rescue Services (SDIS) & Apache-2.0 & fire detection \\
+\texttt{pyro-sdis} dataset — PyroNear volunteers with SDIS partners & Apache-2.0 & fire evaluation \\
+\texttt{pyro-engine} — PyroNear association & Apache-2.0 & architectural reference only; no code copied \\
+FIgLib and camera archive — HPWREN, UC San Diego & attribution required & ignition sequences, negatives, live cameras \\
+ATLANTIS — Erfani et al., iWERS lab, University of South Carolina & CC / public-domain source images; annotation status unstated & flood training and test \\
+FloodNet — Rahnemoonfar et al. & CDLA-Permissive-1.0 & aerial flood training \\
+SeaDronesSee — Varga, Kiefer et al., University of Tübingen & CC0 1.0 (data), MIT (code) & people-in-water detection \\
+\texttt{seadronessee-rfdetr-small} — dronefreak & Apache-2.0 & people-in-water detection \\
+DRespNeT / YOLOv8-DRN — Cranfield University & CC BY 4.0 & building-access detection \\
+\texttt{traffic-accident-detection-yolo11x} — Enos-123 & MIT & road-incident detection \\
+V-FloodNet LSU sequences — Liang et al. & evaluation use only & flood trend comparison \\
+USGS HIVIS streamgage cameras & public domain & flood footage and live cameras \\
+torchvision (DeepLabV3, MobileNetV3) — Meta AI & BSD-3-Clause & flood architecture \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Prior art}
+
+VIGÍA is not the first camera-based hazard detection system and does not claim
+to be. The following work precedes it and in several respects exceeds it.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Prior and concurrent work.}
+\label{tab:priorart}
+\begin{tabularx}{\textwidth}{l l L}
+\toprule
+Organisation & Domain & Note \\
+\midrule
+Pano AI & wildfire & Commercial; \textasciitilde USD 50{,}000 per camera per year including a 24/7 intelligence centre \\
+ALERTCalifornia / DigitalPath & wildfire & UC San Diego and CAL FIRE; 1{,}060+ cameras with human vetting \\
+PyroNear & wildfire & Open-source, deployed across France, Spain and Chile — and the direct source of our fire detector \\
+Lynxight, AngelEye, Coral & drowning & Commercially mature; ASTM F3698-24 and ISO 20380:2017 \\
+Rekor, Iteris, Miovision, NoTraffic & road & Deployed with US state transport departments \\
+xView2 / DIUx~\citep{gupta2019xbd} & building damage & Satellite damage assessment; needs bi-temporal pairs including a pre-disaster image, so not a camera model \\
+RipVIS~\citep{ripvis2025} & rip currents & CVPR 2025 benchmark; source of the $F_2$ convention used here \\
+\citet{choi2026pagehinkley} & urban flood & Page--Hinkley for anticipatory CCTV flood warning — the same capability as \cref{sec:ph}, published independently \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Runtime dependencies}
+
+The runtime is four packages: \texttt{onnxruntime} (MIT), \texttt{numpy}
+(BSD-3-Clause), \texttt{opencv-python-headless} (Apache-2.0) and
+\texttt{PyYAML} (MIT). The \texttt{ultralytics} package (AGPL-3.0) is
+deliberately not a runtime dependency and is confined to an isolated build
+environment (\cref{sec:licensing}). The web interface is an optional extra: a
+deployed edge node runs headless and never needs it.

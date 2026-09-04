@@ -1,0 +1,71 @@
+\section{Introduction}
+\label{sec:introduction}
+
+\subsection{Motivation}
+
+On 29 October 2024 a DANA — an isolated depression at high levels — struck the
+province of Valencia, Spain. It killed 223 people, displaced roughly 15{,}000
+residents and caused losses estimated above €50 billion. The Spanish
+meteorological agency AEMET issued its highest-level red warning hours before
+the worst of the rainfall, but the regional ES-Alert message to citizens'
+mobile phones was not sent until late that evening. People died in their
+homes, in underground garages, and in vehicles overtaken by water.
+
+The gap that day was not a gap in forecasting. It was a gap between what was
+known and what reached the people affected, and between a hazard beginning and
+anyone confirming that it had begun. The 2021 eruption of Cumbre Vieja on La
+Palma, which forced thousands to evacuate over 85 days, showed the same
+pattern from a different hazard.
+
+Spanish cities already carry tens of thousands of cameras: municipal traffic
+cameras, road authority cameras, private security systems. During the DANA
+those cameras were watching the water rise. Nobody was watching the cameras.
+
+\subsection{What VIGÍA is}
+
+VIGÍA integrates the best publicly available hazard detectors under a single
+gated pipeline and adds a shared temporal validation layer that makes them
+operationally trustworthy on ordinary municipal cameras.
+
+The system is an integration project and does not claim novel detection
+architectures. Every detector it runs was trained by someone else, and each is
+credited by name, licence and source in \cref{sec:attribution}. The original
+contributions are the validation layer of \cref{sec:validator} and the
+evaluation methodology of \cref{sec:methodology}, which measures what that
+layer buys and what it costs.
+
+\subsection{The problem the system actually solves}
+
+Hazard detection models are widely available and, individually, good. What
+prevents them from being deployed on municipal cameras is not accuracy but
+trust: they alarm far too often. Industry reporting puts the proportion of
+false alarms in security camera systems at roughly 98\,\%. Commercial wildfire
+operators compensate with human staffing — Pano AI charges around
+USD 50{,}000 per camera per year and runs a 24/7 intelligence centre, and
+ALERTCalifornia routes detections from more than 1{,}060 cameras through
+trained staff before dispatch.
+
+We measured this directly rather than citing it. Run exactly as published, the
+PyroNear wildfire detector~\citep{pyronear2025} raises an alarm on
+\FireImageFAR{} of frames containing no smoke when evaluated against a curated
+hard-negative set of \FireNegatives{} images spanning 21 cameras
+(\cref{sec:fire}). The detector is not defective; that is the operating point
+its authors deliberately chose, assuming a downstream filter. VIGÍA is that
+filter.
+
+\subsection{Scope and limitations}
+
+\begin{itemize}
+  \item VIGÍA is a research prototype, not a certified emergency system. No
+        component has regulatory approval for life-safety use.
+  \item It performs no biometric identification of any kind, by architecture
+        rather than by configuration (\cref{sec:privacy}).
+  \item Each detector carries a declared operating envelope, enforced before
+        any model is loaded. Claims outside that envelope are not made.
+  \item Several figures come from small samples. Each is reported with the
+        interval its sample size supports (\cref{sec:metrics}), and the
+        binding cases are listed in \cref{sec:outstanding}.
+  \item One hazard — road incidents — is retained as a generality experiment
+        for the validator rather than as a disaster capability, and has no
+        standalone measurement against held-out labels.
+\end{itemize}

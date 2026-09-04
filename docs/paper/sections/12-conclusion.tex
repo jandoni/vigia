@@ -1,0 +1,83 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+VIGÍA set out to make published hazard detectors trustworthy enough for the
+cameras cities already own. What survives its own evaluation is narrower and
+better-founded than what an earlier draft believed, and stating the final
+form plainly is the point of this section.
+
+The system stands: five detectors from four independent sources run behind
+one declarative gate with enforced viewpoint envelopes, one temporal
+validator confirmed to contain no hazard-specific branch, a privacy boundary
+with no biometric code path, and an AGPL-free runtime of four packages —
+each property held by a build-failing guard rather than a promise. The
+validator's value, after the controls of \cref{sec:threshold-matched}, is
+scoped to what the measurements support: it reaches an oracle-tuned
+threshold's false-alarm rate \emph{without} access to the negative
+distribution, it deduplicates alerts as no per-frame threshold can, and it
+transfers across hazards by configuration — at a closed-form latency cost
+(\cref{eq:latency}) and a measured recall cost that thresholding, where it
+suffices, does not pay. Two cascade levels that failed their measurements
+were removed rather than kept (\cref{sec:removed-levels}).
+
+We would argue the transferable contribution is the practice: every
+proportion carrying the interval its sample supports, stratified metrics
+where pooling flatters, suppression decomposed into the claim it supports
+and the housekeeping it is not, controls run against one's own headline, and
+twelve retracted claims documented in place. None of this required novel
+architecture. All of it changed what the paper was allowed to say.
+
+\subsection{Outstanding work}
+\label{sec:outstanding}
+
+Listed in the order it would be tackled. The first three are shortages of
+available material rather than defects in the system.
+
+\begin{enumerate}
+  \item \textbf{No temporal hard-negative set exists.} Tuned thresholding
+        suffices on easy negatives (\cref{sec:threshold-matched}); no
+        threshold survives the curated hard stills; whether persistence
+        survives them is untestable without hard negatives that are also
+        sequences — fog rolling over a ridge, filmed. Assembling one from
+        HPWREN's archive is the single most valuable experiment this project
+        has not run.
+  \item \textbf{Building access rests on \BuildingTestImages{} held-out
+        images.} Strong on that split (civilian box recall
+        \BuildingBoxRecall, interval \BuildingCivilianRecallCI{} over
+        instances), but twelve positive images cannot make the image-level
+        figures precise (\cref{tab:intervals}), and the released data cannot
+        be widened. It needs a different post-disaster aerial dataset with
+        people annotated.
+  \item \textbf{No urban flood footage.} The flood demonstration uses a
+        public-domain gauge camera on a creek. The 2024 Valencia DANA is the
+        event this system is motivated by, and no footage of a flooded
+        street is yet available to it under a licence permitting publication.
+  \item \textbf{The road-incident detector has no standalone measurement}
+        against held-out labels; it remains the validator's generality
+        experiment only.
+  \item \textbf{The gauge correlation is one event on one camera}
+        ($r = +0.50$, \cref{sec:gage}); it should be repeated across many
+        USGS cameras and events before the trend claim is leaned on.
+  \item \textbf{The aerial flood segmenter has no held-out split}
+        (\cref{tab:flood-aerial}); FloodNet's withheld masks make this
+        unfixable from the public release.
+  \item \textbf{Night operation.} Fire and flood are evaluated in daylight
+        only; the flood segmenter mislabels infrared frames and the fetch
+        pipeline excludes them by envelope. Disasters do not keep daylight
+        hours — the Valencia flooding peaked in the evening — so an
+        infrared-domain evaluation, likely fine-tuned on the USGS cameras'
+        own night frames, is required before any claim extends past dusk.
+\end{enumerate}
+
+\paragraph{Data and code availability.} Every figure in this paper is
+generated from committed measurement files by the build described in
+\cref{sec:reproducibility}; the repository, including the training and
+evaluation scripts that reproduce each number, accompanies this paper.
+
+\paragraph{Acknowledgments.} This work runs on other people's science, named
+throughout and in \cref{sec:attribution}: the PyroNear association and the
+French SDIS; HPWREN at UC San Diego, whose imagery appears here under its
+attribution requirement; the U.S. Geological Survey's streamgage camera
+network; the authors of ATLANTIS, FloodNet, SeaDronesSee, DRespNeT and
+V-FloodNet; and the maintainers of ONNX Runtime, NumPy, OpenCV and
+torchvision.

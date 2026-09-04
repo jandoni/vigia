@@ -1,0 +1,74 @@
+# VIGÍA camera registry — Tier 0, the context gate.
+#
+# Each camera is registered once with a context. The context declares which
+# hazards can physically occur there, and the pipeline loads only those
+# detectors. This file is the whole of Tier 0's intelligence: it is declarative
+# on purpose, because a wrong line here is visible and fixable by a human,
+# whereas a misrouting classifier fails silently.
+#
+# Contexts and the hazards they enable (see vigia/registry.py):
+#   forest              fire
+#   wildland_interface  fire, traffic
+#   street              flood, traffic, building_access
+#   urban_block         flood, building_access
+#   river               flood, drowning
+#   coast               drowning
+#   motorway            traffic
+#   earthquake_zone     building_access
+#   uav_search          building_access, drowning
+#
+# `source` is a file path, an RTSP URL, or a webcam index.
+
+cameras:
+
+  - camera_id: ridge_01
+    name: Ridgeline camera, wildfire watch
+    source: clips/fire_ridge.mp4
+    context: forest
+    notes: >
+      PyroNear's actual deployment envelope — fixed-mount wide-field camera
+      viewing a landscape horizon, daylight only.
+
+  - camera_id: valencia_calle_01
+    name: Valencia street, DANA scenario
+    source: clips/street_flood.mp4
+    context: street
+    notes: >
+      The case the project exists for. Water rising through a street, vehicles
+      caught in it, people trapped in the buildings alongside.
+
+  - camera_id: a7_km12
+    name: A-7 motorway km 12
+    source: clips/motorway.mp4
+    context: motorway
+    notes: >
+      Traffic is retained as the validator's generality experiment, not as a
+      disaster hazard. Deliberately narrow context: flood is plausible here but
+      the flood detector is calibrated for street-level scenes.
+
+  - camera_id: uav_01
+    name: UAV search and rescue
+    source: clips/uav_search.mp4
+    context: uav_search
+    retention:
+      # Aerial SAR footage contains people at close range; keep the shortest
+      # buffer that still gives an operator context around an event.
+      rolling_buffer_seconds: 5.0
+
+  - camera_id: river_01
+    name: River gauge camera
+    source: clips/river.mp4
+    context: river
+    enabled: false
+    notes: Disabled until the reference line is surveyed for this camera.
+
+  # An override, recorded explicitly rather than by inventing a new context.
+  - camera_id: coast_02
+    name: Coastal path above a road
+    source: clips/coast_road.mp4
+    context: coast
+    hazards: [drowning, traffic]
+    notes: >
+      Overlooks both the water and the corniche road, which no single context
+      expresses. The exception is visible here rather than hidden in a new
+      context nobody else uses.

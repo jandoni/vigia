@@ -1,0 +1,37 @@
+\section{Revision history}
+\label{sec:changelog}
+
+Every entry that adds or revises a measured figure is recorded here, so the
+provenance of each number in this document can be traced.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Revision history. Dates are 2026.}
+\label{tab:changelog}
+\begin{tabularx}{\textwidth}{l l L}
+\toprule
+Ver. & Date & Change \\
+\midrule
+0.1 & 1 Sep & Project foundation: ONNX-only runtime, licence guard, model registry, fetcher. Fire detector integrated and first baseline measured. \\
+0.2 & 1 Sep & Temporal validator implemented with five levels and an $\iou$ tracker. Ablation measured: \FARReduction\,\% false-alarm reduction at persistence 3 with no loss of fires detected. Per-level ablation showed size plausibility contributes nothing. \\
+0.3 & 1 Sep & Road-incident detector integrated via isolated ONNX export. Hazard-agnostic transfer measured across two hazards and enforced by an AST-based test. Scope revised: building access and people-in-water added, pool drowning removed. \\
+0.4 & 1 Sep & ATLANTIS acquired; class mapping derived empirically from the masks. Water level and rate-of-rise implemented and tested. Size-plausibility level removed after measurement across three hazards; all prior results unchanged, confirming it contributed nothing. \\
+0.5 & 1 Sep & All four hazards measured. Flood segmenter trained on ATLANTIS. People-in-water integrated, where a label-shift bug reported boats as swimmers while discarding real swimmers — caught only by box-level evaluation. Building access trained on DRespNeT. \\
+0.6 & 2 Sep & The system became a system: context gate, runtime pipeline, egress boundary and operator view, with privacy enforced by a build-failing guard. Demonstration recorded deterministically for all four hazards, every clip publicly licensed. Results freeze added. Fire baseline re-measured on \FireNegatives{} negatives instead of \FireNarrowNegatives{}: the false-alarm rate fell from \FireNarrowFAR{} to \FireImageFAR{} and every quotation was corrected. Flood footage moved to public-domain USGS gauge cameras. \\
+0.7 & 2 Sep & Building access rebuilt on the DRespNeT authors' own published weights. Civilian box recall moved from $0.141$ to \BuildingBoxRecall, turning the weakest component in the system into one of the strongest. The claim that building access had a usable temporal sequence was retracted. \\
+0.8 & 3 Sep & Aerial flood segmenter trained on FloodNet and routed by viewpoint, with the stratified/pooled distinction of \cref{sec:pooling} made explicit. Scene router trained for the upload path (\cref{sec:routing}). \\
+0.9 & 3 Sep & Live public cameras integrated through the same pipeline (\cref{sec:livecameras}). A blocking-endpoint defect was found and fixed: analysing a clip had stalled every live stream in the process for the duration. \\
+1.0 & 3 Sep & Documentation rebuilt in \LaTeX{} with the mathematics stated explicitly (\cref{sec:metrics}), interval estimation added to every proportion, the persistence-latency identity derived (\cref{eq:latency}), and the Page--Hinkley calibration compared against a closed-form model (\cref{tab:ph}). Every figure is now generated from the results files rather than typed. \\
+\DocVersion & 4 Sep & The two remaining evidence gaps in the cascade were closed by
+measurement, and both cut against the earlier draft. The threshold-matched
+control (\cref{sec:threshold-matched}) showed an oracle-tuned confidence
+floor dominating the cascade on the FIgLib negative set; the headline claim
+was re-scoped accordingly, in the abstract and everywhere else. The colour
+prior — the one level never active in any reported experiment — was measured
+across five cutoffs on stills and sequences, found to trade recall for
+false-alarm rate at every point because fog and smoke are both grey, and
+removed like the size level before it (\cref{sec:removed-levels}), with a
+regression test barring its return. \\
+\bottomrule
+\end{tabularx}
+\end{table}

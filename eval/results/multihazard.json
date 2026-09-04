@@ -1,0 +1,86 @@
+{
+  "hazards": {
+    "fire": {
+      "detector": "PyroNear yolo11s_sensitive (Apache-2.0)",
+      "raw": {
+        "frames": 240,
+        "raw_detections": 109,
+        "raw_frames_with_detection": 109,
+        "raw_alert_rate": 0.4542,
+        "confirmed_events": 0,
+        "levels": {}
+      },
+      "validated": {
+        "frames": 240,
+        "raw_detections": 112,
+        "raw_frames_with_detection": 112,
+        "raw_alert_rate": 0.4667,
+        "confirmed_events": 15,
+        "levels": {
+          "confidence": {
+            "seen": 145,
+            "passed": 112
+          },
+          "size": {
+            "seen": 112,
+            "passed": 112
+          },
+          "colour": {
+            "seen": 112,
+            "passed": 112
+          },
+          "persistence": {
+            "seen": 112,
+            "passed": 95
+          },
+          "cooldown": {
+            "seen": 95,
+            "passed": 15
+          }
+        }
+      },
+      "suppression": 0.8624
+    },
+    "traffic": {
+      "detector": "Enos-123 traffic-accident yolo11x (MIT)",
+      "raw": {
+        "frames": 660,
+        "raw_detections": 291,
+        "raw_frames_with_detection": 209,
+        "raw_alert_rate": 0.3167,
+        "confirmed_events": 0,
+        "levels": {}
+      },
+      "validated": {
+        "frames": 660,
+        "raw_detections": 239,
+        "raw_frames_with_detection": 185,
+        "raw_alert_rate": 0.2803,
+        "confirmed_events": 33,
+        "levels": {
+          "confidence": {
+            "seen": 361,
+            "passed": 239
+          },
+          "size": {
+            "seen": 239,
+            "passed": 239
+          },
+          "colour": {
+            "seen": 239,
+            "passed": 239
+          },
+          "persistence": {
+            "seen": 239,
+            "passed": 102
+          },
+          "cooldown": {
+            "seen": 102,
+            "passed": 33
+          }
+        }
+      },
+      "suppression": 0.8866
+    }
+  }
+}

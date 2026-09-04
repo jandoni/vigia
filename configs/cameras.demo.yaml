@@ -1,0 +1,68 @@
+# Demo registry — one curated clip per hazard, for deterministic replay.
+# Clips are built by scripts/make_demo_clips.py; see clips/MANIFEST.json for
+# the licence attached to each, and whether it may appear in published material.
+cameras:
+  - camera_id: ridge_01
+    name: Ridgeline wildfire watch
+    source: fire_ridge.mp4
+    context: forest
+  - camera_id: creek_01
+    name: USGS streamgage camera, Lick Creek
+    source: creek_gauge.mp4
+    context: river
+    hazards: [flood]
+    notes: >
+      USGS imagery, public domain. Replaced the V-FloodNet LSU sequences, which
+      are all rights reserved and could not appear in anything published.
+  - camera_id: coast_01
+    name: Open water, people in the sea
+    source: open_water.mp4
+    context: coast
+  - camera_id: uav_01
+    name: UAV over collapsed buildings
+    source: collapsed_building.mp4
+    context: uav_search
+    hazards: [building_access]
+
+  # ---------------------------------------------------------------- live --
+  # Real public cameras, watched live. These are not clips: they are other
+  # people's infrastructure, polled at the cadence their operators publish at.
+  # Both networks are listed in vigia/io/live.py with the licence that permits
+  # this and the reason a beach webcam is NOT here (viewpoint, not licence).
+  #
+  # They are slow on purpose. USGS publishes every five minutes and HPWREN
+  # every minute, so a confirmed event takes minutes rather than seconds —
+  # which is the regime municipal and hydrological cameras actually run in,
+  # and the reason the flood trend detector counts samples rather than
+  # seconds. The interface states the interval rather than letting a still
+  # image read as a crash.
+  - camera_id: live_asheville
+    name: French Broad River at Asheville (live)
+    source: usgs://NC_French_Broad_River_at_Asheville
+    context: river
+    hazards: [flood]
+    notes: >
+      USGS streamgage camera, public domain. Updates every 5 minutes.
+  - camera_id: live_pittsburgh
+    name: Monongahela River at Pittsburgh (live)
+    source: usgs://PA_Monongahela_R_at_Point_State_Park_at_Pittsburgh
+    context: river
+    hazards: [flood]
+    notes: >
+      USGS streamgage camera on an urban river, public domain. Updates every
+      5 minutes.
+  - camera_id: live_red_mountain
+    name: Red Mountain, looking west (live)
+    source: hpwren://rm-w-mobo-c
+    context: forest
+    notes: >
+      HPWREN, University of California San Diego. Attribution required. The
+      same network that produced the FIgLib sequences this project's fire
+      figures are measured on. Updates about every minute.
+  - camera_id: live_high_point
+    name: High Point, looking north (live)
+    source: hpwren://hp-n-mobo-c
+    context: forest
+    notes: >
+      HPWREN, University of California San Diego. Attribution required.
+      Updates about every minute.

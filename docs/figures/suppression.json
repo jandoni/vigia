@@ -1,0 +1,30 @@
+[
+  {
+    "hazard": "fire",
+    "proposed": 20,
+    "filtered": 2,
+    "deduplicated": 16,
+    "confirmed": 2
+  },
+  {
+    "hazard": "flood",
+    "proposed": 61,
+    "filtered": 14,
+    "deduplicated": 39,
+    "confirmed": 8
+  },
+  {
+    "hazard": "drowning",
+    "proposed": 451,
+    "filtered": 319,
+    "deduplicated": 73,
+    "confirmed": 59
+  },
+  {
+    "hazard": "building_access",
+    "proposed": 723,
+    "filtered": 599,
+    "deduplicated": 76,
+    "confirmed": 48
+  }
+]

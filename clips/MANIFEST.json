@@ -1,0 +1,69 @@
+{
+  "note": "Clips are derived from datasets VIG\u00cdA does not redistribute. They are generated locally by scripts/make_demo_clips.py and must not be committed. `publishable` decides whether a clip may appear in a recorded demo, a figure, or anything public.",
+  "clips": [
+    {
+      "clip": "fire_ridge.mp4",
+      "hazard": "fire",
+      "context": "forest",
+      "frames": 40,
+      "fps": 8.0,
+      "resolution": "1280x960",
+      "source": "data/figlib/20160604_FIRE_rm-n-mobo-c/*.jpg",
+      "licence": "HPWREN imagery \u2014 attribution required",
+      "attribution": "HPWREN, University of California San Diego (https://hpwren.ucsd.edu). FIgLib fire ignition sequence.",
+      "publishable": true,
+      "why": "HPWREN requires attribution when its images are published. That is a condition we can meet, so this clip may be shown provided the credit appears on the frame or in the caption.",
+      "reference_only": false,
+      "temporal": true,
+      "temporal_note": ""
+    },
+    {
+      "clip": "creek_gauge.mp4",
+      "hazard": "flood",
+      "context": "river",
+      "frames": 40,
+      "fps": 4.0,
+      "resolution": "720x405",
+      "source": "data/usgs_camera/*.jpg",
+      "licence": "Public domain \u2014 work of the United States Government",
+      "attribution": "USGS streamgage camera, Walnut Creek at South State Street, Raleigh NC (station 0208735460). Public domain.",
+      "publishable": true,
+      "why": "USGS imagery is a work of the United States Government and carries no restriction. It fully replaces V-FloodNet's LSU sequences, which are all rights reserved and could not appear in a recorded demonstration or a dossier figure \u2014 that restriction is why flood, the keystone hazard, previously had no showable footage at all. The USGS cameras are the right regime as well as the right licence: fixed mount, pointed at water, sampled sparsely, which is what the trend detection was calibrated for. They add something no other footage in this project has \u2014 an instrumented gage reading alongside every frame, so the segmented coverage can be checked against a measured water level instead of being trusted.",
+      "reference_only": false,
+      "temporal": true,
+      "temporal_note": "A real flood, not a stable creek: 8 August 2024 at Raleigh, where the gage rose to 9.00 ft and receded to 4.25 ft over the two days covered, sampled about every 20 minutes in daylight. Daylight only, because these cameras switch to infrared at night and the segmenter then tints sky and vegetation as water; night is outside the detector's declared envelope and the fetch script enforces that rather than restating it."
+    },
+    {
+      "clip": "open_water.mp4",
+      "hazard": "drowning",
+      "context": "coast",
+      "frames": 69,
+      "fps": 8.0,
+      "resolution": "1280x720",
+      "source": "data/seadronessee/val_seq/*.jpg",
+      "licence": "CC0 1.0 Universal",
+      "attribution": "SeaDronesSee \u2014 Varga, Kiefer et al., University of T\u00fcbingen, IEEE/CVF WACV 2022. CC0; credited by choice.",
+      "publishable": true,
+      "why": "CC0 places no restriction of any kind. The least encumbered footage in the project and the safest thing to put on a screen.",
+      "reference_only": false,
+      "temporal": true,
+      "temporal_note": "A genuine 69-frame flight sequence, fetched by eval/fetch_seadronessee_sequence.py. The first attempt used the sparse validation sample already on disk, whose longest run of consecutive frames is 4 \u2014 the resulting clip played fine and meant nothing. Continuity was verified rather than assumed: adjacent-frame histogram correlation is 0.997 here against 0.015 for unrelated pairs from the same split."
+    },
+    {
+      "clip": "collapsed_building.mp4",
+      "hazard": "building_access",
+      "context": "uav_search",
+      "frames": 66,
+      "fps": 4.0,
+      "resolution": "640x640",
+      "source": "data/drespnet/*/*.jpg",
+      "licence": "CC BY 4.0",
+      "attribution": "DRespNeT \u2014 Cranfield University, arXiv 2508.16016. UAV imagery of the 2023 T\u00fcrkiye earthquakes.",
+      "publishable": true,
+      "why": "CC BY 4.0 permits redistribution with attribution, which is a condition we can meet. The credit is legally required here, unlike SeaDronesSee where it is given by choice.",
+      "reference_only": false,
+      "temporal": false,
+      "temporal_note": "NOT a sequence, and an earlier version of this file wrongly claimed it was. Ordering by the capture index embedded in the filenames does recover the original order, and a 12-frame window from image111 looked continuous (adjacent correlation 0.695 against 0.235 for unrelated pairs), so a 66-frame clip was built on that basis. Checking the authors' own un-augmented raw frames later showed the generalisation was false: across all 615 raw frames the median adjacent correlation is 0.388 with 362 scene cuts, and the longest genuinely continuous run in the whole dataset is SEVEN frames. Within the 66-frame range actually used, 40 of 65 transitions are scene cuts. DRespNeT is curated stills sampled from many flights, not footage, so this hazard cannot demonstrate temporal validation on released data."
+    }
+  ]
+}

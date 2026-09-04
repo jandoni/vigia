@@ -1,0 +1,60 @@
+\section{Reproducibility}
+\label{sec:reproducibility}
+
+\subsection{How this document is built}
+
+No figure in this document is typed. \texttt{docs/build\_paper.py} reads
+\texttt{eval/results/*.json}, regenerates every chart from the same files,
+writes \texttt{generated/numbers.tex} as a set of macros, and only then runs
+the typesetter. A measurement therefore changes this document by rebuilding
+it. Two derived quantities — the Wilson intervals of \cref{eq:wilson} and the
+Page--Hinkley model of \cref{eq:ph-far} — are computed at build time rather
+than stored, because they are properties of the measurements rather than new
+measurements.
+
+\begin{verbatim}
+make paper        # figures -> numbers -> LaTeX -> vigia.pdf
+make check        # licence guard, privacy guard, results freeze, tests
+make dev          # the whole demonstration, one command
+\end{verbatim}
+
+\subsection{The three guards}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Build-failing guards. Each turns a commitment that would otherwise
+live in prose into one that cannot be broken silently.}
+\label{tab:guards}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+Guard & What it prevents \\
+\midrule
+\texttt{tools/check\_licence.py} & Any import of an AGPL-licensed package
+anywhere under \texttt{vigia/}. Parses the AST rather than grepping, so a
+comment mentioning the package does not trip it (\cref{sec:licensing}). \\
+\addlinespace
+\texttt{tools/check\_privacy.py} & Any biometric identification code path
+across \texttt{vigia/}, \texttt{tools/}, \texttt{scripts/} and \texttt{eval/}
+(\cref{sec:privacy}). \\
+\addlinespace
+\texttt{tools/freeze\_results.py} & Any published figure that disagrees with
+the results file it cites (\cref{sec:methodology}). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Reference hardware}
+
+All figures in this document were produced on a MacBook Pro (M4 Pro,
+\SI{48}{\gigabyte}) using the \textsc{reference} backend: the as-published
+dynamic-shape ONNX graph on the CPU execution provider, which is
+deterministic. \Cref{sec:backends} describes the faster non-deterministic
+alternative and why it is never used for a reported number.
+
+\subsection{Data acquisition}
+
+None of the datasets used here are redistributed. Each is fetched from its
+original distributor by a script under \texttt{eval/}, which records the
+licence and refuses to report success if the fetched material fails the
+continuity or licence conditions of \cref{sec:demo}. Acquisition routes for
+material not yet obtained are recorded in \texttt{docs/DATA\_ACQUISITION.md}.

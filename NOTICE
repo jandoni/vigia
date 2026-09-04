@@ -1,0 +1,192 @@
+VIGÍA
+Copyright 2026 Jon Andoni Baranda
+
+Licensed under the Apache License, Version 2.0 (the "License"). You may obtain
+a copy of the License in the LICENSE file in this repository.
+
+================================================================================
+THIRD-PARTY COMPONENTS
+================================================================================
+
+VIGÍA is an integration project. It does not claim novel detection
+architectures. Our contribution is the gated pipeline and the temporal
+validation layer around these models.
+
+Three of the five detectors are third-party weights and the work below is
+theirs. Two — flood segmentation and building access — were trained by us, but
+only in the sense that we fine-tuned someone else's architecture on someone
+else's data: the architectures are torchvision's, the annotations are ATLANTIS's
+and DRespNeT's, and both credits are recorded below and carry the same weight
+as the rest.
+
+Model weights are NOT redistributed in this repository. They are downloaded
+from their original distributors by `tools/fetch_models.py`. Provenance,
+licence and measured performance for each are recorded in models/REGISTRY.yaml.
+
+--------------------------------------------------------------------------------
+1. PyroNear — wildfire smoke detector
+--------------------------------------------------------------------------------
+Authors  : The PyroNear association — https://pyronear.org
+Model    : yolo11s_sensitive-detector
+Source   : https://huggingface.co/pyronear/yolo11s_sensitive-detector
+Licence  : Apache-2.0 (as stated by the model repository)
+Used for : Fire and smoke detection (vigia/detectors/fire.py)
+Changes  : None to the model. We run the published ONNX export unmodified.
+           We relabel its single class from "item" to "smoke" for readability
+           downstream, and wrap it in our own pre/post-processing.
+
+Licence note, recorded for transparency: the ONNX artifact carries an embedded
+metadata field `license = AGPL-3.0 License (https://ultralytics.com/license)`,
+stamped automatically by the Ultralytics exporter because the model was
+fine-tuned from yolo11s.pt. The distributing repository states Apache-2.0. This
+tension exists in PyroNear's own distribution and was not created by us. We
+follow the licence the distributor states and record the discrepancy rather
+than hiding it. We do not redistribute the weights in any case.
+
+--------------------------------------------------------------------------------
+2. PyroNear — pyro-sdis dataset
+--------------------------------------------------------------------------------
+Authors  : The PyroNear association, in collaboration with the French Fire and
+           Rescue Services (SDIS). Annotated by PyroNear volunteers.
+Source   : https://huggingface.co/datasets/pyronear/pyro-sdis
+Licence  : Apache-2.0
+Used for : Evaluation of the fire detector (eval/run_image_eval.py)
+
+--------------------------------------------------------------------------------
+3. PyroNear — pyro-engine
+--------------------------------------------------------------------------------
+Source   : https://github.com/pyronear/pyro-engine
+Licence  : Apache-2.0
+Used for : Architectural reference only. No code copied. Its ONNX-based edge
+           inference design informed our decision to keep the runtime path free
+           of the Ultralytics package.
+
+--------------------------------------------------------------------------------
+4. HPWREN — High Performance Wireless Research and Education Network
+--------------------------------------------------------------------------------
+Operator : University of California San Diego
+Source   : https://hpwren.ucsd.edu
+Used for : Live camera imagery used in development and testing.
+Condition: HPWREN requires attribution when its images are published. Any
+           figure in the dossier or demo that uses an HPWREN frame must carry
+           that credit.
+
+--------------------------------------------------------------------------------
+5. DRespNeT — post-earthquake search-and-rescue dataset
+--------------------------------------------------------------------------------
+Authors  : Cranfield University
+Source   : https://arxiv.org/abs/2508.16016
+Licence  : CC BY 4.0
+Used for : Training data for the building-access detector — UAV imagery of the
+           2023 Turkiye earthquakes, 28 operationally critical classes covering
+           collapsed structures, access points, debris, rescue personnel and
+           civilian visibility. VIGIA merges these to five classes; see
+           models/REGISTRY.yaml for the mapping and the reasoning.
+Condition: CC BY 4.0 REQUIRES attribution. This differs from SeaDronesSee (CC0),
+           where the credit below is given by choice rather than obligation.
+           Any published figure, metric or weight file derived from DRespNeT
+           must carry this credit. Because the licence expressly permits
+           derivative works with attribution, weights trained on it MAY be
+           redistributed provided this notice travels with them.
+
+--------------------------------------------------------------------------------
+6. ATLANTIS — waterbody semantic segmentation dataset
+--------------------------------------------------------------------------------
+Authors  : Erfani et al., iWERS laboratory, University of South Carolina
+Source   : https://github.com/smhassanerfani/atlantis
+Published: Environmental Modelling & Software, 2022
+Licence  : NOT STATED — see condition below
+Used for : Training data for the flood segmentation detector. 5,195
+           pixel-annotated images, 56 classes, split 3,364 / 535 / 1,296,
+           collapsed by us to binary water.
+Condition: The repository carries NO explicit licence file, so the status of
+           the annotations is unstated. We therefore do not redistribute the
+           dataset, and whether weights trained on those annotations may be
+           redistributed is genuinely unclear. That uncertainty is recorded
+           rather than resolved in our favour. The source images were collected
+           via the Flickr API under Creative Commons, No Known Copyright
+           Restrictions, and US Government Work licences.
+
+--------------------------------------------------------------------------------
+7. SeaDronesSee — open-water human detection dataset
+--------------------------------------------------------------------------------
+Authors  : Varga, Kiefer et al., University of Tübingen
+Published: IEEE/CVF WACV 2022
+Source   : https://github.com/Ben93kie/SeaDronesSee
+Licence  : CC0 1.0 Universal (data), MIT (code)
+Model    : dronefreak/seadronessee-rfdetr-small (RF-DETR Small, Apache-2.0),
+           base architecture by Roboflow
+Used for : The people-in-water detector — people in open water viewed from 5 to
+           260 m altitude.
+Condition: CC0 is the least restrictive licence in this project and requires no
+           attribution at all. The credit above is given by choice, not
+           obligation — the opposite of DRespNeT, where CC BY 4.0 makes it a
+           legal requirement. The same author published YOLO11n and YOLO11x
+           checkpoints for this dataset under AGPL-3.0; RF-DETR was chosen
+           specifically because it is Apache-2.0 and keeps this detector
+           outside the AGPL perimeter.
+
+--------------------------------------------------------------------------------
+8. Enos-123 — traffic accident detector
+--------------------------------------------------------------------------------
+Author   : Enos-123 (Hugging Face)
+Source   : https://huggingface.co/Enos-123/traffic-accident-detection-yolo11x
+Licence  : MIT
+Used for : Traffic incident detection, retained explicitly as a generality
+           experiment for the temporal validator rather than as a disaster
+           hazard in its own right.
+Condition: A YOLO11x derivative, so it is converted to ONNX in a separate
+           build environment containing ultralytics; the runtime environment
+           contains neither ultralytics nor torch. Two published checkpoints
+           exist — we ship epoch61 rather than the epoch14 that the upstream
+           infer.py points at, because epoch61 was better behaved on the
+           author's own test images. The author states it is not validated for
+           critical autonomous driving use.
+
+================================================================================
+PLANNED COMPONENTS — attribution to be completed on integration
+================================================================================
+
+None outstanding. All five detectors are integrated and credited above:
+fire (1-3), building access (5), flood (6), people in water (7) and traffic (8).
+
+Two entries were removed from this section rather than completed. Flood
+segmentation was listed here as an MMSegmentation fine-tune; the flood detector
+was instead built on torchvision DeepLabV3, because torchvision is BSD-3-Clause
+and keeps the detector clear of the AGPL perimeter. Its dataset credit is now
+section 6. Pool-drowning detection was dropped entirely by the scope revision of
+1 September 2026 — the Figshare and Water Behavior datasets were never used, and
+open-water people detection (section 7) replaced that hazard because it is what
+the 2024 Valencia DANA actually involved.
+
+================================================================================
+PRIOR ART
+================================================================================
+
+VIGÍA is not the first camera-based hazard detection system, and does not claim
+to be. Work that precedes and in several respects exceeds it:
+
+  Pano AI                  wildfire detection at scale, commercial
+  ALERTCalifornia          UC San Diego / CAL FIRE, 1,060+ cameras
+  DigitalPath              wildfire AI, with ALERTCalifornia
+  PyroNear                 open-source wildfire detection, deployed in
+                           France, Spain and Chile — and the direct source of
+                           our fire detector
+  Lynxight, AngelEye,      pool drowning detection, commercially mature
+    Coral Detection          (ASTM F3698-24, ISO 20380:2017)
+  Rekor, Iteris,           traffic incident detection, deployed with US DOTs
+    Miovision, NoTraffic
+  xView2 / DIUx            building damage assessment from satellite imagery
+  RipVIS authors           rip current segmentation benchmark, CVPR 2025
+
+================================================================================
+RUNTIME DEPENDENCIES
+================================================================================
+
+onnxruntime              MIT          Microsoft
+numpy                    BSD-3-Clause NumPy developers
+opencv-python-headless   Apache-2.0   OpenCV team
+PyYAML                   MIT          PyYAML contributors
+
+The `ultralytics` package (AGPL-3.0) is deliberately NOT a runtime dependency.
+See PLAN.md §4.

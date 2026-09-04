@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use VIGÍA or its evaluation methodology, please cite it."
+title: "VIGÍA: Multi-Hazard Early Detection for Existing Camera Infrastructure"
+type: software
+authors:
+  - family-names: "Baranda"
+    given-names: "Jon Andoni"
+    email: jonandoni.baranda@gmail.com
+license: Apache-2.0
+repository-code: "https://github.com/jandoni/vigia"
+abstract: >
+  A gated multi-hazard detection pipeline for existing municipal cameras:
+  published detectors for fire, flood, people in water and building access
+  behind a shared, hazard-agnostic temporal validator, with licence
+  isolation, privacy boundaries and figure provenance enforced by
+  build-failing guards. Every published number is generated from committed
+  measurement files.

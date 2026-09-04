@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIGÍA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap">
+<link rel="stylesheet" href="/static/demo.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wordmark">VIGÍA</div>
+  <div class="label">Disaster detection for municipal cameras</div>
+  <nav>
+    <button data-go="home" class="on">Overview</button>
+    <button data-go="analyse">Analyse a video</button>
+    <button data-go="live">Live camera</button>
+    <button data-go="how">How it works</button>
+    <button data-go="train">Teach it</button>
+  </nav>
+</header>
+<div class="rule masthead-rule"></div>
+
+<!-- ============================================================ OVERVIEW -->
+<section class="page on" id="page-home">
+  <div style="display:flex; gap:90px; align-items:flex-start;">
+    <div style="flex-grow:1; max-width:690px;">
+      <h1 class="hero">Cameras already watch.<br>The trouble is they <em>cry wolf</em>.</h1>
+      <p class="lede" style="margin-top:24px;">
+        Leave a fire detector running on a hillside camera and it raises an alarm
+        on seventy-one of every hundred frames with no fire in them. No control
+        room can staff that. VIGÍA sits behind the detectors and stays quiet
+        until something is really there.
+      </p>
+    </div>
+
+    <div style="width:400px; flex:none; margin-top:58px;">
+      <div class="label" style="padding-bottom:14px;">On one hour of footage</div>
+      <div class="rule"></div>
+      <div class="figure-row">
+        <div class="figure grey" id="home-proposed">2,846</div>
+        <div class="muted" style="font-size:14px; line-height:1.4;">possible alarms<br>raised by the detector</div>
+      </div>
+      <div class="figure-row" style="padding:10px 0 22px;">
+        <div class="figure amber" id="home-confirmed">7</div>
+        <div class="muted" style="font-size:14px; line-height:1.4;">reached a human being</div>
+      </div>
+      <div class="rule"></div>
+      <p class="faint" style="font-size:13.5px; line-height:1.6; margin:16px 0 0;">
+        The rest were reflections, passing cloud, or the same event reported
+        over and over.
+      </p>
+    </div>
+  </div>
+
+  <div style="margin-top:64px;" class="rule"></div>
+  <div class="grid-3">
+    <div style="padding:30px 44px 0 0;">
+      <div class="mono faint" style="font-size:12px; letter-spacing:0.1em;">01</div>
+      <h2 class="section" style="font-size:27px; margin:13px 0 0;">Give it a video</h2>
+      <p class="muted" style="font-size:14.5px; line-height:1.6;">
+        Pick a clip. Say what it shows, and it runs the right specialist and
+        marks what it finds.
+      </p>
+      <button class="quiet" data-go="analyse" style="margin-top:6px;">Open</button>
+    </div>
+    <div class="col-rule" style="padding-top:30px; padding-right:44px;">
+      <div class="mono faint" style="font-size:12px; letter-spacing:0.1em;">02</div>
+      <h2 class="section" style="font-size:27px; margin:13px 0 0;">Watch a live camera</h2>
+      <p class="muted" style="font-size:14.5px; line-height:1.6;">
+        See what the detector proposes, then watch VIGÍA throw most of it away —
+        and say plainly why it did.
+      </p>
+      <button class="quiet" data-go="live" style="margin-top:6px;">Open</button>
+    </div>
+    <div class="col-rule" style="padding-top:30px;">
+      <div class="mono faint" style="font-size:12px; letter-spacing:0.1em;">03</div>
+      <h2 class="section" style="font-size:27px; margin:13px 0 0;">Teach it a hazard</h2>
+      <p class="muted" style="font-size:14.5px; line-height:1.6;">
+        Point it at marked-up pictures and it learns a new detector, in stages a
+        laptop can finish.
+      </p>
+      <button class="quiet" data-go="train" style="margin-top:6px;">Open</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= ANALYSE -->
+<section class="page" id="page-analyse">
+  <div style="display:flex; gap:44px; align-items:flex-start; margin-top:40px;">
+
+    <!-- left: choose -->
+    <div style="width:420px; flex:none;">
+      <h2 class="section">Analyse a video</h2>
+      <p class="muted" style="font-size:15px; line-height:1.6; margin-top:10px;">
+        Pick one of the sample clips, or choose a file from this computer.
+      </p>
+
+      <div class="label" style="margin-top:26px;">Sample footage</div>
+      <div class="rule" style="margin-top:10px;"></div>
+      <div id="clip-list" class="samples"></div>
+
+      <div style="margin-top:20px; display:flex; align-items:center; gap:16px;">
+        <button class="quiet" id="pick-file">Choose a file…</button>
+        <input type="file" id="file-input" accept="video/*" hidden>
+        <span class="faint" id="upload-note" style="font-size:13px;"></span>
+      </div>
+
+      <div id="scene-block" style="display:none;">
+        <div class="rule" style="margin-top:30px;"></div>
+        <div class="label" style="margin-top:22px;">Read as something else</div>
+        <p class="faint" style="font-size:13px; line-height:1.55; margin:8px 0 14px;">
+          The system chose on its own. If it read the footage wrongly, pick the
+          right one and it will run again.
+        </p>
+        <div class="choice" id="scene-list"></div>
+        <p class="faint" style="font-size:13px; line-height:1.55; margin:14px 0 0;">
+          Road incidents are not offered: only four usable training pictures
+          exist for that scene, so the classifier was never taught it.
+        </p>
+      </div>
+    </div>
+
+    <!-- right: result -->
+    <div style="flex-grow:1; min-width:0;">
+      <div id="analyse-idle" class="muted" style="padding-top:60px; font-size:15px;">
+        Choose a clip to begin.
+      </div>
+
+      <div id="analyse-busy" style="display:none; padding-top:60px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span class="spinner"></span>
+          <span id="busy-text" class="muted" style="font-size:15px;">Working…</span>
+        </div>
+      </div>
+
+      <div id="analyse-result" style="display:none;">
+        <div style="display:flex; align-items:baseline; gap:34px;">
+          <div class="label" style="width:96px; flex:none; padding-top:6px;">Reading</div>
+          <div style="flex-grow:1;">
+            <div class="serif" style="font-size:25px; line-height:1.35;" id="result-headline"></div>
+            <div class="muted" style="font-size:14px; margin-top:6px;" id="result-sub"></div>
+            <div class="faint" style="font-size:13px; margin-top:8px;" id="result-credit"></div>
+          </div>
+        </div>
+        <div class="rule" style="margin:20px 0;"></div>
+
+        <div style="display:flex; gap:34px; align-items:flex-start;">
+          <div style="flex-grow:1; min-width:0;">
+            <div class="stage" id="stage"><div class="empty">no frame</div></div>
+            <p class="faint" style="font-size:13px; margin-top:12px;" id="stage-note"></p>
+          </div>
+
+          <div style="width:340px; flex:none;">
+            <div class="serif" style="font-size:32px; line-height:1.2;" id="result-count"></div>
+            <p class="muted" style="font-size:14.5px; line-height:1.6; margin:8px 0 0;" id="result-blurb"></p>
+            <div class="rule" style="margin-top:20px;"></div>
+            <div id="finding-list"></div>
+
+            <div class="label" style="margin-top:26px;">What you did not have to watch</div>
+            <div class="serif" style="font-size:20px; line-height:1.45; margin-top:12px;" id="saved-line"></div>
+            <p class="faint" style="font-size:13px; line-height:1.6; margin-top:10px;">
+              Without this you would scrub the clip yourself, or trust a detector
+              that marks something on nearly every frame.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ LIVE -->
+<section class="page" id="page-live">
+  <div style="display:flex; align-items:baseline; gap:22px; margin-top:34px;">
+    <h2 class="section" style="font-size:26px;">Live camera</h2>
+    <div class="muted" style="font-size:14px;" id="live-context"></div>
+  </div>
+  <div class="rule" style="margin-top:14px;"></div>
+  <div id="live-cameras" class="camera-bar"></div>
+  <div class="rule-soft"></div>
+
+  <div style="display:flex; gap:34px; margin-top:26px; align-items:flex-start;">
+    <div style="flex-grow:1; min-width:0;">
+      <div class="serif" style="font-size:30px; line-height:1.3;" id="live-headline">
+        Waiting for the first frame…
+      </div>
+      <div class="stage" style="margin-top:18px;">
+        <img id="live-video" alt="camera">
+      </div>
+      <p class="faint" id="live-credit" style="font-size:13px; line-height:1.6; margin-top:12px;"></p>
+      <div style="display:flex; align-items:center; gap:18px; margin-top:16px;">
+        <label style="display:flex; align-items:center; gap:12px; cursor:pointer; min-height:44px;">
+          <input type="checkbox" id="live-suppressed" checked style="accent-color:#ffdc56; width:17px; height:17px;">
+          <span style="font-size:15px;">Show everything the camera proposed</span>
+        </label>
+        <span class="faint" style="font-size:14px;">Turn it off and this becomes an ordinary detection demo.</span>
+      </div>
+    </div>
+
+    <div style="width:380px; flex:none;">
+      <div class="label">Why it ignored the rest</div>
+      <div id="live-reasons"></div>
+      <div class="label" style="margin-top:26px;">The alerts it sent</div>
+      <div id="live-events"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= HOW -->
+<section class="page" id="page-how">
+  <div style="display:flex; gap:80px; align-items:baseline; margin-top:46px;">
+    <h1 class="hero" style="font-size:46px; margin:0; max-width:560px;">Three things happen<br>to every frame</h1>
+    <p class="lede" style="max-width:440px;">
+      The first two are ordinary — anyone building this would do them. The third
+      is the part that is ours.
+    </p>
+  </div>
+
+  <div style="margin-top:48px;" class="rule"></div>
+
+  <div style="display:flex; gap:46px; padding:28px 0;">
+    <div class="mono faint" style="font-size:12px; width:30px; flex:none; padding-top:7px;">01</div>
+    <div style="width:280px; flex:none;"><div class="serif" style="font-size:26px; line-height:1.25;">Only look for what<br>can happen here</div></div>
+    <p class="muted" style="flex-grow:1; font-size:15px; line-height:1.65; max-width:500px; margin:0;">
+      Each camera is told what it overlooks. A camera on a ridge watches for
+      smoke. A camera on a street watches for floodwater and stranded vehicles.
+      Nobody looks for drowning on a hillside.
+    </p>
+    <p class="faint" style="width:250px; flex:none; font-size:13.5px; line-height:1.6; margin:0;">
+      Running every detector on every camera would cost four times the computer,
+      for no extra safety.
+    </p>
+  </div>
+  <div class="rule"></div>
+
+  <div style="display:flex; gap:46px; padding:28px 0;">
+    <div class="mono faint" style="font-size:12px; width:30px; flex:none; padding-top:7px;">02</div>
+    <div style="width:280px; flex:none;"><div class="serif" style="font-size:26px; line-height:1.25;">Ask a specialist</div></div>
+    <p class="muted" style="flex-grow:1; font-size:15px; line-height:1.65; max-width:500px; margin:0;">
+      Each hazard has its own detector, built by people who know that problem
+      best — wildfire researchers, coastguard datasets, earthquake response
+      teams. We did not reinvent any of them.
+    </p>
+    <p class="faint" style="width:250px; flex:none; font-size:13.5px; line-height:1.6; margin:0;">
+      One model trained on everything would be worse at all of it, and
+      retraining one hazard could quietly break another.
+    </p>
+  </div>
+  <div class="rule"></div>
+
+  <div style="display:flex; gap:46px; padding:28px 0;">
+    <div class="mono" style="font-size:12px; width:30px; flex:none; padding-top:7px; color:var(--confirmed);">03</div>
+    <div style="width:280px; flex:none;">
+      <div class="serif" style="font-size:26px; line-height:1.25;">Wait before<br>believing it</div>
+      <div class="label" style="color:var(--confirmed); margin-top:8px;">Our contribution</div>
+    </div>
+    <div style="flex-grow:1; max-width:500px;">
+      <p class="muted" style="font-size:15px; line-height:1.65; margin:0;">
+        A detector shouts on every frame. VIGÍA checks whether the thing is still
+        there a moment later. Smoke keeps rising; a glint on water does not. That
+        one idea removes most false alarms.
+      </p>
+      <div style="display:flex; gap:26px; margin-top:16px; font-size:14px;">
+        <span><span class="mono faint">1×</span> ignored</span>
+        <span><span class="mono faint">2×</span> still waiting</span>
+        <span><span class="mono" style="color:var(--confirmed);">3×</span> wake someone</span>
+      </div>
+    </div>
+    <p class="faint" style="width:250px; flex:none; font-size:13.5px; line-height:1.6; margin:0;">
+      Nobody else ships this. It costs about two seconds and removes three
+      quarters of the false alarms.
+    </p>
+  </div>
+  <div class="rule"></div>
+
+  <div style="display:flex; gap:46px; padding:24px 0 40px;">
+    <div style="width:30px; flex:none;"></div>
+    <div class="label" style="width:280px; flex:none;">Worth knowing</div>
+    <p class="muted" style="font-size:14.5px; line-height:1.65; max-width:780px; margin:0;">
+      Waiting is not free. Holding out for a third sighting means an alert
+      arrives one to three minutes later on a camera that takes a picture every
+      minute. On our test fires it never lost one — but the trade is real, and we
+      report both halves of it.
+    </p>
+  </div>
+</section>
+
+<!-- =============================================================== TRAIN -->
+<section class="page" id="page-train">
+  <div style="display:flex; gap:44px; margin-top:40px; align-items:flex-start;">
+    <div style="width:480px; flex:none;">
+      <h2 class="section">Teach it a hazard</h2>
+      <p class="muted" style="font-size:15px; line-height:1.65; margin-top:12px;">
+        Give it pictures where someone has already marked what is in them. It
+        learns from those and produces a detector the system can use.
+      </p>
+      <div class="rule" style="margin-top:26px;"></div>
+      <div id="train-runs"></div>
+      <p class="faint" style="font-size:13.5px; line-height:1.6; margin-top:20px;">
+        Training runs in short stages so a laptop can finish it, and a stage that
+        is interrupted resumes where it stopped. Starting a run from this screen
+        is deliberately not wired up: a live demonstration should show a finished
+        one, not thirty-five minutes of a progress bar.
+      </p>
+    </div>
+
+    <div style="flex-grow:1; min-width:0;" id="train-detail"></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span class="label">Watches for</span>
+  <span>Wildfire smoke</span><span>Rising floodwater</span>
+  <span>People in open water</span><span>People trapped in damaged buildings</span>
+  <a href="/operator" style="margin-left:auto;">Engineer's view</a>
+</footer>
+
+<script src="/static/demo.js"></script>
+</body>
+</html>

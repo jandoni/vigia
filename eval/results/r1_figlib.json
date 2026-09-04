@@ -1,0 +1,170 @@
+{
+  "detector": "pyronear_yolo11s_sensitive.onnx",
+  "backend": "reference",
+  "conf_threshold": 0.2,
+  "sequences": [
+    "20160604_FIRE_rm-n-mobo-c",
+    "20170722_FIRE_hp-e-mobo-c",
+    "20180603_FIRE_sm-w-mobo-c",
+    "20180813_FIRE_bh-s-mobo-c",
+    "20190924_FIRE_bl-s-mobo-c",
+    "20191006_FIRE_om-n-mobo-c"
+  ],
+  "configurations": {
+    "no_validator": {
+      "sequences": 6,
+      "pre_frames": 120,
+      "post_frames": 120,
+      "false_alarm_rate": 0.0083,
+      "detection_rate": 0.925,
+      "sequences_detected": 5,
+      "total_alerts_pre": 1,
+      "total_alerts_post": 111,
+      "median_minutes_to_detect": 1.0
+    },
+    "validator_min_frames_2": {
+      "sequences": 6,
+      "pre_frames": 120,
+      "post_frames": 120,
+      "false_alarm_rate": 0.0,
+      "detection_rate": 0.8583,
+      "sequences_detected": 6,
+      "total_alerts_pre": 0,
+      "total_alerts_post": 103,
+      "median_minutes_to_detect": 2.0,
+      "levels": [
+        {
+          "name": "confidence",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "size",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "colour",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "persistence",
+          "seen": 20,
+          "passed": 19,
+          "rejected": 1,
+          "rejection_rate": 0.05
+        },
+        {
+          "name": "cooldown",
+          "seen": 19,
+          "passed": 19,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        }
+      ]
+    },
+    "validator_min_frames_3": {
+      "sequences": 6,
+      "pre_frames": 120,
+      "post_frames": 120,
+      "false_alarm_rate": 0.0,
+      "detection_rate": 0.7917,
+      "sequences_detected": 6,
+      "total_alerts_pre": 0,
+      "total_alerts_post": 95,
+      "median_minutes_to_detect": 3.0,
+      "levels": [
+        {
+          "name": "confidence",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "size",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "colour",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "persistence",
+          "seen": 20,
+          "passed": 18,
+          "rejected": 2,
+          "rejection_rate": 0.1
+        },
+        {
+          "name": "cooldown",
+          "seen": 18,
+          "passed": 18,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        }
+      ]
+    },
+    "validator_min_frames_4": {
+      "sequences": 6,
+      "pre_frames": 120,
+      "post_frames": 120,
+      "false_alarm_rate": 0.0,
+      "detection_rate": 0.7333,
+      "sequences_detected": 6,
+      "total_alerts_pre": 0,
+      "total_alerts_post": 88,
+      "median_minutes_to_detect": 4.0,
+      "levels": [
+        {
+          "name": "confidence",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "size",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "colour",
+          "seen": 20,
+          "passed": 20,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        },
+        {
+          "name": "persistence",
+          "seen": 20,
+          "passed": 17,
+          "rejected": 3,
+          "rejection_rate": 0.15
+        },
+        {
+          "name": "cooldown",
+          "seen": 17,
+          "passed": 17,
+          "rejected": 0,
+          "rejection_rate": 0.0
+        }
+      ]
+    }
+  }
+}

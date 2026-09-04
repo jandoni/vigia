@@ -1,0 +1,60 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Operational wildfire detection.} The systems closest to VIGÍA in
+purpose run cameras at scale with humans in the loop: Pano AI operates a
+staffed 24/7 intelligence centre at roughly USD 50{,}000 per camera per year,
+and ALERTCalifornia routes detections from more than 1{,}060 cameras through
+trained staff before dispatch. PyroNear~\citep{pyronear2025} is the open
+counterpart — deployed across France, Spain and Chile on Raspberry Pi
+hardware — and is the direct source of our fire detector. Their training
+manifest shows sequential confirmation over a minimum frame count, so
+temporal confirmation \emph{for fire} is established practice; the narrower
+question this paper measures is whether one untuned mechanism transfers
+across hazards, and what it buys over the baseline nobody reports against
+(\cref{sec:threshold-matched}).
+
+\paragraph{Gating and cascades over video.} NoScope~\citep{kang2017noscope}
+and CaTDet~\citep{mao2018catdet} established that cascaded gating over video
+buys 5--13$\times$ compute at minimal accuracy cost. VIGÍA's Tier~0 applies
+the same economics declaratively — by registered camera context rather than
+by learned routing — trading a classifier's silent misrouting failure for a
+YAML entry a human can audit (\cref{sec:gate}).
+
+\paragraph{Multi-hazard municipal systems.} A recent multi-task system over
+municipal cameras~\citep{multitasksystem} reports fire false alarms reduced
+from 52\,\% to 4\,\% at 96\,\% sensitivity using a shared backbone. VIGÍA
+takes the opposite architectural bet — independent published detectors behind
+a shared validator — because our hazards arrive from separate datasets with
+incompatible label spaces, and because a shared backbone couples retraining
+across hazards (\cref{sec:architecture}). Their reported Base64-over-WebSocket
+transport bottleneck also shaped our interface's split transport
+(\cref{sec:operator}).
+
+\paragraph{Anticipatory flood sensing.}
+\Citet{choi2026pagehinkley} published anticipatory urban flood warning from
+CCTV using Page--Hinkley change detection — the same capability as
+\cref{sec:flood-trend}, developed independently. We therefore claim no
+novelty there: we implement both their mechanism and a windowed fit, measure
+them against each other on identical inputs, and derive a calibration rule
+(\cref{eq:ph-design}) the measurements bound. V-FloodNet~\citep{liang2022vfloodnet}
+provides the real-camera sequences that comparison runs on.
+
+\paragraph{Datasets and benchmarks.} The detectors integrated here rest on
+ATLANTIS~\citep{erfani2022atlantis}, FloodNet~\citep{rahnemoonfar2021floodnet},
+SeaDronesSee~\citep{varga2022seadronessee} and
+DRespNeT~\citep{sirma2025drespnet}; xBD~\citep{gupta2019xbd} was evaluated
+and excluded on modality (bi-temporal satellite pairs, not cameras); and the
+$F_2$ headline convention follows RipVIS~\citep{ripvis2025}. Every dataset's
+licence and the exact use made of each appears in \cref{sec:attribution}.
+
+\paragraph{What this paper adds.} Against that background the contributions
+are: (i) a measured account of what a hazard-agnostic temporal validator
+buys and costs — including the threshold-matched control that partially
+deflates it and two levels removed on evidence; (ii) an enforcement
+architecture in which licence isolation, privacy boundaries, figure
+provenance and the validator's hazard-agnosticism are build-failing checks
+rather than prose; and (iii) an evaluation practice — intervals on every
+proportion, stratified metrics, filtering separated from deduplication, and
+a public register of the project's own retracted claims — that we argue is
+the transferable part.

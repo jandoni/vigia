@@ -1,0 +1,300 @@
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063200_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": [{"box": [493.7, 803.51, 622.87, 872.16], "confidence": 0.11414}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063260_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": [{"box": [500.5, 804.0, 630.78, 871.98], "confidence": 0.16647}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063320_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": [{"box": [499.79, 803.45, 625.45, 870.46], "confidence": 0.28982}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063380_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": [{"box": [493.6, 803.88, 632.11, 872.27], "confidence": 0.2902}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063440_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": [{"box": [490.92, 804.3, 633.61, 873.12], "confidence": 0.09285}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063500_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": [{"box": [494.66, 802.9, 629.88, 872.94], "confidence": 0.29367}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063560_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": [{"box": [499.56, 803.26, 631.53, 873.05], "confidence": 0.23931}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063620_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": [{"box": [505.54, 804.27, 640.66, 872.78], "confidence": 0.25754}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063680_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": [{"box": [516.7, 805.04, 644.18, 872.85], "confidence": 0.1221}]}
+{"sequence": "20160604_FIRE_rm-n-mobo-c", "file": "1465063740_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": [{"box": [539.14, 806.07, 648.74, 873.78], "confidence": 0.06075}]}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468870572_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 1600, "height": 1200, "detections": []}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468870692_-02280.jpg", "frame_index": 1, "offset": -2280.0, "width": 1600, "height": 1200, "detections": []}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468870812_-02160.jpg", "frame_index": 2, "offset": -2160.0, "width": 1600, "height": 1200, "detections": []}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468870932_-02040.jpg", "frame_index": 3, "offset": -2040.0, "width": 1600, "height": 1200, "detections": []}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468871052_-01920.jpg", "frame_index": 4, "offset": -1920.0, "width": 1600, "height": 1200, "detections": []}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468871172_-01800.jpg", "frame_index": 5, "offset": -1800.0, "width": 1600, "height": 1200, "detections": []}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468871292_-01680.jpg", "frame_index": 6, "offset": -1680.0, "width": 1600, "height": 1200, "detections": []}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468871412_-01560.jpg", "frame_index": 7, "offset": -1560.0, "width": 1600, "height": 1200, "detections": []}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468871532_-01440.jpg", "frame_index": 8, "offset": -1440.0, "width": 1600, "height": 1200, "detections": [{"box": [132.65, 541.01, 249.44, 584.81], "confidence": 0.20466}]}
+{"sequence": "20160718_FIRE_lp-n-iqeye", "file": "1468871652_-01320.jpg", "frame_index": 9, "offset": -1320.0, "width": 1600, "height": 1200, "detections": [{"box": [131.32, 540.19, 261.87, 584.83], "confidence": 0.12786}]}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479064533_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479064593_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479064653_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479064713_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479064773_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479064833_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479064893_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479064953_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479065013_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20161113_FIRE_bm-n-mobo-c", "file": "1479065073_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302069_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.5, 709.42, 1742.01, 733.11], "confidence": 0.19251}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302129_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.88, 710.25, 1741.7, 733.68], "confidence": 0.20676}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302189_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.94, 710.18, 1739.61, 733.52], "confidence": 0.20399}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302249_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.67, 709.62, 1741.27, 734.26], "confidence": 0.17325}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302309_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": [{"box": [1693.42, 710.15, 1740.78, 733.28], "confidence": 0.19213}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302369_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.93, 710.3, 1741.24, 733.99], "confidence": 0.17104}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302429_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.36, 712.79, 1728.55, 733.6], "confidence": 0.18446}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302489_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.36, 710.77, 1738.47, 733.94], "confidence": 0.15799}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302549_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.71, 710.57, 1739.1, 733.35], "confidence": 0.1739}]}
+{"sequence": "20170520_FIRE_pi-w-mobo-c", "file": "1495302609_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": [{"box": [1692.14, 712.3, 1729.41, 733.34], "confidence": 0.17735}]}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498576657_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498576717_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498576777_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498576837_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498576897_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498576957_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498577017_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498577077_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498577137_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170627_FIRE_om-e-mobo-c", "file": "1498577197_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499978635_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499978695_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499978755_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499978815_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499978875_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499978935_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499978995_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499979055_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499979115_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170713_FIRE_smer-tcs8-mobo-c", "file": "1499979175_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503347603_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503347663_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503347723_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": [{"box": [683.11, 835.57, 702.04, 850.5], "confidence": 0.09003}]}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503347783_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": [{"box": [683.59, 835.7, 707.22, 850.8], "confidence": 0.07717}]}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503347843_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": [{"box": [1494.59, 815.41, 1529.75, 833.73], "confidence": 0.06536}, {"box": [682.31, 835.08, 706.28, 850.58], "confidence": 0.05627}]}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503347903_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": [{"box": [1496.84, 815.89, 1529.43, 833.49], "confidence": 0.06631}, {"box": [682.25, 836.09, 706.33, 850.8], "confidence": 0.05681}]}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503347963_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": [{"box": [1496.8, 815.2, 1527.75, 833.65], "confidence": 0.07661}, {"box": [682.42, 836.45, 707.53, 851.03], "confidence": 0.06024}]}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503348023_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503348083_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": [{"box": [1497.56, 813.6, 1529.69, 831.27], "confidence": 0.08205}, {"box": [685.01, 833.7, 712.41, 849.63], "confidence": 0.0533}]}
+{"sequence": "20170821_FIRE_lo-s-mobo-c", "file": "1503348143_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": [{"box": [683.75, 834.83, 708.45, 851.0], "confidence": 0.09847}]}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670222_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670282_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670342_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670402_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670462_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670522_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670582_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670642_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670702_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171010_FIRE_rm-e-mobo-c", "file": "1507670762_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679210_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679270_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679330_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679390_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679450_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679510_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679570_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679630_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679690_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20171207_FIRE_bh-n-mobo-c", "file": "1512679750_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467235_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467295_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467355_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467415_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467475_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467535_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467595_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467655_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467715_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180504_FIRE_smer-tcs8-mobo-c", "file": "1525467775_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527975837_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527975897_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527975957_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527976017_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527976077_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527976137_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527976197_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527976257_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527976317_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180602_FIRE_smer-tcs9-mobo-c", "file": "1527976377_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528054917_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528054977_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528055037_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528055097_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528055157_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528055217_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528055277_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528055337_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528055397_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180603_FIRE_smer-tcs9-mobo-c", "file": "1528055457_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528838586_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528838646_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528838706_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528838766_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528838826_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528838886_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528838946_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528839006_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528839066_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180612_FIRE_rm-w-mobo-c", "file": "1528839126_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938169_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938229_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938289_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938349_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938409_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938469_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938529_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938589_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938649_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180718_FIRE_syp-w-mobo-c", "file": "1531938709_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708290_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": [{"box": [1752.68, 738.34, 1806.36, 774.76], "confidence": 0.06107}]}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708350_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": [{"box": [1661.25, 635.32, 1979.33, 774.21], "confidence": 0.06225}]}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708410_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708470_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708530_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708590_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708650_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": [{"box": [1720.05, 634.52, 1982.81, 771.36], "confidence": 0.08572}]}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708710_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": [{"box": [1722.83, 634.37, 1981.4, 771.45], "confidence": 0.07189}]}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708770_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": [{"box": [1755.34, 739.29, 1798.03, 774.21], "confidence": 0.05807}]}
+{"sequence": "20180727_FIRE_bh-n-mobo-c", "file": "1532708830_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532813637_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532813697_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532813757_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532813817_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532813877_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532813937_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532813997_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532814057_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532814117_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180728_FIRE_smer-tcs9-mobo-c", "file": "1532814177_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534194854_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534194914_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534194974_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534195034_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534195094_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534195154_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534195214_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534195274_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534195334_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20180813_FIRE_bh-s-mobo-c", "file": "1534195394_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063026_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063086_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063146_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063206_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063266_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063326_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063386_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063446_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063506_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190620_FIRE_rm-w-mobo-c", "file": "1561063566_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306143_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": [{"box": [1916.95, 943.58, 2048.0, 1126.63], "confidence": 0.09742}, {"box": [606.79, 709.44, 683.93, 734.56], "confidence": 0.08037}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306203_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": [{"box": [1912.56, 929.27, 2047.84, 1126.92], "confidence": 0.17641}, {"box": [601.53, 709.17, 686.7, 734.51], "confidence": 0.09986}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306263_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": [{"box": [604.05, 708.98, 687.22, 734.24], "confidence": 0.12477}, {"box": [1913.25, 930.95, 2047.74, 1125.89], "confidence": 0.11943}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306323_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": [{"box": [604.94, 708.71, 684.39, 734.19], "confidence": 0.20461}, {"box": [1920.17, 942.94, 2048.0, 1125.21], "confidence": 0.10515}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306383_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": [{"box": [1915.27, 940.25, 2048.0, 1126.34], "confidence": 0.20103}, {"box": [601.58, 708.83, 684.88, 734.46], "confidence": 0.13784}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306443_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": [{"box": [1923.42, 917.07, 2047.89, 1125.24], "confidence": 0.11712}, {"box": [609.11, 709.4, 683.52, 733.77], "confidence": 0.07334}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306503_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": [{"box": [1920.99, 918.89, 2047.82, 1124.38], "confidence": 0.17487}, {"box": [599.09, 708.83, 685.68, 734.18], "confidence": 0.06972}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306563_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": [{"box": [609.9, 709.13, 683.93, 733.96], "confidence": 0.13323}, {"box": [1918.84, 941.34, 2047.97, 1124.66], "confidence": 0.12234}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306623_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": [{"box": [1912.58, 928.96, 2047.77, 1125.38], "confidence": 0.15727}, {"box": [605.62, 709.08, 687.78, 734.18], "confidence": 0.13765}]}
+{"sequence": "20190716_FIRE_so-w-mobo-c", "file": "1563306683_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": [{"box": [1917.1, 944.7, 2047.88, 1126.75], "confidence": 0.11147}, {"box": [607.65, 709.14, 685.78, 734.06], "confidence": 0.08241}]}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565728784_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565728844_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565728904_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565728964_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565729024_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565729084_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565729144_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565729206_-01978.jpg", "frame_index": 7, "offset": -1978.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565729264_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190813_FIRE_69bravo-e-mobo-c", "file": "1565729325_-01859.jpg", "frame_index": 9, "offset": -1859.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924443_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924503_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924563_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924623_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924683_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924743_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924803_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924863_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924925_-01918.jpg", "frame_index": 8, "offset": -1918.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190827_FIRE_so-w-mobo-c", "file": "1566924983_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580122_-02398.jpg", "frame_index": 0, "offset": -2398.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580180_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580240_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580300_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580360_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580420_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580480_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580540_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580600_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190915_FIRE_rm-n-mobo-c", "file": "1568580660_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569359957_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360020_-02337.jpg", "frame_index": 1, "offset": -2337.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360077_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360137_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360197_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360257_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": [{"box": [758.4, 781.29, 817.52, 873.08], "confidence": 0.08011}]}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360317_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360380_-01977.jpg", "frame_index": 7, "offset": -1977.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360437_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190924_FIRE_ml-w-mobo-c", "file": "1569360497_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440002_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440062_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440122_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": [{"box": [756.63, 968.01, 790.2, 993.7], "confidence": 0.09217}]}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440182_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440242_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": [{"box": [26.29, 939.2, 127.15, 1028.56], "confidence": 0.05394}]}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440302_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": [{"box": [30.06, 941.06, 129.08, 1027.66], "confidence": 0.05127}]}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440362_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440423_-01979.jpg", "frame_index": 7, "offset": -1979.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440482_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20190925_FIRE_wc-s-mobo-c", "file": "1569440542_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953346_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953407_-02339.jpg", "frame_index": 1, "offset": -2339.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953466_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953526_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953586_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953648_-02098.jpg", "frame_index": 5, "offset": -2098.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953706_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953766_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953826_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191001_FIRE_rm-w-mobo-c", "file": "1569953887_-01859.jpg", "frame_index": 9, "offset": -1859.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570306889_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": [{"box": [866.48, 768.18, 884.38, 780.72], "confidence": 0.06142}]}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570306949_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570307009_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570307069_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570307129_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": [{"box": [867.22, 768.66, 888.17, 781.06], "confidence": 0.058}]}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570307189_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570307249_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570307309_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570307371_-01918.jpg", "frame_index": 8, "offset": -1918.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20191005_FIRE_hp-s-mobo-c", "file": "1570307429_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": [{"box": [867.29, 769.08, 887.16, 781.45], "confidence": 0.06788}]}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383305_-02399.jpg", "frame_index": 0, "offset": -2399.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383363_-02341.jpg", "frame_index": 1, "offset": -2341.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383424_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383483_-02221.jpg", "frame_index": 3, "offset": -2221.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383543_-02161.jpg", "frame_index": 4, "offset": -2161.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383603_-02101.jpg", "frame_index": 5, "offset": -2101.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383723_-01981.jpg", "frame_index": 6, "offset": -1981.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383784_-01920.jpg", "frame_index": 7, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383843_-01861.jpg", "frame_index": 8, "offset": -1861.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_lp-e-mobo-c", "file": "1570383963_-01741.jpg", "frame_index": 9, "offset": -1741.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383427_-02342.jpg", "frame_index": 0, "offset": -2342.0, "width": 2048, "height": 1536, "detections": [{"box": [266.26, 746.13, 293.73, 759.33], "confidence": 0.18679}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383487_-02282.jpg", "frame_index": 1, "offset": -2282.0, "width": 2048, "height": 1536, "detections": [{"box": [266.26, 745.56, 293.79, 759.18], "confidence": 0.18462}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383547_-02222.jpg", "frame_index": 2, "offset": -2222.0, "width": 2048, "height": 1536, "detections": [{"box": [267.6, 746.25, 293.16, 758.75], "confidence": 0.19662}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383667_-02102.jpg", "frame_index": 3, "offset": -2102.0, "width": 2048, "height": 1536, "detections": [{"box": [267.05, 746.02, 293.49, 759.32], "confidence": 0.2208}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383728_-02041.jpg", "frame_index": 4, "offset": -2041.0, "width": 2048, "height": 1536, "detections": [{"box": [267.77, 745.48, 292.41, 758.9], "confidence": 0.15712}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383787_-01982.jpg", "frame_index": 5, "offset": -1982.0, "width": 2048, "height": 1536, "detections": [{"box": [267.39, 746.06, 293.52, 759.36], "confidence": 0.13394}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383853_-01916.jpg", "frame_index": 6, "offset": -1916.0, "width": 2048, "height": 1536, "detections": [{"box": [268.47, 746.49, 294.22, 759.37], "confidence": 0.16876}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383907_-01862.jpg", "frame_index": 7, "offset": -1862.0, "width": 2048, "height": 1536, "detections": [{"box": [267.67, 745.71, 293.41, 759.41], "confidence": 0.16465}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570383967_-01802.jpg", "frame_index": 8, "offset": -1802.0, "width": 2048, "height": 1536, "detections": [{"box": [267.7, 745.85, 294.86, 759.24], "confidence": 0.25711}]}
+{"sequence": "20191006_FIRE_pi-s-mobo-c", "file": "1570384027_-01742.jpg", "frame_index": 9, "offset": -1742.0, "width": 2048, "height": 1536, "detections": [{"box": [265.86, 745.55, 292.26, 759.35], "confidence": 0.15594}]}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581008715_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581008775_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581008835_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581008895_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581008955_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581009015_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581009075_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581009135_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581009195_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200206_FIRE_ml-s-mobo-c", "file": "1581009255_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 2048, "height": 1536, "detections": []}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590096875_-02400.jpg", "frame_index": 0, "offset": -2400.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590096935_-02340.jpg", "frame_index": 1, "offset": -2340.0, "width": 3072, "height": 2048, "detections": [{"box": [2432.66, 1008.54, 2457.79, 1053.91], "confidence": 0.09404}]}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590096995_-02280.jpg", "frame_index": 2, "offset": -2280.0, "width": 3072, "height": 2048, "detections": [{"box": [2433.02, 1019.36, 2456.82, 1054.05], "confidence": 0.07185}]}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590097055_-02220.jpg", "frame_index": 3, "offset": -2220.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590097115_-02160.jpg", "frame_index": 4, "offset": -2160.0, "width": 3072, "height": 2048, "detections": [{"box": [2431.27, 1028.77, 2457.42, 1054.98], "confidence": 0.05269}]}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590097175_-02100.jpg", "frame_index": 5, "offset": -2100.0, "width": 3072, "height": 2048, "detections": [{"box": [2430.98, 1029.06, 2457.21, 1054.83], "confidence": 0.08539}]}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590097235_-02040.jpg", "frame_index": 6, "offset": -2040.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590097295_-01980.jpg", "frame_index": 7, "offset": -1980.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590097355_-01920.jpg", "frame_index": 8, "offset": -1920.0, "width": 3072, "height": 2048, "detections": []}
+{"sequence": "20200521_FIRE_om-n-mobo-c", "file": "1590097415_-01860.jpg", "frame_index": 9, "offset": -1860.0, "width": 3072, "height": 2048, "detections": []}

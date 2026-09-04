@@ -1,0 +1,265 @@
+/* VIGÍA demonstration interface.
+ *
+ * Built for an audience that has never seen the system. The engineer's view
+ * (index.html) still exists at /operator and is unchanged — this is a
+ * different reading of the same data, not a replacement for it.
+ *
+ * Design rules held to throughout:
+ *   - Structure comes from hairline rules, an editorial grid and hung figures.
+ *     No cards with a coloured stripe on one edge.
+ *   - Colour is semantic only: amber means confirmed, teal means still being
+ *     watched, grey means discarded. Nothing is coloured decoratively.
+ *   - Tabular numerals wherever a figure appears, so nothing jitters.
+ */
+
+:root {
+  --ground:     #0d0d0f;
+  --panel:      #141417;
+  --panel-2:    #1a1a1e;
+  --line:       #26262b;
+  --line-soft:  #1a1a1e;
+  --edge:       #3a3a42;
+  --text:       #e6e6e8;
+  --muted:      #85858f;
+  --faint:      #5a5a63;
+
+  --confirmed:  #ffdc56;
+  --tracking:   #78bea6;
+  --discarded:  #6e6e6e;
+  --bad:        #e0655c;
+
+  --display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--faint); }
+a:hover { border-bottom-color: var(--text); }
+
+.serif { font-family: var(--display); font-weight: 400; letter-spacing: -0.01em; }
+.mono  { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.label {
+  color: var(--faint); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+}
+.muted { color: var(--muted); }
+.faint { color: var(--faint); }
+.rule  { height: 1px; background: var(--line); }
+.rule-soft { height: 1px; background: var(--line-soft); }
+
+/* ------------------------------------------------------------- masthead */
+
+.masthead {
+  display: flex; align-items: baseline; gap: 22px;
+  padding: 22px 56px 0;
+}
+.wordmark { font-family: var(--display); font-size: 21px; letter-spacing: 0.02em; }
+.masthead .rule { flex-grow: 1; }
+
+nav { display: flex; gap: 26px; margin-left: auto; }
+nav button {
+  background: none; border: none; padding: 0 0 4px;
+  color: var(--faint); font-family: var(--sans); font-size: 13.5px;
+  cursor: pointer; border-bottom: 1px solid transparent;
+  min-height: 44px;
+}
+nav button:hover { color: var(--muted); }
+nav button.on { color: var(--text); border-bottom-color: var(--text); }
+
+.masthead-rule { margin: 14px 56px 0; }
+
+/* ---------------------------------------------------------------- pages */
+
+.page { display: none; padding: 0 56px; }
+.page.on { display: block; }
+
+h1.hero {
+  font-family: var(--display); font-weight: 400;
+  font-size: 58px; line-height: 1.08; letter-spacing: -0.015em;
+  margin: 52px 0 0; text-wrap: pretty;
+}
+h2.section {
+  font-family: var(--display); font-weight: 400;
+  font-size: 34px; line-height: 1.15; margin: 0;
+}
+.lede {
+  color: var(--muted); font-size: 16.5px; line-height: 1.65;
+  max-width: 580px; text-wrap: pretty;
+}
+
+/* figures hung in a column, report-style */
+.figure-row { display: flex; align-items: baseline; gap: 18px; padding: 18px 0 6px; }
+.figure {
+  font-family: var(--mono); font-size: 52px; line-height: 1;
+  letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+}
+.figure.small { font-size: 30px; }
+.figure.amber { color: var(--confirmed); }
+.figure.grey  { color: var(--discarded); }
+
+/* ------------------------------------------------------------- controls */
+
+button.action {
+  background: var(--text); color: var(--ground);
+  border: none; font-family: var(--sans); font-size: 14.5px; font-weight: 500;
+  padding: 0 24px; height: 46px; cursor: pointer;
+}
+button.action:hover { background: #ffffff; }
+button.action:disabled { background: var(--edge); color: var(--faint); cursor: default; }
+
+button.quiet {
+  background: none; color: var(--text);
+  border: 1px solid var(--edge); font-family: var(--sans); font-size: 14.5px;
+  padding: 0 22px; height: 46px; cursor: pointer;
+}
+button.quiet:hover { border-color: var(--muted); }
+button.quiet.on { border-color: var(--text); }
+
+/* a choice presented as rows, not boxes */
+.choice { display: flex; flex-direction: column; }
+.choice-row {
+  display: flex; align-items: center; gap: 20px;
+  padding: 17px 4px; cursor: pointer;
+  border-bottom: 1px solid var(--line-soft);
+  min-height: 44px;
+}
+.choice-row:hover { background: rgba(255,255,255,0.02); }
+.choice-row.on { background: rgba(255,220,86,0.05); }
+.choice-row .pick {
+  width: 15px; height: 15px; border: 1px solid var(--edge);
+  border-radius: 50%; flex: none; position: relative;
+}
+.choice-row.on .pick { border-color: var(--confirmed); }
+.choice-row.on .pick::after {
+  content: ""; position: absolute; inset: 3px;
+  border-radius: 50%; background: var(--confirmed);
+}
+.choice-row .name { font-size: 15.5px; flex-grow: 1; }
+.choice-row .evidence { color: var(--faint); font-size: 13px; font-family: var(--mono); }
+
+/* ---------------------------------------------------------------- media */
+
+.stage {
+  position: relative; background: #000;
+  border: 1px solid var(--line); overflow: hidden;
+}
+.stage img { display: block; width: 100%; height: auto; }
+.stage .empty {
+  display: flex; align-items: center; justify-content: center;
+  height: 420px; color: var(--faint); font-size: 14px;
+}
+
+.box { position: absolute; border: 1.5px solid var(--confirmed); pointer-events: none; }
+.box.discarded { border: 1px solid var(--discarded); }
+.box-label {
+  position: absolute; font-family: var(--mono); font-size: 11.5px;
+  letter-spacing: 0.04em; color: var(--confirmed);
+  transform: translateY(-100%); padding-bottom: 3px; white-space: nowrap;
+}
+.box-label.discarded { color: var(--muted); }
+
+/* -------------------------------------------------------------- findings */
+
+.finding {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 14px 0; border-bottom: 1px solid var(--line-soft);
+  cursor: pointer; min-height: 44px;
+}
+.finding:hover { background: rgba(255,255,255,0.02); }
+.finding.on .at { color: var(--confirmed); }
+.finding .at { font-family: var(--mono); font-size: 12.5px; color: var(--faint); width: 42px; flex: none; }
+.finding .what { flex-grow: 1; font-size: 14.5px; }
+.finding .score { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+/* ---------------------------------------------------------------- misc */
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+.col-rule { border-left: 1px solid var(--line); padding-left: 44px; }
+
+.spinner {
+  width: 15px; height: 15px; border: 1.5px solid var(--edge);
+  border-top-color: var(--text); border-radius: 50%;
+  animation: spin 0.7s linear infinite; display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.bar { height: 3px; background: var(--line); position: relative; }
+.bar > i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--tracking); }
+
+footer.foot {
+  display: flex; align-items: baseline; gap: 30px;
+  padding: 22px 56px 34px; color: var(--muted); font-size: 13.5px;
+}
+
+@media (max-width: 1100px) {
+  .page, .masthead, footer.foot { padding-left: 28px; padding-right: 28px; }
+  .masthead-rule { margin-left: 28px; margin-right: 28px; }
+  h1.hero { font-size: 40px; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .col-rule { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 28px; }
+}
+
+/* ------------------------------------------------------- sample footage */
+/* A poster frame reads as footage in a way a filename never does, and the
+ * whole point of this screen is that you can see what you are about to run.
+ * Still rows, not cards: the selected state is a hairline and a mark, so
+ * nothing here needs a coloured border to be legible. */
+
+.samples { display: flex; flex-direction: column; }
+
+.sample {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 4px; cursor: pointer;
+  border-bottom: 1px solid var(--line-soft);
+  min-height: 44px;
+}
+.sample:hover { background: rgba(255,255,255,0.02); }
+.sample.on { background: rgba(255,220,86,0.05); }
+.sample img {
+  width: 86px; height: 52px; object-fit: cover; flex: none;
+  background: #000; border: 1px solid var(--line);
+}
+.sample.on img { border-color: var(--confirmed); }
+.sample .meta { flex-grow: 1; min-width: 0; }
+.sample .title { font-size: 15px; }
+.sample .blurb {
+  color: var(--faint); font-size: 12.5px; line-height: 1.45; padding-top: 3px;
+}
+
+/* --------------------------------------------------------- camera picker */
+/* Live public cameras and recorded clips are different kinds of thing and are
+ * labelled as such. A viewer who cannot tell which they are looking at cannot
+ * judge either. */
+
+.camera-bar {
+  display: flex; gap: 0; flex-wrap: wrap;
+  padding: 4px 0 14px;
+}
+.camera-pick {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 12px 22px 12px 0; margin-right: 22px;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  color: var(--muted); font-family: var(--sans); text-align: left;
+  cursor: pointer; min-height: 44px;
+}
+.camera-pick:hover { color: var(--text); }
+.camera-pick.on { color: var(--text); border-bottom-color: var(--text); }
+.camera-pick .cam-name { font-size: 14.5px; }
+.camera-pick .cam-kind {
+  font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--faint);
+}
+.camera-pick.is-live .cam-kind { color: var(--tracking); }
+.camera-pick.on .cam-kind { color: var(--muted); }
+.camera-pick.is-live.on .cam-kind { color: var(--tracking); }

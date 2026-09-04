@@ -1,0 +1,90 @@
+{
+  "dataset": "data/pyro_sdis_val_wide",
+  "model": "pyronear_yolo11s_sensitive.onnx",
+  "provider": "CPUExecutionProvider",
+  "imgsz": 1024,
+  "iou_match_threshold": 0.3,
+  "images": 1085,
+  "positives": 500,
+  "negatives": 585,
+  "results": {
+    "conf_0.1": {
+      "box_level": {
+        "true_positives": 540,
+        "false_positives": 773,
+        "false_negatives": 52,
+        "true_negatives": 0,
+        "precision": 0.4113,
+        "recall": 0.9122,
+        "f1": 0.5669,
+        "f2": 0.7335,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 493,
+        "false_positives": 443,
+        "false_negatives": 7,
+        "true_negatives": 142,
+        "precision": 0.5267,
+        "recall": 0.986,
+        "f1": 0.6866,
+        "f2": 0.8396,
+        "false_alarm_rate": 0.7573
+      },
+      "median_latency_ms": 73.62,
+      "images": 1085
+    },
+    "conf_0.2": {
+      "box_level": {
+        "true_positives": 534,
+        "false_positives": 660,
+        "false_negatives": 58,
+        "true_negatives": 0,
+        "precision": 0.4472,
+        "recall": 0.902,
+        "f1": 0.598,
+        "f2": 0.7496,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 489,
+        "false_positives": 413,
+        "false_negatives": 11,
+        "true_negatives": 172,
+        "precision": 0.5421,
+        "recall": 0.978,
+        "f1": 0.6976,
+        "f2": 0.8425,
+        "false_alarm_rate": 0.706
+      },
+      "median_latency_ms": 72.55,
+      "images": 1085
+    },
+    "conf_0.3": {
+      "box_level": {
+        "true_positives": 519,
+        "false_positives": 570,
+        "false_negatives": 73,
+        "true_negatives": 0,
+        "precision": 0.4766,
+        "recall": 0.8767,
+        "f1": 0.6175,
+        "f2": 0.7507,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 478,
+        "false_positives": 379,
+        "false_negatives": 22,
+        "true_negatives": 206,
+        "precision": 0.5578,
+        "recall": 0.956,
+        "f1": 0.7045,
+        "f2": 0.8365,
+        "false_alarm_rate": 0.6479
+      },
+      "median_latency_ms": 72.19,
+      "images": 1085
+    }
+  }
+}

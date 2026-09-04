@@ -1,0 +1,165 @@
+% ===========================================================================
+%  VIGÍA — preamble
+%
+%  Conventions followed here are the ones that make a technical report read
+%  like one, and each is a decision rather than a default:
+%
+%    * ONE typeface family for text and mathematics (Libertinus). Mixing a
+%      text face with Computer Modern mathematics is the commonest tell of a
+%      document assembled rather than typeset.
+%    * booktabs rules only. No vertical rules and no double rules: the eye
+%      groups columns by whitespace, and ruling every cell is the habit of
+%      spreadsheets rather than of tables.
+%    * siunitx for every column of figures, so decimal points align and a
+%      reader can compare a column by scanning it.
+%    * Numbers are never typed in the prose. They come from
+%      generated/numbers.tex, which docs/build_paper.py writes from
+%      eval/results/*.json.
+%    * cleveref for every cross-reference, so "Section 5" and "Table 3" are
+%      generated with the right noun and can never drift after a reorder.
+% ===========================================================================
+
+\usepackage[a4paper,margin=2.7cm,headheight=14pt]{geometry}
+
+% --- typography ------------------------------------------------------------
+\usepackage{libertinus}          % text + matching mathematics
+\usepackage{amsmath,mathtools}   % deliberately NOT amssymb: libertinus loads
+\usepackage{amsthm}              % unicode-math, which already provides it
+\usepackage{microtype}
+\usepackage[english]{babel}
+
+% Three settings that between them remove almost every overfull line in this
+% document, and each addresses a specific cause rather than hiding the
+% symptom:
+%
+%   emergencystretch  — lets TeX stretch a paragraph rather than push a word
+%                       past the margin, used only as a last resort.
+%   \ttfamily hyphenchar — permits breaking inside \texttt{} at existing
+%                       hyphens. Without it a long identifier such as
+%                       traffic-accident-detection-yolo11x is one unbreakable
+%                       word, which is what made the credits table overflow.
+%   sloppy tables     — the X columns hold names and URLs that cannot always
+%                       be broken; ragged right there is correct anyway,
+%                       since justified prose in a narrow column reads badly.
+\setlength{\emergencystretch}{1.2em}
+\makeatletter
+\g@addto@macro\ttfamily{\hyphenchar\font=`\-}
+\makeatother
+
+% --- tables and figures ----------------------------------------------------
+\usepackage{booktabs,longtable,tabularx,array,multirow}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}   % ragged-right X, see above
+% Weighted flexible column. A plain X shares whatever the fixed columns leave
+% over, so a table whose OTHER columns hold long text starves the X column
+% until its words stack one per line — which is exactly what happened to the
+% credits table. W{1.4} gives that column 1.4 times an equal share; the
+% weights in one table must sum to the number of W columns.
+\newcolumntype{W}[1]{>{\hsize=#1\hsize\raggedright\arraybackslash}X}
+\usepackage{siunitx}
+\sisetup{
+  detect-all,
+  group-digits            = integer,
+  group-minimum-digits    = 4,
+  table-align-text-before = false,
+  table-align-text-after  = false,
+}
+% Units this document needs that siunitx does not ship: pixels and feet.
+% Declared once here rather than written as loose text, so spacing and
+% number formatting stay consistent with every other quantity.
+\DeclareSIUnit{\pixel}{px}
+\DeclareSIUnit{\foot}{ft}
+\DeclareSIUnit{\gigabyte}{GB}
+
+\usepackage{graphicx}
+% One source tree, two layouts: locally the figures live beside the paper in
+% ../figures; in the arXiv bundle they are copied to figures/ inside it.
+% Naming figures bare and letting graphicspath resolve them is what lets the
+% identical sources compile in both places.
+\graphicspath{{../figures/}{figures/}}
+\usepackage{caption}
+\captionsetup{
+  font        = small,
+  labelfont   = bf,
+  labelsep    = period,
+  justification = raggedright,
+  singlelinecheck = false,
+  skip        = 6pt,
+}
+\usepackage{float}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=4pt,leftmargin=1.4em}
+
+% --- diagrams --------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit,calc,backgrounds,shapes.geometric}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% --- references ------------------------------------------------------------
+\usepackage[colorlinks=true,allcolors=linkcolour,breaklinks=true]{hyperref}
+\usepackage{cleveref}
+\usepackage[numbers,sort&compress]{natbib}
+\bibliographystyle{plainnat}
+
+% --- colour ----------------------------------------------------------------
+% Four colours, and only two of them ever appear in ink. A technical report
+% that needs more than that is decorating rather than distinguishing.
+\usepackage{xcolor}
+\definecolor{linkcolour}{HTML}{1F4E5F}
+\definecolor{rulegrey}{HTML}{B9B9B4}
+\definecolor{notegrey}{HTML}{4A4A46}
+\definecolor{tierfill}{HTML}{F2F1EC}
+
+% --- running heads ---------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small\scshape VIGÍA}
+\fancyhead[R]{\small\nouppercase{\leftmark}}
+\fancyfoot[C]{\small\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\small\thepage}}
+
+% --- section headings ------------------------------------------------------
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{0.7em}{}
+\titlespacing*{\section}{0pt}{18pt plus 4pt minus 2pt}{7pt}
+\titlespacing*{\subsection}{0pt}{13pt plus 3pt minus 2pt}{5pt}
+
+% --- environments ----------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{claim}{Claim}[section]
+
+% A RECORDED FAILURE. This project's convention is that a mistake found and
+% corrected is evidence about the method, so each one is set apart and named
+% rather than folded into the prose or quietly dropped. Rules above and below,
+% small type, no coloured panel — the content is the emphasis.
+\newenvironment{recorded}[1]
+  {\par\medskip\noindent{\color{rulegrey}\rule{\linewidth}{0.4pt}}\par\nobreak
+   \vspace{3pt}\noindent{\small\scshape #1}\par\nobreak\vspace{2pt}
+   \begingroup\small\color{notegrey}\noindent\ignorespaces}
+  {\par\endgroup\vspace{3pt}\noindent
+   {\color{rulegrey}\rule{\linewidth}{0.4pt}}\par\medskip}
+
+% Provenance tag for a figure: ours, or somebody else's.
+\newcommand{\measured}{\textsc{measured}}
+\newcommand{\reported}{\textsc{reported by authors}}
+
+% A quantity with the interval its sample size actually supports.
+\newcommand{\ci}[2]{#1\,\raisebox{0.05em}{\scriptsize #2}}
+
+% --- symbols used throughout the mathematics -------------------------------
+\newcommand{\hazards}{\mathcal{H}}
+\newcommand{\contexts}{\mathcal{X}}
+\newcommand{\cameras}{\mathcal{C}}
+\newcommand{\viewpoints}{\mathcal{V}}
+\newcommand{\detectors}{\mathcal{D}}
+\newcommand{\Real}{\mathbb{R}}
+\DeclareMathOperator{\iou}{IoU}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\precision}{P}
+\DeclareMathOperator{\recall}{R}

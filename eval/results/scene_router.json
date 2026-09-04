@@ -1,0 +1,176 @@
+{
+  "model": "scene_router.onnx",
+  "task": "which kind of footage is this \u2014 upload path only",
+  "harness": "scripts/train_scene_router.py",
+  "evidence_class": "HELD OUT ON DIFFERENT SOURCES",
+  "classes": [
+    "fire",
+    "flood",
+    "drowning",
+    "building_access"
+  ],
+  "train_images": 1560,
+  "heldout_images": 384,
+  "best_heldout_accuracy": 1.0,
+  "per_class_final": {
+    "fire": 1.0,
+    "flood": 1.0,
+    "drowning": 1.0,
+    "building_access": 1.0
+  },
+  "split_notes": {
+    "fire": "Different dataset entirely: trained on pyro-sdis stills, tested on HPWREN FIgLib sequences from other cameras.",
+    "flood": "Different sources and both viewpoints: trained on FloodNet UAV imagery plus ATLANTIS ground-level water photography, tested on USGS gauge cameras and LSU creek cameras it has never seen.",
+    "drowning": "Same dataset, different flight: the held-out set is one contiguous run that the sparse training sample does not overlap.",
+    "building_access": "Same dataset, split by capture index so the two halves are different scenes \u2014 the archive contains 362 scene cuts across 615 frames. The weakest split of the four, and the figure should be read with that in mind."
+  },
+  "excluded": {
+    "traffic": "only four usable training images exist"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.1695737895649169,
+      "accuracy": 0.875,
+      "per_class": {
+        "fire": 0.6190476190476191,
+        "flood": 0.9238095238095239,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.6
+    },
+    {
+      "epoch": 2,
+      "loss": 0.0408604834462191,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.4
+    },
+    {
+      "epoch": 3,
+      "loss": 0.016120611155201914,
+      "accuracy": 0.9635416666666666,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 0.8666666666666667,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.4
+    },
+    {
+      "epoch": 4,
+      "loss": 0.014491973252764486,
+      "accuracy": 0.9609375,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 0.8571428571428571,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.7
+    },
+    {
+      "epoch": 5,
+      "loss": 0.004145504010125478,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.7
+    },
+    {
+      "epoch": 6,
+      "loss": 0.0007285884028931378,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.5
+    },
+    {
+      "epoch": 7,
+      "loss": 0.0004656612254242039,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.5
+    },
+    {
+      "epoch": 8,
+      "loss": 0.00047577802815605236,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.8
+    },
+    {
+      "epoch": 9,
+      "loss": 0.00018710465979410174,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.6
+    },
+    {
+      "epoch": 10,
+      "loss": 0.00020827997439217447,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.6
+    },
+    {
+      "epoch": 11,
+      "loss": 0.00012574552368012823,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 52.6
+    },
+    {
+      "epoch": 12,
+      "loss": 0.00017922622005054714,
+      "accuracy": 1.0,
+      "per_class": {
+        "fire": 1.0,
+        "flood": 1.0,
+        "drowning": 1.0,
+        "building_access": 1.0
+      },
+      "seconds": 53.0
+    }
+  ]
+}

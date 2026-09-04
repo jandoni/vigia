@@ -1,0 +1,36 @@
+[project]
+name = "vigia"
+version = "0.1.0"
+description = "Gated multi-hazard detection with shared temporal validation for municipal cameras"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Jon Andoni Baranda" }]
+
+# Runtime deliberately excludes `ultralytics` (AGPL-3.0). Inference is ONNX
+# Runtime only. See PLAN.md section 4.
+dependencies = [
+    "onnxruntime>=1.20",
+    "numpy>=2.0",
+    "opencv-python-headless>=4.10",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+# Isolated: only used by tools/export_onnx.py as an offline build step.
+export = ["ultralytics>=8.3"]
+
+# The operator view. Deliberately OPTIONAL rather than a core dependency:
+# detection runs at the edge and only the event plus one evidence frame leaves
+# the camera, so a deployed node never needs a web server. Keeping these out of
+# the core list is what lets the edge runtime stay at four packages.
+# Licences: FastAPI MIT, uvicorn BSD-3-Clause, Starlette BSD-3-Clause,
+# pydantic MIT, websockets BSD-3-Clause — all compatible with Apache-2.0.
+#
+# `websockets` is explicit rather than implied. Bare uvicorn ships no WebSocket
+# implementation and answers the upgrade request with "Unsupported upgrade
+# request", which the interface survives by falling back to polling — so the
+# omission is invisible in a browser and shows up only in the server log.
+web = ["fastapi>=0.115", "uvicorn>=0.30", "websockets>=13.0"]
+
+[tool.setuptools.packages.find]
+include = ["vigia*"]

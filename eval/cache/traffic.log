@@ -1,0 +1,19 @@
+video   : car_crash.mp4  9888 frames @ 30 fps (5.5 min)
+stride  : 15 (effective 2.0 fps)
+
+  50 frames cached (735/9888 source)
+  100 frames cached (1485/9888 source)
+  150 frames cached (2235/9888 source)
+  200 frames cached (2985/9888 source)
+  250 frames cached (3735/9888 source)
+  300 frames cached (4485/9888 source)
+  350 frames cached (5235/9888 source)
+  400 frames cached (5985/9888 source)
+  450 frames cached (6735/9888 source)
+  500 frames cached (7485/9888 source)
+  550 frames cached (8235/9888 source)
+  600 frames cached (8985/9888 source)
+  650 frames cached (9735/9888 source)
+
+660 frames, 361 detections in 117s (163 ms/frame)
+wrote eval/cache/traffic_carcrash.jsonl

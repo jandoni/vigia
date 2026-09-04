@@ -1,0 +1,813 @@
+# VIGÍA model registry
+#
+# Single source of truth for every model in the system. This file is both the
+# runtime configuration AND the attribution record, so the two cannot drift
+# apart — see PLAN.md §4.
+#
+# Fields per model:
+#   hazard        which hazard it detects
+#   source        canonical URL it came from
+#   licence       licence as stated by the distributor
+#   licence_note  any complication worth recording honestly
+#   authors       who to credit
+#   trained_on    what data it saw
+#   reported      metrics published by the ORIGINAL AUTHORS (never ours)
+#   measured      metrics WE measured (null until we measure them)
+#   envelope      the conditions under which we claim it works
+#   redistribute  may the weights be committed to this repo?
+#
+# Rule: `reported` and `measured` never mix. We publish only `measured`.
+
+version: 1
+
+models:
+
+  fire.pyronear_yolo11s_sensitive:
+    hazard: fire
+    file: models/fire/pyronear_yolo11s_sensitive.onnx
+    source: https://huggingface.co/pyronear/yolo11s_sensitive-detector
+    download:
+      url: https://huggingface.co/pyronear/yolo11s_sensitive-detector/resolve/main/onnx_cpu.tar.gz
+      archive_member: best.onnx
+    licence: Apache-2.0
+    licence_note: >
+      The Hugging Face model repository states Apache-2.0. However the ONNX
+      artifact itself carries an embedded metadata field
+      `license = AGPL-3.0 License (https://ultralytics.com/license)`, stamped
+      automatically by the Ultralytics exporter because the model was
+      fine-tuned from yolo11s.pt. This tension exists in PyroNear's own
+      distribution; we did not create it. We follow the licence the
+      distributor states (Apache-2.0) and record the discrepancy here rather
+      than hiding it. We do not redistribute the weights in any case.
+    authors: PyroNear association (https://pyronear.org)
+    architecture: YOLO11s
+    trained_on: >
+      pyro-dataset (pyronear). Manifest reports 32,201 files / ~1.9 GB in the
+      training input, 50 epochs, AdamW, imgsz 1024, single_cls, seed 0.
+    reported:
+      note: >
+        The model card publishes no precision/recall/mAP. The PyroNear2025
+        benchmark paper (arXiv 2402.05349) reports cross-dataset F1 around 70%
+        for lightweight detectors on this task. Treat as ballpark only.
+      mAP50: null
+      precision: null
+      recall: null
+    measured:
+      status: baseline_measured
+      date: 2026-09-01
+      dataset: >
+        pyronear/pyro-sdis val split, 1,085 rows (500 positive, 585 negative).
+        The negatives span 21 distinct cameras.
+      harness: eval/run_image_eval.py
+      results_file: eval/results/fire_pyro_sdis_val_wide.json
+      conf_threshold: 0.20
+      note: >
+        Single-frame, raw detector output, NO temporal validation. This is the
+        baseline the validator must improve on, not a headline result.
+      box_level:
+        precision: 0.4472
+        recall: 0.902
+        f1: 0.598
+        f2: 0.7496
+      image_level:
+        precision: 0.5421
+        recall: 0.978
+        f2: 0.8425
+        false_alarm_rate: 0.706
+      median_latency_ms: 72.55
+      supersedes:
+        results_file: eval/results/fire_pyro_sdis_val_baseline.json
+        why: >
+          The first measurement used the first 100 rows of the same split, of
+          which only 23 were negative, and carried the standing caveat that the
+          false-alarm figure was indicative rather than precise. Widening to 585
+          negatives from 21 cameras — 25 times the sample — moved the headline
+          materially, and downwards:
+
+            false-alarm rate   0.870 -> 0.706
+            box precision      0.625 -> 0.447
+            box recall         0.904 -> 0.902
+            image recall       0.987 -> 0.978
+
+          Recall barely moved, which is the reassuring part: the detector finds
+          what it finds. Precision and the false-alarm rate both fell, meaning
+          the 23-frame sample had flattered the detector on false alarms while
+          the wider set contains harder negatives. The motivating claim survives
+          — a detector alarming on 71% of no-smoke frames is still unusable
+          without a filter — but the specific figure was overstated by 16
+          percentage points, and every quotation of 0.870 has been corrected.
+          This is exactly what the caveat existed to catch.
+      hardware: MacBook Pro M4 Pro, 48 GB, CPUExecutionProvider (CoreML unavailable, see note)
+      coreml_note: >
+        CoreML EP cannot build an execution plan for this graph because the
+        Ultralytics export uses dynamic spatial dimensions. Falls back to CPU
+        automatically. A static-shape re-export would likely restore CoreML
+        acceleration - tracked as an optimisation, not a blocker.
+    inference:
+      imgsz: 1024
+      conf_threshold: 0.20
+      iou_threshold: 0.01
+      note: >
+        Deliberately sensitive settings from the upstream model card. High
+        recall, low precision, on the assumption that a downstream filter
+        exists. Ours is the temporal validator.
+    envelope: >
+      Fixed-mount wide-field outdoor cameras viewing a landscape horizon.
+      Daylight. Not validated for indoor fire, close-range flame, or night.
+    redistribute: false
+
+  traffic.enos_yolo11x:
+    hazard: traffic
+    file: models/traffic/enos_traffic_epoch61.onnx
+    source: https://huggingface.co/Enos-123/traffic-accident-detection-yolo11x
+    licence: MIT
+    authors: Enos-123 (Hugging Face)
+    architecture: YOLO11x
+    trained_on: Roboflow Traffic Accident Detection dataset, 61 epochs, batch 16, 640x640
+    reported:
+      mAP50: 0.826
+      mAP50_95: 0.600
+      precision: 0.808
+      recall: 0.759
+      f1: 0.782
+      accident_class_recall: 0.855
+      note: Author states it is not validated for critical autonomous driving use.
+    measured:
+      status: not_yet_measured
+    inference:
+      imgsz: 640
+      conf_threshold: 0.25
+      iou_threshold: 0.45
+    envelope: >
+      Roadside and motorway fixed cameras. Classes: accident, vehicle.
+      YOLO11x is the largest variant; expect roughly 10-20 FPS on an M4 Pro.
+    hazard_classes: [accident]
+    hazard_class_note: >
+      Only `accident` reaches the validator; routing `vehicle` would make every
+      car an alert. Same principle as boats in person_in_water and rescue teams
+      in building_access.
+    checkpoint_note: >
+      Two checkpoints are published. We ship epoch61, not the epoch14 that the
+      upstream infer.py points at: compared on the author's own test images,
+      epoch61 gave one accident per image on all four (conf 0.58-0.70) while
+      epoch14 gave three detections on fig1.
+    redistribute: false
+    status: implemented
+    status_note: >
+      Integrated and running behind the validator — it supplied the second
+      hazard in the cross-hazard suppression comparison (eval/run_multihazard.py,
+      88.7% suppression against wildfire's 86.2%, same cascade.py). `measured`
+      stays not_yet_measured because that experiment measures the VALIDATOR, not
+      this detector: no precision/recall for the accident class against
+      held-out labels has been run. Retained explicitly as the generality
+      experiment rather than as a disaster hazard.
+
+  flood.atlantis_deeplabv3:
+    hazard: flood
+    file: models/flood/atlantis_water_deeplabv3.onnx
+    source: trained by us
+    architecture: >
+      torchvision DeepLabV3 with a MobileNetV3-Large backbone, fine-tuned from
+      the COCO-subset pretrained weights. Classifier and auxiliary heads
+      replaced with 2-class convolutions (background / water).
+    licence: Apache-2.0 (ours). Framework torchvision is BSD-3-Clause.
+    licence_note: >
+      The ONLY detector in VIGIA entirely free of AGPL. Fire and traffic are
+      YOLO derivatives and required the ONNX isolation described in PLAN.md
+      section 4; this one required none, because torchvision is BSD-3-Clause.
+      That was the reason for choosing it over YOLO-seg.
+    authors: >
+      Model architecture: torchvision / Meta AI (DeepLabV3, MobileNetV3).
+      Training data: Erfani et al., iWERS laboratory, University of South
+      Carolina — ATLANTIS, published in Environmental Modelling & Software,
+      2022.
+    dataset_source: https://github.com/smhassanerfani/atlantis
+    dataset_note: >
+      5,195 pixel-annotated images, 56 classes, split 3,364 / 535 / 1,296.
+      Source images were collected via the Flickr API under Creative Commons,
+      No Known Copyright Restrictions and US Government Work licences. The
+      repository itself carries NO explicit licence file, so the status of the
+      annotations is unstated. We therefore do not redistribute the dataset.
+      Whether weights trained on those annotations may be redistributed is
+      genuinely unclear and is recorded here rather than assumed.
+    trained_on: >
+      ATLANTIS train split, 3,364 images, collapsed from 56 classes to binary
+      water. 17 liquid-water labels count as water (flood, canal, ditch, fjord,
+      hot_spring, lake, puddle, rapids, reservoir, river, river_delta, sea,
+      spillway, swimming_pool, waterfall, wetland, marsh). Water-associated
+      STRUCTURES (dam, levee, pier, culvert, breakwater, water_tower,
+      water_well) are excluded because they are not water; so are glaciers and
+      snow, which are not liquid, and mangrove, which is vegetation standing in
+      water whose extent does not track a level.
+    class_mapping_note: >
+      ATLANTIS mask values are label_id + 1, with 0 reserved for unlabelled.
+      This was derived empirically by cross-referencing the dominant mask value
+      in each label folder against utils/labels_info.json, not assumed.
+    reported:
+      status: no_third_party_baseline
+      note: >
+        AQUANet (the ATLANTIS authors' own network) reports outperforming other
+        segmentation networks on ATLANTIS, but over all 56 classes rather than
+        binary water, so its numbers are not comparable to ours.
+    measured:
+      status: measured
+      date: 2026-09-01
+      harness: eval/run_flood_eval.py
+      results_file: eval/results/flood.json
+      training:
+        epochs: 15
+        best_epoch: 14
+        val_water_iou: 0.7769
+        val_pixel_accuracy: 0.9378
+        device: Apple M4 Pro (MPS)
+        seconds_per_epoch: 165
+      test_split:
+        dataset: ATLANTIS test, 1296 images, held out and never seen
+        water_iou: 0.7633
+        precision: 0.8799
+        recall: 0.852
+        f1: 0.8657
+        pixel_accuracy: 0.9319
+        median_latency_ms: 21.8
+      generalisation_note: >
+        Test IoU 0.7633 against validation IoU 0.7769 — a gap of
+        about 1.4 points, which is small and suggests the model is not
+        overfitted to the validation split.
+      trend_on_real_cameras:
+        note: >
+          Three LSU creek sequences, 80 frames, 11 minutes to 7 hours.
+          Least-squares fit vs Page-Hinkley on identical inputs.
+        LSU-20200423-original: {interval_min: 15, coverage_change: +0.103, least_squares_s: 5400, page_hinkley_s: 4500}
+        LSU-20200526: {interval_min: 1.2, coverage_change: +0.107, least_squares_s: 76, page_hinkley_s: 184}
+        LSU-20200624: {interval_min: 1.2, coverage_change: +0.223, least_squares_s: 789, page_hinkley_s: 971}
+        finding: >
+          The two methods win on different sampling regimes. The windowed fit
+          is faster on densely sampled cameras; Page-Hinkley is faster on
+          sparsely sampled ones because it is sample-based rather than
+          time-based. A fixed 300 s window originally caused the fit to fail
+          COMPLETELY on the 15-minute-interval camera — reporting UNKNOWN for
+          seven hours while water rose 10% of the frame — because the window
+          could never hold two frames. Found on real data, not in synthetic
+          tests. The window is now adaptive to the sampling interval.
+    inference:
+      imgsz: 512
+      threshold: 0.5
+      preprocessing: >
+        ImageNet mean/std normalisation, RGB, resized rather than letterboxed —
+        padding would inject a large constant-colour region the network never
+        saw in training.
+    mask_to_box_bridge:
+      note: >
+        Flood is the first hazard whose natural output is a mask, not boxes.
+        Rather than specialise the validator (which would break the
+        hazard-agnostic property), connected components of the mask are emitted
+        as ordinary Detection objects. Validated on real ATLANTIS flood masks
+        before adoption.
+      validation:
+        median_components_per_mask: 1
+        share_of_water_in_largest_component: 0.998
+        median_frame_to_frame_box_iou_under_simulated_rise: 0.964
+        minimum_observed_iou: 0.900
+        tracker_iou_threshold: 0.20
+        conversion_cost_ms: 0.31
+    trend_signal:
+      note: >
+        NOT a novel contribution. Choi, Kim, Win Aung and Park, "Real-time
+        anticipatory urban flood warning using CCTV and Page-Hinkley change
+        detection", Developments in the Built Environment 25 (2026), article
+        100866, published this capability for this problem. We implement both
+        their Page-Hinkley approach and a sliding-window least-squares fit, and
+        compare them on identical inputs.
+      calibration_finding: >
+        Naive Page-Hinkley parameters (delta 0.002, threshold 0.02) produced a
+        92% false-alarm rate on STABLE water at realistic segmentation noise.
+        Calibrated defaults (delta 0.005, threshold 0.10) give 0% at that noise
+        level, at a cost of 4-11 samples of detection latency. Full table in
+        eval/results/page_hinkley_calibration.json.
+      real_footage: >
+        LSU creek camera sequences from the V-FloodNet dataset — 3 sequences,
+        80 frames, spanning 11 minutes to 7 hours, timestamps in filenames.
+        Evaluation use only; V-FloodNet is all-rights-reserved and nothing from
+        it is redistributed.
+    envelope: >
+      Water region segmentation in outdoor scenes, from GROUND-LEVEL OR OBLIQUE
+      viewpoints only. Level estimated geometrically against an OPTIONAL
+      per-camera reference line; without calibration the uncalibrated area
+      signal still yields a trend, so a camera is useful the moment it is
+      connected.
+    viewpoint_limit: >
+      NADIR AERIAL IMAGERY IS OUTSIDE THIS MODEL'S ENVELOPE, and this was
+      measured rather than assumed. ATLANTIS is ground-level and oblique
+      photography of water bodies; the model has never seen a straight-down
+      view. Evaluated on FloodNet UAV frames (CC BY-SA 4.0, Hurricane Harvey)
+      it reports up to 0.397 water coverage on frames whose actual water is a
+      narrow canal, tinting large areas of mown grass as water. It does not
+      fail loudly — it returns a confident wrong number, which is the worst way
+      for a life-safety component to be wrong.
+      This is now enforced rather than documented: `Viewpoint` is a declared
+      property of every camera and every detector, and vigia/pipeline.py
+      REFUSES to pair a nadir camera with this model before any session is
+      created. tests/test_registry.py fails the build if that stops being true.
+      Closing the capability, rather than merely guarding it, requires a second
+      model trained on aerial data — FloodNet Track 1 ships semantic masks
+      including `water` and `road-flooded` and is the intended training set.
+    redistribute: false
+    status: implemented
+
+  person_in_water.seadronessee_rfdetr:
+    hazard: drowning
+    file: models/person_in_water/seadronessee_rfdetr_small.onnx
+    source: https://huggingface.co/dronefreak/seadronessee-rfdetr-small
+    base_model: Roboflow RF-DETR Small
+    architecture: >
+      RF-DETR Small, a DETR-style detector emitting 300 object queries with no
+      duplicate boxes — so unlike the YOLO detectors in VIGIA it needs no
+      non-maximum suppression.
+    licence: Apache-2.0
+    licence_note: >
+      The same author published YOLO11n and YOLO11x checkpoints for this
+      dataset under AGPL-3.0. RF-DETR was chosen specifically because it is
+      Apache-2.0, keeping this detector outside the AGPL perimeter. RF-DETR
+      also leads the RF100-VL domain-transfer benchmark, which is the property
+      that matters when a detector meets footage unlike its training set.
+    authors: >
+      Fine-tuned checkpoint by Hugging Face user dronefreak, via DetectionBench.
+      Base architecture by Roboflow. Dataset by Varga, Kiefer et al.,
+      University of Tuebingen, published at IEEE/CVF WACV 2022.
+    dataset_source: https://github.com/Ben93kie/SeaDronesSee
+    dataset_licence: CC0 1.0 Universal (data), MIT (code)
+    dataset_note: >
+      CC0 is the least restrictive licence in the entire project — no
+      attribution legally required, though we credit the authors regardless.
+      Mirror used: dronefreak/SeaDronesSee on Hugging Face, also CC0.
+    classes: [swimmer, boat, jetski, life_saving_appliances, buoy]
+    hazard_classes: [swimmer]
+    hazard_class_note: >
+      Only `swimmer` is routed to the validator. A boat is context, not an
+      emergency; passing boats through would alarm on every vessel in frame.
+    reported:
+      note: >
+        Author's headline is mAP@50 0.7931 across all five classes, which is
+        carried by boats. Per-class AP: boat 0.711, jetski 0.593, buoy 0.489,
+        swimmer 0.282, life_saving_appliances 0.188. We do NOT quote the
+        headline for a people-in-water detector.
+      mAP_50_all_classes: 0.7931
+      per_class_AP_swimmer: 0.282
+    measured:
+      status: measured
+      date: 2026-09-01
+      harness: eval/run_person_in_water_eval.py
+      results_file: eval/results/person_in_water.json
+      dataset: SeaDronesSee val, 300 images (255 with swimmers, 45 without)
+      ground_truth_swimmer_instances: 1218
+      iou_match_threshold: 0.3
+      conf_threshold: 0.30
+      swimmer_only: true
+      box_level:
+        precision: 0.9199
+        recall: 0.9146
+        f1: 0.9172
+        f2: 0.9157
+      image_level:
+        precision: 0.9961
+        recall: 0.9922
+        false_alarm_rate: 0.0222
+      median_latency_ms: 50.2
+      reconciliation_note: >
+        Our box F1 of 0.9172 and the author's swimmer AP of 0.282 are not in
+        conflict: AP@50:0.05:95 averages over strict IoU thresholds and punishes
+        imprecise boxes on tiny objects, whereas our 0.3-IoU operating point
+        asks the operationally relevant question — did we find the person. Both
+        figures are real and they answer different questions.
+    integration_bug_found:
+      description: >
+        The exported head has six logit slots for five classes. We assumed a
+        leading no-object slot (the usual DETR convention) and took
+        scores[:, 1:], shifting every label by one: BOATS were reported as
+        swimmers at 0.84 confidence while real swimmers were discarded. Slot 0
+        is in fact `swimmer` and the unused slot is trailing.
+      why_it_nearly_survived: >
+        The smoke test looked correct — plausible counts, high confidence.
+        Image-level precision was 0.83 because boats and swimmers co-occur in
+        the same frames, so "a hazard is present" was often right for the wrong
+        reason. Only box-level IoU exposed it: box recall was 0.002.
+      how_it_was_caught: >
+        Running the author's own rfdetr.predict() on the same image and
+        comparing coordinates against ground truth.
+      lesson: >
+        Image-level metrics alone would have reported a working detector.
+        Box-level evaluation is what made the failure visible.
+    envelope: >
+      Elevated and aerial views of open water, 5 to 260 m altitude. Not
+      validated for pool settings, surf zones, or extreme crowd density.
+    redistribute: false
+    status: implemented
+
+  building_access.drespnet_yolov8_drn:
+    hazard: building_access
+    file: models/building_access/drespnet_yolov8_drn.onnx
+    source: https://doi.org/10.6084/m9.figshare.29991478.v2
+    architecture: >
+      YOLOv8-DRN, an instance-segmentation model over 28 classes, trained by the
+      DRespNeT authors for 300 epochs and published alongside the dataset. VIGIA
+      uses it as a detector: the 32 mask coefficients are trimmed and the 28
+      classes merged to 5 at the boundary.
+    licence: CC BY 4.0 as published on figshare
+    licence_note: >
+      The figshare record — dataset and weights together — states CC BY 4.0.
+      The checkpoint itself carries an embedded
+      `license = AGPL-3.0 (https://ultralytics.com/license)`, stamped
+      automatically because it was trained with Ultralytics 8.2.0. This is
+      exactly the tension already recorded for the PyroNear fire detector: it
+      exists in the authors' own distribution and we did not create it. We
+      follow the licence the distributor states, record the discrepancy here
+      rather than hiding it, redistribute no weights, and convert to ONNX in an
+      isolated build environment so `ultralytics` is never a runtime
+      dependency — enforced by tools/check_licence.py.
+    authors: >
+      Aykut Sirma and colleagues, Cranfield University. DRespNeT,
+      arXiv 2508.16016.
+    dataset_source: https://doi.org/10.6084/m9.figshare.29991478.v2
+    dataset_licence: CC BY 4.0
+    trained_on: >
+      DRespNeT, 650 training images of UAV imagery from the 2023 Turkiye
+      earthquakes, 28 classes, polygon-level instance annotations.
+    class_merge_note: >
+      The model predicts 28 classes; VIGIA needs the subset answering two
+      questions — are there people, and where can a rescuer get in — so they are
+      merged to five at the detector boundary. The other 23 remain in the graph.
+
+        civilian           <- civilian_visible, group_of_civilians
+        rescue_team        <- rescue_team
+        entry_accessible   <- entry_door/window/gap_accessible,
+                              entry_gap_block_accessible
+        entry_blocked      <- entry_door_blocked, entry_window_blocked
+        building_collapsed <- building_collapsed
+    hazard_classes: [civilian]
+    hazard_class_note: >
+      Only `civilian` reaches the temporal validator, on the same precedent as
+      boats in person_in_water. A rescue team on site is the EXPECTED state and
+      alarming on it would fire at every incident already being handled.
+    reported:
+      model: YOLOv8-DRN, the authors' own benchmark
+      mAP50: 0.927
+      fps: 27
+      note: >
+        Theirs, across all 28 classes at their operating point. Not directly
+        comparable to ours, which merges to 5 and headlines one hazard class.
+    measured:
+      status: measured
+      date: 2026-09-02
+      harness: eval/run_building_access_eval.py
+      results_file: eval/results/building_access.json
+      iou_match_threshold: 0.3
+      conf_threshold: 0.30
+      test_split:
+        note: >
+          HELD OUT. Never used for training or for any selection decision.
+        images: 24
+        ground_truth_civilian_instances: 291
+        box_level:
+          precision: 0.785
+          recall: 0.942
+          f1: 0.856
+          f2: 0.905
+        image_level:
+          precision: 0.923
+          recall: 1.000
+          false_alarm_rate: 0.083
+        per_class_box_f1:
+          civilian: 0.856
+          rescue_team: 0.895
+          entry_accessible: 0.882
+          entry_blocked: 0.802
+          building_collapsed: 0.941
+      valid_split:
+        images: 50
+        box_level: {precision: 0.767, recall: 0.870, f1: 0.815}
+        image_level: {precision: 0.917, recall: 0.917, false_alarm_rate: 0.077}
+      median_latency_ms: 37.6
+      hardware: MacBook Pro M4 Pro, 48 GB, CPUExecutionProvider
+      generalisation_note: >
+        Civilian box F1 is 0.856 on the held-out test split against 0.815 on
+        valid — a gap of four points, in the direction of the harder split, and
+        small enough to suggest the model is not overfitted. The detector VIGIA
+        trained itself showed the opposite: 0.462 box recall on valid against
+        0.141 on test, a collapse that revealed it had not generalised at all.
+      supersedes:
+        model: building_access.drespnet_fasterrcnn (trained by us)
+        why: >
+          VIGIA first trained its own torchvision Faster R-CNN on the same 650
+          images, chosen because torchvision is BSD-3-Clause and would have kept
+          this detector outside the AGPL perimeter entirely. Measured on the
+          identical held-out split with the identical metric:
+
+            civilian box recall     0.141 -> 0.942
+            civilian box precision  0.138 -> 0.785
+            civilian box F1         0.139 -> 0.856
+            image-level FAR         0.167 -> 0.083
+            median latency          31.4 ms -> 37.6 ms
+
+          Our model missed roughly six of every seven people it should have
+          boxed. That is not a margin any amount of tuning on 650 training
+          images was going to close, and it was the weakest component in the
+          system by a wide margin. Keeping it to preserve an architectural
+          preference would have been a choice against the people this detector
+          exists to find. The cost is accepting the Ultralytics licence tension
+          documented above, which the project already carries for fire and
+          traffic and already has machinery to contain.
+      caveats: >
+        The held-out test split is 24 images. That is a small sample and the
+        figures above remain indicative rather than precise — the same caveat
+        that applies to any DRespNeT result. It cannot be widened from released
+        data: the authors' figshare record was resolved and inspected on
+        2 September 2026 and contains the same 650/50/25 split already held.
+        Unlike the fire negative set, which was widened twenty-five-fold, this
+        one needs a different dataset.
+    inference:
+      imgsz: 640
+      conf_threshold: 0.30
+      iou_threshold: 0.50
+      preprocessing: RGB, 0-1 float, letterboxed to 640.
+      note: >
+        A `-seg` export emits 4 box values, then 28 class scores, then 32 mask
+        coefficients. The coefficients are trimmed at postprocess; without that
+        the decoder reads 60 classes and takes an argmax over mask prototypes.
+    envelope: >
+      Downward and oblique UAV views of earthquake-damaged urban blocks, at the
+      altitudes flown in the 2023 Turkiye response. Not validated for
+      street-level views, interior imagery, or night. Trained on 650 images, so
+      treat generalisation to other disaster types and other cities as unproven.
+    redistribute: false
+    redistribute_note: >
+      CC BY 4.0 would permit it with attribution, but the embedded Ultralytics
+      AGPL stamp makes redistribution of the weights a question we decline to
+      answer in our own favour. We distribute no weights for any model.
+    status: implemented
+
+  flood_aerial.floodnet_deeplabv3:
+    hazard: flood
+    file: models/flood/floodnet_aerial_deeplabv3.onnx
+    source: trained by us
+    viewpoint: nadir_aerial
+    architecture: >
+      torchvision DeepLabV3 with a MobileNetV3-Large backbone, the same
+      architecture as the ground flood model, fine-tuned on aerial imagery. Two
+      sets of weights rather than one model, because the two viewpoints are
+      different sensing problems.
+    licence: Apache-2.0 (ours). Framework torchvision is BSD-3-Clause.
+    authors: >
+      Model architecture: torchvision / Meta AI. Training data: Rahnemoonfar
+      et al., FloodNet, arXiv 2012.02951.
+    dataset_source: https://huggingface.co/datasets/torchgeo/floodnet
+    dataset_licence: CDLA-Permissive-1.0
+    dataset_note: >
+      FloodNet Track 1, UAV imagery of Hurricane Harvey, rehosted by torchgeo
+      from the authors' own release. CDLA-Permissive-1.0 carries no share-alike
+      obligation — unlike the CC BY-SA 4.0 on the Track 2 mirror — so nothing
+      built from this model is constrained by it.
+    why_this_exists: >
+      The ground flood model is trained on ATLANTIS, which is ground-level and
+      oblique photography of water bodies. Measured on FloodNet UAV frames it
+      reported up to 0.397 water coverage on images whose actual water is a
+      narrow canal, tinting large areas of mown grass as water. It did not fail
+      loudly; it returned a confident wrong number.
+      That failure was first CONTAINED — `Viewpoint` is declared on every camera
+      and detector and the pipeline refused to pair a nadir camera with the
+      ground model. Containment is not capability, though: a UAV flood camera
+      was refused rather than served. This model closes that gap, and the gate
+      now routes by viewpoint instead of rejecting.
+    trained_on: >
+      FloodNet Track 1 labelled split: 398 image/mask pairs, of which only 51
+      are flooded. Stratified 85/15 split preserving that ratio, giving 339
+      train (44 flooded) and 59 validation (7 flooded). 30 epochs, AdamW,
+      cosine schedule, 512 px, MPS, trained in phased blocks with a checkpoint
+      every epoch.
+    class_mapping_note: >
+      Binary water from the 10-class masks, verified against the data before
+      training rather than taken from the documentation — the same discipline
+      that caught ATLANTIS's label_id + 1 offset. Observed pixel shares over 40
+      masks: water 28.8%, road-flooded 14.7%, pool 0.5%.
+      Water = {water, road-flooded, pool}: liquid surfaces only.
+      building-flooded is EXCLUDED — the building is flooded but those pixels
+      are roof and structure, not a water surface, the same reason ATLANTIS
+      excluded dams, levees and piers.
+    measured:
+      status: validation_measured
+      status_note: >
+        Deliberately NOT `measured`. FloodNet withheld its validation and test
+        masks for the competition, so no independent labelled split exists in
+        the release and these figures come from a stratified split carved out
+        of the training pairs and seen by model selection. Weaker evidence than
+        the held-out figures reported for the other models, and labelled so it
+        is never quoted as equivalent.
+      date: 2026-09-03
+      harness: scripts/train_flood_aerial.py
+      results_file: eval/results/flood_aerial.json
+      selection_metric: water IoU on the FLOODED validation subset
+      best_epoch: 25
+      val_flooded_water_iou: 0.4734
+      val_overall_water_iou: 0.7021
+      val_pixel_accuracy: 0.9568
+      seconds_per_epoch: 63
+      device: Apple M4 Pro (MPS)
+      why_two_numbers: >
+        Only 51 of 398 labelled images are flooded. A single overall IoU is
+        carried by dry scenes — ponds and pools in intact neighbourhoods — and
+        reads 0.702 while the case the model exists for reads 0.473. Reporting
+        one number would flatter it by 23 points on the only thing that
+        matters, so checkpoint selection is on the flooded subset.
+      effect_on_the_failure_it_was_built_for: >
+        Evaluated on the 24 FloodNet frames where the ground model failed:
+        median coverage 0.196 -> 0.125 and maximum 0.397 -> 0.191. On the worst
+        frame the ground model tinted lawn and road as water at 0.397; this one
+        segments the canal alone at 0.119.
+      honest_assessment: >
+        WEAKER THAN THE GROUND MODEL AND THE REASON IS THE DATA. The ground
+        model reaches 0.7633 water IoU on a held-out ATLANTIS test split of
+        1,296 images; this reaches 0.4734 on 7 flooded validation images. The
+        binding constraint is 44 flooded training images, and it is visible in
+        the training curve: the flooded IoU plateaued from epoch 8 while overall
+        IoU and training loss kept improving, which is the signature of fitting
+        dry scenes harder rather than learning flooding. More epochs will not
+        move it; more flooded imagery would. FloodNet ships 1,047 UNLABELLED
+        training images and was designed as a semi-supervised challenge, which
+        is the obvious next lever.
+        It is nonetheless a real capability where there was none: before this,
+        a UAV flood camera was refused outright.
+    inference:
+      imgsz: 512
+      threshold: 0.5
+      preprocessing: ImageNet mean/std normalisation, RGB, resized.
+    envelope: >
+      NADIR AERIAL views of flooded and non-flooded neighbourhoods, at UAV
+      altitudes. Trained on a single event (Hurricane Harvey, Texas) so
+      generalisation to other geographies and flood types is unproven. The
+      pipeline selects between this model and the ground model by the camera's
+      declared viewpoint; neither is a general-purpose water segmenter.
+    redistribute: false
+    status: implemented
+
+  scene_router.mobilenetv3:
+    hazard: routing
+    file: models/scene_router/scene_router.onnx
+    source: trained by us
+    architecture: >
+      torchvision MobileNetV3-Small, fine-tuned from ImageNet weights, with a
+      4-way classification head. 5.8 MB.
+    licence: Apache-2.0 (ours). Framework torchvision is BSD-3-Clause.
+    scope: >
+      THE UPLOAD PATH ONLY. Live cameras route by declaration and that does not
+      change: Tier 0's position is that classifying a declared camera's picture
+      adds a misrouting failure to the critical path in exchange for
+      information the operator already has. An uploaded clip carries no
+      declaration, which is a different problem, and this model exists only for
+      that. vigia/scene_router.py states the boundary at the top of the file.
+    why_it_exists: >
+      The upload path first inferred the scene by running all five detectors
+      and taking whichever claimed the footage most loudly. It routed 2 of 4
+      test clips wrongly, and not because of tuning: the detectors' scores are
+      not comparable quantities. On rubble the aerial flood model reports water
+      confidently, because that is what training on 51 flooded images produces.
+      A classifier trained for the actual question replaces a comparison that
+      was never valid.
+    trained_on: >
+      1,560 frames, 420 per class (300 for drowning, which has fewer), drawn
+      from the datasets already held for the detectors. 12 epochs, AdamW,
+      cosine schedule, 224 px, MPS, trained in phased blocks.
+    classes: [fire, flood, drowning, building_access]
+    excluded_class_note: >
+      Road incidents are absent. Four usable images exist for that scene, which
+      is not a class; dashcam footage is chosen by hand and the interface says
+      so rather than offering a guess it cannot support.
+    split_note: >
+      HELD OUT ON DIFFERENT SOURCES, not at random. Frames from one flight are
+      near-duplicates of each other, so a random split puts nearly identical
+      images on both sides and reports an accuracy that means nothing. Fire
+      trains on pyro-sdis and is tested on HPWREN FIgLib; flood trains on
+      FloodNet and ATLANTIS and is tested on USGS gauge and LSU creek cameras;
+      people-in-water is split by flight. Building access is the weakest split
+      — the same archive divided by capture index, which separates scenes but
+      not sources — and that is stated rather than hidden.
+    measured:
+      status: measured
+      date: 2026-09-03
+      harness: scripts/train_scene_router.py
+      results_file: eval/results/scene_router.json
+      heldout_images: 384
+      heldout_accuracy: 1.0
+      per_class_accuracy:
+        fire: 1.0
+        flood: 1.0
+        drowning: 1.0
+        building_access: 1.0
+      what_a_first_run_showed: >
+        Trained with the flood class drawn from FloodNet alone — all of it
+        aerial — the model scored 1.00 on fire, people-in-water and building
+        access but 0.60 on flood, tested against ground-level cameras. Water
+        seen from above and water seen across are different pictures, and a
+        class taught only one cannot recognise the other. Adding ATLANTIS
+        ground-level water photography to that class alone moved it to 1.00.
+        The failure was informative and is recorded because the number without
+        it looks like luck.
+      honest_assessment: >
+        A perfect score on 384 held-out images should be read for what it is:
+        four visually distinct scene types — a landscape horizon, water, open
+        sea from altitude, and rubble — are an easy discrimination, and the
+        model has clearly memorised its training set (loss 0.0001). The
+        meaningful claim is narrower than the number: on footage resembling the
+        four datasets it was built from, routing is reliable. Footage unlike
+        any of them is untested, which is why the interface preselects the
+        reading rather than committing to it, and why every alternative stays
+        one click away.
+    inference:
+      imgsz: 224
+      preprocessing: RGB, 0-1, ImageNet mean/std, resized (not letterboxed).
+      note: >
+        Six frames are sampled across a clip and their class probabilities
+        averaged rather than voted. A clip that changes scene halfway should
+        show both; an average says so where a majority hides it.
+    envelope: >
+      Footage resembling the four source datasets: wide outdoor landscape,
+      water at ground level or from a UAV, open sea from altitude, and aerial
+      views of earthquake-damaged blocks. Not a general scene classifier.
+    redistribute: false
+    status: implemented
+
+# Experiments that measure the SYSTEM rather than a model. Registered here so
+# tools/freeze_results.py guards their published figures exactly as it guards
+# model figures — an experiment quoted in the paper is a claim like any other.
+experiments:
+  validator.threshold_matched:
+    question: >
+      Can raising the raw detector's confidence floor reach the cascade's
+      operating point without any temporal machinery? The control most system
+      papers skip, run before publishing rather than left to a reviewer.
+    measured:
+      status: measured
+      date: 2026-09-04
+      harness: eval/run_threshold_matched.py
+      results_file: eval/results/threshold_matched.json
+      matched_floor: 0.26
+      matched_recall: 0.9
+      matched_minutes_to_detect: 1.0
+      cascade_far: 0.01
+      cascade_recall: 0.7917
+    honest_assessment: >
+      THE CONTROL PARTIALLY DEFLATES THE HEADLINE, AND IS REPORTED ANYWAY. On
+      the FIgLib negative set, a confidence floor of 0.26 — found by sweeping
+      on these very negatives, so an oracle baseline — matches the cascade's
+      false-alarm rate of 0.010 while keeping higher frame recall (0.900
+      against 0.7917) and lower latency (1 minute against 3). Per-frame
+      false-alarm reduction on this negative set is therefore NOT the
+      cascade's contribution; thresholding does it more cheaply. What the
+      sweep does not settle: the matched floor is tuned on the evaluation
+      negatives (the cascade's floor is the authors' published default), the
+      hard pyro-sdis negatives admit no such floor (FAR 0.648 at 0.30 with
+      recall already falling), and deduplication is not achievable by any
+      threshold. The claim the paper now makes is scoped accordingly.
+
+  validator.colour_prior:
+    question: >
+      Does a colour prior earn a place in the cascade? The last level with no
+      measurement behind it, tested with the prior it was motivated by —
+      wildfire smoke is grey, so demand achromatic pixels in the box.
+    measured:
+      status: measured
+      date: 2026-09-04
+      harness: eval/run_colour_eval.py
+      results_file: eval/results/colour_prior.json
+      stills_baseline_recall: 0.978
+      stills_baseline_far: 0.706
+      stills_strict_recall: 0.736
+      stills_strict_far: 0.456
+      temporal_strict_fires_detected: 5
+    honest_assessment: >
+      REMOVED, like the size level before it, on the evidence. The prior
+      fails for a physical reason: fog — the curated hard negative — is
+      exactly as grey as smoke. On stills it trades roughly five points of
+      recall per ten points of false-alarm rate at every cutoff swept; inside
+      the temporal cascade it improves nothing at any cutoff and the strict
+      ones lose an ignition sequence outright (5 of 6). A regression test in
+      tests/test_validator.py bars reintroduction.
+
+# Components deliberately excluded, kept here so the reasoning is not lost.
+excluded:
+  xview2_first_place:
+    reason: >
+      Weights ARE publicly available. Excluded on modality: requires
+      bi-temporal satellite pairs at 0.5 m GSD plus a pre-disaster image at
+      inference time. Not a camera model.
+    source: https://github.com/DIUx-xView/xView2_first_place
+
+  v_floodnet:
+    reason: >
+      All rights reserved. Best flood system found but no licence to build on.
+      Cited as prior art only.
+    source: https://github.com/xmlyqing00/V-FloodNet
+
+  segformer:
+    reason: >
+      NVIDIA Source Code License - non-commercial research or evaluation only.
+      Usable for our purpose but must never be committed to this repository.
+      Not needed: the ATLANTIS route is permissive and better suited.

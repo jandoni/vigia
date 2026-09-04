@@ -1,0 +1,551 @@
+{
+  "model": "drespnet_yolov8_drn.onnx",
+  "dataset": "DRespNeT (Cranfield University), CC BY 4.0",
+  "iou_match_threshold": 0.3,
+  "hazard_class": "civilian",
+  "class_merge": {
+    "civilian": [
+      "civilian_visible",
+      "group_of_civilians"
+    ],
+    "rescue_team": [
+      "rescue_team"
+    ],
+    "entry_accessible": [
+      "entry_door_accessible",
+      "entry_window_accessible",
+      "entry_gap_accessible",
+      "entry_gap_block_accessible"
+    ],
+    "entry_blocked": [
+      "entry_door_blocked",
+      "entry_window_blocked"
+    ],
+    "building_collapsed": [
+      "building_collapsed"
+    ]
+  },
+  "sample_size_caveat": "The public DRespNeT release holds out 25 test images (24 with labels in our five classes). That is a very small sample and these figures are indicative, not precise \u2014 the same caveat already recorded for the 23 fire negatives. The `valid` split is larger but was used for checkpoint selection and is therefore NOT held out. Widen before publishing.",
+  "reported_by_authors": {
+    "model": "YOLOv8-DRN (DRespNeT paper, arXiv 2508.16016)",
+    "mAP50": 0.927,
+    "fps": 27,
+    "note": "Theirs, not ours, and NOT comparable: they report over 28 classes, we merge to 5 and measure one hazard class."
+  },
+  "results": {
+    "test": {
+      "conf_0.2": {
+        "images": 24,
+        "ground_truth_civilians": 291,
+        "predicted_civilians": 399,
+        "box_level": {
+          "true_positives": 278,
+          "false_positives": 121,
+          "false_negatives": 13,
+          "true_negatives": 0,
+          "precision": 0.6967,
+          "recall": 0.9553,
+          "f1": 0.8058,
+          "f2": 0.8893,
+          "false_alarm_rate": 1.0
+        },
+        "image_level": {
+          "true_positives": 12,
+          "false_positives": 3,
+          "false_negatives": 0,
+          "true_negatives": 9,
+          "precision": 0.8,
+          "recall": 1.0,
+          "f1": 0.8889,
+          "f2": 0.9524,
+          "false_alarm_rate": 0.25
+        },
+        "per_class_box_level": {
+          "civilian": {
+            "true_positives": 278,
+            "false_positives": 121,
+            "false_negatives": 13,
+            "true_negatives": 0,
+            "precision": 0.6967,
+            "recall": 0.9553,
+            "f1": 0.8058,
+            "f2": 0.8893,
+            "false_alarm_rate": 1.0
+          },
+          "rescue_team": {
+            "true_positives": 31,
+            "false_positives": 9,
+            "false_negatives": 0,
+            "true_negatives": 0,
+            "precision": 0.775,
+            "recall": 1.0,
+            "f1": 0.8732,
+            "f2": 0.9451,
+            "false_alarm_rate": 1.0
+          },
+          "entry_accessible": {
+            "true_positives": 91,
+            "false_positives": 44,
+            "false_negatives": 1,
+            "true_negatives": 0,
+            "precision": 0.6741,
+            "recall": 0.9891,
+            "f1": 0.8018,
+            "f2": 0.9046,
+            "false_alarm_rate": 1.0
+          },
+          "entry_blocked": {
+            "true_positives": 70,
+            "false_positives": 54,
+            "false_negatives": 1,
+            "true_negatives": 0,
+            "precision": 0.5645,
+            "recall": 0.9859,
+            "f1": 0.7179,
+            "f2": 0.8578,
+            "false_alarm_rate": 1.0
+          },
+          "building_collapsed": {
+            "true_positives": 25,
+            "false_positives": 5,
+            "false_negatives": 0,
+            "true_negatives": 0,
+            "precision": 0.8333,
+            "recall": 1.0,
+            "f1": 0.9091,
+            "f2": 0.9615,
+            "false_alarm_rate": 1.0
+          }
+        },
+        "median_latency_ms": 37.8
+      },
+      "conf_0.3": {
+        "images": 24,
+        "ground_truth_civilians": 291,
+        "predicted_civilians": 349,
+        "box_level": {
+          "true_positives": 274,
+          "false_positives": 75,
+          "false_negatives": 17,
+          "true_negatives": 0,
+          "precision": 0.7851,
+          "recall": 0.9416,
+          "f1": 0.8563,
+          "f2": 0.9055,
+          "false_alarm_rate": 1.0
+        },
+        "image_level": {
+          "true_positives": 12,
+          "false_positives": 1,
+          "false_negatives": 0,
+          "true_negatives": 11,
+          "precision": 0.9231,
+          "recall": 1.0,
+          "f1": 0.96,
+          "f2": 0.9836,
+          "false_alarm_rate": 0.0833
+        },
+        "per_class_box_level": {
+          "civilian": {
+            "true_positives": 274,
+            "false_positives": 75,
+            "false_negatives": 17,
+            "true_negatives": 0,
+            "precision": 0.7851,
+            "recall": 0.9416,
+            "f1": 0.8563,
+            "f2": 0.9055,
+            "false_alarm_rate": 1.0
+          },
+          "rescue_team": {
+            "true_positives": 30,
+            "false_positives": 6,
+            "false_negatives": 1,
+            "true_negatives": 0,
+            "precision": 0.8333,
+            "recall": 0.9677,
+            "f1": 0.8955,
+            "f2": 0.9375,
+            "false_alarm_rate": 1.0
+          },
+          "entry_accessible": {
+            "true_positives": 90,
+            "false_positives": 22,
+            "false_negatives": 2,
+            "true_negatives": 0,
+            "precision": 0.8036,
+            "recall": 0.9783,
+            "f1": 0.8824,
+            "f2": 0.9375,
+            "false_alarm_rate": 1.0
+          },
+          "entry_blocked": {
+            "true_positives": 69,
+            "false_positives": 32,
+            "false_negatives": 2,
+            "true_negatives": 0,
+            "precision": 0.6832,
+            "recall": 0.9718,
+            "f1": 0.8023,
+            "f2": 0.8961,
+            "false_alarm_rate": 1.0
+          },
+          "building_collapsed": {
+            "true_positives": 24,
+            "false_positives": 2,
+            "false_negatives": 1,
+            "true_negatives": 0,
+            "precision": 0.9231,
+            "recall": 0.96,
+            "f1": 0.9412,
+            "f2": 0.9524,
+            "false_alarm_rate": 1.0
+          }
+        },
+        "median_latency_ms": 37.6
+      },
+      "conf_0.5": {
+        "images": 24,
+        "ground_truth_civilians": 291,
+        "predicted_civilians": 284,
+        "box_level": {
+          "true_positives": 248,
+          "false_positives": 36,
+          "false_negatives": 43,
+          "true_negatives": 0,
+          "precision": 0.8732,
+          "recall": 0.8522,
+          "f1": 0.8626,
+          "f2": 0.8564,
+          "false_alarm_rate": 1.0
+        },
+        "image_level": {
+          "true_positives": 12,
+          "false_positives": 1,
+          "false_negatives": 0,
+          "true_negatives": 11,
+          "precision": 0.9231,
+          "recall": 1.0,
+          "f1": 0.96,
+          "f2": 0.9836,
+          "false_alarm_rate": 0.0833
+        },
+        "per_class_box_level": {
+          "civilian": {
+            "true_positives": 248,
+            "false_positives": 36,
+            "false_negatives": 43,
+            "true_negatives": 0,
+            "precision": 0.8732,
+            "recall": 0.8522,
+            "f1": 0.8626,
+            "f2": 0.8564,
+            "false_alarm_rate": 1.0
+          },
+          "rescue_team": {
+            "true_positives": 29,
+            "false_positives": 3,
+            "false_negatives": 2,
+            "true_negatives": 0,
+            "precision": 0.9062,
+            "recall": 0.9355,
+            "f1": 0.9206,
+            "f2": 0.9295,
+            "false_alarm_rate": 1.0
+          },
+          "entry_accessible": {
+            "true_positives": 76,
+            "false_positives": 8,
+            "false_negatives": 16,
+            "true_negatives": 0,
+            "precision": 0.9048,
+            "recall": 0.8261,
+            "f1": 0.8636,
+            "f2": 0.8407,
+            "false_alarm_rate": 1.0
+          },
+          "entry_blocked": {
+            "true_positives": 59,
+            "false_positives": 10,
+            "false_negatives": 12,
+            "true_negatives": 0,
+            "precision": 0.8551,
+            "recall": 0.831,
+            "f1": 0.8429,
+            "f2": 0.8357,
+            "false_alarm_rate": 1.0
+          },
+          "building_collapsed": {
+            "true_positives": 22,
+            "false_positives": 0,
+            "false_negatives": 3,
+            "true_negatives": 0,
+            "precision": 1.0,
+            "recall": 0.88,
+            "f1": 0.9362,
+            "f2": 0.9016,
+            "false_alarm_rate": 0.0
+          }
+        },
+        "median_latency_ms": 37.7
+      }
+    },
+    "valid": {
+      "conf_0.2": {
+        "images": 50,
+        "ground_truth_civilians": 223,
+        "predicted_civilians": 287,
+        "box_level": {
+          "true_positives": 202,
+          "false_positives": 85,
+          "false_negatives": 21,
+          "true_negatives": 0,
+          "precision": 0.7038,
+          "recall": 0.9058,
+          "f1": 0.7922,
+          "f2": 0.8567,
+          "false_alarm_rate": 1.0
+        },
+        "image_level": {
+          "true_positives": 24,
+          "false_positives": 4,
+          "false_negatives": 0,
+          "true_negatives": 22,
+          "precision": 0.8571,
+          "recall": 1.0,
+          "f1": 0.9231,
+          "f2": 0.9677,
+          "false_alarm_rate": 0.1538
+        },
+        "per_class_box_level": {
+          "civilian": {
+            "true_positives": 202,
+            "false_positives": 85,
+            "false_negatives": 21,
+            "true_negatives": 0,
+            "precision": 0.7038,
+            "recall": 0.9058,
+            "f1": 0.7922,
+            "f2": 0.8567,
+            "false_alarm_rate": 1.0
+          },
+          "rescue_team": {
+            "true_positives": 122,
+            "false_positives": 34,
+            "false_negatives": 3,
+            "true_negatives": 0,
+            "precision": 0.7821,
+            "recall": 0.976,
+            "f1": 0.8683,
+            "f2": 0.9299,
+            "false_alarm_rate": 1.0
+          },
+          "entry_accessible": {
+            "true_positives": 316,
+            "false_positives": 210,
+            "false_negatives": 11,
+            "true_negatives": 0,
+            "precision": 0.6008,
+            "recall": 0.9664,
+            "f1": 0.7409,
+            "f2": 0.8615,
+            "false_alarm_rate": 1.0
+          },
+          "entry_blocked": {
+            "true_positives": 248,
+            "false_positives": 194,
+            "false_negatives": 6,
+            "true_negatives": 0,
+            "precision": 0.5611,
+            "recall": 0.9764,
+            "f1": 0.7126,
+            "f2": 0.8505,
+            "false_alarm_rate": 1.0
+          },
+          "building_collapsed": {
+            "true_positives": 82,
+            "false_positives": 16,
+            "false_negatives": 3,
+            "true_negatives": 0,
+            "precision": 0.8367,
+            "recall": 0.9647,
+            "f1": 0.8962,
+            "f2": 0.9361,
+            "false_alarm_rate": 1.0
+          }
+        },
+        "median_latency_ms": 38.2
+      },
+      "conf_0.3": {
+        "images": 50,
+        "ground_truth_civilians": 223,
+        "predicted_civilians": 253,
+        "box_level": {
+          "true_positives": 194,
+          "false_positives": 59,
+          "false_negatives": 29,
+          "true_negatives": 0,
+          "precision": 0.7668,
+          "recall": 0.87,
+          "f1": 0.8151,
+          "f2": 0.8472,
+          "false_alarm_rate": 1.0
+        },
+        "image_level": {
+          "true_positives": 22,
+          "false_positives": 2,
+          "false_negatives": 2,
+          "true_negatives": 24,
+          "precision": 0.9167,
+          "recall": 0.9167,
+          "f1": 0.9167,
+          "f2": 0.9167,
+          "false_alarm_rate": 0.0769
+        },
+        "per_class_box_level": {
+          "civilian": {
+            "true_positives": 194,
+            "false_positives": 59,
+            "false_negatives": 29,
+            "true_negatives": 0,
+            "precision": 0.7668,
+            "recall": 0.87,
+            "f1": 0.8151,
+            "f2": 0.8472,
+            "false_alarm_rate": 1.0
+          },
+          "rescue_team": {
+            "true_positives": 118,
+            "false_positives": 25,
+            "false_negatives": 7,
+            "true_negatives": 0,
+            "precision": 0.8252,
+            "recall": 0.944,
+            "f1": 0.8806,
+            "f2": 0.9176,
+            "false_alarm_rate": 1.0
+          },
+          "entry_accessible": {
+            "true_positives": 305,
+            "false_positives": 133,
+            "false_negatives": 22,
+            "true_negatives": 0,
+            "precision": 0.6963,
+            "recall": 0.9327,
+            "f1": 0.7974,
+            "f2": 0.8734,
+            "false_alarm_rate": 1.0
+          },
+          "entry_blocked": {
+            "true_positives": 248,
+            "false_positives": 132,
+            "false_negatives": 6,
+            "true_negatives": 0,
+            "precision": 0.6526,
+            "recall": 0.9764,
+            "f1": 0.7823,
+            "f2": 0.8883,
+            "false_alarm_rate": 1.0
+          },
+          "building_collapsed": {
+            "true_positives": 82,
+            "false_positives": 9,
+            "false_negatives": 3,
+            "true_negatives": 0,
+            "precision": 0.9011,
+            "recall": 0.9647,
+            "f1": 0.9318,
+            "f2": 0.9513,
+            "false_alarm_rate": 1.0
+          }
+        },
+        "median_latency_ms": 37.7
+      },
+      "conf_0.5": {
+        "images": 50,
+        "ground_truth_civilians": 223,
+        "predicted_civilians": 192,
+        "box_level": {
+          "true_positives": 171,
+          "false_positives": 21,
+          "false_negatives": 52,
+          "true_negatives": 0,
+          "precision": 0.8906,
+          "recall": 0.7668,
+          "f1": 0.8241,
+          "f2": 0.7887,
+          "false_alarm_rate": 1.0
+        },
+        "image_level": {
+          "true_positives": 21,
+          "false_positives": 1,
+          "false_negatives": 3,
+          "true_negatives": 25,
+          "precision": 0.9545,
+          "recall": 0.875,
+          "f1": 0.913,
+          "f2": 0.8898,
+          "false_alarm_rate": 0.0385
+        },
+        "per_class_box_level": {
+          "civilian": {
+            "true_positives": 171,
+            "false_positives": 21,
+            "false_negatives": 52,
+            "true_negatives": 0,
+            "precision": 0.8906,
+            "recall": 0.7668,
+            "f1": 0.8241,
+            "f2": 0.7887,
+            "false_alarm_rate": 1.0
+          },
+          "rescue_team": {
+            "true_positives": 115,
+            "false_positives": 11,
+            "false_negatives": 10,
+            "true_negatives": 0,
+            "precision": 0.9127,
+            "recall": 0.92,
+            "f1": 0.9163,
+            "f2": 0.9185,
+            "false_alarm_rate": 1.0
+          },
+          "entry_accessible": {
+            "true_positives": 228,
+            "false_positives": 34,
+            "false_negatives": 99,
+            "true_negatives": 0,
+            "precision": 0.8702,
+            "recall": 0.6972,
+            "f1": 0.7742,
+            "f2": 0.7261,
+            "false_alarm_rate": 1.0
+          },
+          "entry_blocked": {
+            "true_positives": 222,
+            "false_positives": 58,
+            "false_negatives": 32,
+            "true_negatives": 0,
+            "precision": 0.7929,
+            "recall": 0.874,
+            "f1": 0.8315,
+            "f2": 0.8565,
+            "false_alarm_rate": 1.0
+          },
+          "building_collapsed": {
+            "true_positives": 78,
+            "false_positives": 1,
+            "false_negatives": 7,
+            "true_negatives": 0,
+            "precision": 0.9873,
+            "recall": 0.9176,
+            "f1": 0.9512,
+            "f2": 0.9308,
+            "false_alarm_rate": 1.0
+          }
+        },
+        "median_latency_ms": 37.8
+      }
+    }
+  }
+}

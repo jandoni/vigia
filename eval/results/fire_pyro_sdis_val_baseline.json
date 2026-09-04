@@ -1,0 +1,168 @@
+{
+  "dataset": "data/samples/pyro_sdis_val",
+  "model": "pyronear_yolo11s_sensitive.onnx",
+  "provider": "CPUExecutionProvider",
+  "imgsz": 1024,
+  "iou_match_threshold": 0.3,
+  "images": 100,
+  "positives": 77,
+  "negatives": 23,
+  "results": {
+    "conf_0.05": {
+      "box_level": {
+        "true_positives": 87,
+        "false_positives": 66,
+        "false_negatives": 7,
+        "true_negatives": 0,
+        "precision": 0.5686,
+        "recall": 0.9255,
+        "f1": 0.7045,
+        "f2": 0.8223,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 77,
+        "false_positives": 22,
+        "false_negatives": 0,
+        "true_negatives": 1,
+        "precision": 0.7778,
+        "recall": 1.0,
+        "f1": 0.875,
+        "f2": 0.9459,
+        "false_alarm_rate": 0.9565
+      },
+      "median_latency_ms": 74.45,
+      "images": 100
+    },
+    "conf_0.1": {
+      "box_level": {
+        "true_positives": 85,
+        "false_positives": 58,
+        "false_negatives": 9,
+        "true_negatives": 0,
+        "precision": 0.5944,
+        "recall": 0.9043,
+        "f1": 0.7173,
+        "f2": 0.8189,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 77,
+        "false_positives": 20,
+        "false_negatives": 0,
+        "true_negatives": 3,
+        "precision": 0.7938,
+        "recall": 1.0,
+        "f1": 0.8851,
+        "f2": 0.9506,
+        "false_alarm_rate": 0.8696
+      },
+      "median_latency_ms": 76.22,
+      "images": 100
+    },
+    "conf_0.15": {
+      "box_level": {
+        "true_positives": 85,
+        "false_positives": 54,
+        "false_negatives": 9,
+        "true_negatives": 0,
+        "precision": 0.6115,
+        "recall": 0.9043,
+        "f1": 0.7296,
+        "f2": 0.8252,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 77,
+        "false_positives": 20,
+        "false_negatives": 0,
+        "true_negatives": 3,
+        "precision": 0.7938,
+        "recall": 1.0,
+        "f1": 0.8851,
+        "f2": 0.9506,
+        "false_alarm_rate": 0.8696
+      },
+      "median_latency_ms": 74.31,
+      "images": 100
+    },
+    "conf_0.2": {
+      "box_level": {
+        "true_positives": 85,
+        "false_positives": 51,
+        "false_negatives": 9,
+        "true_negatives": 0,
+        "precision": 0.625,
+        "recall": 0.9043,
+        "f1": 0.7391,
+        "f2": 0.8301,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 76,
+        "false_positives": 20,
+        "false_negatives": 1,
+        "true_negatives": 3,
+        "precision": 0.7917,
+        "recall": 0.987,
+        "f1": 0.8786,
+        "f2": 0.9406,
+        "false_alarm_rate": 0.8696
+      },
+      "median_latency_ms": 73.36,
+      "images": 100
+    },
+    "conf_0.3": {
+      "box_level": {
+        "true_positives": 84,
+        "false_positives": 44,
+        "false_negatives": 10,
+        "true_negatives": 0,
+        "precision": 0.6562,
+        "recall": 0.8936,
+        "f1": 0.7568,
+        "f2": 0.8333,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 75,
+        "false_positives": 20,
+        "false_negatives": 2,
+        "true_negatives": 3,
+        "precision": 0.7895,
+        "recall": 0.974,
+        "f1": 0.8721,
+        "f2": 0.9305,
+        "false_alarm_rate": 0.8696
+      },
+      "median_latency_ms": 73.82,
+      "images": 100
+    },
+    "conf_0.5": {
+      "box_level": {
+        "true_positives": 67,
+        "false_positives": 29,
+        "false_negatives": 27,
+        "true_negatives": 0,
+        "precision": 0.6979,
+        "recall": 0.7128,
+        "f1": 0.7053,
+        "f2": 0.7097,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 66,
+        "false_positives": 14,
+        "false_negatives": 11,
+        "true_negatives": 9,
+        "precision": 0.825,
+        "recall": 0.8571,
+        "f1": 0.8408,
+        "f2": 0.8505,
+        "false_alarm_rate": 0.6087
+      },
+      "median_latency_ms": 74.49,
+      "images": 100
+    }
+  }
+}
