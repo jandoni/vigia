@@ -1,6 +1,6 @@
 """Tier 0 and the privacy boundary, enforced rather than asserted.
 
-The project's pattern is that a claim in the dossier should be defended by a
+The project's pattern is that a published claim should be defended by a
 test that fails if the claim stops being true — the way
 `test_validator_contains_no_hazard_specific_code` defends the hazard-agnostic
 claim. Two claims are defended here:

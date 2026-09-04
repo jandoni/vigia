@@ -42,6 +42,6 @@ paper:
 arxiv:
 	@.venv/bin/python docs/make_arxiv.py
 
-## docs: the superseded Word build, kept until the dossier is switched over
+## docs: the superseded Word build, kept for reference
 docs:
 	@.venv/bin/python docs/build_documentation.py

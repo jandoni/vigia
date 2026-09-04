@@ -79,7 +79,7 @@ class ClipSpec:
 
 
 #: One per hazard. `publishable` is the field that decides whether a clip may
-#: appear in the demo video, the dossier, or a public repository.
+#: appear in the demo video, a figure, or a public repository.
 SPECS: list[ClipSpec] = [
     ClipSpec(
         name="fire_ridge",
@@ -104,7 +104,7 @@ SPECS: list[ClipSpec] = [
         why="USGS imagery is a work of the United States Government and carries "
             "no restriction. It fully replaces V-FloodNet's LSU sequences, which "
             "are all rights reserved and could not appear in a recorded "
-            "demonstration or a dossier figure — that restriction is why flood, "
+            "demonstration or a published figure — that restriction is why flood, "
             "the keystone hazard, previously had no showable footage at all. "
             "The USGS cameras are the right regime as well as the right "
             "licence: fixed mount, pointed at water, sampled sparsely, which is "
@@ -288,7 +288,7 @@ def main() -> int:
         for entry in restricted:
             print(f"  {entry['clip']}: {entry['licence']}")
         print("  These may be used to rehearse and to develop against. They "
-              "must NOT appear in\n  a recorded demo, a dossier figure, or any "
+              "must NOT appear in\n  a recorded demo, a published figure, or any "
               "published material.")
 
     non_temporal = [e for e in entries if not e["temporal"]]

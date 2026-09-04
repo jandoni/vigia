@@ -1,5 +1,5 @@
 {
-  "dataset": "/Users/MacBook/Projects/concurso/data/seadronessee/val",
+  "dataset": "data/seadronessee/val",
   "model": "seadronessee_rfdetr_small.onnx",
   "iou_match_threshold": 0.3,
   "images": 300,

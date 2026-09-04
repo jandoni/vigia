@@ -1,0 +1,146 @@
+water mask values (17): [7, 13, 16, 17, 19, 20, 24, 32, 33, 34, 35, 36, 38, 44, 45, 55, 56]
+train 3364  val 535  device mps  imgsz 512
+scripts/train_flood.py:235: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:823.)
+  running += float(loss)
+  epoch 1 step 50/420 loss 0.7150
+  epoch 1 step 100/420 loss 0.6329
+  epoch 1 step 150/420 loss 0.6012
+  epoch 1 step 200/420 loss 0.5757
+  epoch 1 step 250/420 loss 0.5601
+  epoch 1 step 300/420 loss 0.5432
+  epoch 1 step 350/420 loss 0.5346
+  epoch 1 step 400/420 loss 0.5249
+epoch   1/15  loss 0.5214  val water IoU 0.6895  pixel acc 0.9138  172s  <- best, saved
+  epoch 2 step 50/420 loss 0.4278
+  epoch 2 step 100/420 loss 0.4188
+  epoch 2 step 150/420 loss 0.4103
+  epoch 2 step 200/420 loss 0.4157
+  epoch 2 step 250/420 loss 0.4113
+  epoch 2 step 300/420 loss 0.4106
+  epoch 2 step 350/420 loss 0.4095
+  epoch 2 step 400/420 loss 0.4059
+epoch   2/15  loss 0.4060  val water IoU 0.7247  pixel acc 0.9180  163s  <- best, saved
+  epoch 3 step 50/420 loss 0.3436
+  epoch 3 step 100/420 loss 0.3515
+  epoch 3 step 150/420 loss 0.3549
+  epoch 3 step 200/420 loss 0.3536
+  epoch 3 step 250/420 loss 0.3547
+  epoch 3 step 300/420 loss 0.3604
+  epoch 3 step 350/420 loss 0.3610
+  epoch 3 step 400/420 loss 0.3628
+epoch   3/15  loss 0.3622  val water IoU 0.7315  pixel acc 0.9227  166s  <- best, saved
+  epoch 4 step 50/420 loss 0.3287
+  epoch 4 step 100/420 loss 0.3355
+  epoch 4 step 150/420 loss 0.3376
+  epoch 4 step 200/420 loss 0.3412
+  epoch 4 step 250/420 loss 0.3424
+  epoch 4 step 300/420 loss 0.3426
+  epoch 4 step 350/420 loss 0.3431
+  epoch 4 step 400/420 loss 0.3424
+epoch   4/15  loss 0.3424  val water IoU 0.7254  pixel acc 0.9249  164s
+  epoch 5 step 50/420 loss 0.3207
+  epoch 5 step 100/420 loss 0.3231
+  epoch 5 step 150/420 loss 0.3232
+  epoch 5 step 200/420 loss 0.3228
+  epoch 5 step 250/420 loss 0.3239
+  epoch 5 step 300/420 loss 0.3217
+  epoch 5 step 350/420 loss 0.3215
+  epoch 5 step 400/420 loss 0.3207
+epoch   5/15  loss 0.3192  val water IoU 0.7579  pixel acc 0.9325  163s  <- best, saved
+  epoch 6 step 50/420 loss 0.3235
+  epoch 6 step 100/420 loss 0.3162
+  epoch 6 step 150/420 loss 0.3105
+  epoch 6 step 200/420 loss 0.3073
+  epoch 6 step 250/420 loss 0.3088
+  epoch 6 step 300/420 loss 0.3098
+  epoch 6 step 350/420 loss 0.3077
+  epoch 6 step 400/420 loss 0.3060
+epoch   6/15  loss 0.3066  val water IoU 0.7545  pixel acc 0.9304  166s
+  epoch 7 step 50/420 loss 0.2907
+  epoch 7 step 100/420 loss 0.2807
+  epoch 7 step 150/420 loss 0.2834
+  epoch 7 step 200/420 loss 0.2835
+  epoch 7 step 250/420 loss 0.2864
+  epoch 7 step 300/420 loss 0.2892
+  epoch 7 step 350/420 loss 0.2891
+  epoch 7 step 400/420 loss 0.2873
+epoch   7/15  loss 0.2868  val water IoU 0.7587  pixel acc 0.9332  164s  <- best, saved
+  epoch 8 step 50/420 loss 0.2705
+  epoch 8 step 100/420 loss 0.2729
+  epoch 8 step 150/420 loss 0.2791
+  epoch 8 step 200/420 loss 0.2826
+  epoch 8 step 250/420 loss 0.2812
+  epoch 8 step 300/420 loss 0.2801
+  epoch 8 step 350/420 loss 0.2787
+  epoch 8 step 400/420 loss 0.2785
+epoch   8/15  loss 0.2785  val water IoU 0.7622  pixel acc 0.9346  163s  <- best, saved
+  epoch 9 step 50/420 loss 0.2646
+  epoch 9 step 100/420 loss 0.2633
+  epoch 9 step 150/420 loss 0.2606
+  epoch 9 step 200/420 loss 0.2632
+  epoch 9 step 250/420 loss 0.2660
+  epoch 9 step 300/420 loss 0.2658
+  epoch 9 step 350/420 loss 0.2681
+  epoch 9 step 400/420 loss 0.2674
+epoch   9/15  loss 0.2678  val water IoU 0.7701  pixel acc 0.9350  164s  <- best, saved
+  epoch 10 step 50/420 loss 0.2716
+  epoch 10 step 100/420 loss 0.2651
+  epoch 10 step 150/420 loss 0.2651
+  epoch 10 step 200/420 loss 0.2628
+  epoch 10 step 250/420 loss 0.2610
+  epoch 10 step 300/420 loss 0.2624
+  epoch 10 step 350/420 loss 0.2611
+  epoch 10 step 400/420 loss 0.2617
+epoch  10/15  loss 0.2622  val water IoU 0.7622  pixel acc 0.9323  166s
+  epoch 11 step 50/420 loss 0.2422
+  epoch 11 step 100/420 loss 0.2498
+  epoch 11 step 150/420 loss 0.2533
+  epoch 11 step 200/420 loss 0.2542
+  epoch 11 step 250/420 loss 0.2553
+  epoch 11 step 300/420 loss 0.2556
+  epoch 11 step 350/420 loss 0.2567
+  epoch 11 step 400/420 loss 0.2561
+epoch  11/15  loss 0.2561  val water IoU 0.7662  pixel acc 0.9351  166s
+  epoch 12 step 50/420 loss 0.2506
+  epoch 12 step 100/420 loss 0.2509
+  epoch 12 step 150/420 loss 0.2498
+  epoch 12 step 200/420 loss 0.2479
+  epoch 12 step 250/420 loss 0.2504
+  epoch 12 step 300/420 loss 0.2497
+  epoch 12 step 350/420 loss 0.2492
+  epoch 12 step 400/420 loss 0.2502
+epoch  12/15  loss 0.2505  val water IoU 0.7748  pixel acc 0.9372  164s  <- best, saved
+  epoch 13 step 50/420 loss 0.2526
+  epoch 13 step 100/420 loss 0.2511
+  epoch 13 step 150/420 loss 0.2472
+  epoch 13 step 200/420 loss 0.2450
+  epoch 13 step 250/420 loss 0.2449
+  epoch 13 step 300/420 loss 0.2458
+  epoch 13 step 350/420 loss 0.2470
+  epoch 13 step 400/420 loss 0.2471
+epoch  13/15  loss 0.2469  val water IoU 0.7758  pixel acc 0.9372  164s  <- best, saved
+  epoch 14 step 50/420 loss 0.2438
+  epoch 14 step 100/420 loss 0.2408
+  epoch 14 step 150/420 loss 0.2445
+  epoch 14 step 200/420 loss 0.2443
+  epoch 14 step 250/420 loss 0.2445
+  epoch 14 step 300/420 loss 0.2475
+  epoch 14 step 350/420 loss 0.2481
+  epoch 14 step 400/420 loss 0.2476
+epoch  14/15  loss 0.2469  val water IoU 0.7769  pixel acc 0.9378  166s  <- best, saved
+  epoch 15 step 50/420 loss 0.2589
+  epoch 15 step 100/420 loss 0.2568
+  epoch 15 step 150/420 loss 0.2517
+  epoch 15 step 200/420 loss 0.2489
+  epoch 15 step 250/420 loss 0.2487
+  epoch 15 step 300/420 loss 0.2463
+  epoch 15 step 350/420 loss 0.2462
+  epoch 15 step 400/420 loss 0.2473
+epoch  15/15  loss 0.2466  val water IoU 0.7766  pixel acc 0.9372  166s
+
+best validation water IoU: 0.7769
+weights : models/flood/atlantis_water_deeplabv3.pt
+history : models/flood/atlantis_water_deeplabv3.history.json
+
+Next: .venv-export/bin/python scripts/export_flood_onnx.py

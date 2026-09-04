@@ -1,0 +1,19 @@
+classes : 5 -> civilian, rescue_team, entry_accessible, entry_blocked, building_collapsed
+train   : 630 images   val: 50   device: cpu
+  epoch 1 step 40/158 loss 1.2940
+  epoch 1 step 80/158 loss 1.2125
+  epoch 1 step 120/158 loss 1.1481
+epoch   1/20  train 1.1080  val 1.0718  373s  <- best, saved
+  epoch 2 step 40/158 loss 0.9918
+  epoch 2 step 80/158 loss 0.9846
+  epoch 2 step 120/158 loss 0.9663
+epoch   2/20  train 0.9658  val 1.1696  422s
+  epoch 3 step 40/158 loss 0.8624
+  epoch 3 step 80/158 loss 0.8591
+  epoch 3 step 120/158 loss 0.8741
+epoch   3/20  train 0.8579  val 1.1753  420s
+  epoch 4 step 40/158 loss 0.8010
+  epoch 4 step 80/158 loss 0.8295
+  epoch 4 step 120/158 loss 0.8239
+/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:324: UserWarning: resource_tracker: There appear to be 14 leaked semaphore objects to clean up at shutdown: {'/mp-8sd2phij', '/mp-j7t2didt', '/mp-3n34ef7e', '/mp-sxujsty2', '/mp-4g54hy66', '/mp-zskhn6u2', '/mp-0h261cn3', '/mp-psr5lama', '/mp-4yf5z97_', '/mp-ii9tjp6u', '/mp-ybjc49hp', '/mp-gcjxt_hp', '/mp-3un_kkgu', '/mp-yev_z3bi'}
+  warnings.warn(

@@ -1,0 +1,27 @@
+{
+  "classes": [
+    "swimmer",
+    "boat",
+    "jetski",
+    "life_saving_appliances",
+    "buoy"
+  ],
+  "hazard_class": "swimmer",
+  "source": "https://huggingface.co/dronefreak/seadronessee-rfdetr-small",
+  "licence": "Apache-2.0",
+  "reported_by_author_val_split": {
+    "mAP_50": 0.7931,
+    "mAP_50_95": 0.4525,
+    "precision": 0.8986,
+    "recall": 0.7789,
+    "f1": 0.8289,
+    "per_class_AP": {
+      "boat": 0.711,
+      "jetski": 0.593,
+      "buoy": 0.489,
+      "swimmer": 0.282,
+      "life_saving_appliances": 0.188
+    },
+    "note": "The swimmer class \u2014 the one VIG\u00cdA needs \u2014 is the second weakest. Do not quote the headline mAP for this detector."
+  }
+}

@@ -1,0 +1,91 @@
+classes : 5 -> civilian, rescue_team, entry_accessible, entry_blocked, building_collapsed
+train   : 630 images   val: 50   device: cpu
+  epoch 1 step 40/158 loss 1.2940
+  epoch 1 step 80/158 loss 1.2125
+  epoch 1 step 120/158 loss 1.1481
+epoch   1/20  train 1.1080  val 1.0718  367s  <- best by proxy loss
+  epoch 2 step 40/158 loss 0.9918
+  epoch 2 step 80/158 loss 0.9846
+  epoch 2 step 120/158 loss 0.9663
+epoch   2/20  train 0.9658  val 1.1696  364s
+  epoch 3 step 40/158 loss 0.8624
+  epoch 3 step 80/158 loss 0.8591
+  epoch 3 step 120/158 loss 0.8741
+epoch   3/20  train 0.8579  val 1.1753  351s
+  epoch 4 step 40/158 loss 0.8010
+  epoch 4 step 80/158 loss 0.8295
+  epoch 4 step 120/158 loss 0.8239
+epoch   4/20  train 0.8150  val 1.2389  360s
+  epoch 5 step 40/158 loss 0.7482
+  epoch 5 step 80/158 loss 0.7384
+  epoch 5 step 120/158 loss 0.7675
+epoch   5/20  train 0.7761  val 1.3137  358s
+  epoch 6 step 40/158 loss 0.7185
+  epoch 6 step 80/158 loss 0.7433
+  epoch 6 step 120/158 loss 0.7427
+epoch   6/20  train 0.7508  val 1.2836  361s
+  epoch 7 step 40/158 loss 0.7373
+  epoch 7 step 80/158 loss 0.7271
+  epoch 7 step 120/158 loss 0.7352
+epoch   7/20  train 0.7429  val 1.3334  360s
+  epoch 8 step 40/158 loss 0.7887
+  epoch 8 step 80/158 loss 0.7725
+  epoch 8 step 120/158 loss 0.7718
+epoch   8/20  train 0.7699  val 1.6554  357s
+  epoch 9 step 40/158 loss 0.7628
+  epoch 9 step 80/158 loss 0.7583
+  epoch 9 step 120/158 loss 0.7629
+epoch   9/20  train 0.7548  val 1.5385  361s
+  epoch 10 step 40/158 loss 0.7467
+  epoch 10 step 80/158 loss 0.7536
+  epoch 10 step 120/158 loss 0.7773
+epoch  10/20  train 0.7639  val 1.7427  361s
+  epoch 11 step 40/158 loss 0.7635
+  epoch 11 step 80/158 loss 0.7815
+  epoch 11 step 120/158 loss 0.7764
+epoch  11/20  train 0.7682  val 1.9962  354s
+  epoch 12 step 40/158 loss 0.7434
+  epoch 12 step 80/158 loss 0.7610
+  epoch 12 step 120/158 loss 0.7603
+epoch  12/20  train 0.7651  val 2.2195  325s
+  epoch 13 step 40/158 loss 0.8040
+  epoch 13 step 80/158 loss 0.7769
+  epoch 13 step 120/158 loss 0.7745
+epoch  13/20  train 0.7707  val 2.1622  311s
+  epoch 14 step 40/158 loss 0.7449
+  epoch 14 step 80/158 loss 0.7419
+  epoch 14 step 120/158 loss 0.7459
+epoch  14/20  train 0.7584  val 2.4554  326s
+  epoch 15 step 40/158 loss 0.7666
+  epoch 15 step 80/158 loss 0.7517
+  epoch 15 step 120/158 loss 0.7460
+epoch  15/20  train 0.7524  val 2.4761  314s
+  epoch 16 step 40/158 loss 0.7586
+  epoch 16 step 80/158 loss 0.7320
+  epoch 16 step 120/158 loss 0.7381
+epoch  16/20  train 0.7444  val 2.9206  307s
+  epoch 17 step 40/158 loss 0.7264
+  epoch 17 step 80/158 loss 0.7324
+  epoch 17 step 120/158 loss 0.7231
+epoch  17/20  train 0.7297  val 2.8931  297s
+  epoch 18 step 40/158 loss 0.7030
+  epoch 18 step 80/158 loss 0.7165
+  epoch 18 step 120/158 loss 0.7052
+epoch  18/20  train 0.7052  val 3.0533  292s
+  epoch 19 step 40/158 loss 0.6838
+  epoch 19 step 80/158 loss 0.6944
+  epoch 19 step 120/158 loss 0.7032
+epoch  19/20  train 0.6993  val 2.9822  302s
+  epoch 20 step 40/158 loss 0.6931
+  epoch 20 step 80/158 loss 0.6887
+  epoch 20 step 120/158 loss 0.6867
+epoch  20/20  train 0.6858  val 3.0806  346s
+
+best proxy validation loss: 1.0718  (models/building_access/drespnet_fasterrcnn.pt)
+last epoch: models/building_access/drespnet_fasterrcnn_last.pt
+all epochs: models/building_access/epochs
+
+The proxy loss does NOT decide which checkpoint ships. Measure the
+candidates against held-out annotations and pick on that:
+  .venv-export/bin/python scripts/export_building_access_onnx.py --weights <candidate>
+  python eval/run_building_access_eval.py --model <exported.onnx>

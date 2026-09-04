@@ -70,7 +70,7 @@ def compose(annotated, state: dict, spec: dict) -> np.ndarray:
     cv2.rectangle(frame, (0, 0), (W, HEADER), PANEL, -1)
     cv2.line(frame, (0, HEADER), (W, HEADER), LINE, 1)
     # OpenCV's Hershey fonts have no accented glyphs, and the project is
-    # VIGÍA, not VIGIA — getting a name wrong on the title card of a prize
+    # VIGÍA, not VIGIA — getting a name wrong on the title card of a public
     # submission is not a detail. The acute accent is two strokes, which is a
     # smaller price than a font dependency for one glyph.
     brand = "V I G I A"

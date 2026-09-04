@@ -2,7 +2,7 @@
 
 These are not incidental unit tests — the validator is the part of VIGÍA we
 claim as a contribution, so its behaviour has to be pinned down and stay
-pinned. Each test asserts one property we will state in the dossier.
+pinned. Each test asserts one property the documentation states.
 
 Run:  python -m pytest tests/ -v      (or)  python tests/test_validator.py
 """
@@ -214,7 +214,7 @@ def test_validator_contains_no_hazard_specific_code():
 
     VIGÍA's contribution is a validator that is *configured* per hazard, never
     *specialised* per hazard. If someone adds `if hazard == Hazard.FIRE` to the
-    cascade to fix a fire bug, the claim in the dossier quietly becomes false.
+    cascade to fix a fire bug, the published claim quietly becomes false.
     This test makes that impossible to do by accident.
     """
     source = (Path(__file__).resolve().parent.parent

@@ -8,7 +8,7 @@
 WHY THIS EXISTS. Flood is the keystone hazard and had no footage that could be
 shown publicly. The only real camera sequences available for it came from
 V-FloodNet, which is all rights reserved: usable to develop and evaluate
-against, and impossible to put in a recorded demonstration or a dossier figure
+against, and impossible to put in a recorded demonstration or a published figure
 without breaching the licence.
 
 USGS operates over 1,300 streamgage cameras whose imagery is a work of the

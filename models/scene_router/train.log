@@ -1,0 +1,31 @@
+train 1560  held out 384  {'fire': 420, 'flood': 420, 'drowning': 300, 'building_access': 420}
+device mps  imgsz 224
+epoch   1/12  loss 0.1696  held-out accuracy 0.8750  53s  <- best, saved
+epoch   2/12  loss 0.0409  held-out accuracy 1.0000  52s  <- best, saved
+epoch   3/12  loss 0.0161  held-out accuracy 0.9635  52s
+epoch   4/12  loss 0.0145  held-out accuracy 0.9609  53s
+
+phase complete: 4 of 12 epochs. Resume with --resume.
+  ...4/12 epochs
+train 1560  held out 384  {'fire': 420, 'flood': 420, 'drowning': 300, 'building_access': 420}
+device mps  imgsz 224
+resumed from epoch 4 (best 1.0000)
+epoch   5/12  loss 0.0041  held-out accuracy 1.0000  53s
+epoch   6/12  loss 0.0007  held-out accuracy 1.0000  53s
+epoch   7/12  loss 0.0005  held-out accuracy 1.0000  53s
+epoch   8/12  loss 0.0005  held-out accuracy 1.0000  53s
+
+phase complete: 8 of 12 epochs. Resume with --resume.
+  ...8/12 epochs
+train 1560  held out 384  {'fire': 420, 'flood': 420, 'drowning': 300, 'building_access': 420}
+device mps  imgsz 224
+resumed from epoch 8 (best 1.0000)
+epoch   9/12  loss 0.0002  held-out accuracy 1.0000  53s
+epoch  10/12  loss 0.0002  held-out accuracy 1.0000  53s
+epoch  11/12  loss 0.0001  held-out accuracy 1.0000  53s
+epoch  12/12  loss 0.0002  held-out accuracy 1.0000  53s
+
+schedule complete. Best held-out accuracy: 1.0000
+per class: {'fire': 1.0, 'flood': 1.0, 'drowning': 1.0, 'building_access': 1.0}
+  ...12/12 epochs
+ROUTER COMPLETE

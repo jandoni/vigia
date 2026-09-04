@@ -4,8 +4,8 @@
     python tools/freeze_results.py
     python tools/freeze_results.py --write RESULTS.md
 
-The acceptance criterion for the results freeze is that every figure in the
-dossier traces back to a measurement on disk. models/REGISTRY.yaml quotes
+The acceptance criterion for the results freeze is that every published
+figure traces back to a measurement on disk. models/REGISTRY.yaml quotes
 figures and names the results file each came from, which is exactly the shape
 of claim that rots: the harness is re-run, the JSON updates, and the summary
 that a reader actually sees keeps the old number. Nothing about that failure is
@@ -13,10 +13,10 @@ visible — both files are well-formed and internally consistent.
 
 So this walks every quoted figure in the registry, opens the results file it
 cites, and compares. A mismatch fails the build. It is the same reasoning as
-tools/check_licence.py and tools/check_privacy.py: a claim worth making in the
-dossier is worth enforcing in CI.
+tools/check_licence.py and tools/check_privacy.py: a claim worth publishing is
+worth enforcing in CI.
 
-The `--write` mode emits a single traceable summary table, so the dossier has
+The `--write` mode emits a single traceable summary table, so there is
 one source to quote from rather than a dozen JSON files to be transcribed by
 hand — transcription being the other way these numbers drift.
 """

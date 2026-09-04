@@ -1,0 +1,11 @@
+{
+  "imgsz": 512,
+  "water_values": [],
+  "val_water_iou": 0.7020978756748442,
+  "opset": 17,
+  "classes": [
+    "background",
+    "water"
+  ],
+  "normalisation": "ImageNet mean/std, RGB, resized (not letterboxed)"
+}

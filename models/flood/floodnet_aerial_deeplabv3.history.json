@@ -1,0 +1,255 @@
+{
+  "best_val_flooded_water_iou": 0.4733984814319526,
+  "selection_metric": "water IoU on the flooded validation subset",
+  "epochs": 30,
+  "device": "mps",
+  "train_images": 339,
+  "val_images": 59,
+  "water_ids": [
+    3,
+    5,
+    8
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.533775317526999,
+      "water_iou": 0.5576778892666352,
+      "flooded_water_iou": 0.3719413837601747,
+      "pixel_accuracy": 0.9390459868867519,
+      "seconds": 62.8
+    },
+    {
+      "epoch": 2,
+      "loss": 0.3626670738061269,
+      "water_iou": 0.5541377133834724,
+      "flooded_water_iou": 0.4009396776872435,
+      "pixel_accuracy": 0.9395302594718287,
+      "seconds": 61.7
+    },
+    {
+      "epoch": 3,
+      "loss": 0.312881856801964,
+      "water_iou": 0.6284945299901277,
+      "flooded_water_iou": 0.4415701947343914,
+      "pixel_accuracy": 0.9462295144291247,
+      "seconds": 61.4
+    },
+    {
+      "epoch": 4,
+      "loss": 0.29072796517894384,
+      "water_iou": 0.6363312632798037,
+      "flooded_water_iou": 0.4295599554875587,
+      "pixel_accuracy": 0.9484310473425913,
+      "seconds": 61.1
+    },
+    {
+      "epoch": 5,
+      "loss": 0.27535775268361684,
+      "water_iou": 0.6510237617165342,
+      "flooded_water_iou": 0.42577220750772893,
+      "pixel_accuracy": 0.9498817961094743,
+      "seconds": 61.1
+    },
+    {
+      "epoch": 6,
+      "loss": 0.26081884191149757,
+      "water_iou": 0.6320188325482792,
+      "flooded_water_iou": 0.4395006831517528,
+      "pixel_accuracy": 0.9456253051757812,
+      "seconds": 65.6
+    },
+    {
+      "epoch": 7,
+      "loss": 0.24072991116415887,
+      "water_iou": 0.6172119110436821,
+      "flooded_water_iou": 0.4294778071788432,
+      "pixel_accuracy": 0.946558224952827,
+      "seconds": 64.1
+    },
+    {
+      "epoch": 8,
+      "loss": 0.21201248112178983,
+      "water_iou": 0.6486588994528922,
+      "flooded_water_iou": 0.4648902200876128,
+      "pixel_accuracy": 0.9485517598814883,
+      "seconds": 63.5
+    },
+    {
+      "epoch": 9,
+      "loss": 0.19971841183446704,
+      "water_iou": 0.6711400239553411,
+      "flooded_water_iou": 0.44241041754788807,
+      "pixel_accuracy": 0.954803466796875,
+      "seconds": 63.5
+    },
+    {
+      "epoch": 10,
+      "loss": 0.19450835582046283,
+      "water_iou": 0.6569627019322142,
+      "flooded_water_iou": 0.44521323005528396,
+      "pixel_accuracy": 0.9484650563385527,
+      "seconds": 63.8
+    },
+    {
+      "epoch": 11,
+      "loss": 0.18440440456782067,
+      "water_iou": 0.6780791251514873,
+      "flooded_water_iou": 0.4472551833884157,
+      "pixel_accuracy": 0.9540231349104542,
+      "seconds": 64.4
+    },
+    {
+      "epoch": 12,
+      "loss": 0.18168218735428082,
+      "water_iou": 0.6504701882741207,
+      "flooded_water_iou": 0.4423982252688187,
+      "pixel_accuracy": 0.9488478191828323,
+      "seconds": 63.1
+    },
+    {
+      "epoch": 13,
+      "loss": 0.16546707422960372,
+      "water_iou": 0.665242571288647,
+      "flooded_water_iou": 0.4499961470105083,
+      "pixel_accuracy": 0.9488217628608315,
+      "seconds": 63.1
+    },
+    {
+      "epoch": 14,
+      "loss": 0.15489974396214598,
+      "water_iou": 0.6836736860373234,
+      "flooded_water_iou": 0.45948538969199504,
+      "pixel_accuracy": 0.9556884119066141,
+      "seconds": 63.0
+    },
+    {
+      "epoch": 15,
+      "loss": 0.15341580073748315,
+      "water_iou": 0.6809177202400224,
+      "flooded_water_iou": 0.44634742447193076,
+      "pixel_accuracy": 0.9535477848376258,
+      "seconds": 62.7
+    },
+    {
+      "epoch": 16,
+      "loss": 0.14936783838839757,
+      "water_iou": 0.6932573337324112,
+      "flooded_water_iou": 0.4452796575319574,
+      "pixel_accuracy": 0.9561346668308064,
+      "seconds": 63.9
+    },
+    {
+      "epoch": 17,
+      "loss": 0.14369788801386243,
+      "water_iou": 0.6944667703081154,
+      "flooded_water_iou": 0.45107732243888204,
+      "pixel_accuracy": 0.9573808443748345,
+      "seconds": 62.7
+    },
+    {
+      "epoch": 18,
+      "loss": 0.13817770175990604,
+      "water_iou": 0.6927502222613482,
+      "flooded_water_iou": 0.43888877300778023,
+      "pixel_accuracy": 0.9566735089835474,
+      "seconds": 62.9
+    },
+    {
+      "epoch": 19,
+      "loss": 0.13441043710779577,
+      "water_iou": 0.6940777765954714,
+      "flooded_water_iou": 0.45427609237038713,
+      "pixel_accuracy": 0.9568744594767943,
+      "seconds": 62.6
+    },
+    {
+      "epoch": 20,
+      "loss": 0.13411796500995046,
+      "water_iou": 0.6954848065266303,
+      "flooded_water_iou": 0.4412452998477158,
+      "pixel_accuracy": 0.9573128910387977,
+      "seconds": 62.4
+    },
+    {
+      "epoch": 21,
+      "loss": 0.1318613967547814,
+      "water_iou": 0.6925115226240104,
+      "flooded_water_iou": 0.4503327627740042,
+      "pixel_accuracy": 0.9562960479219081,
+      "seconds": 63.9
+    },
+    {
+      "epoch": 22,
+      "loss": 0.1291650277340696,
+      "water_iou": 0.6916728135314824,
+      "flooded_water_iou": 0.4629437654966002,
+      "pixel_accuracy": 0.9554337970281052,
+      "seconds": 62.5
+    },
+    {
+      "epoch": 23,
+      "loss": 0.12611724853160836,
+      "water_iou": 0.6928095582610044,
+      "flooded_water_iou": 0.441764760183313,
+      "pixel_accuracy": 0.9569812710002318,
+      "seconds": 62.5
+    },
+    {
+      "epoch": 24,
+      "loss": 0.12617211132532075,
+      "water_iou": 0.6962242547233397,
+      "flooded_water_iou": 0.4519982747884902,
+      "pixel_accuracy": 0.9570472200038069,
+      "seconds": 62.5
+    },
+    {
+      "epoch": 25,
+      "loss": 0.12609434136677355,
+      "water_iou": 0.7020978756748442,
+      "flooded_water_iou": 0.4733984814319526,
+      "pixel_accuracy": 0.9571804757845603,
+      "seconds": 62.5
+    },
+    {
+      "epoch": 26,
+      "loss": 0.12592847964593343,
+      "water_iou": 0.699417935263527,
+      "flooded_water_iou": 0.4708798000234779,
+      "pixel_accuracy": 0.9568217002739341,
+      "seconds": 62.3
+    },
+    {
+      "epoch": 27,
+      "loss": 0.12370144726619833,
+      "water_iou": 0.698925742828307,
+      "flooded_water_iou": 0.4690178972172352,
+      "pixel_accuracy": 0.9567569150763043,
+      "seconds": 61.0
+    },
+    {
+      "epoch": 28,
+      "loss": 0.12234729519557386,
+      "water_iou": 0.6966874397606997,
+      "flooded_water_iou": 0.46998804749419393,
+      "pixel_accuracy": 0.9559692770747815,
+      "seconds": 61.1
+    },
+    {
+      "epoch": 29,
+      "loss": 0.12249382798160825,
+      "water_iou": 0.6971365416198675,
+      "flooded_water_iou": 0.46577817809803396,
+      "pixel_accuracy": 0.9563967171361891,
+      "seconds": 61.0
+    },
+    {
+      "epoch": 30,
+      "loss": 0.12372544194970812,
+      "water_iou": 0.6984940897800556,
+      "flooded_water_iou": 0.4649936965961619,
+      "pixel_accuracy": 0.9568423901574087,
+      "seconds": 61.0
+    }
+  ]
+}

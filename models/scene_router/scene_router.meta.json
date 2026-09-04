@@ -1,0 +1,15 @@
+{
+  "classes": [
+    "fire",
+    "flood",
+    "drowning",
+    "building_access"
+  ],
+  "imgsz": 224,
+  "heldout_accuracy": 1.0,
+  "preprocessing": "RGB, 0-1, ImageNet mean/std, resized (not letterboxed)",
+  "scope": "Upload path only. Live cameras route by declaration; see vigia/registry.py and the note in vigia/scene_router.py.",
+  "excluded": {
+    "traffic": "only four usable training images exist"
+  }
+}

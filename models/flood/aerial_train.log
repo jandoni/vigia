@@ -1,0 +1,166 @@
+phased training: 30 epochs in blocks of 5, resuming each time
+--- phase starting at epoch 1 ---
+labelled pairs: 398  (51 flooded, 347 dry)
+  train 339 (44 flooded)   val 59 (7 flooded)
+  NOTE: only 51 flooded images exist in this release. Every figure below
+        is bounded by that, and the flooded-subset IoU is the one that matters.
+train 339  val 59  device mps  imgsz 512
+Downloading: "https://download.pytorch.org/models/deeplabv3_mobilenet_v3_large-fc3c493d.pth" to ~/.cache/torch/hub/checkpoints/deeplabv3_mobilenet_v3_large-fc3c493d.pth
+
+  0%|          | 0.00/42.3M [00:00<?, ?B/s]
+  1%|▏         | 640k/42.3M [00:00<00:07, 5.83MB/s]
+  4%|▍         | 1.62M/42.3M [00:00<00:05, 8.21MB/s]
+  6%|▌         | 2.50M/42.3M [00:00<00:04, 8.50MB/s]
+  8%|▊         | 3.38M/42.3M [00:00<00:04, 8.54MB/s]
+ 10%|█         | 4.38M/42.3M [00:00<00:04, 9.03MB/s]
+ 13%|█▎        | 5.50M/42.3M [00:00<00:03, 9.75MB/s]
+ 15%|█▌        | 6.50M/42.3M [00:00<00:04, 9.15MB/s]
+ 18%|█▊        | 7.50M/42.3M [00:00<00:04, 8.66MB/s]
+ 20%|█▉        | 8.38M/42.3M [00:01<00:04, 8.00MB/s]
+ 22%|██▏       | 9.25M/42.3M [00:01<00:04, 7.95MB/s]
+ 24%|██▍       | 10.1M/42.3M [00:01<00:04, 7.68MB/s]
+ 26%|██▌       | 11.0M/42.3M [00:01<00:04, 7.96MB/s]
+ 28%|██▊       | 12.0M/42.3M [00:01<00:03, 8.35MB/s]
+ 30%|███       | 12.9M/42.3M [00:01<00:03, 8.53MB/s]
+ 33%|███▎      | 13.9M/42.3M [00:01<00:03, 8.86MB/s]
+ 35%|███▌      | 14.9M/42.3M [00:01<00:03, 9.14MB/s]
+ 38%|███▊      | 15.9M/42.3M [00:01<00:02, 9.37MB/s]
+ 40%|███▉      | 16.9M/42.3M [00:02<00:02, 9.63MB/s]
+ 43%|████▎     | 18.0M/42.3M [00:02<00:02, 10.1MB/s]
+ 45%|████▍     | 19.0M/42.3M [00:02<00:02, 10.1MB/s]
+ 47%|████▋     | 20.0M/42.3M [00:02<00:02, 10.0MB/s]
+ 50%|████▉     | 21.1M/42.3M [00:02<00:02, 10.3MB/s]
+ 53%|█████▎    | 22.2M/42.3M [00:02<00:02, 10.3MB/s]
+ 55%|█████▌    | 23.4M/42.3M [00:02<00:01, 10.4MB/s]
+ 58%|█████▊    | 24.5M/42.3M [00:02<00:01, 10.6MB/s]
+ 61%|██████    | 25.6M/42.3M [00:02<00:01, 10.6MB/s]
+ 63%|██████▎   | 26.8M/42.3M [00:03<00:01, 10.6MB/s]
+ 66%|██████▌   | 27.9M/42.3M [00:03<00:01, 10.5MB/s]
+ 69%|██████▊   | 29.0M/42.3M [00:03<00:01, 10.7MB/s]
+ 71%|███████   | 30.1M/42.3M [00:03<00:01, 10.9MB/s]
+ 74%|███████▍  | 31.2M/42.3M [00:03<00:01, 10.6MB/s]
+ 77%|███████▋  | 32.4M/42.3M [00:03<00:00, 10.5MB/s]
+ 79%|███████▉  | 33.5M/42.3M [00:03<00:00, 10.4MB/s]
+ 82%|████████▏ | 34.5M/42.3M [00:03<00:00, 10.4MB/s]
+ 84%|████████▍ | 35.5M/42.3M [00:03<00:00, 10.3MB/s]
+ 86%|████████▋ | 36.5M/42.3M [00:03<00:00, 10.2MB/s]
+ 89%|████████▊ | 37.5M/42.3M [00:04<00:00, 10.3MB/s]
+ 91%|█████████ | 38.5M/42.3M [00:04<00:00, 10.3MB/s]
+ 93%|█████████▎| 39.5M/42.3M [00:04<00:00, 10.2MB/s]
+ 96%|█████████▌| 40.5M/42.3M [00:04<00:00, 9.52MB/s]
+ 98%|█████████▊| 41.5M/42.3M [00:04<00:00, 8.64MB/s]
+100%|██████████| 42.3M/42.3M [00:04<00:00, 9.52MB/s]
+epoch   1/30  loss 0.5338  IoU all 0.5577  IoU flooded 0.3719  acc 0.9390  63s  <- best, saved
+epoch   2/30  loss 0.3627  IoU all 0.5541  IoU flooded 0.4009  acc 0.9395  62s  <- best, saved
+epoch   3/30  loss 0.3129  IoU all 0.6285  IoU flooded 0.4416  acc 0.9462  61s  <- best, saved
+epoch   4/30  loss 0.2907  IoU all 0.6363  IoU flooded 0.4296  acc 0.9484  61s
+epoch   5/30  loss 0.2754  IoU all 0.6510  IoU flooded 0.4258  acc 0.9499  61s
+
+phase complete: 5 of 30 epochs. Resume with --resume.
+best flooded-subset water IoU: 0.4416
+weights: models/flood/floodnet_aerial_deeplabv3.pt
+
+Next: export to ONNX, then register with viewpoint nadir_aerial so the gate
+can route UAV flood cameras to it.
+      completed 5/30 epochs; cooling down 20s
+--- phase starting at epoch 6 ---
+labelled pairs: 398  (51 flooded, 347 dry)
+  train 339 (44 flooded)   val 59 (7 flooded)
+  NOTE: only 51 flooded images exist in this release. Every figure below
+        is bounded by that, and the flooded-subset IoU is the one that matters.
+train 339  val 59  device mps  imgsz 512
+resumed from epoch 5 (best flooded IoU so far 0.4416)
+epoch   6/30  loss 0.2608  IoU all 0.6320  IoU flooded 0.4395  acc 0.9456  66s
+epoch   7/30  loss 0.2407  IoU all 0.6172  IoU flooded 0.4295  acc 0.9466  64s
+epoch   8/30  loss 0.2120  IoU all 0.6487  IoU flooded 0.4649  acc 0.9486  64s  <- best, saved
+epoch   9/30  loss 0.1997  IoU all 0.6711  IoU flooded 0.4424  acc 0.9548  63s
+epoch  10/30  loss 0.1945  IoU all 0.6570  IoU flooded 0.4452  acc 0.9485  64s
+
+phase complete: 10 of 30 epochs. Resume with --resume.
+best flooded-subset water IoU: 0.4649
+weights: models/flood/floodnet_aerial_deeplabv3.pt
+
+Next: export to ONNX, then register with viewpoint nadir_aerial so the gate
+can route UAV flood cameras to it.
+      completed 10/30 epochs; cooling down 20s
+--- phase starting at epoch 11 ---
+labelled pairs: 398  (51 flooded, 347 dry)
+  train 339 (44 flooded)   val 59 (7 flooded)
+  NOTE: only 51 flooded images exist in this release. Every figure below
+        is bounded by that, and the flooded-subset IoU is the one that matters.
+train 339  val 59  device mps  imgsz 512
+resumed from epoch 10 (best flooded IoU so far 0.4649)
+epoch  11/30  loss 0.1844  IoU all 0.6781  IoU flooded 0.4473  acc 0.9540  64s
+epoch  12/30  loss 0.1817  IoU all 0.6505  IoU flooded 0.4424  acc 0.9488  63s
+epoch  13/30  loss 0.1655  IoU all 0.6652  IoU flooded 0.4500  acc 0.9488  63s
+epoch  14/30  loss 0.1549  IoU all 0.6837  IoU flooded 0.4595  acc 0.9557  63s
+epoch  15/30  loss 0.1534  IoU all 0.6809  IoU flooded 0.4463  acc 0.9535  63s
+
+phase complete: 15 of 30 epochs. Resume with --resume.
+best flooded-subset water IoU: 0.4649
+weights: models/flood/floodnet_aerial_deeplabv3.pt
+
+Next: export to ONNX, then register with viewpoint nadir_aerial so the gate
+can route UAV flood cameras to it.
+      completed 15/30 epochs; cooling down 20s
+--- phase starting at epoch 16 ---
+labelled pairs: 398  (51 flooded, 347 dry)
+  train 339 (44 flooded)   val 59 (7 flooded)
+  NOTE: only 51 flooded images exist in this release. Every figure below
+        is bounded by that, and the flooded-subset IoU is the one that matters.
+train 339  val 59  device mps  imgsz 512
+resumed from epoch 15 (best flooded IoU so far 0.4649)
+epoch  16/30  loss 0.1494  IoU all 0.6933  IoU flooded 0.4453  acc 0.9561  64s
+epoch  17/30  loss 0.1437  IoU all 0.6945  IoU flooded 0.4511  acc 0.9574  63s
+epoch  18/30  loss 0.1382  IoU all 0.6928  IoU flooded 0.4389  acc 0.9567  63s
+epoch  19/30  loss 0.1344  IoU all 0.6941  IoU flooded 0.4543  acc 0.9569  63s
+epoch  20/30  loss 0.1341  IoU all 0.6955  IoU flooded 0.4412  acc 0.9573  62s
+
+phase complete: 20 of 30 epochs. Resume with --resume.
+best flooded-subset water IoU: 0.4649
+weights: models/flood/floodnet_aerial_deeplabv3.pt
+
+Next: export to ONNX, then register with viewpoint nadir_aerial so the gate
+can route UAV flood cameras to it.
+      completed 20/30 epochs; cooling down 20s
+--- phase starting at epoch 21 ---
+labelled pairs: 398  (51 flooded, 347 dry)
+  train 339 (44 flooded)   val 59 (7 flooded)
+  NOTE: only 51 flooded images exist in this release. Every figure below
+        is bounded by that, and the flooded-subset IoU is the one that matters.
+train 339  val 59  device mps  imgsz 512
+resumed from epoch 20 (best flooded IoU so far 0.4649)
+epoch  21/30  loss 0.1319  IoU all 0.6925  IoU flooded 0.4503  acc 0.9563  64s
+epoch  22/30  loss 0.1292  IoU all 0.6917  IoU flooded 0.4629  acc 0.9554  63s
+epoch  23/30  loss 0.1261  IoU all 0.6928  IoU flooded 0.4418  acc 0.9570  63s
+epoch  24/30  loss 0.1262  IoU all 0.6962  IoU flooded 0.4520  acc 0.9570  62s
+epoch  25/30  loss 0.1261  IoU all 0.7021  IoU flooded 0.4734  acc 0.9572  62s  <- best, saved
+
+phase complete: 25 of 30 epochs. Resume with --resume.
+best flooded-subset water IoU: 0.4734
+weights: models/flood/floodnet_aerial_deeplabv3.pt
+
+Next: export to ONNX, then register with viewpoint nadir_aerial so the gate
+can route UAV flood cameras to it.
+      completed 25/30 epochs; cooling down 20s
+--- phase starting at epoch 26 ---
+labelled pairs: 398  (51 flooded, 347 dry)
+  train 339 (44 flooded)   val 59 (7 flooded)
+  NOTE: only 51 flooded images exist in this release. Every figure below
+        is bounded by that, and the flooded-subset IoU is the one that matters.
+train 339  val 59  device mps  imgsz 512
+resumed from epoch 25 (best flooded IoU so far 0.4734)
+epoch  26/30  loss 0.1259  IoU all 0.6994  IoU flooded 0.4709  acc 0.9568  62s
+epoch  27/30  loss 0.1237  IoU all 0.6989  IoU flooded 0.4690  acc 0.9568  61s
+epoch  28/30  loss 0.1223  IoU all 0.6967  IoU flooded 0.4700  acc 0.9560  61s
+epoch  29/30  loss 0.1225  IoU all 0.6971  IoU flooded 0.4658  acc 0.9564  61s
+epoch  30/30  loss 0.1237  IoU all 0.6985  IoU flooded 0.4650  acc 0.9568  61s
+
+schedule complete: 30 epochs.
+best flooded-subset water IoU: 0.4734
+weights: models/flood/floodnet_aerial_deeplabv3.pt
+
+Next: export to ONNX, then register with viewpoint nadir_aerial so the gate
+can route UAV flood cameras to it.
+      completed 30/30 epochs; cooling down 20s
+ALL PHASES COMPLETE

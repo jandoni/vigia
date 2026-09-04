@@ -1,0 +1,18 @@
+{
+  "model": "YOLOv8-DRN, trained by the DRespNeT authors",
+  "source": "https://doi.org/10.6084/m9.figshare.29991478.v2",
+  "imgsz": 640,
+  "model_classes": 28,
+  "classes": ["civilian", "rescue_team", "entry_accessible", "entry_blocked", "building_collapsed"],
+  "class_merge": {
+    "civilian": ["civilian_visible", "group_of_civilians"],
+    "rescue_team": ["rescue_team"],
+    "entry_accessible": ["entry_door_accessible", "entry_window_accessible", "entry_gap_accessible", "entry_gap_block_accessible"],
+    "entry_blocked": ["entry_door_blocked", "entry_window_blocked"],
+    "building_collapsed": ["building_collapsed"]
+  },
+  "task": "segment (mask coefficients trimmed; used as a detector)",
+  "preprocessing": "RGB, 0-1 float, letterboxed to 640",
+  "nms": "applied at runtime by ONNXDetector",
+  "licence_note": "Figshare states CC BY 4.0; the checkpoint carries an embedded Ultralytics AGPL-3.0 stamp. See models/REGISTRY.yaml."
+}

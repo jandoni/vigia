@@ -1,0 +1,40 @@
+{
+  "imgsz": 640,
+  "classes": [
+    "civilian",
+    "rescue_team",
+    "entry_accessible",
+    "entry_blocked",
+    "building_collapsed"
+  ],
+  "class_merge": {
+    "civilian": [
+      "civilian_visible",
+      "group_of_civilians"
+    ],
+    "rescue_team": [
+      "rescue_team"
+    ],
+    "entry_accessible": [
+      "entry_door_accessible",
+      "entry_window_accessible",
+      "entry_gap_accessible",
+      "entry_gap_block_accessible"
+    ],
+    "entry_blocked": [
+      "entry_door_blocked",
+      "entry_window_blocked"
+    ],
+    "building_collapsed": [
+      "building_collapsed"
+    ]
+  },
+  "label_offset": 1,
+  "label_note": "ONNX labels are 1-based; 0 is torchvision's background class and is never emitted. class_names[label - 1].",
+  "opset": 17,
+  "score_threshold": 0.05,
+  "val_loss": 1.3136593516056354,
+  "nms": "applied inside the graph by torchvision; do not repeat it",
+  "preprocessing": "RGB, 0-1 float, resized to imgsz. ImageNet mean/std normalisation happens INSIDE the graph.",
+  "untrained_export_path_test": false
+}

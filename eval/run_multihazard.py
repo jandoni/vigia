@@ -15,7 +15,7 @@ hazard-specific code was needed. The only difference between the two runs is a
 `ValidatorConfig`.
 
 If this script ever needs an `if hazard == ...` branch, the claim is dead and
-the dossier has to say something weaker.
+the documentation has to say something weaker.
 
 Usage:
     python eval/run_multihazard.py
