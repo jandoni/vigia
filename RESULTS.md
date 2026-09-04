@@ -29,6 +29,18 @@ Every figure below is checked against the results file named beside it by `tools
 | `flood_aerial.floodnet_deeplabv3` | val_overall_water_iou | **0.7021** | `eval/results/flood_aerial.json` |
 | `flood_aerial.floodnet_deeplabv3` | val_pixel_accuracy | **0.9568** | `eval/results/flood_aerial.json` |
 | `flood_aerial.floodnet_deeplabv3` | best_epoch | **25** | `eval/results/flood_aerial.json` |
+| `scene_router.mobilenetv3` | heldout_accuracy | **1.0** | `eval/results/scene_router.json` |
+| `scene_router.mobilenetv3` | heldout_images | **384** | `eval/results/scene_router.json` |
+| `validator.threshold_matched` | matched_floor | **0.26** | `eval/results/threshold_matched.json` |
+| `validator.threshold_matched` | matched_recall | **0.9** | `eval/results/threshold_matched.json` |
+| `validator.threshold_matched` | matched_minutes_to_detect | **1.0** | `eval/results/threshold_matched.json` |
+| `validator.threshold_matched` | cascade_far | **0.01** | `eval/results/threshold_matched.json` |
+| `validator.threshold_matched` | cascade_recall | **0.7917** | `eval/results/threshold_matched.json` |
+| `validator.colour_prior` | stills_baseline_recall | **0.978** | `eval/results/colour_prior.json` |
+| `validator.colour_prior` | stills_baseline_far | **0.706** | `eval/results/colour_prior.json` |
+| `validator.colour_prior` | stills_strict_recall | **0.736** | `eval/results/colour_prior.json` |
+| `validator.colour_prior` | stills_strict_far | **0.456** | `eval/results/colour_prior.json` |
+| `validator.colour_prior` | temporal_strict_fires_detected | **5** | `eval/results/colour_prior.json` |
 
 ## Not measured
 

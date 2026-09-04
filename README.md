@@ -168,3 +168,11 @@ contractually unwilling.
 Apache-2.0. Model weights and datasets carry their own licences, recorded per
 model in `models/REGISTRY.yaml` and credited in [`NOTICE`](NOTICE). No weights
 and no third-party imagery are redistributed here.
+
+## Paper and citation
+
+The technical paper — every figure generated from `eval/results/`, built by
+`make paper` — lives in `docs/paper/` (`make arxiv` packages it for arXiv).
+It includes the control experiment that partially deflates our own headline
+(section 6.6), two cascade levels removed on measurement, and a confidence
+interval on every proportion. Cite via `CITATION.cff`.
