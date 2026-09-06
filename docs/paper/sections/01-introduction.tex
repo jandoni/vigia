@@ -28,11 +28,15 @@ gated pipeline and adds a shared temporal validation layer that makes them
 operationally trustworthy on ordinary municipal cameras.
 
 The system is an integration project and does not claim novel detection
-architectures. Every detector it runs was trained by someone else, and each is
-credited by name, licence and source in \cref{sec:attribution}. The original
-contributions are the validation layer of \cref{sec:validator} and the
-evaluation methodology of \cref{sec:methodology}, which measures what that
-layer buys and what it costs.
+architectures. The validation layer itself is deliberately conventional —
+confidence, IoU-tracked persistence, spatial cooldown, each individually
+long-established — and the paper does not claim it as new. What is contributed
+is the \emph{measurement}: the controls of \cref{sec:validator} that
+establish, against a deployment-realistic baseline, what such a layer is
+worth and where it is not; and the evaluation methodology of
+\cref{sec:methodology} that keeps a small single-author system from
+flattering itself. Every detector is credited by name, licence and source in
+\cref{sec:attribution}.
 
 \subsection{The problem the system actually solves}
 
@@ -62,11 +66,14 @@ are stated here at the outset and revisited, with their qualifications, in
 hazard detectors materially more usable on municipal cameras, but its value
 is narrower than a raw suppression figure suggests. On an easy negative set an
 oracle-tuned confidence threshold matches the validator's false-alarm rate
-more cheaply (\cref{sec:threshold-matched}); the validator's defensible
-advantages are that it reaches that operating point without access to the
-negative distribution, that it deduplicates alerts in a way no threshold can,
-and that one configuration transfers across four hazards with different
-physics. Four candidate improvements were measured and three rejected on the
+more cheaply (\cref{sec:threshold-matched}); but a cross-camera transfer
+experiment (\cref{sec:threshold-transfer-exp}) shows that a threshold chosen
+the way a deployment must choose it — on some cameras, run on others — either
+lets false alarms drift up or drops a detection, while the cascade holds both.
+The validator's defensible advantages are therefore that its stability does
+not depend on the deployment's negative distribution, that it deduplicates
+alerts in a way no threshold can, and that one configuration transfers across
+four hazards with different physics. Four candidate improvements were measured and three rejected on the
 evidence, and every quantitative claim is bounded by the interval its sample
 supports. These findings are preliminary in the precise sense that several
 rest on small held-out samples, named individually in \cref{sec:outstanding};
@@ -95,13 +102,15 @@ layer over published detectors is worth. Three questions organise it:
 The contributions, stated so they can be checked:
 
 \begin{enumerate}
-  \item \textbf{A threshold-matched control for alarm-suppression claims}
-        (\cref{sec:threshold-matched}): on easy negatives an oracle-tuned
-        floor dominates our own cascade — a finding we publish against
-        ourselves — while no floor survives curated hard negatives, and
-        deduplication is unreachable by any threshold. We argue this control
-        should be standard in the genre, and it is absent from the systems
-        we compare against.
+  \item \textbf{A threshold-matched control and a cross-camera transfer
+        experiment for alarm-suppression claims}
+        (\cref{sec:threshold-matched}, \cref{sec:threshold-transfer-exp}):
+        on easy negatives an oracle-tuned floor dominates our own cascade — a
+        finding we publish against ourselves — but under the transfer
+        conditions a real deployment faces, the untuned cascade holds its
+        false-alarm rate and its recall where the tuned threshold holds at
+        most one. We argue both controls should be standard in the genre;
+        they are absent from the systems we compare against.
   \item \textbf{A measured decomposition of ``suppression'' into filtering
         and deduplication} (\cref{eq:decomposition}), which differ by a
         factor of eight between hazards; single suppression figures conflate

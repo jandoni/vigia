@@ -35,10 +35,13 @@ Distilled from the measurements, phrased for reuse beyond this system:
         and deduplication differ by a factor of eight between our hazards
         (\cref{tab:decomposition}); one figure conflates a false-alarm claim
         with alert housekeeping.
-  \item \textbf{Run the threshold-matched control before claiming alarm
-        reduction.} On easy negatives it beat our cascade; on hard negatives
-        nothing beats anything yet. Either result changes what may be
-        claimed, and it costs one afternoon on cached detections.
+  \item \textbf{Run the threshold-matched control \emph{and} the transfer
+        experiment before claiming alarm reduction.} On negatives it had seen,
+        an oracle threshold beat our cascade; across unseen cameras that same
+        threshold either let false alarms drift up or lost a detection, while
+        the untuned cascade held both. The oracle result alone would have
+        misled in either direction; both controls cost an afternoon on cached
+        detections.
   \item \textbf{Persistence has a price list:}
         $\mathbb{E}[\Delta t] = (N-1)/f$. The latency cost of temporal
         confirmation is a property of the camera's sampling rate, computable

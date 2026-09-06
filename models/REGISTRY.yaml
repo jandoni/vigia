@@ -825,6 +825,42 @@ experiments:
       needed maximum recall on a single frame, might revisit it.
     redistribute: false
 
+  validator.threshold_transfer:
+    question: >
+      The threshold-matched control (validator.threshold_matched) showed an
+      ORACLE floor beating the cascade on the negatives it was tuned on. Does
+      that floor survive transfer to unseen cameras, the real deployment
+      condition, or does the cascade's untuned persistence generalise better?
+    measured:
+      status: measured
+      date: 2026-09-06
+      harness: eval/run_threshold_transfer.py
+      results_file: eval/results/threshold_transfer.json
+      split: cameras alternated into two disjoint folds (deterministic)
+      ab_tuned_floor: 0.23
+      ab_transfer_far: 0.033
+      ab_cascade_far: 0.020
+      ba_transfer_recall: 0.75
+      ba_cascade_recall: 0.9
+      mean_transferred_threshold_far: 0.017
+      mean_cascade_far: 0.010
+    honest_assessment: >
+      THE CONTROL'S OBJECTION IS ANSWERED, AND IN THE CASCADE'S FAVOUR. A
+      confidence floor tuned to hit the target false-alarm rate on one set of
+      cameras does not hold it on unseen cameras. Trained on fold A (floor
+      0.23, FAR 0.007) it drifts to FAR 0.033 on fold B — over three times the
+      target — while the cascade at the published untuned floor of 0.20 holds
+      0.020. Tuned the other way (fold B, floor 0.30) it transfers on FAR but
+      loses a fire, recall 0.75 against the cascade's 0.9. Averaged over both
+      directions the transferred threshold sits at FAR 0.017 against the
+      cascade's 0.010. The oracle floor of the threshold-matched control is
+      therefore exactly that — an oracle: it beats the cascade only with
+      access to the test distribution. Given the untuned deployment condition,
+      the cascade's camera-independent persistence is the more stable of the
+      two on BOTH false-alarm rate and recall. This is the deployment-facing
+      justification the earlier draft asserted and did not test.
+    redistribute: false
+
 # Components deliberately excluded, kept here so the reasoning is not lost.
 excluded:
   xview2_first_place:

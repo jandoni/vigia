@@ -43,9 +43,15 @@ def dig(data, path: str):
     """
     node = data
     for key in path.split("|"):
-        if not isinstance(node, dict) or key not in node:
+        if isinstance(node, list):
+            try:
+                node = node[int(key)]
+            except (ValueError, IndexError):
+                return None
+        elif isinstance(node, dict) and key in node:
+            node = node[key]
+        else:
             return None
-        node = node[key]
     return node
 
 
@@ -124,6 +130,19 @@ CHECKS: list[tuple[str, str, str]] = [
      "cascade|negatives|false_alarm_rate"),
     ("validator.threshold_matched", "cascade_recall",
      "cascade|fires|detection_rate"),
+
+    # threshold transfer — the deployment-condition control
+    ("validator.threshold_transfer", "ab_transfer_far",
+     "directions|0|threshold_transfer_far"),
+    ("validator.threshold_transfer", "ab_cascade_far",
+     "directions|0|cascade_far"),
+    ("validator.threshold_transfer", "ba_transfer_recall",
+     "directions|1|threshold_transfer_recall"),
+    ("validator.threshold_transfer", "ba_cascade_recall",
+     "directions|1|cascade_recall"),
+    ("validator.threshold_transfer", "mean_transferred_threshold_far",
+     "mean_transferred_threshold_far"),
+    ("validator.threshold_transfer", "mean_cascade_far", "mean_cascade_far"),
 
     # sliced inference (SAHI) — measured and rejected
     ("detector.sliced_inference", "baseline_recall",

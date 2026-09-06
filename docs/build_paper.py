@@ -374,6 +374,24 @@ def collect() -> Macros:
             m.number("ZeroFARFloor", zero["floor"], 2, src)
             m.number("ZeroFARRecall", zero["fires"]["detection_rate"], 3, src)
 
+    # ---------------------------------------- threshold transfer ---- #
+    tt = load("threshold_transfer.json")
+    if tt:
+        src = "eval/results/threshold_transfer.json"
+        ab, ba = tt["directions"][0], tt["directions"][1]
+        m.number("TransferTunedFloor", ab["tuned_floor"], 2, src)
+        m.number("TransferTrainFAR", ab["far_on_train"], 3, src)
+        m.number("TransferTestFAR", ab["threshold_transfer_far"], 3, src)
+        m.number("TransferCascadeFAR", ab["cascade_far"], 3, src)
+        m.number("TransferBATunedFloor", ba["tuned_floor"], 2, src)
+        m.number("TransferBARecall", ba["threshold_transfer_recall"], 2, src)
+        m.number("TransferBACascadeRecall", ba["cascade_recall"], 2, src)
+        m.number("TransferMeanThresholdFAR",
+                 tt["mean_transferred_threshold_far"], 3, src)
+        m.number("TransferMeanCascadeFAR", tt["mean_cascade_far"], 3, src)
+        m.add("TransferCameras",
+              str(ab["test_cameras"] + ba["test_cameras"]), src)
+
     # ------------------------------------------ sliced inference ---- #
     sahi = load("sahi.json")
     if sahi:

@@ -1,7 +1,10 @@
 \section{The temporal validator}
 \label{sec:validator}
 
-This is the original contribution. Everything else in VIGÍA is integration.
+The validator is the component this paper measures most closely. Its
+mechanism is conventional and not claimed as novel (\cref{sec:related}); the
+contribution is the account, given here with controls, of what it buys, what
+it costs, and where a simpler baseline would do as well.
 
 \subsection{Rationale}
 
@@ -248,13 +251,14 @@ more cheaply. Three things bound how far that conclusion travels, each a
 fact, none a defence:
 
 \begin{itemize}
-  \item \textbf{The matched floor is tuned on the evaluation negatives.} The
-        sweep selects $\theta = \MatchedFloor$ using the same 30 sequences it
-        is scored on; the cascade runs the detector authors' published
-        default ($0.20$) untouched. A deployed threshold must be chosen
-        per camera network without access to its future negatives, and how
-        well that transfers is exactly what a single negative set cannot
-        measure.
+  \item \textbf{The matched floor is an oracle.} The sweep selects
+        $\theta = \MatchedFloor$ using the same 30 sequences it is scored on;
+        the cascade runs the detector authors' published default ($0.20$)
+        untouched. A deployed threshold must be chosen on some cameras and run
+        on others, so the honest comparison is not oracle-against-cascade but
+        transferred-threshold-against-cascade. We run that comparison in
+        \cref{sec:threshold-transfer-exp}, and it reverses the control's
+        verdict.
   \item \textbf{No floor survives the hard negatives.} On the curated
         \texttt{pyro-sdis} negatives (\cref{sec:fire}), raising the floor to
         $0.30$ still leaves a false-alarm rate of $0.648$ while recall is
@@ -268,13 +272,44 @@ fact, none a defence:
         an operational function a per-frame threshold cannot express at all.
 \end{itemize}
 
-The honest statement of the validator's value is therefore narrower than an
-earlier draft of this work believed, and is the one this paper stands
-behind: \emph{a single untuned mechanism that reaches an oracle-tuned
-threshold's false-alarm rate without access to the negative distribution,
-provides deduplication no threshold can, and transfers across hazards by
-configuration} — at a measured cost in recall and latency
-(\cref{sec:latency}) that thresholding, where it suffices, does not pay.
+\subsubsection{The transfer experiment: the objection, answered}
+\label{sec:threshold-transfer-exp}
+
+The control's central caveat — that its winning floor is an oracle — is
+testable, so we test it. The \TransferCameras{} FIgLib negative cameras are
+split into two disjoint folds; on one fold the floor is tuned to the target
+false-alarm rate, that fixed floor is applied to the \emph{other} fold, and
+the result is compared against the cascade running its untuned published
+floor on the same held-out cameras (\texttt{eval/run\_threshold\_transfer.py}).
+The split is deterministic — cameras sorted and alternated — so no seed has to
+be trusted, and both directions are reported.
+
+The oracle does not survive transfer. Tuned to a false-alarm rate of
+\TransferTrainFAR{} on one fold (floor \TransferTunedFloor), it drifts to
+\TransferTestFAR{} on the cameras it has not seen — more than three times the
+target — while the cascade at the published floor holds \TransferCascadeFAR{}
+on the same cameras. Tuned the other way (floor \TransferBATunedFloor) it
+does hold the false-alarm rate on transfer, but only by \emph{losing a fire}:
+recall \TransferBARecall{} against the cascade's \TransferBACascadeRecall.
+Averaged over both directions the transferred threshold sits at
+\TransferMeanThresholdFAR{} against the cascade's \TransferMeanCascadeFAR.
+
+This reverses the control of \cref{sec:threshold-matched}. A confidence floor
+beats the cascade only with oracular access to the negatives it will face; a
+floor chosen the way a deployment must choose it either lets false alarms
+drift up or sacrifices a detection, whereas the cascade's persistence — being
+a property of the tracks, not of any camera's confidence calibration — holds
+both false-alarm rate and recall across cameras it has never seen. The
+camera-independence of persistence, asserted by an earlier draft, is here a
+measured advantage.
+
+The honest statement of the validator's value is therefore this, and it is
+now supported by the experiment above rather than by assertion: \emph{a
+single untuned mechanism that holds its false-alarm rate and its recall
+across unseen cameras where a tuned threshold holds at most one of the two,
+provides deduplication no threshold can express, and transfers across hazards
+by configuration} — at a measured cost in latency (\cref{sec:latency}) that
+is predictable in closed form.
 Where a deployment can tune a floor on representative negatives and does not
 need deduplication, thresholding alone is the better choice, and this paper
 says so.
@@ -328,6 +363,43 @@ Road incidents  & Dashcam, 2 fps      & \TrafficFrames & \TrafficRawDetections &
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{The reach of the evidence, stated precisely}
+\label{sec:evidence-reach}
+
+The scope of what has and has not been measured deserves an explicit
+statement, because the two are easy to conflate. Three distinct kinds of
+false-alarm evidence appear in this paper, on different numbers of hazards:
+
+\begin{enumerate}
+  \item \textbf{Per-frame detector false-alarm rate}, measured on curated or
+        natural negatives, is reported for \emph{three} hazards: fire
+        (\FireImageFAR{} on \FireNegatives{} negatives, \cref{sec:fire}),
+        people in water (\SwimmerImageFAR, \cref{sec:piw}) and building
+        access (\BuildingImageFAR, \cref{sec:building}). This establishes
+        that the false-alarm problem the paper motivates is real beyond the
+        one detector used for the headline.
+  \item \textbf{The temporal validator's false-alarm \emph{reduction}} — the
+        cascade against the raw detector on negative sequences, with the
+        transfer control — is demonstrated on \emph{one} hazard, fire,
+        because it is the only hazard for which negative temporal sequences
+        exist in released form. The flood trend detector's false-alarm
+        behaviour is measured separately, on stable water with realistic
+        segmentation noise (\cref{sec:ph-calibration}), which is a second
+        hazard's false-alarm measurement by a different mechanism.
+  \item \textbf{Configuration-only transfer} of the cascade across hazards
+        with different physics is shown in \cref{tab:transfer}, but that
+        table measures suppression, not accuracy against held-out labels.
+\end{enumerate}
+
+The honest consequence is that the central causal claim — \emph{temporal
+validation reduces the false-alarm rate} — is evidenced directly on fire and
+by mechanism-analogue on flood, and that extending it to a second detector
+with negative sequences is the single most valuable experiment this work has
+not been able to run (\cref{sec:outstanding}). The paper's title says
+multi-hazard because the \emph{system} spans four hazards and the validator
+transfers to them by configuration; it does not claim the reduction is
+independently proven on all four.
 
 \begin{recorded}{Enforced, not merely asserted}
 \texttt{tests/test\_validator.py} contains

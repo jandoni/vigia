@@ -1,0 +1,36 @@
+{
+  "question": "does a confidence floor tuned on one set of cameras hold its false-alarm rate on unseen cameras, or does the cascade's untuned persistence generalise better?",
+  "target_far": 0.01,
+  "split": "cameras sorted and alternated into two disjoint folds",
+  "directions": [
+    {
+      "direction": "A->B",
+      "tuned_floor": 0.23,
+      "far_on_train": 0.0067,
+      "threshold_transfer_far": 0.0333,
+      "threshold_transfer_recall": 1.0,
+      "oracle_floor_on_test": 0.3,
+      "oracle_far": 0.0,
+      "cascade_far": 0.02,
+      "cascade_recall": 0.9,
+      "test_cameras": 11,
+      "test_fire_sequences": 2
+    },
+    {
+      "direction": "B->A",
+      "tuned_floor": 0.3,
+      "far_on_train": 0.0,
+      "threshold_transfer_far": 0.0,
+      "threshold_transfer_recall": 0.75,
+      "oracle_floor_on_test": 0.23,
+      "oracle_far": 0.0067,
+      "cascade_far": 0.0,
+      "cascade_recall": 0.9,
+      "test_cameras": 11,
+      "test_fire_sequences": 1
+    }
+  ],
+  "mean_transferred_threshold_far": 0.0167,
+  "mean_cascade_far": 0.01,
+  "verdict": "the cascade holds its false-alarm rate on unseen cameras while the tuned threshold drifts above it"
+}

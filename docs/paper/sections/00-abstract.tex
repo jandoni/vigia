@@ -22,12 +22,17 @@ reduction, while still detecting every one of the \FiresTotal{} ignition
 sequences, at a cost of \AddedMinutesToDetect{} minutes of additional latency
 which this document derives in closed form instead of leaving as an observation. We then
 run the control most system papers omit — matching that false-alarm rate by
-simply raising the detector's confidence floor — and report that on this
-negative set an oracle-tuned floor achieves the same rate at higher recall
-and lower latency. The validator's defensible value is therefore narrower
-than raw suppression: it reaches that operating point without access to the
-negative distribution, and it provides alert deduplication that no threshold
-can express (\cref{sec:threshold-matched}). The same validator, changed
+raising the detector's confidence floor — and report that on this negative set
+an oracle-tuned floor achieves the same rate at higher recall. A
+cross-camera transfer experiment resolves the objection this raises: a floor
+tuned on one set of cameras and applied to unseen cameras either lets the
+false-alarm rate drift to \TransferTestFAR{} or loses a fire (recall
+\TransferBARecall), while the cascade's untuned persistence holds both
+false-alarm rate and recall across the same held-out cameras. The validator's
+defensible value is thus that its stability does not depend on access to the
+deployment's negative distribution, and that it deduplicates alerts in a way
+no threshold can (\cref{sec:threshold-matched},
+\cref{sec:threshold-transfer-exp}). The same validator, changed
 only by configuration, transfers across hazards whose detectors were built by
 different people, on different data, for phenomena with different physics; a
 build-failing test enforces that no hazard-specific branch exists in it.

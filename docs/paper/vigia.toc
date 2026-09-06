@@ -7,8 +7,8 @@
 \contentsline {subsection}{\numberline {1.4}Preliminary conclusions}{1}{subsection.1.4}%
 \contentsline {subsection}{\numberline {1.5}Research questions and contributions}{2}{subsection.1.5}%
 \contentsline {subsection}{\numberline {1.6}Scope and limitations}{2}{subsection.1.6}%
-\contentsline {section}{\numberline {2}Related work}{2}{section.2}%
-\contentsline {paragraph}{Operational wildfire detection.}{2}{section.2}%
+\contentsline {section}{\numberline {2}Related work}{3}{section.2}%
+\contentsline {paragraph}{Operational wildfire detection.}{3}{section.2}%
 \contentsline {paragraph}{Learned smoke detection on the same benchmark.}{3}{section.2}%
 \contentsline {paragraph}{Temporal consistency in video object detection.}{3}{section.2}%
 \contentsline {paragraph}{Gating and cascades over video.}{3}{section.2}%
@@ -39,50 +39,52 @@
 \contentsline {subsection}{\numberline {5.2}Flood and water level}{13}{subsection.5.2}%
 \contentsline {subsubsection}{\numberline {5.2.1}The aerial variant}{14}{subsubsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.3}People in water}{15}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Trapped people and building access}{18}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Road incidents}{18}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.4}Trapped people and building access}{17}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Road incidents}{21}{subsection.5.5}%
 \contentsline {section}{\numberline {6}The temporal validator}{21}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Rationale}{21}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}The cascade}{21}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}The cascade earned its shape: two levels built, measured, removed}{21}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.3}The cascade earned its shape: two levels built, measured, removed}{22}{subsection.6.3}%
 \contentsline {subsection}{\numberline {6.4}Filtering and deduplication are different claims}{22}{subsection.6.4}%
 \contentsline {subsection}{\numberline {6.5}Does it reduce false alarms?}{24}{subsection.6.5}%
 \contentsline {subsection}{\numberline {6.6}The obvious baseline, run against ourselves}{24}{subsection.6.6}%
 \contentsline {subsubsection}{\numberline {6.6.1}What the control does and does not establish}{24}{subsubsection.6.6.1}%
-\contentsline {subsection}{\numberline {6.7}The latency cost, in closed form}{25}{subsection.6.7}%
-\contentsline {subsection}{\numberline {6.8}Hazard-agnosticism, tested and enforced}{25}{subsection.6.8}%
-\contentsline {section}{\numberline {7}The anticipatory flood signal}{26}{section.7}%
-\contentsline {paragraph}{Not a novel contribution, and read this before describing it as one.}{26}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Two signals}{26}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Windowed least squares}{27}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Page--Hinkley change detection}{27}{subsection.7.3}%
-\contentsline {subsection}{\numberline {7.4}Calibration matters more than the algorithm}{27}{subsection.7.4}%
-\contentsline {subsection}{\numberline {7.5}Compared on real cameras}{28}{subsection.7.5}%
-\contentsline {subsection}{\numberline {7.6}Ground truth the other footage does not have}{28}{subsection.7.6}%
-\contentsline {section}{\numberline {8}Scene routing on the upload path}{28}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Two approaches that did not work}{29}{subsection.8.1}%
-\contentsline {paragraph}{Asking the detectors.}{29}{subsection.8.1}%
-\contentsline {paragraph}{Asking the user.}{29}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}A classifier trained for this question}{29}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}How that figure should be read}{29}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}This does not overturn Tier 0}{30}{subsection.8.4}%
-\contentsline {section}{\numberline {9}Evaluation methodology}{30}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Commitments}{30}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Reproducibility}{30}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Execution backends}{31}{subsection.9.3}%
-\contentsline {subsection}{\numberline {9.4}Demonstration material}{31}{subsection.9.4}%
-\contentsline {section}{\numberline {10}Consolidated results}{32}{section.10}%
-\contentsline {section}{\numberline {11}Attribution and credits}{32}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Prior art}{32}{subsection.11.1}%
-\contentsline {subsection}{\numberline {11.2}Runtime dependencies}{32}{subsection.11.2}%
-\contentsline {section}{\numberline {12}Discussion and conclusions}{35}{section.12}%
-\contentsline {subsection}{\numberline {12.1}Findings that travel}{35}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Outstanding work}{36}{subsection.12.2}%
-\contentsline {paragraph}{Data and code availability.}{36}{Item.21}%
-\contentsline {paragraph}{Acknowledgments.}{37}{Item.21}%
-\contentsline {section}{\numberline {A}Reproducibility}{37}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Reproducing the results}{37}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}The three guards}{37}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Reference hardware}{37}{subsection.A.3}%
-\contentsline {subsection}{\numberline {A.4}Data acquisition}{37}{subsection.A.4}%
-\contentsline {section}{\numberline {B}Corrections and version note}{37}{appendix.B}%
+\contentsline {subsubsection}{\numberline {6.6.2}The transfer experiment: the objection, answered}{25}{subsubsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.7}The latency cost, in closed form}{26}{subsection.6.7}%
+\contentsline {subsection}{\numberline {6.8}Hazard-agnosticism, tested and enforced}{26}{subsection.6.8}%
+\contentsline {subsection}{\numberline {6.9}The reach of the evidence, stated precisely}{26}{subsection.6.9}%
+\contentsline {section}{\numberline {7}The anticipatory flood signal}{27}{section.7}%
+\contentsline {paragraph}{Not a novel contribution, and read this before describing it as one.}{27}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Two signals}{27}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Windowed least squares}{28}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Page--Hinkley change detection}{28}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Calibration matters more than the algorithm}{28}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Compared on real cameras}{29}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Ground truth the other footage does not have}{29}{subsection.7.6}%
+\contentsline {section}{\numberline {8}Scene routing on the upload path}{29}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Two approaches that did not work}{30}{subsection.8.1}%
+\contentsline {paragraph}{Asking the detectors.}{30}{subsection.8.1}%
+\contentsline {paragraph}{Asking the user.}{30}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}A classifier trained for this question}{30}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}How that figure should be read}{30}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}This does not overturn Tier 0}{31}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Evaluation methodology}{31}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Commitments}{31}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Reproducibility}{31}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Execution backends}{32}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Demonstration material}{32}{subsection.9.4}%
+\contentsline {section}{\numberline {10}Consolidated results}{33}{section.10}%
+\contentsline {section}{\numberline {11}Attribution and credits}{33}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Prior art}{33}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Runtime dependencies}{33}{subsection.11.2}%
+\contentsline {section}{\numberline {12}Discussion and conclusions}{36}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Findings that travel}{36}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Outstanding work}{37}{subsection.12.2}%
+\contentsline {paragraph}{Data and code availability.}{37}{Item.24}%
+\contentsline {paragraph}{Acknowledgments.}{38}{Item.24}%
+\contentsline {section}{\numberline {A}Reproducibility}{38}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Reproducing the results}{38}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}The three guards}{38}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Reference hardware}{38}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}Data acquisition}{38}{subsection.A.4}%
+\contentsline {section}{\numberline {B}Corrections and version note}{38}{appendix.B}%
