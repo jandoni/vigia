@@ -190,7 +190,12 @@ Full cascade, persistence $= 3$ & \ValidatedFAR & \FARReduction  & \FiresFound/\
 At persistence 3 the false-alarm rate falls by \FARReduction\,\% and every
 fire is still found: \FiresFound{} of \FiresTotal{}, the same as the raw
 detector. Sequence-level detection is what matters operationally, and it is
-unchanged.
+unchanged. A ByteTrack-style second association stage~\citep{zhang2022bytetrack}
+— below-floor detections keeping tracks alive without being allowed to alarm
+— was also implemented and measured: it changed nothing on either the sparse
+ablation or a dense \SI{8}{fps} sequence, because the tracker's miss
+tolerance already bridges the gaps it exists to bridge. It ships disabled, as
+a documented null result.
 
 Two costs are paid for that, and both are in \cref{tab:ablation} rather than
 in a footnote. The median time to first alert rises from

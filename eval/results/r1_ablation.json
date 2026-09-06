@@ -170,6 +170,30 @@
         "alerts": 112,
         "median_minutes_to_detect": 1.0
       }
+    },
+    "full cascade, persistence=3 + LC assoc": {
+      "negatives": {
+        "frames": 300,
+        "pre_frames": 300,
+        "post_frames": 0,
+        "false_alarm_rate": 0.01,
+        "detection_rate": null,
+        "sequences_detected": 0,
+        "total_sequences": 30,
+        "alerts": 3,
+        "median_minutes_to_detect": null
+      },
+      "fires": {
+        "frames": 240,
+        "pre_frames": 120,
+        "post_frames": 120,
+        "false_alarm_rate": 0.0,
+        "detection_rate": 0.7917,
+        "sequences_detected": 6,
+        "total_sequences": 6,
+        "alerts": 95,
+        "median_minutes_to_detect": 3.0
+      }
     }
   }
 }

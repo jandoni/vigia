@@ -161,6 +161,12 @@ def main() -> int:
         ("  minus confidence", replace(base, enable_confidence=False)),
         ("  minus persistence", replace(base, enable_persistence=False)),
     ]
+    # ByteTrack-style second stage: below-floor detections may keep a track
+    # alive but never alarm. Measured before being defaulted, like every
+    # other change to the cascade.
+    configurations.append(
+        ("full cascade, persistence=3 + LC assoc",
+         replace(base, min_frames=3, low_confidence_association=True)))
 
     header = (f"{'configuration':<32} {'FAR':>7} {'reduction':>10} | "
               f"{'fires':>7} {'recall':>7} {'min-to-detect':>14}")

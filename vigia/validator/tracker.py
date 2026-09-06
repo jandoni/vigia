@@ -127,12 +127,48 @@ class IoUTracker:
                 self.tracks.append(track)
                 pairs.append((detection, track))
 
-        # Age out tracks that went unmatched this frame.
+        # Age out tracks that went unmatched this frame. refresh() may still
+        # rescue them with low-confidence detections before pruning bites.
         for track in unmatched_tracks:
             track.misses += 1
         self.tracks = [t for t in self.tracks if t.misses <= self.max_misses]
 
         return pairs
+
+    def refresh(self, detections: list[Detection], frame_index: int) -> int:
+        """Second-stage association with BELOW-FLOOR detections.
+
+        The core idea of ByteTrack (Zhang et al., ECCV 2022), adapted to an
+        alarm cascade rather than a benchmark tracker: a detection too weak to
+        alarm on can still be evidence that an existing track's object is
+        still there. Matched low-confidence detections therefore KEEP A TRACK
+        ALIVE — reset its miss counter and move its box — but deliberately do
+        not increment `hits`, cannot start new tracks, and never reach the
+        caller as alarm candidates. The confidence floor still decides what
+        may alarm; this only decides what may keep being watched.
+
+        Returns the number of tracks refreshed, for the ablation's accounting.
+        """
+        refreshed = 0
+        candidates = [t for t in self.tracks if t.misses > 0]
+        for detection in sorted(detections, key=lambda d: d.confidence,
+                                reverse=True):
+            best_track: Optional[Track] = None
+            best_iou = self.iou_threshold
+            for track in candidates:
+                if track.hazard != detection.hazard.value:
+                    continue
+                iou = detection.box.iou(track.box)
+                if iou >= best_iou:
+                    best_iou, best_track = iou, track
+            if best_track is not None:
+                best_track.box = detection.box
+                best_track.last_frame = detection.frame_index
+                best_track.last_time = detection.timestamp
+                best_track.misses = 0
+                candidates.remove(best_track)
+                refreshed += 1
+        return refreshed
 
     def reset(self) -> None:
         """Clear all state. Call between videos so one clip cannot leak

@@ -111,6 +111,18 @@ class ValidatorConfig:
     min_frames: int = 3                  # consecutive-ish frames before trusting
     track_iou: float = 0.2
     max_misses: int = 5
+    #: ByteTrack-style second-stage association (Zhang et al., ECCV 2022):
+    #: detections below the confidence floor may keep an existing track ALIVE
+    #: (reset its misses) but never increment hits, start tracks, or alarm.
+    #: MEASURED AND NULL on both regimes this project has: identical FAR,
+    #: recall, latency and confirmed tracks on the sparse FIgLib ablation
+    #: (eval/run_ablation.py, the "+ LC assoc" row) AND on the dense 8 fps
+    #: SeaDronesSee sequence — max_misses already bridges the gaps that
+    #: second-stage association exists to bridge. Stays default-off as a
+    #: documented negative result with its reproduction path, not a feature.
+    low_confidence_association: bool = False
+    #: Floor for second-stage candidates, to keep pure noise out of stage 2.
+    association_floor: float = 0.05
 
     # Level 3 — per-location cooldown
     enable_cooldown: bool = True
@@ -190,6 +202,7 @@ class TemporalValidator:
     ) -> list[Event]:
         """Run the full cascade over one frame's detections."""
         survivors: list[Detection] = []
+        below_floor: list[Detection] = []
 
         # --- Level 1: stateless, cheapest first ----------------------- #
         for detection in detections:
@@ -198,6 +211,8 @@ class TemporalValidator:
             self.stats["confidence"].seen += 1
             if self.config.enable_confidence and not self._check_confidence(detection):
                 detection.rejected_by = "confidence"
+                if detection.confidence >= self.config.association_floor:
+                    below_floor.append(detection)
                 continue
             self.stats["confidence"].passed += 1
 
@@ -205,6 +220,10 @@ class TemporalValidator:
 
         # --- Level 2: persistence over tracks ------------------------- #
         pairs = self.tracker.update(survivors, frame_index)
+        if self.config.low_confidence_association and below_floor:
+            # Below-floor detections may keep an existing track alive but can
+            # never alarm, add hits, or start tracks (see tracker.refresh).
+            self.tracker.refresh(below_floor, frame_index)
         events: list[Event] = []
 
         for detection, track in pairs:

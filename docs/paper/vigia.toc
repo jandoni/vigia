@@ -35,40 +35,40 @@
 \contentsline {subsection}{\numberline {4.6}Class merging}{11}{subsection.4.6}%
 \contentsline {section}{\numberline {5}Detectors}{11}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Fire and smoke}{11}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Flood and water level}{12}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.2}Flood and water level}{13}{subsection.5.2}%
 \contentsline {subsubsection}{\numberline {5.2.1}The aerial variant}{14}{subsubsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.3}People in water}{14}{subsection.5.3}%
 \contentsline {subsection}{\numberline {5.4}Trapped people and building access}{15}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Road incidents}{16}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.5}Road incidents}{17}{subsection.5.5}%
 \contentsline {section}{\numberline {6}The temporal validator}{18}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Rationale}{18}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}The cascade}{18}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}The cascade earned its shape: two levels built, measured, removed}{18}{subsection.6.3}%
 \contentsline {subsection}{\numberline {6.4}Filtering and deduplication are different claims}{19}{subsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}Does it reduce false alarms?}{20}{subsection.6.5}%
-\contentsline {subsection}{\numberline {6.6}The obvious baseline, run against ourselves}{20}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.5}Does it reduce false alarms?}{21}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}The obvious baseline, run against ourselves}{21}{subsection.6.6}%
 \contentsline {subsubsection}{\numberline {6.6.1}What the control does and does not establish}{21}{subsubsection.6.6.1}%
-\contentsline {subsection}{\numberline {6.7}The latency cost, in closed form}{21}{subsection.6.7}%
+\contentsline {subsection}{\numberline {6.7}The latency cost, in closed form}{22}{subsection.6.7}%
 \contentsline {subsection}{\numberline {6.8}Hazard-agnosticism, tested and enforced}{22}{subsection.6.8}%
-\contentsline {section}{\numberline {7}The anticipatory flood signal}{22}{section.7}%
-\contentsline {paragraph}{Not a novel contribution, and read this before describing it as one.}{22}{section.7}%
+\contentsline {section}{\numberline {7}The anticipatory flood signal}{23}{section.7}%
+\contentsline {paragraph}{Not a novel contribution, and read this before describing it as one.}{23}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Two signals}{23}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Windowed least squares}{23}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.2}Windowed least squares}{24}{subsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Page--Hinkley change detection}{24}{subsection.7.3}%
 \contentsline {subsection}{\numberline {7.4}Calibration matters more than the algorithm}{24}{subsection.7.4}%
 \contentsline {subsection}{\numberline {7.5}Compared on real cameras}{25}{subsection.7.5}%
 \contentsline {subsection}{\numberline {7.6}Ground truth the other footage does not have}{25}{subsection.7.6}%
 \contentsline {section}{\numberline {8}Scene routing on the upload path}{25}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Two approaches that did not work}{25}{subsection.8.1}%
-\contentsline {paragraph}{Asking the detectors.}{25}{subsection.8.1}%
-\contentsline {paragraph}{Asking the user.}{25}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}A classifier trained for this question}{25}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.1}Two approaches that did not work}{26}{subsection.8.1}%
+\contentsline {paragraph}{Asking the detectors.}{26}{subsection.8.1}%
+\contentsline {paragraph}{Asking the user.}{26}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}A classifier trained for this question}{26}{subsection.8.2}%
 \contentsline {subsection}{\numberline {8.3}How that figure should be read}{26}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}This does not overturn Tier 0}{26}{subsection.8.4}%
-\contentsline {section}{\numberline {9}Evaluation methodology}{26}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Commitments}{26}{subsection.9.1}%
+\contentsline {subsection}{\numberline {8.4}This does not overturn Tier 0}{27}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Evaluation methodology}{27}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Commitments}{27}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}Reproducibility}{27}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Execution backends}{27}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.3}Execution backends}{28}{subsection.9.3}%
 \contentsline {subsection}{\numberline {9.4}Demonstration material}{28}{subsection.9.4}%
 \contentsline {section}{\numberline {10}Consolidated results}{29}{section.10}%
 \contentsline {section}{\numberline {11}Attribution and credits}{29}{section.11}%
@@ -76,12 +76,12 @@
 \contentsline {subsection}{\numberline {11.2}Runtime dependencies}{29}{subsection.11.2}%
 \contentsline {section}{\numberline {12}Conclusion}{32}{section.12}%
 \contentsline {subsection}{\numberline {12.1}Findings that travel}{32}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Outstanding work}{32}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.2}Outstanding work}{33}{subsection.12.2}%
 \contentsline {paragraph}{Data and code availability.}{33}{Item.21}%
 \contentsline {paragraph}{Acknowledgments.}{33}{Item.21}%
-\contentsline {section}{\numberline {A}Reproducibility}{33}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}How this document is built}{33}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}The three guards}{33}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Reference hardware}{33}{subsection.A.3}%
+\contentsline {section}{\numberline {A}Reproducibility}{34}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}How this document is built}{34}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}The three guards}{34}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Reference hardware}{34}{subsection.A.3}%
 \contentsline {subsection}{\numberline {A.4}Data acquisition}{34}{subsection.A.4}%
 \contentsline {section}{\numberline {B}Revision history}{34}{appendix.B}%
