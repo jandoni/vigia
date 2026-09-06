@@ -2,6 +2,15 @@
 
 **Gated multi-hazard detection with shared temporal validation for municipal cameras.**
 
+![Raw detector against validated output on a SeaDronesSee flight sequence](docs/media/hero.gif)
+
+*Left: every detection the raw detector proposes — what every showcase demo
+shows. Right: what survives validation and actually reaches a person. On this
+clip: 451 proposals, 59 alerts. Rendered deterministically by
+`scripts/record_demo.py --split`; more videos in
+[`docs/media/`](docs/media/). Footage: SeaDronesSee (CC0), University of
+Tübingen.*
+
 Off-the-shelf hazard detectors are sensitive by design and consequently alarm
 constantly. Measured on PyroNear's own validation split, their published fire
 detector raises an alarm on **71% of frames containing no smoke**. That is not a

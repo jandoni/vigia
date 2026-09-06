@@ -4,6 +4,26 @@
 One subsection per hazard. Each names the people whose work it uses, states
 what we changed, and reports only figures we measured ourselves; figures
 published by the original authors are listed separately and attributed.
+\Cref{fig:qualitative} shows one annotated frame per hazard, drawn by the
+same overlay the running system uses.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{qualitative.pdf}
+\caption{Qualitative results, one frame per hazard, rendered by
+\texttt{scripts/make\_qualitative\_figure.py} under the same licence gating
+as every published artefact. (a)~Wildfire smoke confirmed at persistence~3 on
+a HPWREN FIgLib ignition sequence (HPWREN, UC~San Diego — attribution
+required). (b)~Flood: the segmentation mask with its boundary, and the
+confirmed regions, on a USGS streamgage camera during the August 2024 Walnut
+Creek flood (public domain). (c)~Seven people in open water confirmed
+simultaneously (SeaDronesSee, CC0). (d)~Building access is \emph{detector
+output only}, shown at confidence $\ge 0.45$ for legibility — its released
+footage has no temporal continuity, so no confirmed state exists to show
+(\cref{sec:demo}); DRespNeT, CC~BY~4.0, UAV imagery of the 2023 Türkiye
+earthquakes.}
+\label{fig:qualitative}
+\end{figure}
 
 Five hazards are integrated. Four are disaster hazards and carry the system's
 purpose; the fifth, road incidents, is retained explicitly as a generality
