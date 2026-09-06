@@ -53,6 +53,25 @@ hard-negative set of \FireNegatives{} images spanning 21 cameras
 its authors deliberately chose, assuming a downstream filter. VIGÍA is that
 filter.
 
+\subsection{Preliminary conclusions}
+\label{sec:preliminary}
+
+Because this is a preprint offered for discussion, the conclusions it reaches
+are stated here at the outset and revisited, with their qualifications, in
+\cref{sec:conclusion}. In brief: a shared temporal validator makes published
+hazard detectors materially more usable on municipal cameras, but its value
+is narrower than a raw suppression figure suggests. On an easy negative set an
+oracle-tuned confidence threshold matches the validator's false-alarm rate
+more cheaply (\cref{sec:threshold-matched}); the validator's defensible
+advantages are that it reaches that operating point without access to the
+negative distribution, that it deduplicates alerts in a way no threshold can,
+and that one configuration transfers across four hazards with different
+physics. Four candidate improvements were measured and three rejected on the
+evidence, and every quantitative claim is bounded by the interval its sample
+supports. These findings are preliminary in the precise sense that several
+rest on small held-out samples, named individually in \cref{sec:outstanding};
+the paper is written so that a reader can locate, and disagree with, each one.
+
 \subsection{Research questions and contributions}
 \label{sec:contributions}
 

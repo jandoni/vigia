@@ -4,27 +4,6 @@
 One subsection per hazard. Each names the people whose work it uses, states
 what we changed, and reports only figures we measured ourselves; figures
 published by the original authors are listed separately and attributed.
-\Cref{fig:qualitative} shows one annotated frame per hazard, drawn by the
-same overlay the running system uses.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{qualitative.pdf}
-\caption{Qualitative results, one frame per hazard, rendered by
-\texttt{scripts/make\_qualitative\_figure.py} under the same licence gating
-as every published artefact. (a)~Wildfire smoke confirmed at persistence~3 on
-a HPWREN FIgLib ignition sequence (HPWREN, UC~San Diego — attribution
-required). (b)~Flood: the segmentation mask with its boundary, and the
-confirmed regions, on a USGS streamgage camera during the August 2024 Walnut
-Creek flood (public domain). (c)~Seven people in open water confirmed
-simultaneously (SeaDronesSee, CC0). (d)~Building access is \emph{detector
-output only}, shown at confidence $\ge 0.45$ for legibility — its released
-footage has no temporal continuity, so no confirmed state exists to show
-(\cref{sec:demo}); DRespNeT, CC~BY~4.0, UAV imagery of the 2023 Türkiye
-earthquakes.}
-\label{fig:qualitative}
-\end{figure}
-
 Five hazards are integrated. Four are disaster hazards and carry the system's
 purpose; the fifth, road incidents, is retained explicitly as a generality
 experiment for the validator, not a headline capability — a car
@@ -105,6 +84,18 @@ never quotable: its interval was \FireNarrowFARCI.
 
 \begin{figure}[htbp]
 \centering
+\includegraphics[width=0.78\textwidth]{qual_fire.png}
+\caption{A confirmed wildfire-smoke detection on a HPWREN FIgLib ignition
+sequence, rendered by the same overlay the running system uses
+(\texttt{vigia/web/overlay.py}). The plume at the right edge has persisted
+across three frames and is confirmed; the corner brackets and confidence chip
+are the operator-view encoding. Imagery: HPWREN, University of California San
+Diego — attribution required.}
+\label{fig:qual-fire}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=0.85\textwidth]{fire_negative_widening.pdf}
 \caption{The same detector at the same threshold, measured against
 \FireNarrowNegatives{} negatives and then against \FireNegatives{}. Recall
@@ -167,6 +158,18 @@ Median latency, ms & \FloodLatency & M4 Pro, CPU provider \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{qual_flood.png}
+\caption{Confirmed flood on a USGS streamgage camera during the August 2024
+Walnut Creek event. The segmentation mask is shown with its boundary; the
+connected water regions above the minimum-area threshold are boxed and
+confirmed. Showing the mask, and not only the derived boxes, reflects that
+the detector's native output is a mask (\cref{sec:pooling}). Imagery: USGS,
+public domain.}
+\label{fig:qual-flood}
+\end{figure}
 
 \begin{recorded}{A deployment hazard in the export}
 PyTorch's ONNX exporter splits weights into a separate \texttt{.onnx.data}
@@ -301,6 +304,16 @@ detected — the same asymmetry that motivates $\beta = 2$ in
 \label{fig:sweep}
 \end{figure}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.72\textwidth]{qual_drowning.png}
+\caption{Seven people in open water confirmed simultaneously on a
+SeaDronesSee flight sequence. At these altitudes each swimmer is a handful of
+pixels, which is why the operating point favours recall and why sliced
+inference was tested (and rejected) above. Imagery: SeaDronesSee, CC0.}
+\label{fig:qual-drowning}
+\end{figure}
+
 \subsection{Trapped people and building access}
 \label{sec:building}
 
@@ -386,6 +399,18 @@ they hide a six-fold difference in whether the person was actually located.}
 \caption{Per-class $F_1$ on the held-out split at confidence $0.30$. Only
 \texttt{civilian} reaches the validator; the rest are operator context.}
 \label{fig:building-classes}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.72\textwidth]{qual_building.png}
+\caption{Building-access \emph{detector output only}, shown at confidence
+$\ge 0.45$ for legibility. Unlike the other three panels this shows no
+confirmed state: the released DRespNeT footage has no temporal continuity, so
+the validator cannot run on it (\cref{sec:demo}). This is the honest limit of
+this hazard, drawn rather than described. Imagery: DRespNeT, Cranfield
+University, CC~BY~4.0; UAV imagery of the 2023 Türkiye earthquakes.}
+\label{fig:qual-building}
 \end{figure}
 
 \subsection{Road incidents}

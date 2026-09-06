@@ -26,10 +26,6 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 import cv2                                                    # noqa: E402
-import matplotlib                                             # noqa: E402
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt                               # noqa: E402
-
 from vigia.pipeline import CameraPipeline                     # noqa: E402
 from vigia.registry import Camera, CameraContext              # noqa: E402
 from vigia.types import Frame, Hazard                         # noqa: E402
@@ -37,15 +33,6 @@ from vigia.web.overlay import TrailBuffer, draw               # noqa: E402
 
 CLIPS = REPO_ROOT / "clips"
 OUT = REPO_ROOT / "docs" / "figures"
-
-PANEL_TITLES = {
-    "fire": "(a) Wildfire smoke — confirmed at persistence 3",
-    "flood": "(b) Flood — confirmed, water mask and level",
-    "drowning": "(c) People in open water — confirmed",
-    "building_access": "(d) Building access — detector output only "
-                       "(no temporal validation possible on this footage)",
-}
-
 
 def best_confirmed_frame(spec: dict) -> tuple:
     """Replay the clip; keep the frame with the most confirmed events.
@@ -119,38 +106,32 @@ def detector_only_frame(spec: dict):
     return best["image"], best["count"]
 
 
+def save_panel(image, name: str) -> None:
+    """One annotated frame as a clean, high-quality image.
+
+    No matplotlib chrome and no burned-in title: each frame goes into its own
+    detector section with a formal LaTeX caption, so the panel must carry the
+    footage and nothing else. Written as PNG because a camera frame is raster
+    to begin with — wrapping a photograph in a vector container buys nothing.
+    """
+    OUT.mkdir(parents=True, exist_ok=True)
+    cv2.imwrite(str(OUT / f"{name}.png"), image,
+                [cv2.IMWRITE_PNG_COMPRESSION, 6])
+    print(f"wrote {OUT / f'{name}.png'}")
+
+
 def main() -> int:
     manifest = json.loads((CLIPS / "MANIFEST.json").read_text(encoding="utf-8"))
     specs = {s["hazard"]: s for s in manifest["clips"] if s["publishable"]}
 
-    panels, credits = {}, []
     for hazard in ("fire", "flood", "drowning"):
-        spec = specs[hazard]
-        image, count = best_confirmed_frame(spec)
+        image, count = best_confirmed_frame(specs[hazard])
         print(f"{hazard}: best frame has {count} confirmed event(s)")
-        panels[hazard] = image
-        credits.append(spec["attribution"])
-    spec = specs["building_access"]
-    panels["building_access"], n = detector_only_frame(spec)
-    print(f"building_access: {n} detections at conf 0.45 (detector only)")
-    credits.append(spec["attribution"])
+        save_panel(image, f"qual_{hazard}")
 
-    fig, axes = plt.subplots(2, 2, figsize=(10.5, 6.6))
-    fig.patch.set_facecolor("white")
-    for ax, hazard in zip(axes.flat,
-                          ("fire", "flood", "drowning", "building_access")):
-        ax.imshow(cv2.cvtColor(panels[hazard], cv2.COLOR_BGR2RGB))
-        ax.set_title(PANEL_TITLES[hazard], fontsize=9, loc="left", pad=6)
-        ax.axis("off")
-    fig.tight_layout(pad=1.2)
-    OUT.mkdir(parents=True, exist_ok=True)
-    for suffix, kwargs in ((".png", {"dpi": 190}), (".pdf", {})):
-        fig.savefig(OUT / f"qualitative{suffix}", bbox_inches="tight", **kwargs)
-    plt.close(fig)
-    print(f"wrote {OUT / 'qualitative.png'} and .pdf")
-    print("\ncredits for the caption:")
-    for credit in credits:
-        print(f"  - {credit}")
+    image, n = detector_only_frame(specs["building_access"])
+    print(f"building_access: {n} detections at conf 0.45 (detector only)")
+    save_panel(image, "qual_building")
     return 0
 
 
