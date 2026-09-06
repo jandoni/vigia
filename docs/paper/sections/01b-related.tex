@@ -14,6 +14,39 @@ question this paper measures is whether one untuned mechanism transfers
 across hazards, and what it buys over the baseline nobody reports against
 (\cref{sec:threshold-matched}).
 
+\paragraph{Learned smoke detection on the same benchmark.}
+The closest measurement setting to ours is
+SmokeyNet~\citep{dewangan2022smokeynet}, a spatiotemporal CNN--LSTM--ViT
+model trained \emph{on FIgLib itself} — the archive our ablation and control
+experiments draw their sequences from. SmokeyNet attacks the problem from
+the opposite end: build a better detector by learning temporal structure
+inside the model. Our work is deliberately complementary: we take detectors
+\emph{as published} — including by operators who cannot retrain, which is
+the municipal reality — and measure what an external, model-agnostic
+validation layer adds. The two approaches compose: a stronger detector
+lowers the load on the cascade, and the cascade's control experiment
+(\cref{sec:threshold-matched}) applies to SmokeyNet-class models unchanged.
+Earlier CNN pipelines for fire and smoke in surveillance
+video~\citep{muhammad2018fire} report strong in-domain accuracy; our
+negative-set analysis (\cref{sec:fire}) shows why such figures do not
+transfer to the false-alarm regime that decides deployability.
+
+\paragraph{Temporal consistency in video object detection.}
+Enforcing agreement across frames is a classical accuracy device in video
+object detection: Seq-NMS rescores boxes along cross-frame
+chains~\citep{han2016seqnms}, tubelet methods link detections into
+tracks~\citep{kang2017tcnn}, and flow-guided aggregation warps features
+between frames~\citep{zhu2017fgfa}. Our persistence level shares the
+association machinery but not the objective: those methods spend temporal
+structure to \emph{raise mAP} on densely sampled video, whereas the
+validator spends it to \emph{withhold alarms}, must run on cameras sampling
+once a minute (where flow and feature aggregation are undefined), and is
+evaluated on false-alarm rate against detection latency rather than
+accuracy. The distinction matters because the failure modes differ: an
+accuracy-oriented linker that hallucinates continuity costs a few points of
+precision; an alarm-oriented one manufactures a confirmed emergency
+(\cref{sec:demo} records exactly this failure on shuffled stills).
+
 \paragraph{Gating and cascades over video.} NoScope~\citep{kang2017noscope}
 and CaTDet~\citep{mao2018catdet} established that cascaded gating over video
 buys 5--13$\times$ compute at minimal accuracy cost. VIGÍA's Tier~0 applies
@@ -40,6 +73,17 @@ them against each other on identical inputs, and derive a calibration rule
 (\cref{eq:ph-design}) the measurements bound. V-FloodNet~\citep{liang2022vfloodnet}
 provides the real-camera sequences that comparison runs on.
 
+\paragraph{Flood mapping and anticipation.}
+Deep flood mapping is a mature literature — \citet{bentivoglio2022flood}
+review it across satellite, aerial and ground imagery — but it is
+predominantly \emph{post-event}: knowing what is inundated, not what is
+filling. The anticipatory gap is the one \citet{choi2026pagehinkley} and our
+\cref{sec:flood-trend} both target from fixed cameras; our addition is the
+comparison of two trend mechanisms on identical real-camera inputs, a
+closed-form false-alarm floor for calibrating one of them
+(\cref{eq:ph-design}), and a first check of camera-derived coverage against
+an instrumented gauge (\cref{sec:gage}).
+
 \paragraph{Datasets and benchmarks.} The detectors integrated here rest on
 ATLANTIS~\citep{erfani2022atlantis}, FloodNet~\citep{rahnemoonfar2021floodnet},
 SeaDronesSee~\citep{varga2022seadronessee} and
@@ -48,13 +92,12 @@ and excluded on modality (bi-temporal satellite pairs, not cameras); and the
 $F_2$ headline convention follows RipVIS~\citep{ripvis2025}. Every dataset's
 licence and the exact use made of each appears in \cref{sec:attribution}.
 
-\paragraph{What this paper adds.} Against that background the contributions
-are: (i) a measured account of what a hazard-agnostic temporal validator
-buys and costs — including the threshold-matched control that partially
-deflates it and two levels removed on evidence; (ii) an enforcement
-architecture in which licence isolation, privacy boundaries, figure
-provenance and the validator's hazard-agnosticism are build-failing checks
-rather than prose; and (iii) an evaluation practice — intervals on every
-proportion, stratified metrics, filtering separated from deduplication, and
-a public register of the project's own retracted claims — that we argue is
-the transferable part.
+\paragraph{Position.} In genre this is a systems and measurement paper, in
+the tradition of the gating work above rather than of architecture papers:
+its claims are quantitative statements about what a mechanism buys, bounded
+by controls. What separates it from prior systems in this space is that the
+controls are turned inward — the threshold-matched baseline of
+\cref{sec:threshold-matched} is, to our knowledge, absent from every
+alarm-suppression system we compare against, and running it changed what
+this paper is allowed to claim. The specific contributions are enumerated in
+\cref{sec:contributions}.

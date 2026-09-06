@@ -53,6 +53,55 @@ hard-negative set of \FireNegatives{} images spanning 21 cameras
 its authors deliberately chose, assuming a downstream filter. VIGÍA is that
 filter.
 
+\subsection{Research questions and contributions}
+\label{sec:contributions}
+
+This is a measurement-driven systems paper: its purpose is not a new
+detection architecture but establishing, with controls, what a validation
+layer over published detectors is worth. Three questions organise it:
+
+\begin{description}[leftmargin=3.2em,style=sameline,font=\normalfont\bfseries]
+  \item[RQ1] What does temporal validation buy over the trivial alternative —
+        raising the detector's confidence threshold — and at what cost?
+        (\cref{sec:validator}, especially the control in
+        \cref{sec:threshold-matched}.)
+  \item[RQ2] Does one untuned validation mechanism transfer across hazards
+        with different physics, and can that property be \emph{enforced}
+        rather than asserted? (\cref{sec:validator}, \cref{sec:architecture}.)
+  \item[RQ3] Which evaluation practices stop a small single-author system
+        from deceiving itself? (\cref{sec:metrics}, and the corrections
+        recorded throughout.)
+\end{description}
+
+The contributions, stated so they can be checked:
+
+\begin{enumerate}
+  \item \textbf{A threshold-matched control for alarm-suppression claims}
+        (\cref{sec:threshold-matched}): on easy negatives an oracle-tuned
+        floor dominates our own cascade — a finding we publish against
+        ourselves — while no floor survives curated hard negatives, and
+        deduplication is unreachable by any threshold. We argue this control
+        should be standard in the genre, and it is absent from the systems
+        we compare against.
+  \item \textbf{A measured decomposition of ``suppression'' into filtering
+        and deduplication} (\cref{eq:decomposition}), which differ by a
+        factor of eight between hazards; single suppression figures conflate
+        two different claims.
+  \item \textbf{A closed-form latency law for persistence},
+        $\mathbb{E}[\Delta t] = (N-1)/f$, matching measurement exactly and
+        making the recall/latency price of validation predictable before
+        deployment (\cref{sec:latency}).
+  \item \textbf{Negative results with mechanisms}: two cascade levels
+        removed on evidence — one inverting the safety property on severe
+        floods, one failing because fog is exactly as grey as smoke
+        (\cref{sec:removed-levels}) — plus a register of the project's own
+        corrected claims.
+  \item \textbf{An enforcement architecture}: licence isolation, a
+        no-biometrics boundary, viewpoint envelopes, figure provenance and
+        the validator's hazard-agnosticism held by build-failing checks, so
+        the paper's claims are continuously re-verified in public.
+\end{enumerate}
+
 \subsection{Scope and limitations}
 
 \begin{itemize}

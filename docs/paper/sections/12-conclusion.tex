@@ -20,6 +20,43 @@ transfers across hazards by configuration — at a closed-form latency cost
 suffices, does not pay. Two cascade levels that failed their measurements
 were removed rather than kept (\cref{sec:removed-levels}).
 
+\subsection{Findings that travel}
+\label{sec:findings}
+
+Distilled from the measurements, phrased for reuse beyond this system:
+
+\begin{enumerate}
+  \item \textbf{Report suppression as two numbers or not at all.} Filtering
+        and deduplication differ by a factor of eight between our hazards
+        (\cref{tab:decomposition}); one figure conflates a false-alarm claim
+        with alert housekeeping.
+  \item \textbf{Run the threshold-matched control before claiming alarm
+        reduction.} On easy negatives it beat our cascade; on hard negatives
+        nothing beats anything yet. Either result changes what may be
+        claimed, and it costs one afternoon on cached detections.
+  \item \textbf{Persistence has a price list:}
+        $\mathbb{E}[\Delta t] = (N-1)/f$. The latency cost of temporal
+        confirmation is a property of the camera's sampling rate, computable
+        before any data is collected.
+  \item \textbf{Pooled metrics flatter minority-critical classes.} Selecting
+        the aerial flood model on pooled IoU would have chosen a model
+        better at recognising dry ground (\cref{sec:pooling}); stratify on
+        the case the system exists for.
+  \item \textbf{Appearance priors fail where the confuser shares the
+        property} — fog is as grey as smoke — and geometric priors can
+        invert safety on the severe tail (the worst floods are the largest).
+        Measure each level of a life-safety cascade on the negatives it will
+        actually face, and be willing to delete.
+  \item \textbf{Image-level metrics can hide a dead detector.} A label-shift
+        bug survived image-level evaluation at precision $0.83$ and was
+        exposed only at box level, at recall $0.002$
+        (\cref{sec:twolevels}). Evaluate at both levels, always.
+  \item \textbf{Interval or it didn't happen.} At $n = 12$ images, a recall
+        of $1.000$ means $[0.757, 1.000]$ (\cref{tab:intervals}); reporting
+        the interval is the difference between a measurement and an
+        anecdote.
+\end{enumerate}
+
 We would argue the transferable contribution is the practice: every
 proportion carrying the interval its sample supports, stratified metrics
 where pooling flatters, suppression decomposed into the claim it supports
