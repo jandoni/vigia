@@ -81,8 +81,8 @@
 \contentsline {paragraph}{Data and code availability.}{36}{Item.21}%
 \contentsline {paragraph}{Acknowledgments.}{37}{Item.21}%
 \contentsline {section}{\numberline {A}Reproducibility}{37}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}How this document is built}{37}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.1}Reproducing the results}{37}{subsection.A.1}%
 \contentsline {subsection}{\numberline {A.2}The three guards}{37}{subsection.A.2}%
 \contentsline {subsection}{\numberline {A.3}Reference hardware}{37}{subsection.A.3}%
 \contentsline {subsection}{\numberline {A.4}Data acquisition}{37}{subsection.A.4}%
-\contentsline {section}{\numberline {B}Revision history}{37}{appendix.B}%
+\contentsline {section}{\numberline {B}Corrections and version note}{37}{appendix.B}%

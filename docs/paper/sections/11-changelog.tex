@@ -1,37 +1,38 @@
-\section{Revision history}
+\section{Corrections and version note}
 \label{sec:changelog}
 
-Every entry that adds or revises a measured figure is recorded here, so the
-provenance of each number in this document can be traced.
+This is version~\DocVersion{} of the preprint. In keeping with the paper's
+commitment to reporting its own errors, the substantive corrections made to
+quantitative claims during preparation are recorded here, so that a reader
+encountering an earlier draft can see what changed and why.
 
-\begin{table}[htbp]
-\centering\small
-\caption{Revision history. Dates are 2026.}
-\label{tab:changelog}
-\begin{tabularx}{\textwidth}{l l L}
-\toprule
-Ver. & Date & Change \\
-\midrule
-0.1 & 1 Sep & Project foundation: ONNX-only runtime, licence guard, model registry, fetcher. Fire detector integrated and first baseline measured. \\
-0.2 & 1 Sep & Temporal validator implemented with five levels and an $\iou$ tracker. Ablation measured: \FARReduction\,\% false-alarm reduction at persistence 3 with no loss of fires detected. Per-level ablation showed size plausibility contributes nothing. \\
-0.3 & 1 Sep & Road-incident detector integrated via isolated ONNX export. Hazard-agnostic transfer measured across two hazards and enforced by an AST-based test. Scope revised: building access and people-in-water added, pool drowning removed. \\
-0.4 & 1 Sep & ATLANTIS acquired; class mapping derived empirically from the masks. Water level and rate-of-rise implemented and tested. Size-plausibility level removed after measurement across three hazards; all prior results unchanged, confirming it contributed nothing. \\
-0.5 & 1 Sep & All four hazards measured. Flood segmenter trained on ATLANTIS. People-in-water integrated, where a label-shift bug reported boats as swimmers while discarding real swimmers — caught only by box-level evaluation. Building access trained on DRespNeT. \\
-0.6 & 2 Sep & The system became a system: context gate, runtime pipeline, egress boundary and operator view, with privacy enforced by a build-failing guard. Demonstration recorded deterministically for all four hazards, every clip publicly licensed. Results freeze added. Fire baseline re-measured on \FireNegatives{} negatives instead of \FireNarrowNegatives{}: the false-alarm rate fell from \FireNarrowFAR{} to \FireImageFAR{} and every quotation was corrected. Flood footage moved to public-domain USGS gauge cameras. \\
-0.7 & 2 Sep & Building access rebuilt on the DRespNeT authors' own published weights. Civilian box recall moved from $0.141$ to \BuildingBoxRecall, turning the weakest component in the system into one of the strongest. The claim that building access had a usable temporal sequence was retracted. \\
-0.8 & 3 Sep & Aerial flood segmenter trained on FloodNet and routed by viewpoint, with the stratified/pooled distinction of \cref{sec:pooling} made explicit. Scene router trained for the upload path (\cref{sec:routing}). \\
-0.9 & 3 Sep & Live public cameras integrated through the same pipeline (\cref{sec:livecameras}). A blocking-endpoint defect was found and fixed: analysing a clip had stalled every live stream in the process for the duration. \\
-1.0 & 3 Sep & Documentation rebuilt in \LaTeX{} with the mathematics stated explicitly (\cref{sec:metrics}), interval estimation added to every proportion, the persistence-latency identity derived (\cref{eq:latency}), and the Page--Hinkley calibration compared against a closed-form model (\cref{tab:ph}). Every figure is now generated from the results files rather than typed. \\
-\DocVersion & 4 Sep & The two remaining evidence gaps in the cascade were closed by
-measurement, and both cut against the earlier draft. The threshold-matched
-control (\cref{sec:threshold-matched}) showed an oracle-tuned confidence
-floor dominating the cascade on the FIgLib negative set; the headline claim
-was re-scoped accordingly, in the abstract and everywhere else. The colour
-prior — the one level never active in any reported experiment — was measured
-across five cutoffs on stills and sequences, found to trade recall for
-false-alarm rate at every point because fog and smoke are both grey, and
-removed like the size level before it (\cref{sec:removed-levels}), with a
-regression test barring its return. \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\begin{itemize}
+  \item \textbf{Fire false-alarm rate.} The motivating figure — that the
+        published fire detector alarms on frames containing no smoke — was
+        first measured on \FireNarrowNegatives{} negatives and carried a
+        standing caveat that it was indicative. Widening the negative set to
+        \FireNegatives{} images across 21 cameras moved the image-level
+        false-alarm rate from \FireNarrowFAR{} to \FireImageFAR{}; every
+        quotation was corrected to the wider figure
+        (\cref{sec:fire}, \cref{tab:intervals}).
+  \item \textbf{Building-access detector.} An initial detector trained in-house
+        reached civilian box recall of $0.141$. It was replaced by the
+        dataset authors' published weights (\BuildingBoxRecall) once the
+        licence exposure was found to be containable, and the earlier figure
+        is reported alongside the replacement rather than removed
+        (\cref{sec:building}).
+  \item \textbf{Retracted temporal claim.} An earlier draft described the
+        building-access footage as a usable time sequence; inspection of the
+        authors' raw frames showed 362 scene cuts across 615 frames, and the
+        claim was withdrawn (\cref{sec:demo}). The hazard is now presented as
+        detector-only (\cref{fig:qual-building}).
+  \item \textbf{Suppression headline.} The single ``suppression'' figure was
+        decomposed into filtering and deduplication once the two were found to
+        differ by a factor of eight between hazards, and the false-alarm claim
+        was scoped to the filtering component alone
+        (\cref{sec:decomposition}).
+  \item \textbf{Threshold-matched control.} The claim that the validator
+        reduces false alarms was re-scoped after a control experiment showed
+        an oracle-tuned confidence threshold matching its false-alarm rate
+        more cheaply on the easy negative set (\cref{sec:threshold-matched}).
+\end{itemize}

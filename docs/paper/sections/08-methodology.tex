@@ -35,8 +35,8 @@ Detection is run once and cached to JSONL; validator configurations are then
 replayed against the cache. Every configuration therefore sees byte-identical
 detector output, so any difference in outcome is attributable to the validator
 and not to run-to-run variation. All results files are committed under
-\texttt{eval/results/}, and every figure in this document is generated from
-them (\cref{sec:reproducibility}).
+\texttt{eval/results/}, and every reported figure traces to one of them
+(\cref{sec:reproducibility}).
 
 A third guard, \texttt{tools/freeze\_results.py}, checks each published figure
 against the results file it cites and fails the build if the two disagree.

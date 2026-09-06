@@ -1,12 +1,9 @@
 % ===========================================================================
 %  VIGÍA — Multi-Hazard Early Detection for Existing Camera Infrastructure
 %
-%  BUILD:  python docs/build_paper.py        (or: make paper)
-%
-%  Do not compile this file directly and do not edit generated/numbers.tex.
-%  The build regenerates the figures from eval/results/, writes the numbers
-%  macros from the same files, and only then runs the typesetter — so a
-%  chart, a table and a sentence cannot disagree about a measurement.
+%  Every reported figure is drawn from the committed measurement files under
+%  eval/results/, so a chart, a table and a sentence cannot disagree about a
+%  measurement. See the reproducibility appendix.
 % ===========================================================================
 \documentclass[11pt,a4paper]{article}
 
@@ -54,9 +51,10 @@ omitted. Proportions carry the interval their sample size supports
 (\cref{sec:metrics}); several of this project's headline numbers rest on
 small samples, and a point estimate alone would overstate them.\par
 \vspace{6pt}
-\noindent Numbers in this document are not typed. They are generated from
-\texttt{eval/results/*.json} by \texttt{docs/build\_paper.py}, so a
-re-measurement changes the document by rebuilding it.
+\noindent Every quantitative claim traces to a committed measurement file
+under \texttt{eval/results/}, produced by a named evaluation script and
+checked against the text by an automated guard (\cref{sec:reproducibility}).
+Nothing reported here is entered by hand.
 \end{minipage}
 
 \vspace{1.2cm}

@@ -1,21 +1,24 @@
 \section{Reproducibility}
 \label{sec:reproducibility}
 
-\subsection{How this document is built}
+\subsection{Reproducing the results}
 
-No figure in this document is typed. \texttt{docs/build\_paper.py} reads
-\texttt{eval/results/*.json}, regenerates every chart from the same files,
-writes \texttt{generated/numbers.tex} as a set of macros, and only then runs
-the typesetter. A measurement therefore changes this document by rebuilding
-it. Two derived quantities — the Wilson intervals of \cref{eq:wilson} and the
-Page--Hinkley model of \cref{eq:ph-far} — are computed at build time rather
-than stored, because they are properties of the measurements rather than new
-measurements.
+Every quantitative claim in this paper traces to a committed measurement file
+under \texttt{eval/results/}, each produced by an evaluation script named in
+the relevant section. Detection is run once and cached, and validator
+configurations replay against that cache, so a reported figure depends only on
+the model and the data, not on the run. Two derived quantities — the Wilson
+intervals of \cref{eq:wilson} and the Page--Hinkley model of
+\cref{eq:ph-far} — are computed from the measurements rather than measured,
+and their derivations are given in full where they appear.
+
+The reference implementation, the evaluation harnesses, and the measurement
+files are released together, so each table and figure can be regenerated from
+the same inputs. A single command runs the licence guard, the privacy guard,
+the results freeze and the test suite:
 
 \begin{verbatim}
-make paper        # figures -> numbers -> LaTeX -> vigia.pdf
-make check        # licence guard, privacy guard, results freeze, tests
-make dev          # the whole demonstration, one command
+make check
 \end{verbatim}
 
 \subsection{The three guards}
