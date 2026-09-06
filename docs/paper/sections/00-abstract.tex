@@ -20,7 +20,7 @@ Across \AblationNegativeSequences{} negative sequences the validator reduces
 the false-alarm rate from \RawFAR{} to \ValidatedFAR{}, a \FARReduction\,\%
 reduction, while still detecting every one of the \FiresTotal{} ignition
 sequences, at a cost of \AddedMinutesToDetect{} minutes of additional latency
-that this document derives in closed form rather than only observing. We then
+which this document derives in closed form instead of leaving as an observation. We then
 run the control most system papers omit — matching that false-alarm rate by
 simply raising the detector's confidence floor — and report that on this
 negative set an oracle-tuned floor achieves the same rate at higher recall
@@ -32,7 +32,7 @@ only by configuration, transfers across hazards whose detectors were built by
 different people, on different data, for phenomena with different physics; a
 build-failing test enforces that no hazard-specific branch exists in it.
 
-Two commitments are enforced in code rather than stated in prose. The runtime
+Two commitments are enforced in code, not stated in prose. The runtime
 imports no AGPL-licensed package, and no biometric identification code path
 exists; both are checked by guards that parse the source tree and fail the
 build. A third guard checks every published figure against the results file it

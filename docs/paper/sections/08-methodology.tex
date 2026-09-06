@@ -73,17 +73,17 @@ The ONNX export parity check originally traced the model on random noise. A
 trained detector finds nothing in random noise, so the check compared zero
 detections against zero detections and passed unconditionally. It now traces a
 real frame and reports \textsc{unverified} if that frame yields no detections,
-rather than passing quietly.
+instead of passing quietly.
 \end{recorded}
 
 \subsection{Demonstration material}
 \label{sec:demo}
 
-Demonstration clips are treated as evidence rather than decoration, and are
+Demonstration clips are treated as evidence, not decoration, and are
 subject to the same gating as any published figure. One clip per hazard is
 assembled from local data in sorted order at a fixed frame rate, so a clip
 built twice is identical and a run over it reproduces exactly. The recording
-is rendered directly from the pipeline rather than screen-captured, which
+is rendered directly from the pipeline instead of screen-captured, which
 removes any dependence on a browser, a display or a network at presentation
 time.
 
@@ -97,7 +97,7 @@ one that may.
   \item \textbf{The licence permits publication.} The source datasets carry
         four different licences and one forbids redistribution outright. Where
         a licence permits publication subject to attribution, the credit is
-        burned onto every frame rather than left to a caption that may be
+        burned onto every frame not left to a caption that may be
         cropped away.
   \item \textbf{The frames are a genuine time sequence.} The validator is
         temporal, so demonstrating it on footage without temporal continuity
@@ -111,7 +111,7 @@ one that may.
 The first people-in-water clip was 60 unrelated validation stills stitched
 into a video. It played correctly and produced confident figures — 156
 detections proposed, 16 confirmed, 121 rejected by persistence — all of them
-artefacts. Continuity is now verified rather than assumed: adjacent-frame
+artefacts. Continuity is now verified, not assumed: adjacent-frame
 histogram correlation is about $0.997$ on genuine footage against about
 $0.015$ for unrelated frames from the same split, and the fetch script refuses
 to report success unless that separation holds. On real sequential footage the
@@ -154,7 +154,7 @@ Building access & DRespNeT stills — \emph{no sequence exists}~\citep{sirma2025
 \end{tabularx}
 \end{table}
 
-Flood was solved by changing source rather than by relaxing the rule. The USGS
+Flood was solved by changing source, not by relaxing the rule. The USGS
 operates over 1{,}300 streamgage cameras whose imagery is unrestricted, and
 they are the right kind of footage as well as the right licence: fixed mount,
 pointed at water, sampled roughly hourly — the same sparse regime the trend
@@ -162,5 +162,5 @@ detection was calibrated for, and the regime in which a fixed
 \SI{300}{\second} window originally failed outright (\cref{sec:flood-trend}).
 Only daylight frames are used: these cameras switch to infrared at night, and
 on night frames the segmenter tints sky and vegetation as water. That is the
-detector's declared envelope, and the fetch script enforces it rather than
+detector's declared envelope, and the fetch script enforces it instead of
 restating it.

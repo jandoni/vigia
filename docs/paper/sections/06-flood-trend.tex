@@ -44,7 +44,7 @@ that camera.
 
 \subsection{Windowed least squares}
 
-Rate of rise is fitted rather than differenced. Frame-to-frame differencing of
+Rate of rise is fitted, not differenced. Frame-to-frame differencing of
 a noisy segmentation mask produces a rate estimate dominated by segmentation
 jitter; an ordinary least-squares slope over a window is stable enough to
 threshold on. Over the readings in a trailing window $\mathcal{W}$,
@@ -78,7 +78,7 @@ could never contain two frames. Every synthetic test passed throughout. A time
 window is the wrong abstraction when the sampling rate is a property of the
 deployment, so the window is now adaptive: it admits at least four sampling
 intervals, measured from the observed median gap. Page--Hinkley, being
-sample-based rather than time-based, was unaffected.
+sample-based, not time-based, was unaffected.
 \end{recorded}
 
 \subsection{Page--Hinkley change detection}
@@ -149,7 +149,7 @@ latency for zero false alarms at typical segmentation noise: detection latency
 for a genuine rise is 11, 7 and 4 samples at 0.5\,\%, 1\,\% and 3\,\% per
 frame respectively. A camera with noisier segmentation needs a higher
 threshold, and \cref{eq:ph-design} says roughly how much higher — but it
-should be measured per camera rather than assumed.
+should be measured per camera, not assumed.
 
 \subsection{Compared on real cameras}
 
@@ -158,7 +158,7 @@ in the V-FloodNet dataset~\citep{liang2022vfloodnet}: real fixed cameras, real
 water, real segmentation noise. The two win on different sampling regimes —
 the windowed fit is faster on densely sampled cameras, Page--Hinkley on
 sparsely sampled ones, because it counts samples rather than seconds. Neither
-is claimed as ours, and the comparison is reported rather than a winner
+is claimed as ours, and the comparison is reported; no winner is
 declared.
 
 \subsection{Ground truth the other footage does not have}
@@ -172,7 +172,7 @@ Raleigh, 8 August 2024, gauge rising to \SI{9.00}{\foot} and receding to
 height at $r = +0.50$.
 
 That is a real but moderate relationship, and it is reported because it
-\emph{qualifies} the trend claim rather than supporting it unconditionally.
+\emph{qualifies} the trend claim instead of supporting it unconditionally.
 Coverage tracks the water level between a flood day and a receded day, but
 within a day at near-constant level the coverage still varies by more than the
 level does. Restricting to midday frames does not improve it ($r = +0.46$ to

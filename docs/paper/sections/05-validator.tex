@@ -42,7 +42,7 @@ maximising $\iou$ above a threshold $\tau_t$, or starts a new one, and a track
 is dropped after $M$ consecutive misses. Every level is independently
 switchable. That is not a convenience — it is what allows the ablation of
 \cref{sec:ablation} to be produced by the same code that runs in production,
-rather than by a separate analysis script that might diverge from it.
+and not by a separate analysis script that might diverge from it.
 
 \subsection{The cascade earned its shape: two levels built, measured, removed}
 \label{sec:removed-levels}
@@ -197,7 +197,7 @@ ablation or a dense \SI{8}{fps} sequence, because the tracker's miss
 tolerance already bridges the gaps it exists to bridge. It ships disabled, as
 a documented null result.
 
-Two costs are paid for that, and both are in \cref{tab:ablation} rather than
+Two costs are paid for that, and both sit in \cref{tab:ablation}, not
 in a footnote. The median time to first alert rises from
 \RawMinutesToDetect{} to \MedianMinutesToDetect{} minutes, and frame-level
 recall falls from \RawFireRecall{} to \ValidatedFireRecall{} — the frames
@@ -245,7 +245,7 @@ the reason the claim in \cref{sec:scoped-claim} is scoped the way it is.}
 The control establishes that \textbf{per-frame false-alarm reduction on this
 negative set is not the cascade's contribution}: a tuned threshold does it
 more cheaply. Three things bound how far that conclusion travels, each a
-fact rather than a defence:
+fact, none a defence:
 
 \begin{itemize}
   \item \textbf{The matched floor is tuned on the evaluation negatives.} The

@@ -10,7 +10,7 @@ The system stands: five detectors from four independent sources run behind
 one declarative gate with enforced viewpoint envelopes, one temporal
 validator confirmed to contain no hazard-specific branch, a privacy boundary
 with no biometric code path, and an AGPL-free runtime of four packages —
-each property held by a build-failing guard rather than a promise. The
+each property held by a build-failing guard, not a promise. The
 validator's value, after the controls of \cref{sec:threshold-matched}, is
 scoped to what the measurements support: it reaches an oracle-tuned
 threshold's false-alarm rate \emph{without} access to the negative
@@ -18,7 +18,7 @@ distribution, it deduplicates alerts as no per-frame threshold can, and it
 transfers across hazards by configuration — at a closed-form latency cost
 (\cref{eq:latency}) and a measured recall cost that thresholding, where it
 suffices, does not pay. Two cascade levels that failed their measurements
-were removed rather than kept (\cref{sec:removed-levels}).
+were removed, not kept (\cref{sec:removed-levels}).
 
 \subsection{Findings that travel}
 \label{sec:findings}

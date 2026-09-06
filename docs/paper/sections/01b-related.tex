@@ -41,7 +41,7 @@ association machinery but not the objective: those methods spend temporal
 structure to \emph{raise mAP} on densely sampled video, whereas the
 validator spends it to \emph{withhold alarms}, must run on cameras sampling
 once a minute (where flow and feature aggregation are undefined), and is
-evaluated on false-alarm rate against detection latency rather than
+evaluated on false-alarm rate against detection latency, not
 accuracy. The distinction matters because the failure modes differ: an
 accuracy-oriented linker that hallucinates continuity costs a few points of
 precision; an alarm-oriented one manufactures a confirmed emergency
@@ -50,7 +50,7 @@ precision; an alarm-oriented one manufactures a confirmed emergency
 \paragraph{Gating and cascades over video.} NoScope~\citep{kang2017noscope}
 and CaTDet~\citep{mao2018catdet} established that cascaded gating over video
 buys 5--13$\times$ compute at minimal accuracy cost. VIGÍA's Tier~0 applies
-the same economics declaratively — by registered camera context rather than
+the same economics declaratively, by registered camera context rather than
 by learned routing — trading a classifier's silent misrouting failure for a
 YAML entry a human can audit (\cref{sec:gate}).
 

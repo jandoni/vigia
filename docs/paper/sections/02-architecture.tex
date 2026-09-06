@@ -146,7 +146,7 @@ and $\mathrm{CameraPipeline}(c)$ raises unless
 $\mathrm{adm}(c,d)$ holds for every $d \in \detectors(c)$.
 \end{definition}
 
-This was added after a measured failure rather than as a precaution.
+This was added after a measured failure, not as a precaution.
 
 \begin{recorded}{A confident wrong number}
 The flood segmenter is trained on ATLANTIS~\citep{erfani2022atlantis}, which
@@ -157,13 +157,13 @@ water. It did not fail loudly. It returned a confident wrong number, which for
 a life-safety component is the worst available failure. Viewpoint is therefore
 declared on every camera and every detector, and the pipeline refuses the
 pairing before any model is loaded — the same reasoning as the licence and
-privacy guards: make the mistake impossible rather than documented. A test
+privacy guards: make the mistake impossible instead of documented. A test
 fails the build if any detector stops declaring an envelope, so a sixth hazard
 cannot be added without stating where it works.
 \end{recorded}
 
 \begin{recorded}{Failing loudly}
-An unregistered camera raises rather than returning an empty hazard set.
+An unregistered camera raises instead of returning an empty hazard set.
 Returning an empty set would turn a typo into a camera that watches for
 nothing and reports success — the worst available failure mode for this
 system. Enforced by \texttt{tests/test\_registry.py}.
@@ -191,7 +191,7 @@ architecture. Any \texttt{.pt}~$\rightarrow$~\texttt{.onnx} conversion is an
 offline build step confined to \texttt{tools/}, executed in a separate virtual
 environment.
 
-This is enforced automatically rather than by discipline:
+This is enforced automatically, not by discipline:
 \texttt{tools/check\_licence.py} parses every file under \texttt{vigia/} with
 Python's AST module and fails the build if a forbidden package is imported. It
 parses rather than greps, so a comment mentioning the package does not trip
@@ -206,7 +206,7 @@ high-risk, and Article 5(1)(h) prohibits real-time remote biometric
 identification in publicly accessible spaces for law enforcement, with narrow
 exceptions.
 
-VIGÍA identifies nobody, and this is structural rather than configured.
+VIGÍA identifies nobody, and this is structural, not configured.
 
 \begin{table}[htbp]
 \centering\small
@@ -349,9 +349,9 @@ browser's own decoder does the work; events are small JSON over a WebSocket.
 Frames never travel on the event channel. The reference
 system~\citep{multitasksystem} identifies
 Base64-over-WebSocket frame transport as its bottleneck and lists WebRTC as
-future work; separating the channels sidesteps that problem rather than
+future work; separating the channels sidesteps that problem instead of
 optimising it. The client falls back to polling if the socket drops, so the
-view degrades to slower rather than to frozen.
+view degrades to slower, never to frozen.
 
 The front end is vanilla JavaScript and CSS with no build step and no package
 manager, and the web framework is an optional dependency rather than a core
@@ -375,7 +375,7 @@ found in the server log and a direct client, not in the browser.
 \begin{recorded}{Blocking work on the event loop}
 Several HTTP endpoints were declared asynchronous while doing synchronous work
 — image decoding, and in one case a complete multi-second analysis of an
-uploaded clip. An asynchronous handler runs on the event loop rather than in a
+uploaded clip. An asynchronous handler runs on the event loop, not in a
 worker thread, so analysing a clip stalled every MJPEG stream and every event
 socket in the process for the duration, including the live public cameras of
 \cref{sec:livecameras}. The symptom presented as a slow interface rather than
@@ -393,9 +393,9 @@ streamgage camera network~\citep{usgshivis}, whose imagery is a work of the
 United States Government and therefore unrestricted, and HPWREN's real-time
 wildfire cameras~\citep{hpwren}, which permit publication subject to
 attribution. Both publish stills every one to five minutes rather than video,
-and that cadence is the deployment regime rather than a limitation of the
+and that cadence is the deployment regime, not a limitation of the
 demonstration — it is precisely why the flood trend detector of
-\cref{sec:flood-trend} counts samples rather than seconds.
+\cref{sec:flood-trend} counts samples, not seconds.
 
 Two properties of this path are worth stating because they are easy to get
 wrong. First, only genuinely new images are admitted: a repeated fetch of an
@@ -403,7 +403,7 @@ unchanged image is discarded, because handing the validator the same frame
 three times would satisfy a persistence-of-three test without the world having
 been observed three times, manufacturing a confirmation from a single
 observation. Second, no beach or resort webcam appears in the catalogue, and
-the reason is \cref{def:admissible} rather than licensing: a beach camera
+the reason is \cref{def:admissible}, not licensing: a beach camera
 looking along the sand is a \textsc{ground} view, while the people-in-water
 detector's envelope is aerial and elevated. The pairing is refused before a
 model is loaded.

@@ -27,7 +27,7 @@ earthquakes.}
 
 Five hazards are integrated. Four are disaster hazards and carry the system's
 purpose; the fifth, road incidents, is retained explicitly as a generality
-experiment for the validator rather than as a headline capability — a car
+experiment for the validator, not a headline capability — a car
 accident is an emergency, not a disaster. Its value is that it has completely
 different physics and timescales from wildfire, so a validator that works on
 both is demonstrably not tuned to one phenomenon.
@@ -294,7 +294,7 @@ detected — the same asymmetry that motivates $\beta = 2$ in
   \item[Envelope] Downward and oblique UAV views of earthquake-damaged urban
     blocks. Not validated for street-level views, interior imagery or night.
     Trained on 650 images, so generalisation to other disaster types and other
-    cities is unproven rather than assumed.
+    cities is unproven and treated as unproven.
 \end{description}
 
 The model predicts 28 classes; \cref{eq:merge} reduces them to five at the
@@ -387,11 +387,11 @@ footage and therefore cannot support a false-positive rate. The authors report
 mAP@50 of $0.826$ and accident-class recall of $0.855$ (\reported{}); we do
 not adopt those as ours.
 
-\begin{recorded}{A checkpoint choice recorded rather than silently made}
+\begin{recorded}{A checkpoint choice recorded, not silently made}
 The author's own inference script uses the \texttt{epoch14} checkpoint. On
 their four published test images, \texttt{epoch61} returns exactly one
 accident per image at confidence $0.58$--$0.70$, whereas \texttt{epoch14}
 returns three detections on one image. We use \texttt{epoch61} and record the
-reason here rather than leaving a future reader to wonder why the two
+reason here so a future reader need not wonder why the two
 disagree.
 \end{recorded}
