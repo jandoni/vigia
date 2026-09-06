@@ -125,6 +125,16 @@ CHECKS: list[tuple[str, str, str]] = [
     ("validator.threshold_matched", "cascade_recall",
      "cascade|fires|detection_rate"),
 
+    # sliced inference (SAHI) — measured and rejected
+    ("detector.sliced_inference", "baseline_recall",
+     "results|baseline_conf_0.3|box_level|recall"),
+    ("detector.sliced_inference", "sliced_recall",
+     "results|sliced_conf_0.3|box_level|recall"),
+    ("detector.sliced_inference", "sliced_precision",
+     "results|sliced_conf_0.3|box_level|precision"),
+    ("detector.sliced_inference", "sliced_image_far",
+     "results|sliced_conf_0.3|image_level|false_alarm_rate"),
+
     # colour prior — measured and removed
     ("validator.colour_prior", "stills_baseline_recall",
      "stills|results|colour off|recall"),

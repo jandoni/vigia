@@ -374,6 +374,26 @@ def collect() -> Macros:
             m.number("ZeroFARFloor", zero["floor"], 2, src)
             m.number("ZeroFARRecall", zero["fires"]["detection_rate"], 3, src)
 
+    # ------------------------------------------ sliced inference ---- #
+    sahi = load("sahi.json")
+    if sahi:
+        src = "eval/results/sahi.json"
+        base = sahi["results"]["baseline_conf_0.3"]
+        sliced = sahi["results"]["sliced_conf_0.3"]
+        m.number("SahiBaseRecall", base["box_level"]["recall"], 3, src)
+        m.number("SahiSlicedRecall", sliced["box_level"]["recall"], 3, src)
+        m.number("SahiBasePrecision", base["box_level"]["precision"], 3, src)
+        m.number("SahiSlicedPrecision", sliced["box_level"]["precision"], 3, src)
+        m.number("SahiBaseFAR", base["image_level"]["false_alarm_rate"], 3, src)
+        m.number("SahiSlicedFAR", sliced["image_level"]["false_alarm_rate"], 3, src)
+        m.number("SahiBaseLatency", base["median_latency_ms"], 1, src)
+        m.number("SahiSlicedLatency", sliced["median_latency_ms"], 1, src)
+        m.number("SahiLatencyFactor",
+                 sliced["median_latency_ms"] / base["median_latency_ms"], 0, src)
+        m.number("SahiFARFactor",
+                 sliced["image_level"]["false_alarm_rate"]
+                 / base["image_level"]["false_alarm_rate"], 0, src)
+
     # ------------------------------------------------ colour prior ---- #
     cp = load("colour_prior.json")
     if cp:

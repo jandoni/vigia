@@ -1,0 +1,111 @@
+{
+  "question": "does sliced inference (SAHI, Akyon et al. 2022) improve small-object recall enough to pay its latency bill?",
+  "method": "tiles of 512px at 20% overlap plus one full-frame pass, greedy NMS at IoU 0.5; identical images, labels and matching as eval/run_person_in_water_eval.py",
+  "dataset": "data/seadronessee/val, swimmer class only",
+  "results": {
+    "baseline_conf_0.3": {
+      "box_level": {
+        "true_positives": 1114,
+        "false_positives": 97,
+        "false_negatives": 104,
+        "true_negatives": 0,
+        "precision": 0.9199,
+        "recall": 0.9146,
+        "f1": 0.9172,
+        "f2": 0.9157,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 253,
+        "false_positives": 1,
+        "false_negatives": 2,
+        "true_negatives": 44,
+        "precision": 0.9961,
+        "recall": 0.9922,
+        "f1": 0.9941,
+        "f2": 0.9929,
+        "false_alarm_rate": 0.0222
+      },
+      "median_latency_ms": 52.2,
+      "images": 300
+    },
+    "baseline_conf_0.5": {
+      "box_level": {
+        "true_positives": 1057,
+        "false_positives": 50,
+        "false_negatives": 161,
+        "true_negatives": 0,
+        "precision": 0.9548,
+        "recall": 0.8678,
+        "f1": 0.9092,
+        "f2": 0.8839,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 245,
+        "false_positives": 0,
+        "false_negatives": 10,
+        "true_negatives": 45,
+        "precision": 1.0,
+        "recall": 0.9608,
+        "f1": 0.98,
+        "f2": 0.9684,
+        "false_alarm_rate": 0.0
+      },
+      "median_latency_ms": 52.2,
+      "images": 300
+    },
+    "sliced_conf_0.3": {
+      "box_level": {
+        "true_positives": 1175,
+        "false_positives": 817,
+        "false_negatives": 43,
+        "true_negatives": 0,
+        "precision": 0.5899,
+        "recall": 0.9647,
+        "f1": 0.7321,
+        "f2": 0.8559,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 255,
+        "false_positives": 13,
+        "false_negatives": 0,
+        "true_negatives": 32,
+        "precision": 0.9515,
+        "recall": 1.0,
+        "f1": 0.9751,
+        "f2": 0.9899,
+        "false_alarm_rate": 0.2889
+      },
+      "median_latency_ms": 3283.9,
+      "images": 300
+    },
+    "sliced_conf_0.5": {
+      "box_level": {
+        "true_positives": 1161,
+        "false_positives": 474,
+        "false_negatives": 57,
+        "true_negatives": 0,
+        "precision": 0.7101,
+        "recall": 0.9532,
+        "f1": 0.8139,
+        "f2": 0.8921,
+        "false_alarm_rate": 1.0
+      },
+      "image_level": {
+        "true_positives": 254,
+        "false_positives": 5,
+        "false_negatives": 1,
+        "true_negatives": 40,
+        "precision": 0.9807,
+        "recall": 0.9961,
+        "f1": 0.9883,
+        "f2": 0.993,
+        "false_alarm_rate": 0.1111
+      },
+      "median_latency_ms": 3283.9,
+      "images": 300
+    }
+  }
+}

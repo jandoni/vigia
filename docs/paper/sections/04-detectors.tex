@@ -271,6 +271,25 @@ thresholds punishes imprecise boxes on tiny objects, while our
 $\tau = 0.3$ operating point asks the operationally relevant question, which
 is whether the person was found at all.
 
+\begin{recorded}{Sliced inference: more recall, far more false alarms}
+The fixed \SI{512}{\pixel} input means a swimmer at altitude reaches the
+model at less than half native resolution, which is the textbook case for
+sliced inference (SAHI~\citep{akyon2022sahi}): run the detector on
+overlapping native-resolution tiles and merge. Measured on the same split
+(\texttt{eval/run\_sahi\_eval.py}), it did raise swimmer recall from
+\SahiBaseRecall{} to \SahiSlicedRecall. It also collapsed precision
+(\SahiBasePrecision{} to \SahiSlicedPrecision), drove the image-level
+false-alarm rate up by a factor of \SahiFARFactor{} (\SahiBaseFAR{} to
+\SahiSlicedFAR), and cost \SahiLatencyFactor$\times$ the latency
+(\SI{\SahiBaseLatency}{\milli\second} to
+\SI{\SahiSlicedLatency}{\milli\second} per frame). Tiles at full
+resolution fire on wave crests and glints the whole-frame pass never
+proposed. For a system whose contribution is false-alarm reduction, trading
+a thirteenfold rise in false alarms for five points of recall is the wrong
+direction; the temporal validator recovers persistent swimmers far more
+cheaply. Recorded as a measured negative result.
+\end{recorded}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{confidence_sweep.pdf}

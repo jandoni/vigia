@@ -791,6 +791,40 @@ experiments:
       ones lose an ignition sequence outright (5 of 6). A regression test in
       tests/test_validator.py bars reintroduction.
 
+  detector.sliced_inference:
+    question: >
+      Does sliced inference (SAHI, Akyon et al. 2022) improve small-object
+      recall enough to justify its cost? The people-in-water detector takes a
+      fixed 512 px input, so a swimmer at altitude reaches the model at less
+      than half native resolution — SAHI's textbook case.
+    measured:
+      status: measured
+      date: 2026-09-06
+      harness: eval/run_sahi_eval.py
+      results_file: eval/results/sahi.json
+      baseline_recall: 0.9146
+      baseline_precision: 0.9199
+      baseline_image_far: 0.0222
+      baseline_latency_ms: 52.2
+      sliced_recall: 0.9647
+      sliced_precision: 0.5899
+      sliced_image_far: 0.2889
+      sliced_latency_ms: 3283.9
+    honest_assessment: >
+      REJECTED, and against the project's own grain: slicing is the standard
+      small-object remedy and it did raise swimmer recall by five points
+      (0.915 -> 0.965). But it collapsed precision (0.920 -> 0.590), drove the
+      image-level false-alarm rate thirteenfold (0.022 -> 0.289), and cost 63x
+      the latency (52 ms -> 3.3 s per frame). Tiles at native resolution fire
+      on wave crests and sun glints the full-frame pass never proposed. For a
+      system whose entire contribution is false-alarm reduction, importing a
+      technique that multiplies false alarms to recover a few detections is
+      the wrong trade — the temporal validator recovers persistence-worthy
+      swimmers far more cheaply. Kept as a measured negative result; a
+      deployment that could tolerate the false alarms and the latency, and
+      needed maximum recall on a single frame, might revisit it.
+    redistribute: false
+
 # Components deliberately excluded, kept here so the reasoning is not lost.
 excluded:
   xview2_first_place:
