@@ -21,7 +21,7 @@ Spanish cities already carry tens of thousands of cameras: municipal traffic
 cameras, road authority cameras, private security systems. During the DANA
 those cameras were watching the water rise. Nobody was watching the cameras.
 
-\subsection{What VIGÍA is}
+\subsection{Overview}
 
 VIGÍA integrates the best publicly available hazard detectors under a single
 gated pipeline and adds a shared temporal validation layer that makes them
@@ -34,11 +34,11 @@ long-established — and the paper does not claim it as new. What is contributed
 is the \emph{measurement}: the controls of \cref{sec:validator} that
 establish, against a deployment-realistic baseline, what such a layer is
 worth and where it is not; and the evaluation methodology of
-\cref{sec:methodology} that keeps a small single-author system from
+\cref{sec:discussion} that keeps a small single-author system from
 flattering itself. Every detector is credited by name, licence and source in
-\cref{sec:attribution}.
+the references.
 
-\subsection{The problem the system actually solves}
+\subsection{Problem statement}
 
 Hazard detection models are widely available and, individually, good. What
 prevents them from being deployed on municipal cameras is not accuracy but
@@ -57,29 +57,7 @@ hard-negative set of \FireNegatives{} images spanning 21 cameras
 its authors deliberately chose, assuming a downstream filter. VIGÍA is that
 filter.
 
-\subsection{Preliminary conclusions}
-\label{sec:preliminary}
-
-Because this is a preprint offered for discussion, the conclusions it reaches
-are stated here at the outset and revisited, with their qualifications, in
-\cref{sec:conclusion}. In brief: a shared temporal validator makes published
-hazard detectors materially more usable on municipal cameras, but its value
-is narrower than a raw suppression figure suggests. On an easy negative set an
-oracle-tuned confidence threshold matches the validator's false-alarm rate
-more cheaply (\cref{sec:threshold-matched}); but a cross-camera transfer
-experiment (\cref{sec:threshold-transfer-exp}) shows that a threshold chosen
-the way a deployment must choose it — on some cameras, run on others — either
-lets false alarms drift up or drops a detection, while the cascade holds both.
-The validator's defensible advantages are therefore that its stability does
-not depend on the deployment's negative distribution, that it deduplicates
-alerts in a way no threshold can, and that one configuration transfers across
-four hazards with different physics. Four candidate improvements were measured and three rejected on the
-evidence, and every quantitative claim is bounded by the interval its sample
-supports. These findings are preliminary in the precise sense that several
-rest on small held-out samples, named individually in \cref{sec:outstanding};
-the paper is written so that a reader can locate, and disagree with, each one.
-
-\subsection{Research questions and contributions}
+\subsection{Contributions}
 \label{sec:contributions}
 
 This is a measurement-driven systems paper: its purpose is not a new
@@ -130,7 +108,7 @@ The contributions, stated so they can be checked:
         the paper's claims are continuously re-verified in public.
 \end{enumerate}
 
-\subsection{Scope and limitations}
+\subsection{Scope}
 
 \begin{itemize}
   \item VIGÍA is a research prototype, not a certified emergency system. No

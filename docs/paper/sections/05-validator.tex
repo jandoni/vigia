@@ -1,4 +1,4 @@
-\section{The temporal validator}
+\subsection{The temporal validator}
 \label{sec:validator}
 
 The validator is the component this paper measures most closely. Its
@@ -6,7 +6,7 @@ mechanism is conventional and not claimed as novel (\cref{sec:related}); the
 contribution is the account, given here with controls, of what it buys, what
 it costs, and where a simpler baseline would do as well.
 
-\subsection{Rationale}
+\subsubsection{Rationale}
 
 Detection is a commodity: datasets are public, models are published, and
 fine-tuning one is a weekend's work. The unsolved, expensive and
@@ -19,7 +19,7 @@ not discarded silently: each is annotated with the name of the level that
 rejected it, so suppression is auditable in evaluation and visible in the
 operator interface.
 
-\subsection{The cascade}
+\subsubsection{The cascade}
 
 \begin{definition}[Cascade]
 \label{def:cascade}
@@ -47,7 +47,7 @@ switchable. That is not a convenience — it is what allows the ablation of
 \cref{sec:ablation} to be produced by the same code that runs in production,
 and not by a separate analysis script that might diverge from it.
 
-\subsection{The cascade earned its shape: two levels built, measured, removed}
+\subsubsection{Cascade design and level ablation}
 \label{sec:removed-levels}
 
 The cascade did not start with three levels. Two more were implemented,
@@ -87,7 +87,7 @@ an ignition sequence outright (\ColourStrictFires{} of \FiresTotal). Removed
 locally so the experiment outlives the level it deleted).
 \end{recorded}
 
-\subsection{Filtering and deduplication are different claims}
+\subsubsection{Decomposing suppression into filtering and deduplication}
 \label{sec:decomposition}
 
 The validator rejects the large majority of what the detectors propose, and it
@@ -168,7 +168,7 @@ separately everywhere they appear, including on the recorded demonstrations
 and in the operator interface.
 \end{recorded}
 
-\subsection{Does it reduce false alarms?}
+\subsubsection{False-alarm reduction}
 \label{sec:ablation}
 
 \begin{table}[htbp]
@@ -209,7 +209,7 @@ about a fire it can already see. Reporting only the false-alarm reduction
 would hide both. A filter that drove false alarms to zero by refusing to alert
 at all would score perfectly on the one metric and be useless.
 
-\subsection{The obvious baseline, run against ourselves}
+\subsubsection{Comparison with confidence thresholding}
 \label{sec:threshold-matched}
 
 \Cref{tab:ablation} compares the cascade against the raw detector \emph{at
@@ -242,7 +242,7 @@ the reason the claim in \cref{sec:scoped-claim} is scoped the way it is.}
 \label{fig:frontier}
 \end{figure}
 
-\subsubsection{What the control does and does not establish}
+\paragraph{What the control does and does not establish}
 \label{sec:scoped-claim}
 
 The control establishes that \textbf{per-frame false-alarm reduction on this
@@ -272,7 +272,7 @@ fact, none a defence:
         an operational function a per-frame threshold cannot express at all.
 \end{itemize}
 
-\subsubsection{The transfer experiment: the objection, answered}
+\paragraph{The transfer experiment: the objection, answered}
 \label{sec:threshold-transfer-exp}
 
 The control's central caveat — that its winning floor is an oracle — is
@@ -314,7 +314,7 @@ Where a deployment can tune a floor on representative negatives and does not
 need deduplication, thresholding alone is the better choice, and this paper
 says so.
 
-\subsection{The latency cost, in closed form}
+\subsubsection{Latency cost}
 \label{sec:latency}
 
 The latency is not an empirical surprise. Persistence requires $N$ associated
@@ -335,7 +335,7 @@ cascade on a camera sampling at \SI{1}{\hertz} costs two seconds. A deployment
 choosing $N$ is choosing a point on \cref{eq:latency}, and can be told what it
 will cost before any data is collected.
 
-\subsection{Hazard-agnosticism, tested and enforced}
+\subsubsection{Cross-hazard transfer}
 
 PyroNear's published training manifest shows that they already perform
 sequential confirmation for wildfire, with a grid search over a minimum frame
@@ -364,7 +364,7 @@ Road incidents  & Dashcam, 2 fps      & \TrafficFrames & \TrafficRawDetections &
 \end{tabular}
 \end{table}
 
-\subsection{The reach of the evidence, stated precisely}
+\subsubsection{Scope of the evidence}
 \label{sec:evidence-reach}
 
 The scope of what has and has not been measured deserves an explicit

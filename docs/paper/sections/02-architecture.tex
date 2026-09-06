@@ -1,4 +1,4 @@
-\section{System architecture}
+\subsection{System architecture}
 \label{sec:architecture}
 
 VIGÍA is organised in three tiers. Detectors are interchangeable; the
@@ -50,7 +50,7 @@ detections become events.}
 \label{fig:architecture}
 \end{figure}
 
-\subsection{Tier 0 — the context gate}
+\subsubsection{Tier 0 — the context gate}
 \label{sec:gate}
 
 Each camera is registered once with a declared context. The gate looks up
@@ -128,7 +128,7 @@ $\rho = \GateReduction\,\%$, and only \GateModelsLoaded{} of the
 never constructed at all, so the saving is in memory as well as compute: a
 deployment of only ridgeline cameras loads one ONNX session, not five.
 
-\subsection{Viewpoint envelopes}
+\subsubsection{Viewpoint envelopes}
 \label{sec:viewpoint}
 
 The gate also declares \emph{viewpoint}, because a detector's training
@@ -169,7 +169,7 @@ nothing and reports success — the worst available failure mode for this
 system. Enforced by \texttt{tests/test\_registry.py}.
 \end{recorded}
 
-\subsection{Tier 1 — specialist detectors}
+\subsubsection{Tier 1 — specialist detectors}
 
 Independent models running in parallel, rather than one shared-backbone
 multi-task model. A unified model would require a single coherent label space
@@ -177,7 +177,7 @@ and jointly annotated data; these hazards come from separate datasets with
 incompatible labels. It would also couple training, so that retraining fire
 could silently degrade flood.
 
-\subsection{Licensing architecture}
+\subsubsection{Licensing architecture}
 \label{sec:licensing}
 
 VIGÍA ships under Apache-2.0. Several source models were fine-tuned using
@@ -197,7 +197,7 @@ Python's AST module and fails the build if a forbidden package is imported. It
 parses rather than greps, so a comment mentioning the package does not trip
 it.
 
-\subsection{Privacy by design}
+\subsubsection{Privacy by design}
 \label{sec:privacy}
 
 The EU AI Act's high-risk provisions~\citep{euaiact} took full effect in
@@ -258,7 +258,7 @@ underscores. Matching now strips underscores before comparison. The same
 reasoning applies to the ONNX parity check of \cref{sec:backends}.
 \end{recorded}
 
-\subsection{Runtime pipeline}
+\subsubsection{Runtime pipeline}
 \label{sec:pipeline}
 
 The three tiers are joined by \texttt{vigia/pipeline.py}: capture, gate,
@@ -304,106 +304,3 @@ On the reference machine a single ridgeline camera replaying a 40-frame
 sequence through the fire detector sustains 8--14 frames per second end to end
 at \SI{117}{\milli\second} median detector latency, processing every frame
 with none dropped.
-
-\subsection{Operator view}
-\label{sec:operator}
-
-The interface is built around one observation. Every camera-AI demonstration
-draws a box around a fire, and a reviewer has seen that before. What is rarely
-shown is detections being \emph{rejected} — and since the validator suppresses
-the large majority of what the detectors propose, watching that happen is the
-only direct visual evidence for the one claim in this work that is original.
-The interface is therefore a dual view: what the detector proposed against
-what the system confirmed. Every other decision follows from that.
-
-\begin{itemize}
-  \item \textbf{Header} — the camera's context and a chip per hazard, lit only
-        for the hazards the gate runs there. Switching cameras visibly changes
-        which detectors are active, which explains Tier 0 faster than a
-        diagram does.
-  \item \textbf{Canvas} — confirmed events in accent, candidates still short
-        of the persistence threshold in a muted tone, and suppressed
-        candidates outlined in grey and labelled with the cascade level that
-        rejected them. Naming the level is the point: the viewer sees not only
-        that a detection was dropped but which test dropped it.
-  \item \textbf{Signal chain} — the levels of \cref{def:cascade} with live
-        pass and reject counts, the same counters that produce
-        \cref{tab:ablation}.
-  \item \textbf{Timeline} — candidate ticks above confirmed ticks. The density
-        contrast between the two rows is the argument, made without a sentence
-        of text.
-  \item \textbf{Metric strip} — seen, confirmed, filtered, deduplicated, frame
-        rate and latency, always visible, in tabular figures so nothing reads
-        as hand-waved. Filtering and deduplication are shown separately here
-        for the reason given in \cref{sec:decomposition}.
-\end{itemize}
-
-A single control switches the suppressed layer off, at which point the view
-becomes an ordinary detection demonstration while the counters keep running.
-That is the difference between a clean frame and several hundred suppressed
-candidates behind it: the work is happening either way, and only one of the
-two views shows it.
-
-The transport is deliberately split. Video is MJPEG over plain HTTP, so the
-browser's own decoder does the work; events are small JSON over a WebSocket.
-Frames never travel on the event channel. The reference
-system~\citep{multitasksystem} identifies
-Base64-over-WebSocket frame transport as its bottleneck and lists WebRTC as
-future work; separating the channels sidesteps that problem instead of
-optimising it. The client falls back to polling if the socket drops, so the
-view degrades to slower, never to frozen.
-
-The front end is vanilla JavaScript and CSS with no build step and no package
-manager, and the web framework is an optional dependency rather than a core
-one — a deployed edge node runs headless and never needs it. Both choices are
-credibility arguments as much as technical ones: a system that requires a
-toolchain to demonstrate is a system nobody will try, and an edge runtime of
-four packages is a claim that can be checked.
-
-\begin{recorded}{A failure that hid behind its own fallback}
-The WebSocket route rejected every handshake with HTTP 403 while the interface
-kept updating normally, because the polling fallback covered for it. The cause
-was that this module used deferred annotation evaluation, which turns
-annotations into strings that the framework resolves against module globals —
-while the WebSocket type was imported inside a function, to keep the web
-framework optional. The parameter could not be typed and was treated as a
-required query parameter. Worth recording because the graceful degradation
-that made the system robust is exactly what made the defect invisible; it was
-found in the server log and a direct client, not in the browser.
-\end{recorded}
-
-\begin{recorded}{Blocking work on the event loop}
-Several HTTP endpoints were declared asynchronous while doing synchronous work
-— image decoding, and in one case a complete multi-second analysis of an
-uploaded clip. An asynchronous handler runs on the event loop, not in a
-worker thread, so analysing a clip stalled every MJPEG stream and every event
-socket in the process for the duration, including the live public cameras of
-\cref{sec:livecameras}. The symptom presented as a slow interface rather than
-as an error. The endpoints that block now run in a thread pool, and the
-analysis call is dispatched explicitly off the loop; the server answers in
-milliseconds while an analysis runs.
-\end{recorded}
-
-\subsection{Live public cameras}
-\label{sec:livecameras}
-
-The system runs against genuinely live public cameras as well as recorded
-clips, through the same pipeline: the United States Geological Survey's
-streamgage camera network~\citep{usgshivis}, whose imagery is a work of the
-United States Government and therefore unrestricted, and HPWREN's real-time
-wildfire cameras~\citep{hpwren}, which permit publication subject to
-attribution. Both publish stills every one to five minutes rather than video,
-and that cadence is the deployment regime, not a limitation of the
-demonstration — it is precisely why the flood trend detector of
-\cref{sec:flood-trend} counts samples, not seconds.
-
-Two properties of this path are worth stating because they are easy to get
-wrong. First, only genuinely new images are admitted: a repeated fetch of an
-unchanged image is discarded, because handing the validator the same frame
-three times would satisfy a persistence-of-three test without the world having
-been observed three times, manufacturing a confirmation from a single
-observation. Second, no beach or resort webcam appears in the catalogue, and
-the reason is \cref{def:admissible}, not licensing: a beach camera
-looking along the sand is a \textsc{ground} view, while the people-in-water
-detector's envelope is aerial and elevated. The pairing is refused before a
-model is loaded.

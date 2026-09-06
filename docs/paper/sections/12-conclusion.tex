@@ -1,15 +1,10 @@
-\section{Discussion and conclusions}
+\section{Conclusions}
 \label{sec:conclusion}
 
-This section restates the conclusions previewed in \cref{sec:preliminary},
-now with the evidence behind them, and marks explicitly where the authors
-regard the question as open. It is written to invite disagreement: each
-claim below is tied to a table or an experiment a reader can re-run.
-
-VIGÍA set out to make published hazard detectors trustworthy enough for the
-cameras cities already own. What survives its own evaluation is narrower and
-better-founded than what an earlier draft believed, and stating the final
-form plainly is the point of this section.
+This paper set out to make published hazard detectors usable on the cameras
+cities already operate, and to measure honestly what a shared temporal
+validation layer contributes toward that goal. The conclusions the
+measurements support are stated below in their final, qualified form.
 
 The system stands: five detectors from four independent sources run behind
 one declarative gate with enforced viewpoint envelopes, one temporal
@@ -24,103 +19,13 @@ transfers across hazards by configuration — at a closed-form latency cost
 (\cref{eq:latency}) and a measured recall cost that thresholding, where it
 suffices, does not pay. Two cascade levels that failed their measurements
 were removed, not kept (\cref{sec:removed-levels}).
-
-\subsection{Findings that travel}
-\label{sec:findings}
-
-Distilled from the measurements, phrased for reuse beyond this system:
-
-\begin{enumerate}
-  \item \textbf{Report suppression as two numbers or not at all.} Filtering
-        and deduplication differ by a factor of eight between our hazards
-        (\cref{tab:decomposition}); one figure conflates a false-alarm claim
-        with alert housekeeping.
-  \item \textbf{Run the threshold-matched control \emph{and} the transfer
-        experiment before claiming alarm reduction.} On negatives it had seen,
-        an oracle threshold beat our cascade; across unseen cameras that same
-        threshold either let false alarms drift up or lost a detection, while
-        the untuned cascade held both. The oracle result alone would have
-        misled in either direction; both controls cost an afternoon on cached
-        detections.
-  \item \textbf{Persistence has a price list:}
-        $\mathbb{E}[\Delta t] = (N-1)/f$. The latency cost of temporal
-        confirmation is a property of the camera's sampling rate, computable
-        before any data is collected.
-  \item \textbf{Pooled metrics flatter minority-critical classes.} Selecting
-        the aerial flood model on pooled IoU would have chosen a model
-        better at recognising dry ground (\cref{sec:pooling}); stratify on
-        the case the system exists for.
-  \item \textbf{Appearance priors fail where the confuser shares the
-        property} — fog is as grey as smoke — and geometric priors can
-        invert safety on the severe tail (the worst floods are the largest).
-        Measure each level of a life-safety cascade on the negatives it will
-        actually face, and be willing to delete.
-  \item \textbf{Image-level metrics can hide a dead detector.} A label-shift
-        bug survived image-level evaluation at precision $0.83$ and was
-        exposed only at box level, at recall $0.002$
-        (\cref{sec:twolevels}). Evaluate at both levels, always.
-  \item \textbf{Interval or it didn't happen.} At $n = 12$ images, a recall
-        of $1.000$ means $[0.757, 1.000]$ (\cref{tab:intervals}); reporting
-        the interval is the difference between a measurement and an
-        anecdote.
-\end{enumerate}
-
-We would argue the transferable contribution is the practice: every
-proportion carrying the interval its sample supports, stratified metrics
-where pooling flatters, suppression decomposed into the claim it supports
-and the housekeeping it is not, controls run against one's own headline, and
-twelve retracted claims documented in place. None of this required novel
-architecture. All of it changed what the paper was allowed to say.
-
-\subsection{Outstanding work}
-\label{sec:outstanding}
-
-Listed in the order it would be tackled. The first three are shortages of
-available material rather than defects in the system.
-
-\begin{enumerate}
-  \item \textbf{No temporal hard-negative set exists.} Tuned thresholding
-        suffices on easy negatives (\cref{sec:threshold-matched}); no
-        threshold survives the curated hard stills; whether persistence
-        survives them is untestable without hard negatives that are also
-        sequences — fog rolling over a ridge, filmed. Assembling one from
-        HPWREN's archive is the single most valuable experiment this project
-        has not run.
-  \item \textbf{Building access rests on \BuildingTestImages{} held-out
-        images.} Strong on that split (civilian box recall
-        \BuildingBoxRecall, interval \BuildingCivilianRecallCI{} over
-        instances), but twelve positive images cannot make the image-level
-        figures precise (\cref{tab:intervals}), and the released data cannot
-        be widened. It needs a different post-disaster aerial dataset with
-        people annotated.
-  \item \textbf{No urban flood footage.} The flood demonstration uses a
-        public-domain gauge camera on a creek. The 2024 Valencia DANA is the
-        event this system is motivated by, and no footage of a flooded
-        street is yet available to it under a licence permitting publication.
-  \item \textbf{The road-incident detector has no standalone measurement}
-        against held-out labels; it remains the validator's generality
-        experiment only.
-  \item \textbf{The gauge correlation is one event on one camera}
-        ($r = +0.50$, \cref{sec:gage}); it should be repeated across many
-        USGS cameras and events before the trend claim is leaned on.
-  \item \textbf{The aerial flood segmenter has no held-out split}
-        (\cref{tab:flood-aerial}); FloodNet's withheld masks make this
-        unfixable from the public release.
-  \item \textbf{Night operation.} Fire and flood are evaluated in daylight
-        only; the flood segmenter mislabels infrared frames and the fetch
-        pipeline excludes them by envelope. Disasters do not keep daylight
-        hours — the Valencia flooding peaked in the evening — so an
-        infrared-domain evaluation, likely fine-tuned on the USGS cameras'
-        own night frames, is required before any claim extends past dusk.
-\end{enumerate}
-
 \paragraph{Data and code availability.} Every figure in this paper is
 generated from committed measurement files by the build described in
-\cref{sec:reproducibility}; the repository, including the training and
+the released repository, including the training and
 evaluation scripts that reproduce each number, accompanies this paper.
 
 \paragraph{Acknowledgments.} This work runs on other people's science, named
-throughout and in \cref{sec:attribution}: the PyroNear association and the
+throughout: the PyroNear association and the
 French SDIS; HPWREN at UC San Diego, whose imagery appears here under its
 attribution requirement; the U.S. Geological Survey's streamgage camera
 network; the authors of ATLANTIS, FloodNet, SeaDronesSee, DRespNeT and

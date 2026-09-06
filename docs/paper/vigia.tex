@@ -40,22 +40,7 @@
 {\small\itshape Preprint --- circulated for discussion and comment.\par}
 
 \vfill
-\begin{minipage}{0.82\textwidth}
-\small
-\noindent{\scshape How to read this document}\par\vspace{3pt}
-\noindent Every quantitative figure is labelled either \measured{} — produced
-by our own evaluation harness, with the dataset and script named — or
-\reported{}, published by the people who built the component. The two are
-never mixed, and a figure we have not measured is marked as such rather than
-omitted. Proportions carry the interval their sample size supports
-(\cref{sec:metrics}); several of this project's headline numbers rest on
-small samples, and a point estimate alone would overstate them.\par
-\vspace{6pt}
-\noindent Every quantitative claim traces to a committed measurement file
-under \texttt{eval/results/}, produced by a named evaluation script and
-checked against the text by an automated guard (\cref{sec:reproducibility}).
-Nothing reported here is entered by hand.
-\end{minipage}
+
 
 \vspace{1.2cm}
 {\small Project licence: Apache-2.0 \textperiodcentered\ Research prototype,
@@ -73,22 +58,25 @@ not a certified emergency system\par}
 
 % -------------------------------------------------------------------- body
 \input{sections/01-introduction}
+
 \input{sections/01b-related}
+
+\section{Materials and Methods}
+\label{sec:methods}
 \input{sections/02-architecture}
 \input{sections/03-metrics}
 \input{sections/04-detectors}
-\input{sections/05-validator}
 \input{sections/06-flood-trend}
 \input{sections/07-routing}
-\input{sections/08-methodology}
-\input{sections/09-results}
-\input{sections/10-attribution}
-\input{sections/12-conclusion}
 
-% ---------------------------------------------------------------- appendix
-\appendix
-\input{sections/A-reproducibility}
-\input{sections/11-changelog}
+\section{Results}
+\label{sec:results-top}
+\input{sections/05-validator}
+\input{sections/09-results}
+
+\input{sections/08-discussion}
+
+\input{sections/12-conclusion}
 
 \bibliography{refs}
 

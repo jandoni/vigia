@@ -1,4 +1,4 @@
-\section{Definitions and evaluation metrics}
+\subsection{Definitions and evaluation metrics}
 \label{sec:metrics}
 
 This section fixes the quantities the rest of the document reports. It exists
@@ -6,7 +6,7 @@ because several of the mistakes recorded here were mistakes of \emph{metric}
 and not of model: a figure that was correct as computed and wrong as
 interpreted. Stating the definitions precisely is what made those visible.
 
-\subsection{Matching predictions to ground truth}
+\subsubsection{Matching predictions to ground truth}
 
 For two axis-aligned boxes $a, b$ the intersection over union is
 \begin{equation}
@@ -30,7 +30,7 @@ convention, and the choice is deliberate: the operational question is whether
 a person or a plume was \emph{found}, not whether its box was drawn tightly.
 A stricter threshold answers a localisation question this system does not ask.
 
-\subsection{Two levels of evaluation, and why both}
+\subsubsection{Box-level and image-level evaluation}
 \label{sec:twolevels}
 
 \emph{Box-level} metrics use \cref{eq:pr} over instances. \emph{Image-level}
@@ -55,7 +55,7 @@ boat called ``swimmer'' is still an image containing a swimmer. Only
 box-level $\iou$ matching exposed it, at a recall of $0.002$.
 \end{recorded}
 
-\subsection{Recall-weighted \texorpdfstring{$F$}{F} scores}
+\subsubsection{Recall-weighted \texorpdfstring{$F$}{F} scores}
 
 The harmonic family
 \begin{equation}
@@ -77,7 +77,7 @@ of precision here. That is the correct trade for this system for an asymmetric
 reason: the validator downstream can discard a false alarm, but nothing
 downstream can recover a person who was never detected.
 
-\subsection{Segmentation, and the trap of pooling}
+\subsubsection{Segmentation metrics and pooling}
 \label{sec:pooling}
 
 For binary masks the water $\iou$ on a single image is \cref{eq:iou} over
@@ -108,7 +108,7 @@ publishes it as the headline with the pooled one beside it, clearly labelled.
 Selecting on the pooled figure would have chosen a model that is better at
 recognising dry ground.
 
-\subsection{Interval estimation}
+\subsubsection{Interval estimation}
 \label{sec:intervals}
 
 Half of this project's figures rest on small samples: \BuildingTestImages{}
@@ -177,7 +177,7 @@ Scene router accuracy, \RouterHeldOut{} images
 \end{tabularx}
 \end{table}
 
-\subsection{Class merging}
+\subsubsection{Class merging}
 
 Two detectors emit more classes than VIGÍA consumes. Merging is a partial
 surjection

@@ -31,8 +31,7 @@ false-alarm rate drift to \TransferTestFAR{} or loses a fire (recall
 false-alarm rate and recall across the same held-out cameras. The validator's
 defensible value is thus that its stability does not depend on access to the
 deployment's negative distribution, and that it deduplicates alerts in a way
-no threshold can (\cref{sec:threshold-matched},
-\cref{sec:threshold-transfer-exp}). The same validator, changed
+no threshold can (\cref{sec:threshold-matched}). The same validator, changed
 only by configuration, transfers across hazards whose detectors were built by
 different people, on different data, for phenomena with different physics; a
 build-failing test enforces that no hazard-specific branch exists in it.
@@ -47,3 +46,8 @@ Where the evidence is thin, this document says so and quantifies it. Building
 access rests on \BuildingTestImages{} held-out images: its image-level recall
 is \BuildingImageRecall, but the interval that sample supports is
 \BuildingImageRecallCI, and the paper reports the second.
+
+\medskip
+\noindent\textbf{Keywords:} wildfire smoke detection; flood monitoring;
+multi-hazard early warning; temporal validation; false-alarm reduction;
+camera networks; disaster risk reduction; ONNX Runtime.

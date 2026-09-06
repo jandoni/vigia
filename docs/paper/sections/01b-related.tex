@@ -45,7 +45,7 @@ evaluated on false-alarm rate against detection latency, not
 accuracy. The distinction matters because the failure modes differ: an
 accuracy-oriented linker that hallucinates continuity costs a few points of
 precision; an alarm-oriented one manufactures a confirmed emergency
-(\cref{sec:demo} records exactly this failure on shuffled stills).
+(this failure on shuffled stills is described in \cref{sec:results-top}).
 
 \paragraph{Gating and cascades over video.} NoScope~\citep{kang2017noscope}
 and CaTDet~\citep{mao2018catdet} established that cascaded gating over video
@@ -62,7 +62,7 @@ a shared validator — because our hazards arrive from separate datasets with
 incompatible label spaces, and because a shared backbone couples retraining
 across hazards (\cref{sec:architecture}). Their reported Base64-over-WebSocket
 transport bottleneck also shaped our interface's split transport
-(\cref{sec:operator}).
+in the system's operator interface.
 
 \paragraph{Anticipatory flood sensing.}
 \Citet{choi2026pagehinkley} published anticipatory urban flood warning from
@@ -90,7 +90,7 @@ SeaDronesSee~\citep{varga2022seadronessee} and
 DRespNeT~\citep{sirma2025drespnet}; xBD~\citep{gupta2019xbd} was evaluated
 and excluded on modality (bi-temporal satellite pairs, not cameras); and the
 $F_2$ headline convention follows RipVIS~\citep{ripvis2025}. Every dataset's
-licence and the exact use made of each appears in \cref{sec:attribution}.
+licence and the exact use made of each is recorded in the released repository.
 
 \paragraph{Position.} In genre this is a systems and measurement paper, in
 the tradition of the gating work above rather than of architecture papers:

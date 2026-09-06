@@ -1,4 +1,4 @@
-\section{The anticipatory flood signal}
+\subsection{Anticipatory flood-level estimation}
 \label{sec:flood-trend}
 
 Flood is the only hazard whose temporal logic does not rest solely on the
@@ -15,7 +15,7 @@ independently. VIGÍA therefore implements \emph{both} mechanisms and measures
 them against each other on identical inputs, rather than claiming either. What
 is ours is the multi-hazard pipeline they sit inside.
 
-\subsection{Two signals}
+\subsubsection{Two signals}
 
 Segmenting water yields a mask $W_t \subseteq \Omega$ over the frame domain
 $\Omega$. Two scalars are derived, deliberately:
@@ -42,7 +42,7 @@ comparable between cameras. Choosing the reference line is deliberately not
 automated: a wrong automatic choice would silently corrupt every reading from
 that camera.
 
-\subsection{Windowed least squares}
+\subsubsection{Windowed least squares}
 
 Rate of rise is fitted, not differenced. Frame-to-frame differencing of
 a noisy segmentation mask produces a rate estimate dominated by segmentation
@@ -81,7 +81,7 @@ intervals, measured from the observed median gap. Page--Hinkley, being
 sample-based, not time-based, was unaffected.
 \end{recorded}
 
-\subsection{Page--Hinkley change detection}
+\subsubsection{Page--Hinkley change detection}
 \label{sec:ph}
 
 The Page--Hinkley test~\citep{page1954continuous,hinkley1971inference} is a
@@ -102,7 +102,7 @@ responds quickly to the \emph{onset} of a change, whereas the fit estimates
 the \emph{rate} of an ongoing one more stably. They are complementary rather
 than competing, which is why both are available.
 
-\subsection{Calibration matters more than the algorithm}
+\subsubsection{Calibration}
 \label{sec:ph-calibration}
 
 On a signal that is not changing, \cref{eq:ph-cum} is a random walk with step
@@ -150,7 +150,7 @@ frame respectively. A camera with noisier segmentation needs a higher
 threshold, and \cref{eq:ph-design} says roughly how much higher — but it
 should be measured per camera, not assumed.
 
-\subsection{Compared on real cameras}
+\subsubsection{Compared on real cameras}
 
 Both mechanisms were run on identical inputs from LSU creek camera sequences
 in the V-FloodNet dataset~\citep{liang2022vfloodnet}: real fixed cameras, real
@@ -160,7 +160,7 @@ sparsely sampled ones, because it counts samples rather than seconds. Neither
 is claimed as ours, and the comparison is reported; no winner is
 declared.
 
-\subsection{Ground truth the other footage does not have}
+\subsubsection{Validation against gauge measurements}
 \label{sec:gage}
 
 USGS cameras~\citep{usgshivis} sit on instrumented gauges, so every frame

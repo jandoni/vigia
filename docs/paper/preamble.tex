@@ -139,11 +139,8 @@
 % rather than folded into the prose or quietly dropped. Rules above and below,
 % small type, no coloured panel — the content is the emphasis.
 \newenvironment{recorded}[1]
-  {\par\medskip\noindent{\color{rulegrey}\rule{\linewidth}{0.4pt}}\par\nobreak
-   \vspace{3pt}\noindent{\small\scshape #1}\par\nobreak\vspace{2pt}
-   \begingroup\small\color{notegrey}\noindent\ignorespaces}
-  {\par\endgroup\vspace{3pt}\noindent
-   {\color{rulegrey}\rule{\linewidth}{0.4pt}}\par\medskip}
+  {\par\medskip\noindent\textit{#1.}\enspace\ignorespaces}
+  {\par\medskip}
 
 % Provenance tag for a figure: ours, or somebody else's.
 \newcommand{\measured}{\textsc{measured}}

@@ -1,4 +1,4 @@
-\section{Detectors}
+\subsection{Detectors}
 \label{sec:detectors}
 
 One subsection per hazard. Each names the people whose work it uses, states
@@ -11,7 +11,7 @@ accident is an emergency, not a disaster. Its value is that it has completely
 different physics and timescales from wildfire, so a validator that works on
 both is demonstrably not tuned to one phenomenon.
 
-\subsection{Fire and smoke}
+\subsubsection{Fire and smoke}
 \label{sec:fire}
 
 \begin{description}[leftmargin=7.4em,labelwidth=7.0em,style=sameline,font=\normalfont\itshape]
@@ -104,7 +104,7 @@ small sample flattering a detector looks like.}
 \label{fig:widening}
 \end{figure}
 
-\subsection{Flood and water level}
+\subsubsection{Flood and water level}
 \label{sec:flood}
 
 The keystone hazard, and the one directly connected to the DANA. Two
@@ -179,7 +179,7 @@ the single file and verifies argmax parity against the source PyTorch model,
 failing below 99.9\,\% agreement.
 \end{recorded}
 
-\subsubsection{The aerial variant}
+\paragraph{The aerial variant}
 
 A UAV camera declaring a \textsc{nadir} viewpoint was previously refused by
 \cref{def:admissible}, because the ATLANTIS model's envelope excludes it. A
@@ -224,7 +224,7 @@ flatter the model on the one case it exists to handle.}
 \label{fig:aerial}
 \end{figure}
 
-\subsection{People in water}
+\subsubsection{People in water}
 \label{sec:piw}
 
 \begin{description}[leftmargin=7.4em,labelwidth=7.0em,style=sameline,font=\normalfont\itshape]
@@ -314,7 +314,7 @@ inference was tested (and rejected) above. Imagery: SeaDronesSee, CC0.}
 \label{fig:qual-drowning}
 \end{figure}
 
-\subsection{Trapped people and building access}
+\subsubsection{Trapped people and building access}
 \label{sec:building}
 
 \begin{description}[leftmargin=7.4em,labelwidth=7.0em,style=sameline,font=\normalfont\itshape]
@@ -407,13 +407,13 @@ they hide a six-fold difference in whether the person was actually located.}
 \caption{Building-access \emph{detector output only}, shown at confidence
 $\ge 0.45$ for legibility. Unlike the other three panels this shows no
 confirmed state: the released DRespNeT footage has no temporal continuity, so
-the validator cannot run on it (\cref{sec:demo}). This is the honest limit of
+the validator cannot run on it. This is the honest limit of
 this hazard, drawn rather than described. Imagery: DRespNeT, Cranfield
 University, CC~BY~4.0; UAV imagery of the 2023 Türkiye earthquakes.}
 \label{fig:qual-building}
 \end{figure}
 
-\subsection{Road incidents}
+\subsubsection{Road incidents}
 \label{sec:traffic}
 
 Included to test whether the validator transfers to a hazard with entirely

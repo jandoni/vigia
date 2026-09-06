@@ -1,4 +1,4 @@
-\section{Scene routing on the upload path}
+\subsection{Scene routing for uploaded footage}
 \label{sec:routing}
 
 Tier 0 decides which detectors run on a \emph{registered} camera, from a
@@ -8,7 +8,7 @@ separated from \cref{sec:gate} deliberately: the two answer superficially
 similar questions under completely different evidence, and conflating them
 would undermine the argument of \cref{sec:gate}.
 
-\subsection{Two approaches that did not work}
+\subsubsection{Two rejected approaches}
 
 \paragraph{Asking the detectors.} The first version ran every detector over a
 few sampled frames and took whichever claimed the footage most strongly. It
@@ -23,7 +23,7 @@ flood model genuinely reports water — the known consequence of training on
 reactions as ranked evidence and let the operator choose. Always correct, and
 one piece of homework for someone who came to watch a system work.
 
-\subsection{A classifier trained for this question}
+\subsubsection{A trained scene classifier}
 
 The third version is a MobileNetV3 classifier over \RouterClasses{} scene
 classes, trained on \RouterTrainImages{} images and held out on
@@ -45,7 +45,7 @@ and per class \RouterPerClass{} on \RouterPerClassImages{} images each
 (\RouterPerClassCI). On the four demonstration clips it routes 4 of 4
 correctly, at $\bar{p}_{\hat{c}}$ of $1.00$, $0.98$, $1.00$ and $0.85$.
 
-\subsection{How that figure should be read}
+\subsubsection{Interpretation}
 
 An accuracy of \RouterAccuracy{} deserves suspicion before celebration,
 and three qualifications belong beside it.
@@ -79,7 +79,7 @@ ground-level photography to that one class moved it to
 \RouterPerClass{}. The number without this story looks like luck.
 \end{recorded}
 
-\subsection{This does not overturn Tier 0}
+\subsubsection{Relationship to the context gate}
 
 The router is confined to the upload path. A registered camera's hazards are
 still \emph{declared}, never inferred, so the argument of \cref{sec:gate} —
