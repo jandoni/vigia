@@ -187,3 +187,19 @@ def draw(
         _chip(canvas, label, value, x1, y1, colour)
 
     return canvas
+
+
+def encode_jpeg(image: np.ndarray, quality: int = 80) -> bytes:
+    ok, buffer = cv2.imencode(".jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), quality])
+    if not ok:
+        raise RuntimeError("JPEG encoding failed")
+    return buffer.tobytes()
+
+
+def placeholder(width: int = 960, height: int = 540, text: str = "no signal") -> np.ndarray:
+    """A frame to serve before the pipeline has produced one."""
+    canvas = np.full((height, width, 3), 18, dtype=np.uint8)
+    (tw, th), _ = cv2.getTextSize(text, FONT, 0.7, 1)
+    cv2.putText(canvas, text, ((width - tw) // 2, (height + th) // 2),
+                FONT, 0.7, (90, 90, 90), 1, cv2.LINE_AA)
+    return canvas

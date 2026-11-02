@@ -2,7 +2,8 @@
 
 Off-the-shelf hazard detectors are sensitive by design and consequently alarm
 constantly. Measured on PyroNear's own validation split, their published fire
-detector raises an alarm on 87% of frames containing no smoke. That is not a
+detector raises an alarm on 71% of frames containing no smoke
+(0.706, eval/results/fire_pyro_sdis_val_wide.json). That is not a
 defect in their model; it is the operating point they chose, on the assumption
 that something downstream filters the output. This is that something.
 

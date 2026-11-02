@@ -23,11 +23,11 @@ const el = {
   link: $("link"), linkDot: $("link-dot"),
 };
 
-/* Levels the validator actually runs. Size plausibility was implemented,
-   measured across three hazards, found to contribute nothing on two and to be
-   harmful on the third, and removed — so it is absent here rather than shown
-   greyed out. The interface should not advertise a level that does not exist. */
-const LEVEL_ORDER = ["confidence", "colour", "persistence", "cooldown"];
+/* Levels the validator actually runs. Size plausibility and the colour prior
+   were both implemented, measured and removed (see vigia/validator/cascade.py),
+   so they are absent here rather than shown greyed out. The interface should
+   not advertise a level that does not exist. */
+const LEVEL_ORDER = ["confidence", "persistence", "cooldown"];
 
 function setLink(state, text) {
   el.linkDot.className = "dot" + (state ? " " + state : "");
